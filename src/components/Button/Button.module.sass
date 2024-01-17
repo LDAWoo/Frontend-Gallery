@@ -1,0 +1,68 @@
+@import ../../styles/helpers
+.button
+    display: flex
+    align-items: center
+    justify-content: center
+    border: none
+    width: var(--full-w)
+    transition-duration: 300ms
+    cursor: pointer
+    background-color: transparent
+
+.classButton
+    display: flex
+    align-items: center
+    justify-content: center
+    width: var(--full-w)
+
+.buttonBackground
+    width: var(--full-w)
+    background-color: $p1
+    transition-duration: 300ms
+    color: $n
+    &:hover
+        background-color: $p2
+
+.backgroundGallery
+    padding: 4px
+    border-radius: 4px
+    outline: none
+    border: none
+    background-color: $n3
+    transition-duration: 300ms
+    cursor: pointer
+    +t
+        padding: 6px
+    &:hover
+        background-color: $n5
+
+.buttonBorder
+    border: 1px solid $n3
+    border-radius: 5px
+    color: $n0
+    padding: 4px 6px
+    width: var(--full-w)
+    background-color: transparent
+    cursor: pointer
+    &:hover
+        background-color: $n6
+
+.buttonDisabled
+    opacity: 70
+    cursor: not-allowed
+    background-color: #d9d9d9
+
+.buttonLoading
+    display: inline-block
+    height: 26px
+    width: 26px
+    animation: spin 1s linear infinite
+    border-radius: 100%
+    border: 3px solid blue
+    border-right: transpanrent
+    vertical-align: -0.125remt
+    @keyframes spin 
+    to 
+        transform: rotate(360deg)
+
+

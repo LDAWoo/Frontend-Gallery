@@ -1,0 +1,86 @@
+@import '~/styles/helpers'
+
+.wrapper 
+    display: flex
+    flex-direction: column
+    gap: 12px
+    padding: 12px
+    +t 
+        padding: 16px
+        gap: 16px
+
+.content
+    display: flex
+    align-items: center
+    gap: 12px
+    +t
+        gap: 16px
+
+.wrapperContent
+    display: flex
+    height: var(--full-h)
+    flex-direction: row
+    gap: 8px    
+    align-items: center
+    margin: auto
+    &:nth-child(5)
+            width: var(--full-w)
+            flex: 1 1 auto
+    +t
+        &:nth-child(3)
+            flex: 1 1 auto
+        &:nth-child(5)
+            width: auto
+            flex: none    
+
+.wrapperGroups
+    width: var(--full-w)
+    height: var(--full-h)
+
+.wrapperButton
+    width: var(--full-w)
+    height: var(--full-h)
+
+.buttonNavigation
+    width: var(--full-w)
+    padding: 6px
+    color: $n
+    +t
+        padding: 8px
+
+.contentButtonNavigation
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 4px
+    
+.wrapperSearch
+    display: flex
+    gap: 8px
+    align-items: center
+
+.buttonSearch
+    display: flex
+    +t
+        display: none
+
+.inputSearch
+    width: var(--full-w)
+    display: none
+    +t
+        display: flex
+
+.wrapperDropDown
+    display: flex
+    gap: 8px
+    align-items: center
+
+.buttonDropDownFirst
+    display: flex
+    +t
+        display: none 
+
+.buttonDropDownLast
+    display: none
+    +t
+        display: flex                   

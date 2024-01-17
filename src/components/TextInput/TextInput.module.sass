@@ -1,0 +1,84 @@
+@import ../../styles/helpers
+
+.wrapper
+    width: var(--full-w)
+    border-radius: 5px
+    position: relative
+
+.border
+    border-width: 1px
+    border: 1px solid $n2 
+    transition-duration: 300ms
+
+.active
+    border-color: $n1
+
+.error
+    border-color: red
+
+.input
+    
+    background-color: transparent
+    border-radius: 5px
+    padding: 10px 0
+    outline: none
+    border: none
+    color: $n
+    &:hover
+        background-color: transparent
+    &::placeholder
+        color: $n2    
+
+.inputCopyActive
+    padding-right: 40px
+    width: calc( var(--full-w) - 76px)
+
+.inputCopy
+    padding-left: 10px 
+
+.inputIconActive
+    padding-left: 36px
+    width: calc( var(--full-w) - 36px)
+
+.inputIcon
+    padding-left: 10px    
+
+.wrapperIcon
+    position: absolute
+    top: 0
+    bottom: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    padding-left: 8px
+    color: $n   
+
+.wrapperCopy
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: transparent
+
+.wrapperError
+    position: absolute
+    top: 0
+    bottom: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    padding-left: 8px
+    background-color: transparent
+
+
+.copyActive
+    right: 35px
+
+.copy
+   right: 0px     
+
+
+        

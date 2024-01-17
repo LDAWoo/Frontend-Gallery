@@ -1,0 +1,145 @@
+@import '~/styles/helpers'
+
+.wrapper
+    padding-bottom: 8px 
+
+.cardContent
+    overflow: hidden
+    border-radius: 8px
+    border: 1px solid $n3
+    position: relative
+    background-color: $n6
+
+.cardHeading
+    flex: 1 1 auto
+    display: flex
+    width: var(--full-w)
+    position: relative
+    padding-bottom: 100%
+
+.cardGroup
+    overflow: hidden
+    position: absolute
+    top: 0
+    left: 0
+    width: var(--full-w)
+    height: var(--full-h)
+    display: flex
+    align-items: center
+    justify-content: center
+
+.wrapperGroup
+    width: var(--full-w)
+    height: var(--full-h)
+    cursor: pointer 
+
+.wrapperImage
+    display: flex
+    width: var(--full-w)
+    height: var(--full-h)
+    max-width: var(--full-w)
+    max-height: var(--full-h)  
+    background-color: $n6
+    aspect-ratio: auto
+    margin: none
+
+.buttonLucky
+    display: flex
+    position: absolute
+    top: 8px
+    left: 8px
+    padding: 3px 4px
+    cursor: pointer
+    border: none
+    transition-property: opacity
+    transition-timing-function: cubic-bezier(.4,0,.2,1)        
+    transition-duration: .15s
+    border-radius: 100%
+    background-color: $n1 
+
+.buttonAdd
+    display: flex
+    position: absolute
+    top: 8px
+    right: 8px
+    padding: 5px 6px
+    cursor: pointer
+    border: 1px solid $p1
+    border-radius: 100%
+    background-color: rgba(102,22,61,.5)
+    transition-duration: 300ms
+    &:hover
+        background-color: rgba(102,22,61,.8)
+
+.cardFooter
+    position: relative
+
+
+.cardItems
+    display: flex
+    flex-direction: column
+    padding: 8px 8px 0 8px
+    gap: 0
+    +t
+       padding: 12px 12px 4px 12px
+       gap: 4px 0 
+
+.itemHead
+    display: flex
+    justify-content: space-between 
+    gap: 4px 0
+    background-color: transparent
+    align-items: center
+
+.item
+    color: $n
+    text-decoration: none
+    transition-duration: 300ms
+    &:hover
+        color: $n1
+
+.itemNft
+    display: flex
+    gap: 0
+    min-width: 0
+
+.wrapperNft
+    display: flex
+    flex-wrap: wrap
+    cursor: default
+    align-items: center
+    gap: 5px
+    background-color: rgb(153, 140, 166)
+    padding: 2px 4px
+    border-radius: 2px
+    color: $n
+    font-size: .75rem
+
+.itemFood
+    display: flex
+    justify-content: space-between 
+    gap: 4px 0
+    background-color: transparent
+    align-items: center
+    color: $n
+
+.moneyWrapper
+    display: flex
+    gap: 4px
+    align-items: center
+
+.iconMoney
+    color: $p3
+    transform: translateY(1px)
+
+.shoppingWrapper
+    display: flex
+    gap: 4px
+    align-items: center
+
+.iconShopping
+    color: $n1
+    transform: translateY(1px)    
+
+.titleShopping
+    color: $n1    

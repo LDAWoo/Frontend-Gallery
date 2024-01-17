@@ -1,0 +1,33 @@
+@import '~/styles/helpers'
+
+.contentInfo
+    flex-shrink: 0 
+    display: flex
+    column-gap: 8px
+
+.overInfo
+    display: none
+    column-gap: 8px
+    flex-direction: column
+    +t
+        display: flex
+
+.itemsInfo
+    display: flex
+    column-gap: 12px
+    align-items: center 
+
+.item
+    color: $n1
+    transition-duration: 300ms
+    &:hover
+        opacity: 50
+        color: $n2
+.iconTitle
+    color: $n1
+    transform: translateY(2px)
+
+.buttonItem
+    background-color: transparent
+    border: none
+    color: $n

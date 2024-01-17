@@ -1,0 +1,54 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--w-full) 
+    display: inline-block
+
+.content
+    display: inline-flex
+    flex-shrink: 0
+    overflow: auto
+    align-items: stretch
+    column-gap: 12px
+    padding: 0 16px
+    +t
+        column-gap: 16px
+
+.wrapperItem
+    position: relative
+    transition-property: all
+    transition-timing-function: cubiz-bezier(.4,0,.2,1)
+    transition-duration: 200ms
+    flex-shrink: 0
+    
+
+.itemButton
+    background-color: transparent
+    margin: 4px 0
+    padding: 12px 4px
+    border: none
+    cursor: pointer
+
+.wrapperItem:hover .itemActive:not(.active)
+    background-color: $n2   
+
+.itemTitle
+    color: $n1
+    font-weight: 500
+    &.active
+        color: $-n1
+
+.itemActive
+    position: absolute
+    left: 0
+    bottom: 0
+    right: 0
+    height: 4px
+    border-radius: 9999px
+    transition-property: all
+    transition-timing-function: cubiz-bezier(.4,0,.2,1)
+    transition-duration: 300ms
+    &.active
+        background-color: $p1      
+
+                

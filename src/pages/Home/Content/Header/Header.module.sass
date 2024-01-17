@@ -1,0 +1,46 @@
+@import '~/styles/helpers'
+
+.wrapper
+    position: relative
+    background-color: $n8
+    z-index: 20
+    left: 0
+    right: 0
+    top: 0px
+    transition-timing-function: cubic-bezier(0.4,0,1,1)
+    transition-duration: 325ms
+    +t
+        position: relative
+        top:0
+
+.content
+    display: flex
+    justify-content: space-between
+    border-bottom: 1px solid $n4
+
+.collection
+    position: relative
+    width: var(--full-w)
+    overflow: hidden
+
+.collectionInfo
+    display: none
+    padding-top: 4px
+    padding-bottom: 1px
+    +t
+        display: flex
+
+.wrapperInfo
+    width: var(--full-w)
+
+.info
+    display: flex
+    align-items: center
+    overflow-x: auto
+    column-gap: 12px
+    +t
+        column-gap: 16px
+
+                  
+
+
