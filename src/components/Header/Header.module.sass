@@ -10,6 +10,13 @@
     background-color: $n7
     border-color: $n4
     z-index: 70
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1)
+    transition-duration: 325ms
+    &.active
+        transform: translateY(-98px)
+    +t
+        &.active
+            transform: translateY(0)
     +t 
         position: relative
         min-width: 55px

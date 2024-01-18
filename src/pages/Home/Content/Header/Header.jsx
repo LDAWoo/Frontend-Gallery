@@ -5,12 +5,14 @@ import ItemCollection from "./ItemCollection";
 import MarketplaceTabsTip from "./MarketplaceTabsTip";
 import ActiveAndFilterTip from "./ActiveAndFilterTip";
 import Navigation from "./Navigation";
+import { useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
+  const [showNavigation] = useGlobalState("showNavigation");
   return (
-    <div className={cx("wrapper")}>
+    <div className={`${cx("wrapper")} ${showNavigation ? cx("active") : ""}`}>
       <div>
         <div className={cx("content")}>
           <div className={cx("collection")}>

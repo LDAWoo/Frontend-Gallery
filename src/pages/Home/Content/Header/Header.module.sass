@@ -1,14 +1,19 @@
 @import '~/styles/helpers'
 
 .wrapper
-    position: relative
+    position: absolute
     background-color: $n8
     z-index: 20
     left: 0
     right: 0
-    top: 0px
+    top: 48px
     transition-timing-function: cubic-bezier(0.4,0,1,1)
     transition-duration: 325ms
+    &.active
+        transform: translateY(-98px)
+    +t
+        &.active
+            transform: translateY(0)
     +t
         position: relative
         top:0
