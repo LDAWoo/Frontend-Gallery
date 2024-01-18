@@ -1,0 +1,25 @@
+@import '~/styles/helpers'
+
+.container
+    width: var(--full-w)  
+    margin: 0
+    padding: 0
+    border: none
+
+.wrapper
+    display: none
+    width: var(--full-w)
+    border-top: 1px solid $n3
+    background-color: $n8
+    height: 40px
+    position: sticky
+    bottom: 0
+    z-index: 60
+    +t
+        display: block
+
+.content
+    display: flex 
+    height: var(--full-h)
+    justify-content: space-between        
+

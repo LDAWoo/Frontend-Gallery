@@ -1,0 +1,91 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    text-align: left
+
+.wrapperData
+    display: flex
+    align-items: center
+    border-right: 1px solid $n3
+    padding: 0 16px 
+
+.containerData
+    display: flex
+    align-items: center
+    color: $n
+
+.containerAnimation
+    flex-shrink: 0
+    height: 20px
+    width: 20px
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+
+.animation
+    position: absolute
+    height: 12px
+    width: 12px
+    border-radius: 100%
+    background-color: rgb(139, 204, 177)
+    animation: ping 1s cubic-bezier(0,0,.2,1) infinite
+
+.circle
+    position: relative
+    height: 8px
+    width: 8px
+    border-radius: 100%
+    background-color: rgb(139, 204, 177)
+
+@keyframes ping
+    75%,to
+        transform: scale(2)
+        opacity: 0
+
+.wrapperItem
+    display: flex
+    align-items: center
+    padding: 0 16px
+
+.containerItem
+    display: flex
+    flex: 1 1 auto
+    position: relative
+    height: 24px
+    overflow: hidden
+
+.contentItem
+    display: flex
+    justify-content: center
+    align-items: center
+
+.inlineItem
+    white-space: nowrap
+    margin-right: 0px
+    margin-bottom: 0
+    font-size: .75rem
+    line-height: 1rem
+    &:nth-child(1)
+        margin-right: 8px
+    +x  
+        &:nth-child(1)
+            margin-right: 16px
+            
+.items
+    display: flex
+    align-items: center
+    gap: 4px
+    justify-content: center
+
+.priceNft
+    color: $n
+    letter-spacing: -0.025em
+
+.text
+    color: $n1    
+
+                          
+
+        

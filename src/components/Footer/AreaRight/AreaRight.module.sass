@@ -1,0 +1,54 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    text-align: right
+
+.wrapperItem
+    display: flex
+    flex-direction: row
+    gap: 4px
+    align-items: center
+    justify-content: center
+    padding: 0 16px
+
+    &:nth-child(3)
+        padding: 0 0
+
+    &:nth-child(4)
+        padding: 0 0
+
+    &:not(:nth-child(4))
+        border-right: 1px solid $n3
+        
+
+.wrapperText
+    display: flex
+    flex-direction: row
+    gap: 4px
+    align-items: center
+    color: $n1
+    font-size: 12px
+
+.iconPriceNft
+    color: $p3    
+
+.priceNft
+    color: $-n1
+
+.button
+    background-color: transparent
+    border: none
+    cursor: pointer
+    height: var(--full-h)
+    padding: 0px 12px
+    transition-duration: 300ms
+    &:hover
+        background-color: $n6
+
+.buttonContent
+    gap: 4px
+    display: flex
+    align-items: center
+    justify-content: center
+    color: $-n1    
