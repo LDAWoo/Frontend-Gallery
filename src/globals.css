@@ -9,6 +9,7 @@ body {
 
 :root {
     --full-vh: 100vh;
+    --full-dvh: 100dvh;
     --full-w: 100%;
     --full-h: 100%;
     --scrollbar-thumb-color: #24182f;
