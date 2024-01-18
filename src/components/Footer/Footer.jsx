@@ -14,7 +14,6 @@ const Footer = () => {
           <AreaRight />
         </div>
       </div>
-      {/* <div>Footer</div> */}
     </div>
   );
 };
