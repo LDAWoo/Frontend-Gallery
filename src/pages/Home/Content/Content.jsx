@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import styles from "~/pages/Home/Content/Content.module.sass";
 import Header from "./Header";
 import Main from "./Main";
+import Footer from "./Footer";
 
 const cx = classNames.bind(styles);
 
@@ -12,10 +13,7 @@ const Content = () => {
         <Header />
         <Main />
       </div>
-
-      <div className={cx("footer")} style={{ color: "white" }}>
-        Footer
-      </div>
+      <Footer />
     </div>
   );
 };

@@ -3,11 +3,15 @@
     display: flex
     align-items: center
     justify-content: center
+    padding: 4px
     border: none
     width: var(--full-w)
     transition-duration: 300ms
     cursor: pointer
     background-color: transparent
+    border-radius: 4px
+    &:hover
+        background-color: $n6
 
 .classButton
     display: flex
@@ -16,10 +20,16 @@
     width: var(--full-w)
 
 .buttonBackground
+    padding: 4px
+    border-radius: 4px
+    border: none
+    cursor: pointer
     width: var(--full-w)
     background-color: $p1
     transition-duration: 300ms
     color: $n
+    +t
+        padding: 6px
     &:hover
         background-color: $p2
 
@@ -31,6 +41,8 @@
     background-color: $n3
     transition-duration: 300ms
     cursor: pointer
+    width: var(--full-w)
+    color: $n
     +t
         padding: 6px
     &:hover

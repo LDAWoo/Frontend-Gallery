@@ -1,0 +1,76 @@
+@import '~/styles/helpers'
+
+.wrapper
+    overflow: hidden
+    height: 0px
+    transition-property: height
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+    transition-duration: 300ms
+    &.active
+        height: 40px
+    +t
+        height: auto
+
+.content
+    display: flex
+    flex-direction: row
+    gap: 0 12px
+
+.inputContent
+    border: 1px solid $n3
+    flex-shrink: 0
+    overflow: hidden
+    border-radius: 4px
+    display: flex
+    align-items: center
+
+.inputItems
+    border: none
+    outline: none
+    color: $-n1
+    background: $n7
+    max-height: 28px
+    max-width: 28px
+    text-align: center
+    padding: 0.5rem 0.8rem
+    font-weight: 600 
+    +t
+        max-height: 40px
+        max-width: 40px
+        padding: 0.7rem 1rem
+
+.titleItems
+    padding: 0 8px
+    color: $n2 
+
+.sliderContent
+    width: var(--full-w)
+    display: flex
+    align-items: center
+    +t
+        width: 162px
+
+.settingContent
+    display: flex
+    align-items: center
+    cursor: pointer
+    position: relative
+
+.settingIcon
+    transform: translateY(2px)
+    color: $n1
+    &:hover
+        color: $n2
+
+.dotted
+    width: 8px
+    height: 8px
+    border-radius: 100%
+    position: absolute
+    background-color: $p2
+    top: 8px
+    left: 12px            
+    
+
+
+    

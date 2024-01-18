@@ -43,6 +43,11 @@
     aspect-ratio: auto
     margin: none
 
+.image
+    max-width: var(--full-w)
+    max-height: var(--full-h)
+    object-fit: cover  
+
 .buttonLucky
     display: flex
     position: absolute
@@ -64,12 +69,11 @@
     right: 8px
     padding: 5px 6px
     cursor: pointer
-    border: 1px solid $p1
+    border: none
     border-radius: 100%
-    background-color: rgba(102,22,61,.5)
     transition-duration: 300ms
-    &:hover
-        background-color: rgba(102,22,61,.8)
+    background-color: rgba(18,12,24,.2)
+   
 
 .cardFooter
     position: relative
@@ -78,10 +82,11 @@
 .cardItems
     display: flex
     flex-direction: column
-    padding: 8px 8px 0 8px
-    gap: 0
+    padding: 8px
+    position: relative
+    gap: 4px 0
     +t
-       padding: 12px 12px 4px 12px
+       padding: 12px 12px 32px 12px
        gap: 4px 0 
 
 .itemHead
@@ -115,13 +120,21 @@
     color: $n
     font-size: .75rem
 
+.wrapperFood
+    padding-bottom: 0 
+
 .itemFood
     display: flex
-    justify-content: space-between 
+    flex-direction: column
     gap: 4px 0
     background-color: transparent
-    align-items: center
     color: $n
+
+.contentFood
+    display: flex
+    justify-content: space-between
+    +t
+        margin-bottom: 4px
 
 .moneyWrapper
     display: flex
@@ -132,14 +145,74 @@
     color: $p3
     transform: translateY(1px)
 
-.shoppingWrapper
+.wrapperPriceNft
     display: flex
     gap: 4px
     align-items: center
+    +t
+        display: none
 
 .iconShopping
     color: $n1
     transform: translateY(1px)    
 
-.titleShopping
-    color: $n1    
+.titlePriceNft
+    color: $n1
+
+.wrapperWallet
+    display: none
+    position: absolute
+    bottom: 0
+    left: 0
+    flex-direction: row
+    width: var(--full-w)
+    align-items: center
+    +t  
+        display: flex
+
+.lastPriceNft
+    display: none
+    position: absolute
+    bottom: 0
+    left: 0
+    padding: 0 12px
+    height: 32px
+    width: var(--full-w)
+    align-items: center 
+    gap: 0 4px
+    color: $n1
+    font-size: 12px
+    +t  
+        display: flex
+
+.contentWallet
+    margin-right: auto
+    display: flex
+    align-items: center
+    justify-content: center
+    width: var(--full-w)
+    height: 32px
+
+.buttonWallet
+    background-color: $n3
+    width: var(--full-w)
+    height: var(--full-h)
+    border: none
+    color: $n
+    border-bottom-left-radius: 8px
+    cursor: pointer    
+
+.modalDetails
+    margin-left: auto
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 32px
+    &.active
+        background-color: $n5
+
+.zoomIcon
+    transform: translateY(2px)
+    color: $n1
+    &.active
+        color: $n

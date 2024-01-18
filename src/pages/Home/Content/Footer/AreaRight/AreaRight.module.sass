@@ -1,0 +1,73 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    align-items: center
+    flex-direction: row
+    gap: 8px
+    +t 
+        gap: 12px
+
+.contentWrapper
+    display: flex
+    gap: 12px 0
+    flex-direction: row
+    width: 32px
+    &.hidden
+        display: none
+        
+    +t
+        display: none
+        width: 0
+        &.hidden
+            display: flex 
+            width: auto 
+
+    &:nth-child(4)
+        display: flex
+        flex: 1 0 0px
+        width: var(--full-w)
+        gap: 12px
+    +t
+        &:nth-child(4)
+            flex: none
+            width: 240px   
+            
+
+.buttonWrapper
+    display: flex
+    gap: 12px 0
+    height: 32px
+    width: var(--full-w)
+    +t
+        display: none
+        &.active
+            display: flex
+            
+.buttonActive
+    padding: 4px
+    border: none
+    width: var(--full-w)
+    transition-duration: 300ms
+    cursor: pointer
+    border-radius: 4px
+    background-color: transparent
+
+    &.active
+        background-color: $n6
+        &:hover
+            background-color: $n7  
+
+    &:hover
+        background-color: $n6
+
+
+.buttonContent
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 0px
+    &.activeIcon
+        gap: 4px
+            
+    

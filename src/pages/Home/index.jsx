@@ -7,12 +7,8 @@ const cx = classNames.bind(styles);
 const Home = () => {
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("content")}>
-        <div className="contentWrapper">
-          <div style={{ display: "flex", flex: "1 1 auto" }}>
-            <Content />
-          </div>
-        </div>
+      <div className={cx("container")}>
+        <Content />
       </div>
     </div>
   );

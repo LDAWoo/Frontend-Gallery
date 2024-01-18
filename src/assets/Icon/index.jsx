@@ -85,3 +85,15 @@ export const shoppingIcon = () => {
     </svg>
   );
 };
+
+export const zoomIcon = () => {
+  return (
+    <svg viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor" width="22" height="22" size="22">
+      <path d="M7.33333 2.76306H4.58333C4.0971 2.76306 3.63079 2.95622 3.28697 3.30003C2.94315 3.64385 2.75 4.11016 2.75 4.59639V7.34639" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+      <path d="M19.25 7.34639V4.59639C19.25 4.11016 19.0569 3.64385 18.713 3.30003C18.3692 2.95622 17.9029 2.76306 17.4167 2.76306H14.6667" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+      <path d="M2.75 14.6797V17.4297C2.75 17.9159 2.94315 18.3822 3.28697 18.726C3.63079 19.0699 4.0971 19.263 4.58333 19.263H7.33333" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+      <path d="M14.6667 19.263H17.4167C17.9029 19.263 18.3692 19.0699 18.713 18.726C19.0569 18.3822 19.25 17.9159 19.25 17.4297V14.6797" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+      <rect x="7.5" y="7.51306" width="7" height="7" rx="1.5" stroke="currentColor"></rect>
+    </svg>
+  );
+};

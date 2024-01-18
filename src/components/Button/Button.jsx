@@ -8,17 +8,17 @@ import Title from "~/components/Title";
 
 const cx = classNames.bind(styles);
 
-function Button({ className, classButton, background, backgroundGallery, border, classIcon, active, icon, classTitle, title, size, disabled, loading, classImg, src, alt, onClick, iconPosition, srcPosition, titlePosition, fontBold, fontMedium, xxxl, xxl, xl, large, medium, small, nowrap }) {
+function Button({ className, classButton, background, backgroundGallery, border, classIcon, active, icon, classTitle, title, size, disabled, loading, classImg, src, alt, onClick, iconPosition, srcPosition, titlePosition, fontBold, fontMedium, fontSemiBold, xxxl, xxl, xl, large, medium, small, nowrap, ...props }) {
   return (
-    <button className={`${background ? (disabled ? "" : `${cx("buttonBackground")}`) : ""} ${backgroundGallery ? cx("backgroundGallery") : ""} ${border ? (disabled ? "" : `${cx("buttonBorder")}`) : ""} ${disabled ? `${cx("buttonDisabled")}` : ""} ${className ? className : `${cx("button")}`}`} type="button" disabled={disabled} onClick={onClick}>
+    <button className={`${background ? (disabled ? "" : `${cx("buttonBackground")}`) : ""} ${backgroundGallery ? cx("backgroundGallery") : ""} ${border ? (disabled ? "" : `${cx("buttonBorder")}`) : ""} ${disabled ? `${cx("buttonDisabled")}` : ""} ${className ? className : `${cx("button")}`}`} type="button" disabled={disabled} onClick={onClick} {...props}>
       <div className={`${classButton ? classButton : cx("classButton")}`}>
         {loading && <div className={`${cx("buttonLoading")}`} role="status" />}
         {srcPosition === "before" && src && <Image className={classImg} src={src} alt={alt} />}
-        {titlePosition === "before" && <Title title={title} fontBold={fontBold} fontMedium={fontMedium} xxxl={xxxl} xxl={xxl} xl={xl} large={large} medium={medium} small={small} nowrap={nowrap} className={classTitle} />}
+        {titlePosition === "before" && <Title title={title} fontSemiBold={fontSemiBold} fontBold={fontBold} fontMedium={fontMedium} xxxl={xxxl} xxl={xxl} xl={xl} large={large} medium={medium} small={small} nowrap={nowrap} className={classTitle} />}
         {iconPosition !== "right" && icon && <Icon classIcon={classIcon} icon={icon} size={size} />}
         <div className={`${iconPosition !== "right" ? "" : "flex-1"}`}>
           {srcPosition !== "before" && src && <Image className={classImg} src={src} alt={alt} />}
-          {titlePosition !== "before" && title && <Title title={title} fontBold={fontBold} fontMedium={fontMedium} xxxl={xxxl} xxl={xxl} xl={xl} large={large} medium={medium} small={small} nowrap={nowrap} className={classTitle} />}
+          {titlePosition !== "before" && title && <Title title={title} fontSemiBold={fontSemiBold} fontBold={fontBold} fontMedium={fontMedium} xxxl={xxxl} xxl={xxl} xl={xl} large={large} medium={medium} small={small} nowrap={nowrap} className={classTitle} />}
         </div>
         {active && iconPosition === "right" && icon && <Icon classIcon={classIcon} icon={icon} size={size} />}
       </div>
@@ -49,6 +49,7 @@ Button.propTypes = {
   titlePosition: PropTypes.oneOf(["before", "right"]),
   fontBold: PropTypes.bool,
   fontMedium: PropTypes.bool,
+  fontSemiBold: PropTypes.bool,
   xxxl: PropTypes.bool,
   xxl: PropTypes.bool,
   xl: PropTypes.bool,
