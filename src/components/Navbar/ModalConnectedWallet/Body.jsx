@@ -70,8 +70,8 @@ const Body = () => {
   const handleConnectedWallet = async (chain, id) => {
     if (chain === "solana" && id === "phantom") {
       await connectedWalletPhantomSolana(chain, id);
-      setGlobalState("closeModalConnectWallet", !closeModalConnectWallet);
     }
+    setGlobalState("closeModalConnectWallet", !closeModalConnectWallet);
   };
 
   return (

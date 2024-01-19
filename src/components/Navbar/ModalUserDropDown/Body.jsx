@@ -1,15 +1,16 @@
 import classNames from "classnames/bind";
-import styles from "./Body.module.sass";
+import { Link } from "react-router-dom";
 import { disconnectIcon, dollarIcon } from "~/assets/Icon";
 import Icon from "~/components/Icon";
-import { truncate, useGlobalState } from "~/store";
-import { formatPrice } from "~/format";
 import Title from "~/components/Title";
-import { Link } from "react-router-dom";
+import { setGlobalState, truncate, useGlobalState } from "~/store";
+import styles from "./Body.module.sass";
+import { disconnectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 const cx = classNames.bind(styles);
 
 const Body = () => {
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const items = [
     {
       id: "blockchain",
@@ -72,6 +73,18 @@ const Body = () => {
     },
   ];
 
+  const handleAction = (id) => {
+    if (id === "connectDifferentWallet") {
+      setGlobalState("connectedModal", true);
+    }
+    if (id === "disconnect") {
+      setGlobalState("closeModalUserDropDown", !closeModalUserDropDown);
+      setTimeout(() => {
+        disconnectedWalletPhantomSolana();
+      }, 300);
+    }
+  };
+
   return (
     <div className={cx("wrapper")}>
       {items?.map((item, index) => (
@@ -90,7 +103,7 @@ const Body = () => {
                     </div>
                     <div className={cx("contentGroup")}>
                       {group?.actions.map((action, index) => (
-                        <div key={index} className={`${cx("contentAction")} ${action.active ? cx("active") : ""}`}>
+                        <div key={index} className={`${cx("contentAction")} ${action.active ? cx("active") : ""}`} onClick={() => handleAction(action.id)}>
                           {action?.name}
                         </div>
                       ))}

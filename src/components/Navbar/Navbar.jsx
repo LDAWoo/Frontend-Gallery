@@ -29,6 +29,7 @@ const Navbar = () => {
   const [connectedModal] = useGlobalState("connectedModal");
   const [showModalUserDropDown] = useGlobalState("showModalUserDropDown");
   const [closeModalConnectWallet] = useGlobalState("closeModalConnectWallet");
+  const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -98,7 +99,7 @@ const Navbar = () => {
               </div>
 
               {connectedAccount.length > 0 ? (
-                <ModalRight classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown}>
+                <ModalRight classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown} closeModal={closeModalUserDropDown}>
                   <div className={cx("wrapperUser")} onClick={handleModalUserDropDown}>
                     <span className={cx("priceUser")}>0 SOL</span>
                     <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />

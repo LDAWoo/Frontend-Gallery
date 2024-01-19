@@ -1,6 +1,7 @@
 import { setGlobalState } from "~/store";
 
 const PRIVATE_KEY = import.meta.env.VITE_APP_PHANTOM_SOLANA_API_KEY;
+const keyLocalStorage = "last-connected-wallet-data";
 
 const connectedWalletPhantomSolana = async (chain, name) => {
   if (isConnectedWalletPhantomSolana()) return;
@@ -13,10 +14,9 @@ const connectedWalletPhantomSolana = async (chain, name) => {
     chain: chain,
     name: name,
   };
-  localStorage.setItem("last-connected-wallet-data", JSON.stringify(data));
+  localStorage.setItem(keyLocalStorage, JSON.stringify(data));
   setGlobalState("connectedAccount", publicKey);
   setGlobalState("modalConnectedWallet", { active: "", data: [] });
-
   // await getBalanceWalletPhantomSolana(publicKey);
 };
 
@@ -36,8 +36,9 @@ const getBalanceWalletPhantomSolana = async (address) => {
     .catch((error) => console.log("error", error));
 };
 
-const disconnectedWalletPhantomSolana = async () => {
-  await window.phantom.solana.disconnect();
+const disconnectedWalletPhantomSolana = () => {
+  window.phantom.solana.disconnect();
+  localStorage.removeItem(keyLocalStorage);
   setGlobalState("connectedAccount", "");
 };
 
