@@ -1,0 +1,39 @@
+@import '~/styles/helpers'
+
+
+.wrapper
+    position: fixed
+    z-index: 9999
+    left: 0
+    top: 0
+    bottom: 0
+    right: 0
+
+.containerScreen
+    position: fixed
+    inset: 0
+    background-color: rgba(0, 0, 0, .5)
+    backdrop-filter: blur(1px)
+
+.container
+    height: var(--full-vh)
+    width: auto
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-left: auto
+    margin-right: auto
+    +m
+        width: 576px
+
+.content
+    display: flex
+    flex-direction: column
+    position: relative
+    overflow: auto
+    padding: 0 12px
+    border-radius: 20px
+    background-color: rgba(18,12,24,1)
+    width: 420px
+    max-height: calc(100vh - 100px)
+    

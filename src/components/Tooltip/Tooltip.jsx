@@ -8,8 +8,6 @@ import styles from "./Tooltip.module.sass";
 const cx = classNames.bind(styles);
 
 const Tooltip = ({ toolTip = false, interactive, delay, content, items, width, onClickOutside, isVisible, placement, className, children, ...props }) => {
-  console.log(content);
-
   const ToolTipTippy = () => (
     <Tippy delay={delay} content={content} animation className={`${!className ? `${cx("wrapperTippy")}` : className}`} placement={placement} {...props}>
       {children}

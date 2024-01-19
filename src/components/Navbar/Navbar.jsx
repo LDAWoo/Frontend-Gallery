@@ -13,6 +13,7 @@ import styles from "~/components/Navbar/Navbar.module.sass";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Title from "../Title";
+import ModalCenter from "../Modal/ModalCenter/ModalCenter";
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
@@ -93,6 +94,7 @@ const Navbar = () => {
             </div>
           )}
         </nav>
+        <ModalCenter />
       </Header>
     </div>
   );

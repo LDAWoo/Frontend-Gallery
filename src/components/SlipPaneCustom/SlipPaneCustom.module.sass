@@ -1,0 +1,23 @@
+
+@import '~/styles/helpers'
+
+.resizer   
+    height: 10px
+    width: 100%
+    cursor: ns-resize
+    background-color: $n7
+    display: none
+    align-items: center
+    justify-content: center
+    pointer-events: auto
+    &.active
+        display: flex
+    &:before
+        content: ''
+        width: 10%
+        height: 50%
+        background-color: $p4
+        border-radius: 9999px
+        transition: background-color .1s ease-out
+    
+  

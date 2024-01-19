@@ -1,0 +1,45 @@
+@import '~/styles/helpers'
+
+.wrapper
+    flex-shrink: 0
+    width: calc( var(--full-w)  -  32px)
+    display: flex    
+    align-items: center
+    gap: 16px
+    padding: 0 16px
+    color: $n    
+
+.container
+    display: flex
+    flex-direction: row
+    gap: 16px
+    align-items: center
+    border-bottom: 1px solid $n3
+    padding-top: 12px
+
+.containerContent
+    cursor: pointer
+    font-size: .875rem
+    line-height: 1.25rem
+    color: $n1
+    transition-duration: 300ms
+    transition-property: color
+    &.active
+        color: $n
+        &:hover
+            color: $n1
+    &:hover
+        color: $n2
+
+.contentItem
+    display: flex
+    flex-direction: column
+    gap: 4px
+
+.lineActive
+    height: 4px
+    border-radius: 999px
+    width: var(--full-w) 
+    background-color: transparent
+    &.active
+        background-color: $p1

@@ -40,8 +40,6 @@ const AreaLeft = () => {
     }
   };
 
-  console.log(showAreaLeft);
-
   return (
     <div className={`${cx("wrapper")} ${showAreaLeft ? cx("active") : ""}`}>
       <div className={cx("content")}>
