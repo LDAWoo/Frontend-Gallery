@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "~/pages/Home/Content/Content.module.sass";
+import styles from "./Content.module.sass";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";

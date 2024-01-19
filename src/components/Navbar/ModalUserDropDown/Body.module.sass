@@ -1,0 +1,111 @@
+@import '~/styles/helpers'
+
+
+.wrapper
+    width: var(--full-w) 
+    height: var(--full-h)
+
+.container  
+    width: var(--full-w) 
+    height: var(--full-h)
+    display: flex
+    flex-direction: column
+    gap: 12px  
+
+.border
+    width: var(--full-w)
+    opacity: 0.6
+    border-top: 1px solid $n2 
+
+.itemBlockchain
+    width: var(--full-w) 
+    display: flex
+    flex-direction: column
+    gap: 12px  
+
+.containerGroup
+    display: flex
+    flex-direction: row
+    gap: 8px
+    align-items: center
+    width: var(--full-w) 
+
+.iconGroup
+    color: $p3
+    min-height: 30px
+    min-width: 30px
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 9999px
+    background-color: $n6
+    &.active
+        color: $n1
+        rotate: 45deg
+
+.containerContent
+    display: flex
+    flex-direction: column
+    width: var(--full-w) 
+
+.contentGroup
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+
+.content
+    color: $-n1
+    font-weight: 600
+    font-size: .875rem
+    line-height: 1.25rem
+
+.contentAction
+    color: $n1            
+    font-size: .875rem
+    line-height: 1.25rem
+    cursor: pointer
+    transition-property: color,opacity
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+    transition-duration: 300ms
+    &.active
+        &:hover
+            opacity: 1
+            color: $n
+    &:hover
+       opacity: 0.6
+       color: $c2 
+
+.itemMenu
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+
+.menuGroup
+    text-decoration: none
+    color: $n
+    padding: 8px 16px
+    border-radius: 4px
+    transition-duration: 300ms
+    transition-property: color,background-color,border-color,text-decoration-color
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+    &:hover
+        background-color: $n2  
+
+.containerMenu
+    display: flex
+    align-items: center
+    gap: 4px
+
+.subName
+    display: flex
+    align-items: center
+    justify-content: center
+    font-weight: 600
+    padding: 2px 3px
+    background-color: #1D1326
+    border-radius: 3px
+    color: #DBB0FE   
+    font-size: .875rem
+    line-height: 1.25rem           
+    

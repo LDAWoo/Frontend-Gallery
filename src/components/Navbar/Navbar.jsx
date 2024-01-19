@@ -16,13 +16,18 @@ import Title from "../Title";
 import ModalCenter from "../Modal/ModalCenter/ModalCenter";
 import { setGlobalState, useGlobalState } from "~/store";
 import HeaderModalWallet from "./ModalConnectedWallet/Header";
-import Body from "./ModalConnectedWallet/Body";
+import HeaderModalUserDropDown from "./ModalUserDropDown/Header";
+import BodyModalWallet from "./ModalConnectedWallet/Body";
+import BodyModalUserDropDown from "./ModalUserDropDown/Body";
 import Image from "~/components/Image";
+import routesConfig from "~/configs";
+import ModalRight from "../Modal/ModalRight/ModalRight";
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [connectedModal] = useGlobalState("connectedModal");
+  const [showModalUserDropDown] = useGlobalState("showModalUserDropDown");
   const [closeModalConnectWallet] = useGlobalState("closeModalConnectWallet");
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
 
@@ -49,6 +54,10 @@ const Navbar = () => {
     handleCloseDropDown();
   };
 
+  const handleModalUserDropDown = () => {
+    setGlobalState("showModalUserDropDown", true);
+  };
+
   return (
     <div className={`${cx("wrapper")}`}>
       <Header>
@@ -66,9 +75,9 @@ const Navbar = () => {
                 <div className={cx("menuItems")}>
                   <Button icon={MdOutlineMenu} size={24} classIcon={cx("menuIcon")} />
                 </div>
-                <Link className={cx("logo")}>
+                <Link className={cx("logo")} to={routesConfig.home}>
                   <Icon />
-                  <Title title="Gallery" fontBold />
+                  <Title title="Gallery" fontBold extraLarge4 />
                 </Link>
               </div>
             </div>
@@ -89,11 +98,13 @@ const Navbar = () => {
               </div>
 
               {connectedAccount.length > 0 ? (
-                <div className={cx("wrapperUser")}>
-                  <span className={cx("priceUser")}>0 SQL</span>
-                  <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
-                  <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
-                </div>
+                <ModalRight classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown}>
+                  <div className={cx("wrapperUser")} onClick={handleModalUserDropDown}>
+                    <span className={cx("priceUser")}>0 SOL</span>
+                    <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
+                    <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
+                  </div>
+                </ModalRight>
               ) : (
                 <div className={cx("wrapperConnected")}>
                   <div className={cx("contentConnected")}>
@@ -115,7 +126,7 @@ const Navbar = () => {
             </div>
           )}
         </nav>
-        <ModalCenter header={<HeaderModalWallet />} body={<Body />} type={"connectedModal"} isOpen={connectedModal} closeModal={closeModalConnectWallet} />
+        <ModalCenter header={<HeaderModalWallet />} body={<BodyModalWallet />} type={"connectedModal"} isOpen={connectedModal} closeModal={closeModalConnectWallet} />
       </Header>
     </div>
   );

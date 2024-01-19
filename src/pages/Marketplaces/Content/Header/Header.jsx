@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "~/pages/Home/Content/Header/Header.module.sass";
+import styles from "./Header.module.sass";
 import Information from "./Information";
 import ItemCollection from "./ItemCollection";
 import MarketplaceTabsTip from "./MarketplaceTabsTip";

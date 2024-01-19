@@ -1,5 +1,7 @@
 import { setGlobalState } from "~/store";
 
+const PRIVATE_KEY = import.meta.env.VITE_APP_PHANTOM_SOLANA_API_KEY;
+
 const connectedWalletPhantomSolana = async (chain, name) => {
   if (isConnectedWalletPhantomSolana()) return;
   await window.phantom.solana.connect();
@@ -11,10 +13,27 @@ const connectedWalletPhantomSolana = async (chain, name) => {
     chain: chain,
     name: name,
   };
-
   localStorage.setItem("last-connected-wallet-data", JSON.stringify(data));
   setGlobalState("connectedAccount", publicKey);
   setGlobalState("modalConnectedWallet", { active: "", data: [] });
+
+  // await getBalanceWalletPhantomSolana(publicKey);
+};
+
+const getBalanceWalletPhantomSolana = async (address) => {
+  var myHeaders = new Headers();
+  myHeaders.append("x-api-key", PRIVATE_KEY);
+
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch(`https://api.shyft.to/sol/v1/wallet/balance?network=devnet&address=${address}`, requestOptions)
+    .then((response) => console.log(response))
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 };
 
 const disconnectedWalletPhantomSolana = async () => {

@@ -1,13 +1,13 @@
 import classNames from "classnames/bind";
-import styles from "~/pages/Home/Home.module.sass";
-import Content from "~/pages/Home/Content";
-import Footer from "./Footer/Footer";
+import styles from "./Marketplaces.module.sass";
+import Content from "./Content";
+import Footer from "./Footer";
 import ActivityAndAnalytics from "./ActivityAndAnalytics";
 import { useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 
-const Home = () => {
+const Marketplaces = () => {
   const [showActivity] = useGlobalState("showActivity");
   const [showAnalytics] = useGlobalState("showAnalytics");
   return (
@@ -21,4 +21,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Marketplaces;
