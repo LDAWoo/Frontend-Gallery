@@ -6,6 +6,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showActivity: false,
   showAnalytics: false,
   activeAnalyticsNavigation: "sales",
+  connectedModal: false,
 });
 
 export { useGlobalState, setGlobalState, getGlobalState };

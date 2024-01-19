@@ -1,0 +1,113 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    color: $n1
+    gap: 12px
+
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: $n6
+    border-radius: 0.5rem
+    border: 1px solid $n3
+    padding: 12px
+
+.contentBlockchain
+    display: flex
+    align-items: center
+    justify-content: space-evenly
+    gap: 8px    
+    border-bottom: 1px solid $n3
+    width: var(--full-w)
+    
+.containerItem  
+    display: flex
+    flex-direction: column
+    align-items: center  
+    padding: 4px 0
+    cursor: pointer
+    gap: 5px
+    &.active
+        color: $n
+
+.wrapperItem
+    display: flex
+    align-items: center
+    flex-direction: row
+    gap: 4px
+
+.iconBlockchain
+    color: $p3 
+
+.line
+    width: var(--full-w)
+    height: 2px
+    background-color: transpanrent
+    &.active
+        background-color: $p1
+
+.contentTechnology
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    margin-top: 16px
+
+.wrapperTechnology
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 12px 
+    border-radius: 0.5rem
+    margin-top: 6px
+    margin-bottom: 6px
+    position: relative
+    padding: 0.563rem 0.7rem
+    cursor: pointer
+    border: 1px solid $n3
+    transition-duration: 300ms
+
+    &.active
+        background-color: $p5
+        border: 1px solid $p1
+        &:hover
+            border: 1px solid $p1
+    &:hover
+        border: 1px solid $n2
+        background-color: $n4
+
+.iconTechnology
+    color: $n
+    border-radius: 5px
+    display: flex
+    justify-content: center
+    align-items: center
+
+.nameTechnology
+    display: flex
+    flex-direction: column
+    gap: 4px
+    font-size: 14px
+    color: $n
+
+.detected
+    color: $n1    
+        
+
+
+.technologyRecommended
+    position: absolute  
+    top: 8px
+    right: 8px
+    border-radius: 0.375rem
+    background-color: $n4
+    font-weight: 600
+    font-size: .75rem
+    line-height: 1rem
+    display: flex
+    align-items: center
+    justify-content: center
+    color: $p6
+    padding: 2px 4px

@@ -14,9 +14,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Title from "../Title";
 import ModalCenter from "../Modal/ModalCenter/ModalCenter";
+import { setGlobalState, useGlobalState } from "~/store";
+import HeaderModalWallet from "./ModalConnectedWallet/Header";
+import Body from "./ModalConnectedWallet/Body";
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
+  const [connectedModal] = useGlobalState("connectedModal");
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -35,6 +39,10 @@ const Navbar = () => {
 
   const handleCloseSearch = () => {
     setShowHeaderSearch(false);
+  };
+
+  const handleConnectedWallet = () => {
+    setGlobalState("connectedModal", true);
   };
 
   return (
@@ -77,11 +85,11 @@ const Navbar = () => {
               </div>
               <div className={cx("wrapperConnected")}>
                 <div className={cx("contentConnected")}>
-                  <Button className={cx("buttonConnected")} background title="Connect Wallet" />
+                  <Button className={cx("buttonConnected")} background title="Connect Wallet" onClick={handleConnectedWallet} />
                   <Button backgroundGallery fontMedium classButton={cx("contentButtonDropdown")} icon={IoIosArrowDown} size={18} onClick={handleShowDropDown} />
                   <div className={`${showDropdown ? cx("showDropDown") : cx("hiddenDropDown")} ${cx("wrapperDropdown")}`}>
                     <div className={cx("headerDropdown")}>
-                      <Button className={cx("buttonConnected")} fontMedium background title="Connect Wallet" />
+                      <Button className={cx("buttonConnected")} fontMedium background title="Connect Wallet" onClick={handleConnectedWallet} />
                       <Button icon={MdOutlineClose} size={24} classIcon={cx("buttonCloseDropdown")} onClick={handleCloseDropDown} />
                     </div>
                   </div>
@@ -94,7 +102,7 @@ const Navbar = () => {
             </div>
           )}
         </nav>
-        <ModalCenter />
+        <ModalCenter header={<HeaderModalWallet />} body={<Body />} type={"connectedModal"} isOpen={connectedModal} />
       </Header>
     </div>
   );

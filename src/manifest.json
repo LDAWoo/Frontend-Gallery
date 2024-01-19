@@ -1,0 +1,23 @@
+{
+  "name": "Gallery Chrome Extension",
+  "description": "Gallery To Chrome Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage", "activeTab", "contextMenus"],
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.google.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
