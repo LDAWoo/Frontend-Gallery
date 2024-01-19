@@ -17,10 +17,13 @@ import ModalCenter from "../Modal/ModalCenter/ModalCenter";
 import { setGlobalState, useGlobalState } from "~/store";
 import HeaderModalWallet from "./ModalConnectedWallet/Header";
 import Body from "./ModalConnectedWallet/Body";
+import Image from "~/components/Image";
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
+  const [connectedAccount] = useGlobalState("connectedAccount");
   const [connectedModal] = useGlobalState("connectedModal");
+  const [closeModalConnectWallet] = useGlobalState("closeModalConnectWallet");
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -43,6 +46,7 @@ const Navbar = () => {
 
   const handleConnectedWallet = () => {
     setGlobalState("connectedModal", true);
+    handleCloseDropDown();
   };
 
   return (
@@ -83,18 +87,27 @@ const Navbar = () => {
               <div className={cx("searchIcon")}>
                 <Icon icon={IoSearchOutline} size={20} classIcon={cx("buttonSearch")} onClick={handleShowSearch} />
               </div>
-              <div className={cx("wrapperConnected")}>
-                <div className={cx("contentConnected")}>
-                  <Button className={cx("buttonConnected")} background title="Connect Wallet" onClick={handleConnectedWallet} />
-                  <Button backgroundGallery fontMedium classButton={cx("contentButtonDropdown")} icon={IoIosArrowDown} size={18} onClick={handleShowDropDown} />
-                  <div className={`${showDropdown ? cx("showDropDown") : cx("hiddenDropDown")} ${cx("wrapperDropdown")}`}>
-                    <div className={cx("headerDropdown")}>
-                      <Button className={cx("buttonConnected")} fontMedium background title="Connect Wallet" onClick={handleConnectedWallet} />
-                      <Button icon={MdOutlineClose} size={24} classIcon={cx("buttonCloseDropdown")} onClick={handleCloseDropDown} />
+
+              {connectedAccount.length > 0 ? (
+                <div className={cx("wrapperUser")}>
+                  <span className={cx("priceUser")}>0 SQL</span>
+                  <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
+                  <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
+                </div>
+              ) : (
+                <div className={cx("wrapperConnected")}>
+                  <div className={cx("contentConnected")}>
+                    <Button className={cx("buttonConnected")} background title="Connect Wallet" onClick={handleConnectedWallet} />
+                    <Button backgroundGallery fontMedium classButton={cx("contentButtonDropdown")} icon={IoIosArrowDown} size={18} onClick={handleShowDropDown} />
+                    <div className={`${showDropdown ? cx("showDropDown") : cx("hiddenDropDown")} ${cx("wrapperDropdown")}`}>
+                      <div className={cx("headerDropdown")}>
+                        <Button className={cx("buttonConnected")} fontMedium background title="Connect Wallet" onClick={handleConnectedWallet} />
+                        <Button icon={MdOutlineClose} size={24} classIcon={cx("buttonCloseDropdown")} onClick={handleCloseDropDown} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           ) : (
             <div className={cx("navbarCloseSearch")}>
@@ -102,7 +115,7 @@ const Navbar = () => {
             </div>
           )}
         </nav>
-        <ModalCenter header={<HeaderModalWallet />} body={<Body />} type={"connectedModal"} isOpen={connectedModal} />
+        <ModalCenter header={<HeaderModalWallet />} body={<Body />} type={"connectedModal"} isOpen={connectedModal} closeModal={closeModalConnectWallet} />
       </Header>
     </div>
   );

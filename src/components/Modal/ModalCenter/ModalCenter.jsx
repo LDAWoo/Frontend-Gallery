@@ -7,7 +7,7 @@ import { setGlobalState } from "~/store";
 import { useEffect, useRef, useState } from "react";
 
 const cx = classNames.bind(styles);
-const ModalCenter = ({ header, body, type, isOpen }) => {
+const ModalCenter = ({ header, body, type, isOpen, closeModal }) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
 
@@ -33,6 +33,10 @@ const ModalCenter = ({ header, body, type, isOpen }) => {
       setGlobalState(type, false);
     }, 300);
   };
+
+  useEffect(() => {
+    handleCloseModal();
+  }, [closeModal]);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -63,6 +67,7 @@ ModalCenter.propTypes = {
   body: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.bool,
 };
 
 export default ModalCenter;
