@@ -1,14 +1,16 @@
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { disconnectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 import { disconnectIcon, dollarIcon } from "~/assets/Icon";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
+import routesConfig from "~/configs";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
-import { disconnectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 const cx = classNames.bind(styles);
 
 const Body = () => {
+  const navigate = useNavigate();
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const items = [
@@ -54,20 +56,20 @@ const Body = () => {
       groups: [
         {
           name: "My Items",
-          url: "/me",
+          url: routesConfig.profile,
         },
         {
           name: "Rewards",
           subName: "Sign in",
-          url: "/me",
+          url: "",
         },
         {
           name: "Account Settings",
-          url: "/me",
+          url: routesConfig.profile + "?activeTab=settings",
         },
         {
           name: "Manage Wallets",
-          url: "/me",
+          url: routesConfig.profile + "?activeTab=manage-wallet",
         },
       ],
     },
@@ -83,6 +85,11 @@ const Body = () => {
         disconnectedWalletPhantomSolana();
       }, 300);
     }
+  };
+
+  const handleClickMenuItem = (url) => {
+    setGlobalState("closeModalUserDropDown", !closeModalUserDropDown);
+    navigate(url);
   };
 
   return (
@@ -117,12 +124,12 @@ const Body = () => {
           {item?.id === "menu" && (
             <div className={cx("itemMenu")}>
               {item?.groups.map((group, index) => (
-                <Link key={index} to={group?.url} className={cx("menuGroup")}>
+                <div key={index} className={cx("menuGroup")} onClick={() => handleClickMenuItem(group?.url)}>
                   <div className={cx("containerMenu")}>
                     <Title title={group?.name} fontBold />
                     {group?.subName && <div className={cx("subName")}>{group?.subName}</div>}
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           )}

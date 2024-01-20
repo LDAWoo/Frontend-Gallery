@@ -86,6 +86,9 @@ const Navbar = () => {
               <div className={cx("items")}>
                 <span className={cx("item")}>Discover</span>
                 <span className={cx("item")}>Mint</span>
+                <Link to={routesConfig.marketplace} className={cx("item")}>
+                  Marketplace
+                </Link>
               </div>
             </div>
             <div className={cx("wrapperSearch")}>

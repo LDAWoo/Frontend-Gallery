@@ -84,11 +84,12 @@
 .menuGroup
     text-decoration: none
     color: $n
-    padding: 8px 16px
+    padding: 12px 16px
     border-radius: 4px
     transition-duration: 300ms
     transition-property: color,background-color,border-color,text-decoration-color
     transition-timing-function: cubic-bezier(.4,0,.2,1)
+    cursor: pointer
     &:hover
         background-color: $n2  
 
@@ -96,15 +97,19 @@
     display: flex
     align-items: center
     gap: 4px
+    position: relative
 
 .subName
+    position: absolute
+    top: -16%
+    left: 28%
     display: flex
     align-items: center
     justify-content: center
     font-weight: 600
     padding: 2px 3px
     background-color: #1D1326
-    border-radius: 3px
+    border-radius: 4px
     color: #DBB0FE   
     font-size: .875rem
     line-height: 1.25rem           
