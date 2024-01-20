@@ -1,0 +1,19 @@
+@import '~/styles/helpers'
+
+.textarea
+    background-color: transparent
+    padding: 10px
+    border-radius: 5px
+    outline: none
+    color: $n
+    transition-property: border
+    transition-duration: 300ms
+    font-size: 14px
+    min-height: 80px
+    border: 1px solid $n3
+    &.active
+        border: 1px solid $n2
+
+    &:placeholder-shown
+        color: $n2    
+    resize: none    

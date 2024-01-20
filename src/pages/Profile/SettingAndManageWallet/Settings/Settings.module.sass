@@ -1,0 +1,30 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    height: var(--full-h)
+    color: $n
+
+.wrapperHeader
+    display: flex
+    justify-content: space-between
+    align-items: center 
+    padding: 16px 16px 8px 16px
+
+.headerIconClose
+    transition-duration: 300ms
+    cursor: pointer
+    &:hover
+        color: $n1
+
+.tabsTip
+    border-bottom: 1px solid $n3
+
+.containerContent
+    display: flex
+    flex-direction: column
+    flex: 1 1 auto
+    overflow-y: auto 
+    height: 0

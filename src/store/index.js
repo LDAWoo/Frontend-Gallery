@@ -16,6 +16,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showModalUserDropDown: false,
   closeModalUserDropDown: false,
   activeSettingAndManageWallet: "",
+  activeSetting: "",
 });
 
 const truncate = (text, startChars, endChars, maxLength) => {

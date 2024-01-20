@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 function Button({ className, classButton, background, backgroundGallery, border, classIcon, active, icon, classTitle, title, size, disabled, loading, classImg, src, alt, onClick, iconPosition, srcPosition, titlePosition, fontBold, fontMedium, fontSemiBold, xxxl, xxl, xl, large, medium, small, nowrap, ...props }) {
   return (
-    <button className={`${background ? (disabled ? "" : `${cx("buttonBackground")}`) : ""} ${backgroundGallery ? cx("backgroundGallery") : ""} ${border ? (disabled ? "" : `${cx("buttonBorder")}`) : ""} ${disabled ? `${cx("buttonDisabled")}` : ""} ${className ? className : `${cx("button")}`}`} type="button" disabled={disabled} onClick={onClick} {...props}>
+    <button className={`${background ? (disabled ? cx("buttonDisabled") : `${cx("buttonBackground")}`) : ""} ${backgroundGallery ? cx("backgroundGallery") : ""} ${border ? (disabled ? "" : `${cx("buttonBorder")}`) : ""} ${disabled ? `${cx("buttonDisabled")}` : ""} ${className ? className : `${cx("button")}`}`} type="button" disabled={disabled} onClick={onClick} {...props}>
       <div className={`${classButton ? classButton : cx("classButton")}`}>
         {loading && <div className={`${cx("buttonLoading")}`} role="status" />}
         {srcPosition === "before" && src && <Image className={classImg} src={src} alt={alt} />}

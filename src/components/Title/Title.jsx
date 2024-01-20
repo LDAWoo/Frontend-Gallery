@@ -7,7 +7,7 @@ function Title({ title, small, medium, large, xl, xxl, xxxl, extraLarge4, extraL
   return (
     <span
       className={`${cx("wrapper")} ${small ? cx("small") : ""} ${medium ? cx("medium") : ""}
-      ${large ? cx("large") : ""} ${xl ? cx("xl") : ""} ${xxl ? cx("xxl") : ""} ${xxxl ? cx("xxl") : ""} ${extraLarge4 ? cx("extraLarge4") : ""} ${extraLarge5 ? cx("extraLarge5") : ""} ${extraLarge6 ? cx("extraLarge6") : ""} ${extraLarge7 ? cx("extraLarge7") : ""} ${fontBold ? cx("fontBold") : ""} ${fontSemiBold ? cx("fontSemiBold") : ""} ${fontMedium ? cx("fontMedium") : ""} ${
+      ${large ? cx("large") : ""} ${xl ? cx("xl") : ""} ${xxl ? cx("xxl") : ""} ${xxxl ? cx("xxxl") : ""} ${extraLarge4 ? cx("extraLarge4") : ""} ${extraLarge5 ? cx("extraLarge5") : ""} ${extraLarge6 ? cx("extraLarge6") : ""} ${extraLarge7 ? cx("extraLarge7") : ""} ${fontBold ? cx("fontBold") : ""} ${fontSemiBold ? cx("fontSemiBold") : ""} ${fontMedium ? cx("fontMedium") : ""} ${
         nowrap ? cx("nowrap") : ""
       } ${className ? className : ""}`}
     >

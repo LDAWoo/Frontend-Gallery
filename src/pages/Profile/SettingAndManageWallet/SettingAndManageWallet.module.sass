@@ -4,12 +4,14 @@
     flex-shrink: 0
     width: 360px
     background-color: $n8
-    border-left: 1px solid $n3
+    border: 1px solid $n3
+    border-top: 0
     display: none
     +t
         display: flex
     
 .container
     height: var(--full-h) 
-    width: var(--full-w) 
-    position: relative
+    width: var(--full-w)
+    display: flex
+    flex-direction: column
