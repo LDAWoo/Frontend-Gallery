@@ -7,16 +7,17 @@
     position: absolute
     z-index: 300
     top: 0px
-    right: 0px
+    right: -2px
+
     transition-property: transform, opacity
-    transition-duration: 300ms
+    transition-duration: 150ms
     transition-timing-function: ease
     transform-origin: center top
     opacity: 100
 
-    transform: translate(0,0) rotate(0) skewX(0) skewY(0) scaleX(0) scaleY(0)
+    transform: scaleY(0)
     &.active
-        transform: translate(0,0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)
+        transform: scaleY(1)
 
 .container
     width: 350px

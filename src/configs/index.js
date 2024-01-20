@@ -1,6 +1,6 @@
 const routesConfig = {
   home: "/",
-  profile: "/me",
+  profile: "/profile",
   marketplace: "/marketplace",
 };
 
