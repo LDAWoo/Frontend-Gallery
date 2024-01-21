@@ -1,0 +1,32 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    padding: 0.5rem 0 0.5rem 0
+    border-radius: 5px
+    border: 1px solid $n3
+    background-color: $n7
+    width: var(--full-w)
+    height: var(--full-h)
+    max-height: 450px
+    overflow: auto
+
+.contentItem
+   cursor: pointer
+   padding: 0.5rem 0.75rem
+   font-size: 0.875rem
+   color: $n1
+   transition-timing-function: ease
+   transition-property: background-color, transform
+   transition-duration: 300ms
+   &.active
+        background-color: $n4
+
+   &.noActive
+        cursor: default
+        color: $n2
+        &:hover
+            background-color: transparent
+   &:hover
+        background-color: $n4     

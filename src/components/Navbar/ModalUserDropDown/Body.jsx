@@ -59,6 +59,10 @@ const Body = () => {
           url: routesConfig.profile,
         },
         {
+          name: "Creator",
+          url: `${routesConfig.creator}?source=collection`,
+        },
+        {
           name: "Rewards",
           subName: "Sign in",
           url: "",

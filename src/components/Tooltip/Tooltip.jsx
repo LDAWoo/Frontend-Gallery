@@ -7,7 +7,7 @@ import styles from "./Tooltip.module.sass";
 
 const cx = classNames.bind(styles);
 
-const Tooltip = ({ toolTip = false, interactive, delay, content, items, width, onClickOutside, isVisible, placement, className, children, ...props }) => {
+const Tooltip = ({ toolTip = false, interactive, delay, translate, content, items, width, onClickOutside, isVisible, placement, className, children, ...props }) => {
   const ToolTipTippy = () => (
     <Tippy delay={delay} content={content} animation className={`${!className ? `${cx("wrapperTippy")}` : className}`} placement={placement} {...props}>
       {children}
@@ -15,13 +15,13 @@ const Tooltip = ({ toolTip = false, interactive, delay, content, items, width, o
   );
 
   const renderItems = () => (
-    <div className={`${cx("wrapperTippyHeadless")}`} style={{ width: width, height: "auto" }}>
+    <div className={`${cx("wrapperTippyHeadless")} ${translate ? cx("active") : ""}`} style={{ width: width, height: "auto" }}>
       {items}
     </div>
   );
 
   const ToolTipTippyHeadless = () => (
-    <TippyHeadless onClickOutside={onClickOutside} interactive={interactive} visible={isVisible} render={renderItems} placement={placement}>
+    <TippyHeadless onClickOutside={onClickOutside} interactive={interactive} visible={isVisible} render={renderItems} placement={placement} {...props}>
       {children}
     </TippyHeadless>
   );
@@ -32,6 +32,7 @@ const Tooltip = ({ toolTip = false, interactive, delay, content, items, width, o
 Tooltip.propTypes = {
   delay: PropTypes.arrayOf(PropTypes.number),
   interactive: PropTypes.bool,
+  translate: PropTypes.bool,
   content: PropTypes.node,
   placement: PropTypes.string,
   className: PropTypes.string,

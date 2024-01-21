@@ -8,6 +8,7 @@
     transition-duration: 300ms
     background-color: $n3
     color:$-n1 
+    
 
 .wrapperTippyHeadless
     display: flex
@@ -17,3 +18,9 @@
     margin: auto
     border-radius: 5px
     background-color: $n2
+    transform: translateX(0px)
+    &.active
+        transform: translateX(-5px)
+
+.tippyHeadless
+    width: var(--full-w)    

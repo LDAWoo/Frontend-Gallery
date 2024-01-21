@@ -8,6 +8,7 @@ body {
 }
 
 :root {
+    --max-width: 1150px;
     --full-vh: 100vh;
     --full-dvh: 100dvh;
     --full-w: 100%;
@@ -44,4 +45,12 @@ body {
 
 .scrollbarCustom::-webkit-scrollbar-corner {
     background: transparent;
+}
+
+.CircularProgressbar-path {
+    stroke: #FF2982 !important;
+}
+
+.CircularProgressbar-trail {
+    stroke: #30152E !important;
 }

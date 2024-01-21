@@ -3,10 +3,10 @@ import classNames from "classnames/bind";
 import styles from "~/components/Title/Title.module.sass";
 
 const cx = classNames.bind(styles);
-function Title({ title, small, medium, large, xl, xxl, xxxl, extraLarge4, extraLarge5, extraLarge6, extraLarge7, nowrap = true, fontBold, fontMedium, fontSemiBold, className }) {
+function Title({ title, gallery, white, small, medium, large, xl, xxl, xxxl, extraLarge4, extraLarge5, extraLarge6, extraLarge7, nowrap = true, fontBold, fontMedium, fontSemiBold, className }) {
   return (
     <span
-      className={`${cx("wrapper")} ${small ? cx("small") : ""} ${medium ? cx("medium") : ""}
+      className={`${cx("wrapper")} ${gallery ? cx("gallery") : ""} ${white ? cx("white") : ""} ${small ? cx("small") : ""} ${medium ? cx("medium") : ""}
       ${large ? cx("large") : ""} ${xl ? cx("xl") : ""} ${xxl ? cx("xxl") : ""} ${xxxl ? cx("xxxl") : ""} ${extraLarge4 ? cx("extraLarge4") : ""} ${extraLarge5 ? cx("extraLarge5") : ""} ${extraLarge6 ? cx("extraLarge6") : ""} ${extraLarge7 ? cx("extraLarge7") : ""} ${fontBold ? cx("fontBold") : ""} ${fontSemiBold ? cx("fontSemiBold") : ""} ${fontMedium ? cx("fontMedium") : ""} ${
         nowrap ? cx("nowrap") : ""
       } ${className ? className : ""}`}
@@ -21,6 +21,8 @@ Title.propTypes = {
   small: PropTypes.bool,
   medium: PropTypes.bool,
   large: PropTypes.bool,
+  gallery: PropTypes.bool,
+  white: PropTypes.bool,
   xl: PropTypes.bool,
   xxl: PropTypes.bool,
   xxxl: PropTypes.bool,

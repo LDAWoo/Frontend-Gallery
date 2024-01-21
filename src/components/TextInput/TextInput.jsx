@@ -18,7 +18,7 @@ function TextInput({ className, classBorder, classInput, error, icon, classIcon,
     setActive(false);
   };
   return (
-    <div className={`${className && className}`}>
+    <div className={`${className ? className : ""}`}>
       <div className={`${cx("wrapper")} ${!classBorder ? `${cx("border")} ${active ? `${cx("active")}` : `${error ? `${cx("error")}` : ""}`}` : classBorder}`}>
         <input {...props} className={`${!classInput ? `${cx("input")} ${copy ? `${cx("inputCopyActive")}` : `${cx("inputCopy")}`} ${icon ? `${cx("inputIconActive")}` : `${cx("inputIcon")}`}` : classInput} `} placeholder={placeholder} autoCapitalize="off" autoCorrect="off" autoComplete="off" spellCheck="false" onBlur={handleBlur} onFocus={handleFocus} style={{ WebkitBackgroundClip: "text" }} />
         {icon && (
