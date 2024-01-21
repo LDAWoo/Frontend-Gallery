@@ -26,14 +26,14 @@ const ActiveAndFilterTip = () => {
   const [activeSettingAndManageWallet] = useGlobalState("activeSettingAndManageWallet");
 
   const [searchParams] = useSearchParams();
-  const activeTab = searchParams.get("activeTab");
+  const activeTab = searchParams.get("tab");
 
   useEffect(() => {
     setGlobalState("activeSettingAndManageWallet", ["settings", "manage-wallet"].includes(activeTab) ? activeTab : "");
   }, [activeTab]);
 
   const handleClick = (tab) => {
-    navigate(`${routesConfig.profile}?activeTab=${tab}`);
+    navigate(`${routesConfig.profile}?tab=${tab}`);
   };
 
   return (

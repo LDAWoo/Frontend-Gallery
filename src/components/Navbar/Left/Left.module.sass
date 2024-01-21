@@ -1,0 +1,133 @@
+@import '~/styles/helpers'
+
+
+.navbarConnected
+    display: flex
+    height: var(--full-h)
+    flex-shrink: 0
+    align-items: center
+    position: relative
+
+.navbarCloseSearch
+    display: flex
+    height: var(--full-h)
+    flex-shrink: 0
+    align-items: center
+    justify-content: center
+    padding: 4px
+
+.searchIcon
+    display: flex
+    width: 40px
+    height: 40px
+    align-items: center
+    justify-content: center
+    +x
+        display: none
+
+.buttonSearch
+    padding: 4px  
+    color: $n
+    border-radius: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    cursor: pointer
+    transition-duration: 300ms
+    &:hover
+        background-color: $n3      
+
+.wrapperConnected
+    display: flex
+    align-items: center
+    width: auto
+
+.contentConnected
+    display: flex
+    margin-top: auto
+    margin-bottom: auto
+    margin-right: 0px
+    gap: 8px
+    align-items: center
+    +t
+        margin-right: 2px
+
+.buttonConnected
+    height: 28px
+    border-radius: 4px
+    outline: none
+    border: none
+    cursor: pointer
+    +t
+        height: 32px
+
+.contentButtonDropdown
+    display: flex
+    align-items: center
+    justify-content: center
+
+.wrapperDropdown
+    position: absolute
+    padding: 16px 
+    top: 5px
+    right: 0px
+    background-color: $n3
+    width: fit-content
+    opacity: 1
+    transform: scaleY(1)
+    z-index:300
+    transition-duration: 300ms
+    transition-timing-function: ease
+    transform-origin: center top
+    transition-property: transform,opacity
+    border-radius: 5px
+
+.showDropDown
+    transform: translateY(0px)
+
+.hiddenDropDown
+    transform: translateY(-110%)            
+
+.headerDropdown
+    display: flex
+    align-items: center
+    justify-content: space-between
+    column-gap: 8px
+
+.buttonCloseDropdown
+    color:$n1
+    transition-duration: 300ms
+    &:hover
+        color:$n
+
+
+.wrapperUser
+    display: flex
+    align-items: center
+    gap: 4px
+    padding: 4px 8px
+    border-radius: 0.375rem
+    transition-duration: 300ms
+    cursor: pointer
+    &:hover
+        background-color: $n5
+        
+
+.priceUser
+    color: $n  
+    font-weight: 600
+    font-size: 14px  
+
+.imageUser
+    margin-left: 8px
+    width: 28px
+    height: 28px
+    border-radius: 9999px
+    object-fit: cover
+
+.iconDropdown
+    color: $n1
+    transform: translateY(2px)    
+
+.headerModalUserDropDown
+    padding: 12px        

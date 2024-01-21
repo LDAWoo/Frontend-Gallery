@@ -1,0 +1,82 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    height: var(--full-h)
+    color: $n
+    padding: 16px 16px 8px 16px
+    gap: 16px
+
+.wrapperHeader
+    display: flex
+    justify-content: space-between
+    align-items: center 
+    width: var(--full-w)
+
+.headerIconClose
+    transition-duration: 300ms
+    cursor: pointer
+    &:hover
+        color: $n1
+
+.wrapperDescription
+    color: $n1
+
+.wrapperLink
+
+.buttonLinkWallet
+    height: 40px
+    width: auto
+    padding: 0 16px 
+
+.wrapperContainer
+    padding: 16px 0 8px 0
+    border-top: 1px solid $n3
+
+.container
+    display: flex
+    align-items: center
+    gap: 8px
+
+.imageUser
+    object-fit: cover
+    width: 50px
+    height: 50px
+    border-radius: 9999px
+
+.content
+    display: flex
+    flex-direction: column 
+
+.contentHead
+    display: flex
+    flex-direction: row
+    gap: 8px
+    align-items: center
+
+.addressNFT
+    font-size: 14px
+    font-weight: 600
+    text-align: left
+
+.main
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem
+    border: 1px solid $p7
+    background-color: rgba(0, 209, 140, 0.2)   
+    text-transform: uppercase
+    border-radius: 0.25rem
+    font-size: .625rem
+
+.connected
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem
+    border: 1px solid $p8
+    background-color: rgba(228, 37, 117, 0.2)   
+    text-transform: uppercase
+    border-radius: 0.25rem
+    font-size: .625rem   
+
+.chain
+    font-size: 0.965rem  
+    text-transform: capitalize
+    color: $n1          

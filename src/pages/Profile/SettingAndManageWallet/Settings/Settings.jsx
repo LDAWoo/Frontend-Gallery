@@ -1,13 +1,13 @@
 import classNames from "classnames/bind";
-import styles from "./Settings.module.sass";
-import Title from "~/components/Title";
-import Icon from "~/components/Icon";
 import { MdClose } from "react-icons/md";
-import TabsTip from "~/components/TabsTip";
-import { setGlobalState, useGlobalState } from "~/store";
-import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
+import Icon from "~/components/Icon";
+import TabsTip from "~/components/TabsTip";
+import Title from "~/components/Title";
 import routesConfig from "~/configs";
+import { useGlobalState } from "~/store";
+import Profile from "./Profile";
+import styles from "./Settings.module.sass";
 const cx = classNames.bind(styles);
 
 const items = [

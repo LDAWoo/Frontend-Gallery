@@ -15,7 +15,7 @@ const connectedWalletPhantomSolana = async (chain, name) => {
     name: name,
   };
   localStorage.setItem(keyLocalStorage, JSON.stringify(data));
-  setGlobalState("connectedAccount", publicKey);
+  setGlobalState("connectedAccount", data);
   setGlobalState("modalConnectedWallet", { active: "", data: [] });
   // await getBalanceWalletPhantomSolana(publicKey);
 };
@@ -35,6 +35,8 @@ const getBalanceWalletPhantomSolana = async (address) => {
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
 };
+
+const minNFTPhantomSolana = async () => {};
 
 const disconnectedWalletPhantomSolana = () => {
   window.phantom.solana.disconnect();

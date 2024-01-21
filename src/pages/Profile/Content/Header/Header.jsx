@@ -2,6 +2,8 @@ import classNames from "classnames/bind";
 import styles from "./Header.module.sass";
 import Information from "./Information";
 import SettingAndManageWallet from "./SettingAndManageWallet";
+import MarketplaceTabsTip from "../MarketplaceTabsTip";
+import Navigation from "./Navigation";
 
 const cx = classNames.bind(styles);
 
@@ -12,17 +14,14 @@ const Header = () => {
         <div className={cx("content")}>
           <div className={cx("collection")}>
             <div className={cx("collectionInfo")}>
-              <div className={cx("wrapperInfo")}>
-                <div className={`${cx("info")} no-scrollbar`}>
-                  <div></div>
-                  <Information />
-                </div>
-              </div>
+              <Information />
             </div>
+            <MarketplaceTabsTip />
           </div>
           <SettingAndManageWallet />
         </div>
       </div>
+      <Navigation />
     </div>
   );
 };

@@ -24,7 +24,7 @@ const Body = () => {
           actions: [
             {
               id: "address",
-              name: truncate(connectedAccount, 5, 3, 11),
+              name: truncate(connectedAccount.address, 5, 3, 11),
               icon: dollarIcon,
               active: true,
             },
@@ -65,17 +65,18 @@ const Body = () => {
         },
         {
           name: "Account Settings",
-          url: routesConfig.profile + "?activeTab=settings",
+          url: routesConfig.profile + "?tab=settings",
         },
         {
           name: "Manage Wallets",
-          url: routesConfig.profile + "?activeTab=manage-wallet",
+          url: routesConfig.profile + "?tab=manage-wallet",
         },
       ],
     },
   ];
 
   const handleAction = (id) => {
+    console.log(id);
     if (id === "connectDifferentWallet") {
       setGlobalState("connectedModal", true);
     }

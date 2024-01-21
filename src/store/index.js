@@ -1,7 +1,7 @@
 import { createGlobalState } from "react-hooks-global-state";
 
 const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
-  connectedAccount: "",
+  connectedAccount: { address: "", chain: "", name: "" },
   modalConnectedWallet: {
     active: "",
     data: [],
@@ -17,6 +17,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   closeModalUserDropDown: false,
   activeSettingAndManageWallet: "",
   activeSetting: "",
+  WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },
 });
 
 const truncate = (text, startChars, endChars, maxLength) => {

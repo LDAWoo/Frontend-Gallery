@@ -12,7 +12,7 @@ const Content = () => {
   return (
     <div className={cx("container")}>
       <div className={cx("wrapper")}>
-        {connectedAccount.length > 0 ? (
+        {connectedAccount.address.length > 0 ? (
           <div className={cx("wrapper")}>
             <div className={cx("container")}>
               <Header />
