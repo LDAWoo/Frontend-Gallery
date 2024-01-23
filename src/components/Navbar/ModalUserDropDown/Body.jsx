@@ -75,6 +75,10 @@ const Body = () => {
           name: "Manage Wallets",
           url: routesConfig.profile + "?tab=manage-wallet",
         },
+        {
+          name: "Marketplace",
+          url: routesConfig.marketplace,
+        },
       ],
     },
   ];
