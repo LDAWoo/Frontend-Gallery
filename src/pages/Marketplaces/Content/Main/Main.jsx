@@ -14,8 +14,10 @@ const Main = () => {
 
   const handleScroll = (event) => {
     const currentScrollPos = event.target.scrollTop;
-    setScroll(currentScrollPos > prevScrollPos ? true : false);
-    setPrevScrollPos(currentScrollPos);
+    if (Math.abs(currentScrollPos - prevScrollPos) > 50) {
+      setScroll(currentScrollPos > prevScrollPos ? true : false);
+      setPrevScrollPos(currentScrollPos);
+    }
   };
 
   useEffect(() => {
