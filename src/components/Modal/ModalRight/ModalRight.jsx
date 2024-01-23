@@ -7,7 +7,7 @@ import { setGlobalState } from "~/store";
 import { useEffect, useRef, useState } from "react";
 
 const cx = classNames.bind(styles);
-const ModalRight = ({ header, body, type, isOpen, closeModal, className, classHeader, classBody, children }) => {
+const ModalRight = ({ header, body, type, isOpen, closeModal, className, classHeader, classBody, children, isClickOutside = true }) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
 
@@ -15,7 +15,7 @@ const ModalRight = ({ header, body, type, isOpen, closeModal, className, classHe
     const handleClickOutside = (e) => {
       if (!modalRef.current) return;
 
-      if (!modalRef.current.contains(e.target)) {
+      if (!modalRef.current.contains(e.target) && isClickOutside) {
         handleCloseModal();
       }
     };
@@ -75,6 +75,7 @@ ModalRight.propTypes = {
   type: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.bool,
+  isClickOutside: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 

@@ -40,7 +40,7 @@ const Select = ({ data, value, disableValue, onChange, ...props }) => {
 
   return (
     <Tooltip interactive={true} items={<Item data={data} disableValue={disableValue} value={value} visible={visible} setVisible={setVisible} setValues={setValues} />} width={width} onClickOutside={() => setVisible(false)} visible={visible} {...props}>
-      <div onClick={() => setVisible(!visible)} ref={selectRef} style={{ width: "100%" }}>
+      <div onClick={() => setVisible(!visible)} ref={selectRef} style={{ width: "100%", position: "relative" }}>
         <input type="hidden" value={values?.value} />
         <div>
           <Button className={cx("button")} classButton={cx("buttonSelect")} classIcon={cx("iconSelect")} iconPosition="right" active border title={values && values?.name} titlePosition="before" icon={arrowDownUp} />

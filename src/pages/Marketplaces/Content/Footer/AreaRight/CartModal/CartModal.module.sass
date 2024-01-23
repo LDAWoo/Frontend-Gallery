@@ -1,0 +1,48 @@
+@import '~/styles/helpers'
+
+.buttonActive
+
+    &.active
+        background-color: $p1
+        &:hover
+            background-color: $p2
+
+.classContentModal
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 100dvw
+    height: var(--full-h)
+    background-color: $n8
+    box-sizing: border-box
+    border-radius: 0px
+    +t
+        width: 450px   
+        border-radius: 5px 
+
+.classHeader    
+    box-sizing: border-box
+    margin: 0
+    padding: 10px 16px
+    border-bottom: 1px solid $n3
+    +t
+        border: 1px solid $n3
+        border-radius: 5px
+        border-bottom-left-radius: 0px
+        border-bottom-right-radius: 0px
+
+.classBody   
+    width: auto
+    border-top: none
+    border-bottom-left-radius: 5px
+    border-bottom-right-radius: 5px
+    box-sizing: border-box
+    padding: 0
+    height: var(--full-h)
+    overflow-x: hidden
+    overflow-y:  auto
+    +t
+        border: 1px solid $n3
+        border-top: none
+
+    

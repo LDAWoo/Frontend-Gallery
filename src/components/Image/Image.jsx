@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import styles from "./Image.module.sass";
+import classNames from "classnames/bind";
 
+const cx = classNames.bind(styles);
 function Image({ className, src, alt, imageBase, ...props }) {
   const [currentSrc, setCurrentSrc] = useState(src);
 
@@ -11,7 +14,7 @@ function Image({ className, src, alt, imageBase, ...props }) {
     }
   }, [imageBase, currentSrc]);
 
-  return <img loading="lazy" className={className} src={currentSrc} alt={alt} {...props} />;
+  return <img loading="lazy" className={`${className ? className : cx("image")}`} src={currentSrc} alt={alt} {...props} />;
 }
 
 function base64ToBlob(base64String, contentType = "") {

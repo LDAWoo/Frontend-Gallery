@@ -9,6 +9,7 @@
     padding: 0 16px
     height: 50px
     color: $n
+    justify-content: space-between
 
 .containerTitle
     display: flex
@@ -19,3 +20,21 @@
     gap: 12px
     flex-direction: row
     align-items: center
+
+.button
+    &:nth-child(4)
+            display: none
+    +t  
+        &:nth-child(4)
+            background-color: transparent
+            border: none
+            padding: 4px
+            border-radius: 5px
+            cursor: pointer
+            transition-duration: 300ms
+            transition-property: background-color
+            &:hover
+               background-color: $n3
+
+            display: flex
+              

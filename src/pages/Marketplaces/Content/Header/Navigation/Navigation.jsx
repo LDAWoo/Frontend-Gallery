@@ -10,6 +10,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import TextInput from "~/components/TextInput";
 import Tooltip from "~/components/Tooltip";
 import { arrowDownUp } from "~/assets/Icon";
+import Select from "~/components/Select";
+import { useState } from "react";
+import DropDownSort from "./DropDownSort";
 const cx = classNames.bind(styles);
 
 const items = [
@@ -68,7 +71,15 @@ const items = [
         id: "sort",
         name: "sort",
         type: "dropDown",
-        data: [],
+        data: [
+          { name: "Price: Low to High", value: "low_to_high" },
+          { name: "Price: High to Low", value: "high_to_low" },
+          { name: "Inscription: Low to High", value: "inscription_low_to_high" },
+          { name: "Inscription: High to Low", value: "inscription_high_to_low" },
+          { name: "Recently", value: "recently" },
+          { name: "Common to Rare", value: "common_to_rare" },
+          { name: "Rare to Common", value: "rare_to_common" },
+        ],
         icon: arrowDownUp,
       },
     ],
@@ -100,6 +111,21 @@ const items = [
 ];
 
 const Navigation = () => {
+  const [sortValue, setSortValue] = useState();
+  const data = [
+    { name: "Price: Low to High", value: "low_to_high" },
+    { name: "Price: High to Low", value: "high_to_low" },
+    { name: "Inscription: Low to High", value: "inscription_low_to_high" },
+    { name: "Inscription: High to Low", value: "inscription_high_to_low" },
+    { name: "Recently", value: "recently" },
+    { name: "Common to Rare", value: "common_to_rare" },
+    { name: "Rare to Common", value: "rare_to_common" },
+  ];
+
+  const handleSort = (v) => {
+    setSortValue(v);
+  };
+
   const ButtonNavigation = ({ group }) => {
     return <>{group?.title ? <Button className={cx("buttonNavigation")} classButton={cx("contentButtonNavigation")} xl fontMedium title={group?.title} backgroundGallery icon={group?.icon} size={20} /> : <Button className={cx("buttonNavigation")} backgroundGallery icon={group?.icon} size={20} />}</>;
   };
@@ -108,16 +134,7 @@ const Navigation = () => {
     return (
       <div className={cx("wrapperSearch")}>
         <Button icon={group?.icon} size={20} backgroundGallery className={`${cx("buttonNavigation")} ${cx("buttonSearch")}`} />
-        <TextInput className={cx("inputSearch")} icon={group?.icon} sizeIcon={20} placeholder={group?.placeHolder} />
-      </div>
-    );
-  };
-
-  const DropDownNavigation = ({ group }) => {
-    return (
-      <div className={cx("wrapperDropDown")}>
-        <Button className={`${cx("buttonNavigation")} ${cx("buttonDropDownFirst")}`} icon={BsArrowDownUp} backgroundGallery size={20} />
-        <Button className={`${cx("buttonNavigation")} ${cx("buttonDropDownLast")}`} border title="Price: Low To High" titlePosition="before" icon={group?.icon} />
+        <TextInput className={cx("inputSearch")} classBorder={cx("borderInputSearch")} icon={group?.icon} sizeIcon={20} placeholder={group?.placeHolder} />
       </div>
     );
   };
@@ -128,7 +145,7 @@ const Navigation = () => {
         {items.map((item, index) => (
           <div key={index} className={cx("wrapperContent")}>
             {item?.groups.map((group, index) => (
-              <div key={index} className={cx("wrapperGroups")}>
+              <div key={index} className={`${cx("wrapperGroups")} ${item?.groups.length > 1 ? cx("active") : ""}`}>
                 {group?.type === "button" && (
                   <div>
                     {group?.toolTip ? (
@@ -144,7 +161,7 @@ const Navigation = () => {
                     )}
                   </div>
                 )}
-                {group?.type === "dropDown" && <DropDownNavigation group={group} />}
+                {group?.type === "dropDown" && <DropDownSort data={group.data} value={sortValue} onChange={handleSort} />}
                 {group?.type === "input" && <InputNavigation group={group} />}
               </div>
             ))}

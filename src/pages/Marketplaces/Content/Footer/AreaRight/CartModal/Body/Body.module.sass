@@ -1,0 +1,175 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    height: var(--full-h)
+    justify-content: space-between
+
+.containerItem
+    padding: 16px
+    display: flex
+    flex-direction: column
+    gap: 12px
+    height: var(--full-h)
+    align-items: center
+
+.listItem    
+    display: flex
+    flex-direction: column
+    height: var(--full-h)
+    width: var(--full-w)
+    gap: 4px
+    overflow-y: auto
+    +t
+        max-height: 250px
+
+.rowItem        
+    opacity: 1
+    transform: translateX(0px) translateY(0px)
+    height: auto
+    &:nth-child(1)
+        margin-top: 8px
+
+.itemWidthHeight
+    width: var(--full-w)
+    display: flex
+    height: 48px
+
+.relative
+    height: 48px
+    position: relative 
+
+.absolute
+    position: absolute
+    top: -8px
+    right: -8px
+
+.deleteIcon
+    cursor: pointer
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 16px
+    width: 16px
+    border-radius: 9999px
+    background-color: $n6  
+    color: $n1     
+    transform: translateY(2px)
+    transition-duration: 150ms
+    transition-property: background-color
+    &:hover
+        background-color: $n5 
+
+
+.containerImage
+    display: flex
+    width: 48px
+    height: 48px
+    overflow: hidden
+    border-radius: 5px            
+
+.containerContent    
+    padding: 16px
+    display: flex
+    flex-direction: column
+    gap: 8px
+    overflow-y: auto
+
+.containerKeyNFT
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    margin-left: 8px
+
+.containerPriceNFT
+    margin-left: auto
+    display: flex
+    align-items: center
+
+.contentPriceNFT
+    display: flex
+    flex-direction: row
+    gap: 2px
+
+.keyNFT
+    cursor: pointer
+
+.iconPrice
+    color: $p3    
+
+.priceNFT
+    color: $-n1
+    font-size: .875rem
+    line-height: 1.25rem
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace
+
+.border
+    border-top: 1px solid $n3  
+
+.wrapperItem
+    min-height: 48px
+    color: $n1
+    display: flex
+    justify-content: center
+    align-items: center
+
+.containerSummaryPrice
+    margin-bottom: 4px
+    display: flex
+    flex-direction: column
+    gap: 0.25rem
+
+.itemSummaryPrice
+    flex-direction: row
+    display: flex
+    justify-content: space-between 
+    font-size: .75rem
+    line-height: 1rem
+    align-items: center
+
+.namePrice
+    color: $n1
+
+.containerPrice
+    display: flex
+    flex-direction: row
+    gap: 4px    
+    color: $n
+    font-weight: 600
+    align-items: center
+
+
+.iconPrice
+    color: $p3    
+    transform: translateY(2px)
+
+.containerServices
+    color: $n1
+    font-size: .75rem
+    line-height: 1rem
+
+.service
+    text-decoration: none
+    font-weight: 600
+    color: $n1
+    transition-duration: 300ms
+    &:hover
+        opacity: 0.8
+        color: $-n1
+
+.containerBuy
+    width: var(--full-w)
+    display: flex
+    +t
+        display: none
+
+.buttonBuy
+    padding: 12px 16px        
+
+
+
+
+
+

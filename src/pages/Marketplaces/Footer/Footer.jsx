@@ -1,89 +1,69 @@
 import classNames from "classnames/bind";
-import styles from "./Footer.module.sass";
+import { CiSettings } from "react-icons/ci";
 import { PiShoppingCartLight } from "react-icons/pi";
 import { columnIcon, lineIcon } from "~/assets/Icon";
-import { CiSettings } from "react-icons/ci";
 import Button from "~/components/Button";
-import { useReducer } from "react";
+import { setGlobalState, useGlobalState } from "~/store";
+import ActivityModal from "../ActivityAndAnalytics/Activity/ActivityModal";
+import CartModal from "../Content/Footer/AreaRight/CartModal";
+import styles from "./Footer.module.sass";
+import AnalyticsModal from "../ActivityAndAnalytics/Analytics/AnalyticsModal";
 const cx = classNames.bind(styles);
 
-const items = [
-  {
-    id: 1,
-    groups: [
-      {
-        id: "shoppingCart",
-        type: "button",
-        icon: PiShoppingCartLight,
-        size: 20,
-      },
-      {
-        id: "activity",
-        type: "button",
-        icon: lineIcon,
-      },
-      {
-        id: "analytics",
-        type: "button",
-        icon: columnIcon,
-      },
-    ],
-  },
-  {
-    id: 2,
-    groups: [
-      {
-        id: "setting",
-        type: "button",
-        icon: CiSettings,
-        size: 22,
-      },
-    ],
-  },
-];
-
 const Footer = () => {
-  const initialState = items.flatMap((item) => item.groups.map((group) => ({ id: group.id, active: false })));
+  const [showModalCart] = useGlobalState("showModalCart");
+  const [showActivity] = useGlobalState("showActivity");
+  const [showAnalytics] = useGlobalState("showAnalytics");
+  const [showSettings] = useGlobalState("showSettings");
 
-  const callFunction = (state, id) => {
-    return state.map((item) => (id === item.id ? { ...item, active: !item.active } : { ...item, active: false }));
-  };
+  const items = [
+    {
+      id: 1,
+      groups: [
+        {
+          id: "shoppingCart",
+          type: "button",
+          icon: PiShoppingCartLight,
+          size: 20,
+          modal: CartModal,
+          action: "showModalCart",
+          visible: showModalCart,
+        },
+        {
+          id: "activity",
+          type: "button",
+          icon: lineIcon,
+          modal: ActivityModal,
+          action: "showActivity",
+          visible: showActivity,
+        },
+        {
+          id: "analytics",
+          type: "button",
+          icon: columnIcon,
+          modal: AnalyticsModal,
+          action: "showAnalytics",
+          visible: showAnalytics,
+        },
+      ],
+    },
+    {
+      id: 2,
+      groups: [
+        {
+          id: "setting",
+          type: "button",
+          icon: CiSettings,
+          size: 22,
+          action: "showSettings",
+          visible: showSettings,
+        },
+      ],
+    },
+  ];
 
-  const handleShoppingCartAction = (state, id) => {
-    return callFunction(state, id);
-  };
-
-  const handleActivityAction = (state, id) => {
-    return callFunction(state, id);
-  };
-
-  const handleAnalyticsAction = (state, id) => {
-    return callFunction(state, id);
-  };
-
-  const handleSettingAction = (state, id) => {
-    return callFunction(state, id);
-  };
-
-  const reducer = (state, active) => {
-    switch (active.type) {
-      case "shoppingCart":
-        return handleShoppingCartAction(state, active.payload);
-      case "activity":
-        return handleActivityAction(state, active.payload);
-      case "analytics":
-        return handleAnalyticsAction(state, active.payload);
-      case "setting":
-        return handleSettingAction(state, active.payload);
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const handleClick = (id) => {
-    dispatch({ type: id, payload: id });
+  const handleClick = (action) => {
+    setGlobalState(action, true);
   };
 
   return (
@@ -93,7 +73,13 @@ const Footer = () => {
           <div key={index} className={cx("containerItem")}>
             {item?.groups.map((group, index) => (
               <div key={index} className={`${cx("buttonWrapper")}`}>
-                <Button className={`${state.find((s) => s.id === group?.id)?.active ? `${cx("active")} ${cx("buttonActive")}` : ""}`} icon={group?.icon} size={group?.size} onClick={() => handleClick(group?.id)} />
+                {group.modal ? (
+                  <group.modal>
+                    <Button className={`${group.visible ? `${cx("active")} ${cx("buttonActive")}` : ""}`} icon={group?.icon} size={group?.size} onClick={() => handleClick(group?.action)} />
+                  </group.modal>
+                ) : (
+                  <Button className={`${group.visible ? `${cx("active")} ${cx("buttonActive")}` : ""}`} icon={group?.icon} size={group?.size} onClick={() => handleClick(group?.id)} />
+                )}
               </div>
             ))}
           </div>

@@ -9,9 +9,11 @@ import Title from "~/components/Title";
 import Icon from "~/components/Icon";
 import { dollarIcon, shoppingIcon, zoomIcon } from "~/assets/Icon";
 import { useState } from "react";
+import { useGlobalState } from "~/store";
 const cx = classNames.bind(styles);
 
 const Card = ({ items, index }) => {
+  const [connectedAccount] = useGlobalState("connectedAccount");
   const [active, setActive] = useState(false);
 
   const handleMouseEnter = () => {
@@ -69,11 +71,7 @@ const Card = ({ items, index }) => {
                   </div>
                 </div>
                 <div className={cx("wrapperWallet")}>
-                  {active && (
-                    <div className={cx("contentWallet")}>
-                      <Button title="Connect Wallet" xl className={cx("buttonWallet")} />
-                    </div>
-                  )}
+                  {active && <div className={cx("contentWallet")}>{connectedAccount.address && connectedAccount.address.length > 0 ? <Button title="Add funds" xl className={cx("buttonWallet")} /> : <Button title="Connect Wallet" xl className={cx("buttonWallet")} />}</div>}
                   <div className={`${cx("modalDetails")} ${active ? cx("active") : ""}`}>
                     <Button icon={zoomIcon} classIcon={`${cx("zoomIcon")} ${active ? cx("active") : ""}`} />
                   </div>

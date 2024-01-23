@@ -37,6 +37,17 @@
     width: var(--full-w)
     height: var(--full-h)
 
+    &.active
+        &:nth-child(1)
+            display: none
+        &:nth-child(3)
+            display: none
+        +t
+            &:nth-child(1)
+                display: flex
+            &:nth-child(3)
+                display: flex
+
 .wrapperButton
     width: var(--full-w)
     height: var(--full-h)
@@ -66,21 +77,18 @@
 
 .inputSearch
     width: var(--full-w)
+
     display: none
     +t
         display: flex
+        
+.borderInputSearch
+    width: var(--full-w)
+    border: 1px solid $n3
+    transition-property: border
+    transition-property: 3000ms
+    padding-right: 16px
+    &:hover
+        border: 1px solid $n2
 
-.wrapperDropDown
-    display: flex
-    gap: 8px
-    align-items: center
-
-.buttonDropDownFirst
-    display: flex
-    +t
-        display: none 
-
-.buttonDropDownLast
-    display: none
-    +t
-        display: flex                   
+               

@@ -35,7 +35,7 @@ const Collection = () => {
 
   return (
     <div className={cx("wrapper")}>
-      <Title gallery title="Step 2 of 5" large nowrap={false} />
+      <Title gallery title="Step 1 of 5" large nowrap={false} />
       <Title title="Collection Info" white nowrap={false} fontBold extraLarge6 />
       <Title gallery title="Tell us about the collection your are minting!" fontMedium xl nowrap={false} />
 

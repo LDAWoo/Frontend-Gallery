@@ -1,0 +1,26 @@
+@import '~/styles/helpers'
+
+.wrapperDropDown
+    display: flex
+    gap: 8px
+    align-items: center
+    +t
+        width: 200px
+
+.buttonNavigation
+    width: var(--full-w)
+    padding: 6px
+    color: $n
+    +t
+        padding: 8px
+
+.buttonDropDownFirst
+    display: flex
+    +t
+        display: none 
+
+.buttonDropDownLast
+    width: var(--full-w)
+    display: none
+    +t
+        display: flex        

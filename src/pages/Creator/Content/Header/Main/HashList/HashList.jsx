@@ -23,7 +23,7 @@ const HashList = () => {
 
   return (
     <div className={cx("wrapper")}>
-      <Title gallery title="Step 4 of 5" large nowrap={false} />
+      <Title gallery title="Step 3 of 5" large nowrap={false} />
       <Title title="NFT Hash List" white nowrap={false} fontBold extraLarge6 />
       <Title gallery title="Please upload your mint hash list for your NFTs. To see how  to retrieve your hash list." fontMedium xl nowrap={false} />
       <div className={`${cx("mb")}`}></div>

@@ -24,7 +24,7 @@ const Body = () => {
           actions: [
             {
               id: "address",
-              name: truncate(connectedAccount.address, 5, 3, 11),
+              name: connectedAccount.address ? truncate(connectedAccount.address, 5, 3, 11) : "",
               icon: dollarIcon,
               active: true,
             },

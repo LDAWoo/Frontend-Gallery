@@ -10,9 +10,10 @@ import ModalRight from "~/components/Modal/ModalRight/ModalRight";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Left.module.sass";
 
+import ModalFull from "~/components/Modal/ModalFull/ModalFull";
 import BodyModalUserDropDown from "../ModalUserDropDown/Body";
 import HeaderModalUserDropDown from "../ModalUserDropDown/Header";
-
+import PropTypes from "prop-types";
 const cx = classNames.bind(styles);
 
 const Left = ({ setShowHeaderSearch }) => {
@@ -20,6 +21,7 @@ const Left = ({ setShowHeaderSearch }) => {
   const [showModalUserDropDown] = useGlobalState("showModalUserDropDown");
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
 
   const handleShowDropDown = () => {
     setShowDropdown(true);
@@ -48,13 +50,15 @@ const Left = ({ setShowHeaderSearch }) => {
         <Icon icon={IoSearchOutline} size={20} classIcon={cx("buttonSearch")} onClick={handleShowSearch} />
       </div>
 
-      {connectedAccount.address.length > 0 ? (
-        <ModalRight classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown} closeModal={closeModalUserDropDown}>
-          <div className={cx("wrapperUser")} onClick={handleModalUserDropDown}>
-            <span className={cx("priceUser")}>0 SOL</span>
-            <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
-            <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
-          </div>
+      {connectedAccount.address && connectedAccount.address.length > 0 ? (
+        <ModalRight isClickOutside={WidthAndHeightWindow.width >= 768 ? true : false} classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown} closeModal={closeModalUserDropDown}>
+          <ModalFull isClickOutside={false} classHeader={cx("headerModalUserDropDown")} classBody={cx("bodyModalUserDropDown")} type="showModalUserDropDown" classContent={cx("classContentModal")} header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown}>
+            <div className={cx("wrapperUser")} onClick={handleModalUserDropDown}>
+              <span className={cx("priceUser")}>0 SOL</span>
+              <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
+              <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
+            </div>
+          </ModalFull>
         </ModalRight>
       ) : (
         <div className={cx("wrapperConnected")}>
@@ -72,6 +76,10 @@ const Left = ({ setShowHeaderSearch }) => {
       )}
     </div>
   );
+};
+
+Left.propTypes = {
+  setShowHeaderSearch: PropTypes.func,
 };
 
 export default Left;

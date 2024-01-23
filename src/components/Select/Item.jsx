@@ -4,7 +4,7 @@ import styles from "./Item.module.sass";
 
 const cx = classNames.bind(styles);
 
-const Item = ({ data, value, disableValue, setValues, visible, setVisible }) => {
+const Item = ({ data, value, disableValue = "", setValues, visible, setVisible }) => {
   const handleSetValue = (name, value) => {
     const shouldSetValues = !disableValue || disableValue !== value;
 

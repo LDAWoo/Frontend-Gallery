@@ -1,5 +1,6 @@
 @import '~/styles/helpers'
 
+ 
 
 .navbarConnected
     display: flex
@@ -129,5 +130,28 @@
     color: $n1
     transform: translateY(2px)    
 
+.classContentModal
+    display: flex
+    flex-direction: column
+    width: 100dvw
+    height: var(--full-h)
+    background-color: $n8
+    box-sizing: border-box
+    border-radius: 0px
+    padding: 12px
+    +t
+        width: 0px   
+        height: 0px
+        padding: 0
+        background-color: transparent
+        border-radius: 5px        
+
 .headerModalUserDropDown
-    padding: 12px        
+    padding: 12px 0    
+    width: auto   
+    +t
+        padding: 12px
+
+.bodyModalUserDropDown
+    width: auto
+    padding: 0 0 16px 0    

@@ -10,6 +10,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showNavigation: true,
   showActivity: false,
   showAnalytics: false,
+  showSettings: false,
   activeAnalyticsNavigation: "sales",
   connectedModal: false,
   closeModalConnectWallet: false,
@@ -18,6 +19,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   activeSettingAndManageWallet: "",
   activeSetting: "",
   WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },
+  showModalCart: false,
 });
 
 const truncate = (text, startChars, endChars, maxLength) => {

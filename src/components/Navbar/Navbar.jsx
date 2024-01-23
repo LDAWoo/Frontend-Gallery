@@ -11,17 +11,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "~/components/Navbar/Navbar.module.sass";
 import routesConfig from "~/configs";
-import { useGlobalState } from "~/store";
-import ModalFull from "../Modal/ModalFull/ModalFull";
 import Title from "../Title";
 import Left from "./Left";
 
-import BodyModalUserDropDown from "./ModalUserDropDown/Body";
-import HeaderModalUserDropDown from "./ModalUserDropDown/Header";
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
-  const [showModalUserDropDown] = useGlobalState("showModalUserDropDown");
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
 
   const handleCloseSearch = () => {
@@ -30,7 +25,6 @@ const Navbar = () => {
 
   return (
     <div className={`${cx("wrapper")}`}>
-      <ModalFull classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown} />
       <Header>
         <nav className={`${cx("navbar")}`}>
           {showHeaderSearch && (

@@ -7,6 +7,8 @@ import { dollarIcon } from "~/assets/Icon";
 import Button from "~/components/Button";
 import { setGlobalState } from "~/store";
 import styles from "./AreaRight.module.sass";
+import ModalFull from "~/components/Modal/ModalFull/ModalFull";
+import CartModal from "./CartModal";
 
 const cx = classNames.bind(styles);
 
@@ -88,6 +90,7 @@ const items = [
         backgroundGallery: true,
         size: 20,
         active: true,
+        modal: true,
       },
     ],
   },
@@ -99,10 +102,16 @@ const AreaRight = () => {
     return state.map((item) => (id === item.id ? { ...item, active: !item.active } : item));
   };
 
+  const handleShoppingCartAction = (state, id) => {
+    return state.map((item) => (id === item.id ? { ...item, active: !item.active } : item));
+  };
+
   const reducer = (state, action) => {
     switch (action.type) {
       case "broom":
         return handleBroomAction(state, action.payload);
+      case "shoppingCart":
+        return handleShoppingCartAction(state, action.payload);
       default:
         return state;
     }
@@ -119,6 +128,9 @@ const AreaRight = () => {
       if (s.id === "broom") {
         setGlobalState("showAreaLeft", s.active);
       }
+      if (s.id === "shoppingCart") {
+        setGlobalState("showModalCart", s.active);
+      }
     });
   }, [state]);
 
@@ -131,17 +143,35 @@ const AreaRight = () => {
               {group?.type === "button" && group?.title ? (
                 <Button onClick={() => handleClick(group?.id)} background={group?.background} xl fontMedium backgroundGallery={group?.backgroundGallery} title={group?.title} titlePosition="before" icon={group?.icon} size={group?.size} classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`} />
               ) : (
-                <Button
-                  onClick={() => handleClick(group?.id)}
-                  className={`${group?.buttonActive ? (state.find((s) => s.id === group?.id)?.active ? `${cx("active")} ${cx("buttonActive")}` : "") : ""}`}
-                  background={group?.background}
-                  xl
-                  fontMedium
-                  backgroundGallery={group?.backgroundGallery}
-                  icon={group?.icon}
-                  size={group?.size}
-                  classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`}
-                />
+                <>
+                  {group.modal ? (
+                    <CartModal>
+                      <Button
+                        onClick={() => handleClick(group?.id)}
+                        className={`${group?.buttonActive ? (state.find((s) => s.id === group?.id)?.active ? `${cx("active")} ${cx("buttonActive")}` : "") : ""}`}
+                        background={group?.background}
+                        xl
+                        fontMedium
+                        backgroundGallery={group?.backgroundGallery}
+                        icon={group?.icon}
+                        size={group?.size}
+                        classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`}
+                      />
+                    </CartModal>
+                  ) : (
+                    <Button
+                      onClick={() => handleClick(group?.id)}
+                      className={`${group?.buttonActive ? (state.find((s) => s.id === group?.id)?.active ? `${cx("active")} ${cx("buttonActive")}` : "") : ""}`}
+                      background={group?.background}
+                      xl
+                      fontMedium
+                      backgroundGallery={group?.backgroundGallery}
+                      icon={group?.icon}
+                      size={group?.size}
+                      classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`}
+                    />
+                  )}
+                </>
               )}
             </div>
           ))}

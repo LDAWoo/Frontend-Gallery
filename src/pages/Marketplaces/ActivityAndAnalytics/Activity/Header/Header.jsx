@@ -20,10 +20,10 @@ const Header = () => {
       </div>
 
       <div className={cx("containerButton")}>
-        <Button backgroundGallery icon={TbExchange} size={20} />
-        <Button backgroundGallery icon={BsGrid} size={20} />
-        <Button backgroundGallery icon={CgArrowsExpandRight} size={20} />
-        <Button icon={MdClose} size={24} onClick={handleCloseActivity} />
+        <Button className={cx("button")} backgroundGallery icon={TbExchange} size={20} />
+        <Button className={cx("button")} backgroundGallery icon={BsGrid} size={20} />
+        <Button className={cx("button")} backgroundGallery icon={CgArrowsExpandRight} size={20} />
+        <Button className={cx("button")} icon={MdClose} size={24} onClick={handleCloseActivity} />
       </div>
     </div>
   );
