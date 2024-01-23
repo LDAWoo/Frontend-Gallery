@@ -8,11 +8,13 @@ const cx = classNames.bind(styles);
 
 const Main = () => {
   const [showNavigation] = useGlobalState("showNavigation");
+  const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const scrollRef = useRef();
   const [scroll, setScroll] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const handleScroll = (event) => {
+    if (WidthAndHeightWindow.width >= 768) return;
     const currentScrollPos = event.target.scrollTop;
     if (Math.abs(currentScrollPos - prevScrollPos) > 50) {
       setScroll(currentScrollPos > prevScrollPos ? true : false);
