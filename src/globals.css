@@ -7,6 +7,10 @@ body {
     font-family: 'Arial';
 }
 
+a {
+    text-decoration: none;
+}
+
 :root {
     --max-width: 1150px;
     --full-vh: 100vh;

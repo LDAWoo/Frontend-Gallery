@@ -7,7 +7,7 @@ import { setGlobalState } from "~/store";
 import { useEffect, useRef, useState } from "react";
 
 const cx = classNames.bind(styles);
-const ModalCenter = ({ header, body, type, isOpen, closeModal }) => {
+const ModalCenter = ({ header, body, type, classClose, close, size = 20, isOpen, closeModal, classContainer, classContent, isClickOutside = true }) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
 
@@ -15,7 +15,7 @@ const ModalCenter = ({ header, body, type, isOpen, closeModal }) => {
     const handleClickOutside = (e) => {
       if (!modalRef.current) return;
 
-      if (!modalRef.current.contains(e.target)) {
+      if (!modalRef.current.contains(e.target) && isClickOutside) {
         handleCloseModal();
       }
     };
@@ -47,12 +47,13 @@ const ModalCenter = ({ header, body, type, isOpen, closeModal }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("containerScreen")}></div>
-      <div className={`${cx("container")} ${showModal ? cx("active") : ""}`}>
-        <div className={`${cx("content")}`} ref={modalRef}>
+      <div className={`${cx("container")} ${classContainer ? classContainer : ""} ${showModal ? cx("active") : ""}`}>
+        <div className={`${cx("content")} ${classContent ? classContent : ""}`} ref={modalRef}>
           <div className={cx("contentHeader")}>
             <div className={cx("header")}>{header}</div>
-            <div className={cx("close")}>
-              <Button icon={IoMdClose} size={20} onClick={handleCloseModal} />
+            <div className={`${cx("close")} ${classClose ? classClose : ""}`}>
+              {close}
+              <Button icon={IoMdClose} size={size} onClick={handleCloseModal} />
             </div>
           </div>
           <div className={`${cx("contentBody")} scrollbarCustom`}>{body}</div>

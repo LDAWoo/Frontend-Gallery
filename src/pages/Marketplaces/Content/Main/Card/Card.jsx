@@ -9,7 +9,7 @@ import Title from "~/components/Title";
 import Icon from "~/components/Icon";
 import { dollarIcon, shoppingIcon, zoomIcon } from "~/assets/Icon";
 import { useState } from "react";
-import { useGlobalState } from "~/store";
+import { setGlobalState, useGlobalState } from "~/store";
 const cx = classNames.bind(styles);
 
 const Card = ({ items, index }) => {
@@ -24,6 +24,9 @@ const Card = ({ items, index }) => {
     setActive(false);
   };
 
+  const handleNFTDetail = () => {
+    setGlobalState("showNFTDetails", true);
+  };
   return (
     <div className={cx("wrapper")} tabIndex={index + 1}>
       <div>
@@ -73,7 +76,7 @@ const Card = ({ items, index }) => {
                 <div className={cx("wrapperWallet")}>
                   {active && <div className={cx("contentWallet")}>{connectedAccount.address && connectedAccount.address.length > 0 ? <Button title="Add funds" xl className={cx("buttonWallet")} /> : <Button title="Connect Wallet" xl className={cx("buttonWallet")} />}</div>}
                   <div className={`${cx("modalDetails")} ${active ? cx("active") : ""}`}>
-                    <Button icon={zoomIcon} classIcon={`${cx("zoomIcon")} ${active ? cx("active") : ""}`} />
+                    <Button icon={zoomIcon} classIcon={`${cx("zoomIcon")} ${active ? cx("active") : ""}`} onClick={handleNFTDetail} />
                   </div>
                 </div>
               </div>

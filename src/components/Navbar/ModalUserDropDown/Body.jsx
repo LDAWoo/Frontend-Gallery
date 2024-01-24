@@ -7,6 +7,7 @@ import Title from "~/components/Title";
 import routesConfig from "~/configs";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
+import { disconnectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 const cx = classNames.bind(styles);
 
 const Body = () => {
@@ -84,14 +85,21 @@ const Body = () => {
   ];
 
   const handleAction = (id) => {
-    console.log(id);
+    const name = connectedAccount.name;
+    const chain = connectedAccount.chain;
     if (id === "connectDifferentWallet") {
       setGlobalState("connectedModal", true);
     }
     if (id === "disconnect") {
       setGlobalState("closeModalUserDropDown", !closeModalUserDropDown);
       setTimeout(() => {
-        disconnectedWalletPhantomSolana();
+        if (name === "phantom" && chain === "solana") {
+          disconnectedWalletPhantomSolana();
+        }
+
+        if (name === "metamask" && chain === "ethereum") {
+          disconnectedWalletMetaMaskEthereum();
+        }
       }, 300);
     }
   };

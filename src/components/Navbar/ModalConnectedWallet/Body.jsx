@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { useEffect } from "react";
+import { connectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 import { connectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 import { backpackIcon, dollarIcon, ethereumIcon, metaMaskIcon, phantomIcon } from "~/assets/Icon";
 import Icon from "~/components/Icon";
@@ -70,6 +71,9 @@ const Body = () => {
   const handleConnectedWallet = async (chain, id) => {
     if (chain === "solana" && id === "phantom") {
       await connectedWalletPhantomSolana(chain, id);
+    }
+    if (chain === "ethereum" && id === "metamask") {
+      await connectedWalletMetaMaskEthereum(chain, id);
     }
     setGlobalState("closeModalConnectWallet", !closeModalConnectWallet);
   };

@@ -7,12 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "@openzeppelin/contracts": "^4.7.3",
     "@tippyjs/react": "^4.2.6",
+    "axios": "^1.6.5",
     "classnames": "^2.5.1",
     "date-fns": "^3.3.0",
+    "ethers": "^5.5.3",
+    "ipfs-http-client": "^60.0.1",
     "js-cookie": "^3.0.5",
     "rc-slider": "^10.5.0",
     "react": "^18.2.0",
@@ -26,9 +32,12 @@
     "react-router-dom": "^6.21.2",
     "react-split-pane": "^0.1.92",
     "react-time-picker": "^6.6.0",
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "web3modal": "^1.9.12"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
@@ -36,6 +45,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "hardhat": "^2.19.4",
     "vite": "^5.0.8"
   }
 }

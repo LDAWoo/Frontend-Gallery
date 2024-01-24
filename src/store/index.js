@@ -11,6 +11,12 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showActivity: false,
   showAnalytics: false,
   showSettings: false,
+  showNFTDetails: false,
+  showActiveNFTDetails: {
+    overview: false,
+    activity: false,
+    offers: false,
+  },
   activeAnalyticsNavigation: "sales",
   connectedModal: false,
   closeModalConnectWallet: false,
