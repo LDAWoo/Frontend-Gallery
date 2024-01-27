@@ -3,19 +3,24 @@ import Button from "~/components/Button";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
 import styles from "./SubmitNFT.module.sass";
+import { useGlobalState } from "~/store";
+import { createNFT } from "~/NFTMarketplace/NFTMarketplace";
+import { createNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 const cx = classNames.bind(styles);
 const SubmitNFT = () => {
+  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
+  const [connectedAccount] = useGlobalState("connectedAccount");
   const items = [
     {
       id: 2,
       data: [
         {
           name: "name",
-          value: "Robot wombats",
+          value: formDataCreateNFT.collectionName,
         },
         {
           name: "symbol",
-          value: "robotwombats",
+          value: formDataCreateNFT.collectionSymbol,
         },
       ],
     },
@@ -24,11 +29,11 @@ const SubmitNFT = () => {
       data: [
         {
           name: "total supply",
-          value: "10000",
+          value: formDataCreateNFT.collectionPrice,
         },
         {
           name: "description",
-          value: "This is a collection of 10000 and can be used",
+          value: formDataCreateNFT.collectionDescription,
         },
         {
           name: "categories primary",
@@ -45,7 +50,7 @@ const SubmitNFT = () => {
       data: [
         {
           name: "collection pfp",
-          url: "https://img-cdn.magiceden.dev/rs:fit:400:0:0/plain/https%3A%2F%2Frenderer.magiceden.dev%2Fv2%2Frender%3Fid%3De151d62f71ab4e9cfbe1a6ab368db482a393e2a01627b2f9c0e99106cd54cba5i49",
+          url: formDataCreateNFT.currentUrlImage,
           type: "image",
         },
       ],
@@ -81,6 +86,20 @@ const SubmitNFT = () => {
     },
   ];
 
+  const handleCreateNFT = async () => {
+    const address = connectedAccount.address;
+    const name = formDataCreateNFT.collectionName;
+    const symbol = formDataCreateNFT.collectionSymbol;
+    const description = formDataCreateNFT.collectionDescription;
+    const external_url = "";
+    const royalty = 10;
+    const supply = formDataCreateNFT.collectionPrice;
+    const image = formDataCreateNFT.currentUrlImage;
+
+    console.log(formDataCreateNFT);
+    createNFTPhantomSolana(address, name, symbol, description, external_url, supply, royalty, image, address);
+  };
+
   return (
     <div className={cx("wrapper")}>
       <Title gallery title="The last step" large nowrap={false} />
@@ -97,7 +116,7 @@ const SubmitNFT = () => {
                   {x?.value && <div className={cx("valueItem")}>{x?.value}</div>}
                   {x?.url && x?.type === "image" && (
                     <div className={cx("containerImage")}>
-                      <Image src={x?.url} className={cx("image")} />
+                      <Image lazy={false} src={x?.url} className={cx("image")} />
                     </div>
                   )}
                   {x?.url && x?.type === "link" && <div className={cx("linkValue")}>{x?.url}</div>}
@@ -108,7 +127,7 @@ const SubmitNFT = () => {
         </div>
       </div>
       <div className={`${cx("mb")}`}>
-        <Button title="Submit" className={cx("buttonSubmit")} />
+        <Button title="Submit" className={cx("buttonSubmit")} onClick={handleCreateNFT} />
       </div>
     </div>
   );

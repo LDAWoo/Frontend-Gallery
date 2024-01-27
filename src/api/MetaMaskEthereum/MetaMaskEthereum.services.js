@@ -3,7 +3,7 @@ import { setGlobalState } from "~/store";
 
 const keyLocalStorage = "last-connected-wallet-data";
 const connectedWalletMetaMaskEthereum = async (chain, name) => {
-  if (isConnectedWalletMetaMaskEthereum()) return;
+  if (!isConnectedWalletMetaMaskEthereum()) return;
 
   const address = await window.ethereum.request({
     method: "eth_requestAccounts",

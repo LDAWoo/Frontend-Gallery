@@ -37,20 +37,21 @@ contract NFTMarketplace is ERC721URIStorage{
         bool sold
     );
 
-    modifier onlyOwner {
+    modifier onlyOwner() {
         require(msg.sender == owner, "Only owner of the marketplace can change the listing price");
         _;
     }
 
     constructor () ERC721("NFT Metevarse Token", "MYMFT"){
-        owner == payable(msg.sender);
+        owner = payable(msg.sender);
     }
 
     function updateListingPrice(uint256 _listingPrice) public payable onlyOwner{
         listingPrice = _listingPrice;
     }
 
-    function getListingPrice() public view returns(uint256){
+    function getListingPrice() public view returns (uint256){
+        console.log("Getting listing price");
         return listingPrice;
     }
 

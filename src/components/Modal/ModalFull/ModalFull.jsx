@@ -7,7 +7,7 @@ import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./ModalFull.module.sass";
 
 const cx = classNames.bind(styles);
-const ModalFull = ({ topLeft, topRight, bottomLeft, bottomRight, classContent, header, body, type, isOpen, closeModal, className, classHeader, classBody, children, isClickOutside = true }) => {
+const ModalFull = ({ topLeft, topRight, bottomLeft, bottomRight, classContent, header, body, type, isOpen, closeModal, className, classHeader, classBody, classClose, children, isClickOutside = true }) => {
   const [showModal, setShowModal] = useState(false);
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const [width, setWidth] = useState(0);
@@ -65,7 +65,7 @@ const ModalFull = ({ topLeft, topRight, bottomLeft, bottomRight, classContent, h
                 <div className={`${classContent ? classContent : cx("containerContent")}`} ref={contentRef}>
                   <div className={`${cx("contentHeader")} ${classHeader ? classHeader : ""}`}>
                     <div className={cx("header")}>{header}</div>
-                    <div className={cx("close")}>
+                    <div className={`${cx("close")} ${classClose ? classClose : ""}`}>
                       <Button icon={IoMdClose} size={20} onClick={handleCloseModal} />
                     </div>
                   </div>

@@ -37,9 +37,10 @@
 
 .wrapperLogo
     display: flex
-    align-item: center
+    align-items: center
     column-gap: 20px
     padding-left: 4px
+    height: var(--full-h)
     +t
        column-gap: 12px 
 
@@ -49,9 +50,15 @@
 
 .menuItems
     display: flex
-
     +t
         display: none
+
+.logoGardeneden
+    width: 176px
+    height: 20px
+    object-fit: cover 
+    background-image: none
+    background: none        
 
 .menuIcon
     color: $n1
@@ -61,12 +68,12 @@
         color: $n2
 
 .logo
-    color: $p1
-    text-decoration: none
+   transform: translateY(6px)
     
 
 .wrapperItems
-    height: var(--full-h)
+    margin-top: auto
+    margin-bottom: auto
     display: none
     margin-left: 12px
     +t
@@ -75,6 +82,7 @@
 .items
     display: flex
     column-gap: 12px
+    height: var(--full-h)
     
 .item
     color: $n
@@ -84,9 +92,10 @@
     cursor: default
     margin: auto
     transition-property: opacity
-    transition-duration: 2000ms
+    transition-duration: 300ms
     &:hover
-        color: $n1
+        color: $n
+        opacity: 0.8
 
 .wrapperSearch
     flex: 1 1 auto
@@ -232,3 +241,22 @@
 
 .headerModalUserDropDown
     padding: 12px        
+
+
+.classCloseModalDropdownMenuItem
+    display: block
+    +t    
+        display: none
+
+.classContentModalDropdownMenuItem
+    width: 220px
+    background-color: $n6
+    height: var(--full-h)
+
+.classHeaderModalDropdownMenuItem
+    margin: 0!important    
+
+.classBodyModalDropdownMenuItem
+    align-items: start!important
+    padding: 12px 0!important
+ 

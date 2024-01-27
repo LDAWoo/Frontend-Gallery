@@ -7,7 +7,7 @@ import { setGlobalState } from "~/store";
 import { useEffect, useRef, useState } from "react";
 
 const cx = classNames.bind(styles);
-const ModalCenter = ({ header, body, type, classClose, close, size = 20, isOpen, closeModal, classContainer, classContent, isClickOutside = true }) => {
+const ModalCenter = ({ header, body, type, classClose, classHeader, isCloseModal = true, close, size = 20, isOpen, closeModal, classContainer, classContent, isClickOutside = true }) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
 
@@ -35,8 +35,10 @@ const ModalCenter = ({ header, body, type, classClose, close, size = 20, isOpen,
   };
 
   useEffect(() => {
-    handleCloseModal();
-  }, [closeModal]);
+    if (isCloseModal) {
+      handleCloseModal();
+    }
+  }, [closeModal, isCloseModal]);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -49,7 +51,7 @@ const ModalCenter = ({ header, body, type, classClose, close, size = 20, isOpen,
       <div className={cx("containerScreen")}></div>
       <div className={`${cx("container")} ${classContainer ? classContainer : ""} ${showModal ? cx("active") : ""}`}>
         <div className={`${cx("content")} ${classContent ? classContent : ""}`} ref={modalRef}>
-          <div className={cx("contentHeader")}>
+          <div className={`${cx("contentHeader")} ${classHeader ? classHeader : ""}`}>
             <div className={cx("header")}>{header}</div>
             <div className={`${cx("close")} ${classClose ? classClose : ""}`}>
               {close}
@@ -64,9 +66,9 @@ const ModalCenter = ({ header, body, type, classClose, close, size = 20, isOpen,
 };
 
 ModalCenter.propTypes = {
-  header: PropTypes.node.isRequired,
-  body: PropTypes.node.isRequired,
-  type: PropTypes.string.isRequired,
+  header: PropTypes.node,
+  body: PropTypes.node,
+  type: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.bool,
 };

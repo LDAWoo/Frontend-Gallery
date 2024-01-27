@@ -7,9 +7,15 @@ import Tooltip from "~/components/Tooltip";
 import styles from "./HashList.module.sass";
 import Time from "./Time";
 import TextInput from "~/components/TextInput";
+import { setGlobalState, useGlobalState } from "~/store";
+import { useNavigate } from "react-router-dom";
+import routesConfig from "~/configs";
 const cx = classNames.bind(styles);
 
 const HashList = () => {
+  const navigate = useNavigate();
+  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
+  const [price, setPrice] = useState(0);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
@@ -19,6 +25,18 @@ const HashList = () => {
 
   const handleChangeTime = (e) => {
     setTime(e);
+  };
+
+  const handleChangePrice = (e) => {
+    const value = e.target.value.trim();
+    setPrice(value);
+  };
+
+  const handleKeyDown = (e) => {};
+
+  const handleReview = () => {
+    setGlobalState("formDataCreateNFT", { ...formDataCreateNFT, collectionPrice: price });
+    navigate(`${routesConfig.creator}?source=submit`);
   };
 
   return (
@@ -38,11 +56,11 @@ const HashList = () => {
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="Total Supply" white xl fontMedium nowrap={false} />
-        <TextInput type="type" placeholder="678" />
+        <TextInput type="type" placeholder="678" onKeyDown={handleKeyDown} onChange={handleChangePrice} />
         <Title gallery title="Number of total items in the collection existing or expected" fontMedium large nowrap={false} />
       </div>
       <div className={`${cx("mb")}`}>
-        <Button title="Review" className={cx("buttonReview")} />
+        <Button title="Review" className={cx("buttonReview")} onClick={handleReview} />
       </div>
     </div>
   );

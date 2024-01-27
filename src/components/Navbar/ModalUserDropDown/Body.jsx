@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 const Body = () => {
   const navigate = useNavigate();
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const [balances] = useGlobalState("currentBalances");
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const items = [
     {
@@ -21,7 +22,8 @@ const Body = () => {
         {
           icon: dollarIcon,
           name: "Main",
-          value: 0,
+          balances: balances,
+          chain: connectedAccount.chain === "solana" ? " SOL" : "",
           actions: [
             {
               id: "address",
@@ -58,10 +60,6 @@ const Body = () => {
         {
           name: "My Items",
           url: routesConfig.profile,
-        },
-        {
-          name: "Creator",
-          url: `${routesConfig.creator}?source=collection`,
         },
         {
           name: "Rewards",
@@ -109,6 +107,8 @@ const Body = () => {
     navigate(url);
   };
 
+  console.log(connectedAccount?.chain);
+
   return (
     <div className={cx("wrapper")}>
       {items?.map((item, index) => (
@@ -123,7 +123,7 @@ const Body = () => {
                   <div className={cx("containerContent")}>
                     <div className={cx("contentGroup")}>
                       <div className={cx("content")}>{group?.name}</div>
-                      <div className={cx("content")}>{`${group.value > -1 ? `${group.value} SOL` : ""}`}</div>
+                      {!group.balances && group.chain && <div className={cx("content")}>{group.balances + group.chain}</div>}
                     </div>
                     <div className={cx("contentGroup")}>
                       {group?.actions.map((action, index) => (

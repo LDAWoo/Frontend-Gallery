@@ -3,7 +3,21 @@ import { ethers } from "ethers";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 
-const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+const projectId = import.meta.env.VITE_APP_INFURA_PROJECT_ID;
+const projectSecretKey = import.meta.env.VITE_APP_INFURA_PROJECT_SECRET_KEY;
+
+const auth = `Basic ${btoa(`${projectId}:${projectSecretKey}`)}`;
+
+const client = ipfsHttpClient({
+  host: "ipfs.infura.io",
+  port: "5001",
+  protocol: "https",
+  headers: {
+    authorization: auth,
+  },
+});
+
+const subdomain = "https://img-cdn.gardeneden.io";
 
 // INTERNAL IMPORT
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
@@ -52,8 +66,8 @@ const checkIfWalletConnected = async () => {
 // UPLOAD TO IPFS
 const uploadToIPFS = async (file) => {
   try {
-    const added = await client.add({ content: file });
-    const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+    const added = await client.add(file);
+    const url = `${subdomain}/ipfs/${added.path}`;
     return url;
   } catch (error) {
     console.log("Error Upload ipfs");
@@ -61,9 +75,8 @@ const uploadToIPFS = async (file) => {
 };
 
 // CREATE NFT FUNCTION
-const createNFT = async (formInput, fileUrl, router) => {
+const createNFT = async (name, description, price, fileUrl, router) => {
   try {
-    const { name, description, price } = formInput;
     if (!name || !description || !price || !fileUrl) {
       return console.log("Data Is Missing");
     }
@@ -73,7 +86,7 @@ const createNFT = async (formInput, fileUrl, router) => {
     try {
       const added = await client.add(data);
 
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      const url = `https://infura.ipfs.io/ipfs/${added.path}`;
 
       await createSale(url, price);
     } catch (error) {
@@ -89,8 +102,10 @@ const createSale = async (url, formInputPrice, isReselling, id) => {
   try {
     const price = ethers.utils.parseUnits(formInputPrice, "ether");
     const contract = await connectingWithSmartContract();
-
+    console.log(contract);
     const listingPrice = await contract.getListingPrice();
+
+    console.log(listingPrice);
 
     const transaction = !isReselling
       ? await contract.createToken(url, price, {
@@ -102,7 +117,7 @@ const createSale = async (url, formInputPrice, isReselling, id) => {
 
     await transaction.wait();
   } catch (error) {
-    console.log("Error create sale");
+    console.log("Error create sale", error);
   }
 };
 

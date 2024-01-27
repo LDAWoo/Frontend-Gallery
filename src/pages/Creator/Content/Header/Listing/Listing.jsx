@@ -1,9 +1,8 @@
 import classNames from "classnames/bind";
-import styles from "./Listing.module.sass";
-import Title from "~/components/Title";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Title from "~/components/Title";
 import routesConfig from "~/configs";
-import CircleProgressBar from "~/components/CircleProgressBar";
+import styles from "./Listing.module.sass";
 
 const cx = classNames.bind(styles);
 
@@ -43,9 +42,6 @@ const Listing = () => {
           {items.map((item, index) => (
             <div key={index} className={`${cx("item")} ${item?.source === currentSource ? cx("active") : ""}`} onClick={() => handleApplyListing(item?.source)}>
               <div>{item?.name}</div>
-              <div className={cx("progress")}>
-                <CircleProgressBar value={0} fontSize="30px" textColor="#9C93A5" />
-              </div>
             </div>
           ))}
         </div>

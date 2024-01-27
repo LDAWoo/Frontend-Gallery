@@ -41,11 +41,11 @@ const ManageWallet = () => {
           <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
           <div className={cx("content")}>
             <div className={cx("contentHead")}>
-              <span className={cx("addressNFT")}>{truncate(connectedAccount.address, 5, 3, 11)}</span>
+              {connectedAccount.address.length > 0 && <span className={cx("addressNFT")}>{truncate(connectedAccount.address, 5, 3, 11)}</span>}
               <div className={cx("main")}>MAIN</div>
               <div className={cx("connected")}>CONNECTED</div>
             </div>
-            <div className={cx("chain")}>{connectedAccount.chain}</div>
+            {connectedAccount.chain.length > 0 && <div className={cx("chain")}>{connectedAccount.chain}</div>}
           </div>
         </div>
       </div>

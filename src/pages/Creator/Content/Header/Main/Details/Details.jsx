@@ -7,6 +7,10 @@ import TextArea from "~/components/TextArea";
 import TextInput from "~/components/TextInput";
 import Title from "~/components/Title";
 import styles from "./Details.module.sass";
+import { uploadToIPFS } from "~/NFTMarketplace/NFTMarketplace";
+import { setGlobalState, useGlobalState } from "~/store";
+import { useNavigate } from "react-router-dom";
+import routesConfig from "~/configs";
 const cx = classNames.bind(styles);
 
 const items = [
@@ -32,8 +36,11 @@ const items = [
   },
 ];
 const Details = () => {
+  const navigate = useNavigate();
+  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
   const fileInputRef = useRef();
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState(formDataCreateNFT.currentUrlImage);
+  const [description, setDescription] = useState(formDataCreateNFT.collectionDescription);
   const [categories, setCategories] = useState({
     primary: "",
     secondary: "",
@@ -46,13 +53,13 @@ const Details = () => {
     setCategories((prev) => ({ ...prev, secondary: value }));
   };
 
-  useEffect(() => {
-    return () => {
-      avatar && URL.revokeObjectURL(avatar);
-    };
-  }, [avatar]);
+  // useEffect(() => {
+  //   return () => {
+  //     avatar && URL.revokeObjectURL(avatar);
+  //   };
+  // }, [avatar]);
 
-  const onFileDrop = (e) => {
+  const onFileDrop = async (e) => {
     const files = e.target.files[0];
     if (files.type.split("/")[0] !== "image") return;
     files.preview = URL.createObjectURL(files);
@@ -64,6 +71,17 @@ const Details = () => {
     fileInputRef.current.click();
   };
 
+  const handleChangeDescription = (e) => {
+    const value = e.target.value.trim();
+    setDescription(value);
+  };
+
+  const handleSave = async () => {
+    const collectionImage = await uploadToIPFS(avatar);
+    setGlobalState("formDataCreateNFT", { ...formDataCreateNFT, currentUrlImage: avatar.preview, collectionImage: collectionImage, collectionDescription: description });
+    navigate(`${routesConfig.creator}?source=hashList`);
+  };
+
   return (
     <div className={cx("wrapper")}>
       <Title gallery title="Step 2 of 5" large nowrap={false} />
@@ -72,7 +90,7 @@ const Details = () => {
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="Collection Description" white xl fontMedium nowrap={false} />
-        <TextArea type="text" name="description" placeholder="2000 unique NFTs governed by DAO" />
+        <TextArea type="text" name="description" value={description} placeholder="2000 unique NFTs governed by DAO" onChange={handleChangeDescription} />
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
@@ -125,7 +143,7 @@ const Details = () => {
       </div>
 
       <div className={`${cx("mb")}`}>
-        <Button title="Save & Proceed" className={cx("buttonSave")} />
+        <Button title="Save & Proceed" className={cx("buttonSave")} onClick={handleSave} />
       </div>
     </div>
   );

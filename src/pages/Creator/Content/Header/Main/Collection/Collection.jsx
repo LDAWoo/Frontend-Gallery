@@ -7,25 +7,28 @@ import Button from "~/components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import routesConfig from "~/configs";
+import { setGlobalState, useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 const Collection = () => {
   const navigate = useNavigate();
-  const [collectionName, setCollectionName] = useState("");
-  const [collectionSymbol, setCollectionSymbol] = useState("");
+  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
+  const [collectionName, setCollectionName] = useState(formDataCreateNFT.collectionName);
+  const [collectionSymbol, setCollectionSymbol] = useState(formDataCreateNFT.collectionSymbol);
   const [disable, setDisable] = useState(false);
 
   const handleChangeCollectionName = (e) => {
-    const value = e.target.value.trim();
+    const value = e.target.value;
     setCollectionName(value);
   };
 
   const handleChangeCollectionSymbol = (e) => {
-    const value = e.target.value.trim();
+    const value = e.target.value;
     setCollectionSymbol(value);
   };
 
   const handleSave = () => {
+    setGlobalState("formDataCreateNFT", { ...formDataCreateNFT, collectionName: collectionName, collectionSymbol: collectionSymbol });
     navigate(`${routesConfig.creator}?source=details`);
   };
 

@@ -8,11 +8,13 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "node scripts/deploy.js"
+    "deploy": "node scripts/deploy.cjs --network localhost"
   },
   "dependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.6",
     "@openzeppelin/contracts": "^4.7.3",
+    "@shyft-to/js": "^0.2.33",
+    "@solana/web3.js": "^1.89.1",
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",

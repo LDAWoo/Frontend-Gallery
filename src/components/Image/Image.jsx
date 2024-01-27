@@ -4,7 +4,7 @@ import styles from "./Image.module.sass";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
-function Image({ className, src, alt, imageBase, ...props }) {
+function Image({ className, lazy = true, src, alt, imageBase, ...props }) {
   const [currentSrc, setCurrentSrc] = useState(src);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function Image({ className, src, alt, imageBase, ...props }) {
     }
   }, [imageBase, currentSrc]);
 
-  return <img loading="lazy" className={`${className ? className : cx("image")}`} src={currentSrc} alt={alt} {...props} />;
+  return <img loading={lazy ? "lazy" : "eager"} className={`${className ? className : cx("image")}`} src={currentSrc} alt={alt} {...props} />;
 }
 
 function base64ToBlob(base64String, contentType = "") {
@@ -31,6 +31,7 @@ function base64ToBlob(base64String, contentType = "") {
 
 Image.propTypes = {
   className: PropTypes.string,
+  lazy: PropTypes.bool,
   src: PropTypes.string,
   alt: PropTypes.string,
   imageBase: PropTypes.string,

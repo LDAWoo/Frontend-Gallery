@@ -18,6 +18,7 @@ const cx = classNames.bind(styles);
 
 const Left = ({ setShowHeaderSearch }) => {
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const [balances] = useGlobalState("currentBalances");
   const [showModalUserDropDown] = useGlobalState("showModalUserDropDown");
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -54,7 +55,7 @@ const Left = ({ setShowHeaderSearch }) => {
         <ModalRight isClickOutside={WidthAndHeightWindow.width >= 768 ? true : false} classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown} closeModal={closeModalUserDropDown}>
           <ModalFull isClickOutside={false} classHeader={cx("headerModalUserDropDown")} classBody={cx("bodyModalUserDropDown")} type="showModalUserDropDown" classContent={cx("classContentModal")} header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown}>
             <div className={cx("wrapperUser")} onClick={handleModalUserDropDown}>
-              <span className={cx("priceUser")}>0 SOL</span>
+              <span className={cx("priceUser")}>{`${balances} ${connectedAccount.chain === "solana" ? " SOL" : ""}`}</span>
               <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
               <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
             </div>

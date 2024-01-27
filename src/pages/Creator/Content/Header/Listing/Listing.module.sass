@@ -1,19 +1,10 @@
 @import '~/styles/helpers'
 
 .wrapper
-    position: absolute
     background-color: $n8
-    z-index: 20
-    left: 0
-    right: 0
-    top: 48px
     margin-left: 16px
     margin-right: 16px
-    +t
-        position: relative
-        top:0
-        margin-left: 0
-        margin-right: 0
+    
 
 .container
     display: flex
@@ -29,9 +20,13 @@
     display: grid
     flex-direction: row
     width: var(--full-width)
-    grid-template-columns: repeat(4,minmax(0,1fr))
+    grid-template-columns: repeat(1,minmax(0,1fr))
     gap: 1px
+    +s
+        grid-template-columns: repeat(4,minmax(0,1fr))
+        flex-direction: row
     +t
+        grid-template-columns: repeat(4,minmax(0,1fr))
         display: flex
         flex-direction: column
 

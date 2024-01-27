@@ -1,0 +1,52 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 40px
+    width: var(--full-w)
+
+.wrapperImage
+    width: 70px
+    height: 60px      
+
+.wrapperContainer   
+    width: var(--full-w)
+    display: flex
+    align-items: center
+    justify-content: center
+
+.input
+    width: var(--full-w)
+
+.classBorderInput
+    border: 1px solid rgba(84,84,84,0.5)
+    border-radius: 10px
+    padding: 12px 14px
+    transition-duration: 300ms
+    transition-property: box-shadow
+    transition-delay: all .2s ease
+    &:hover
+        box-shadow: 0 0 0 3px $p1
+
+
+    
+        
+.classInput
+    width: var(--full-w)
+    border: none
+    color: $n
+    font-size: 16px
+    line-height: 24px
+    &:focus
+        outline: none
+    &:placeholder
+        color: $n
+
+.buttonLogin
+    padding: 14px
+    border-radius: 10px 
+    width: var(--full-w)
+
+

@@ -11,11 +11,11 @@ const cx = classNames.bind(styles);
 const Creator = () => {
   const navigate = useNavigate();
   const [connectedAccount] = useGlobalState("connectedAccount");
-  // useEffect(() => {
-  //   if (!connectedAccount.address.length > 0) {
-  //     navigate(routesConfig.home);
-  //   }
-  // }, [connectedAccount, navigate]);
+  useEffect(() => {
+    if (!connectedAccount.address.length > 0) {
+      navigate(routesConfig.home);
+    }
+  }, [connectedAccount, navigate]);
 
   return (
     <div className={cx("wrapper")}>

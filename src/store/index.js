@@ -2,6 +2,9 @@ import { createGlobalState } from "react-hooks-global-state";
 
 const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   connectedAccount: { address: "", chain: "", name: "" },
+  showModalNavbarDiscover: false,
+  showModalNavbarMint: false,
+  currentBalances: 0,
   modalConnectedWallet: {
     active: "",
     data: [],
@@ -26,6 +29,19 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   activeSetting: "",
   WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },
   showModalCart: false,
+  formDataCreateNFT: {
+    collectionName: "",
+    collectionSymbol: "",
+    collectionDescription: "",
+    collectionImage: "",
+    currentUrlImage: "",
+    collectionPrice: 0,
+  },
+  emailLoginOrSignUp: "",
+  showModalWelcome: true,
+  showModalInboxEmail: false,
+  showModalEmailExpired: false,
+  loading: false,
 });
 
 const truncate = (text, startChars, endChars, maxLength) => {

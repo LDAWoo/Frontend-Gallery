@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import { connectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 import { connectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 
 export const UserContext = createContext();
 
 const AppUserProvider = ({ children }) => {
+  const [owner, setOwner] = useState({});
+
+  useEffect(() => {}, []);
+
   useEffect(() => {
     const localStorageLastConnectedWallet = localStorage.getItem("last-connected-wallet-data");
 
@@ -31,7 +35,7 @@ const AppUserProvider = ({ children }) => {
     connectedWallet();
   }, []);
 
-  return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ owner, setOwner }}>{children}</UserContext.Provider>;
 };
 
 AppUserProvider.propTypes = {
