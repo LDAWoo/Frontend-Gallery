@@ -3,7 +3,7 @@ const routesConfig = {
   profile: "/profile",
   marketplace: "/marketplace",
   dashboard: "/dashboard",
-  creator: "/dashboard/creator",
+  creator: "/dashboard/creator/:id",
 };
 
 export default routesConfig;

@@ -1,7 +1,7 @@
 @import '~/styles/helpers'
 
 .wrapper
-    background-color: $n8
+    background-color: $n7
     margin-left: 16px
     margin-right: 16px
     
@@ -22,9 +22,6 @@
     width: var(--full-width)
     grid-template-columns: repeat(1,minmax(0,1fr))
     gap: 1px
-    +s
-        grid-template-columns: repeat(4,minmax(0,1fr))
-        flex-direction: row
     +t
         grid-template-columns: repeat(4,minmax(0,1fr))
         display: flex
@@ -44,6 +41,7 @@
     display: flex
     align-items: center
     justify-content: space-between
+    position: relative
     &:hover
         background-color: $n6
 
@@ -54,3 +52,8 @@
 .progress
     width: 25px
     height: 25px        
+
+.iconComplete
+    position: absolute
+    color: #1DA024   
+    right: 10px

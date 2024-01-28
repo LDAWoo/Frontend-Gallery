@@ -10,6 +10,11 @@ import { useGlobalState } from "~/store";
 import ModalCheckInboxEmail from "./ModalCheckInboxEmail";
 import ModalEmailExpired from "./ModalEmailExpired/ModalEmailExpired";
 import ModalWelcomeBack from "./ModalWelcomeBack/ModalWelcomeBack";
+import Collection from "./Collection/Collection";
+import classNames from "classnames/bind";
+import styles from "./Dashboard.module.sass";
+
+const cx = classNames.bind(styles);
 
 const Dashboard = () => {
   const [searchParams] = useSearchParams();
@@ -38,7 +43,7 @@ const Dashboard = () => {
 
       fetchData();
     } else {
-      if (token.length > 0) {
+      if (token) {
         const checkTokenOwner = async () => {
           try {
             const result = await findOwnerByToken(token);
@@ -57,7 +62,7 @@ const Dashboard = () => {
   }, [token, paramsToken, navigate, setOwner]);
 
   return (
-    <div>
+    <div className={`${cx("wrapper")} no-scrollbar scrollbarCustom`}>
       {visible ? (
         <>
           <ModalWelcomeBack />
@@ -65,7 +70,11 @@ const Dashboard = () => {
           <ModalEmailExpired />
         </>
       ) : (
-        <div>DashBoard</div>
+        <div className={`${cx("wrapperContainer")}`}>
+          <div className={cx("container")}>
+            <Collection />
+          </div>
+        </div>
       )}
       <LoadingFullScreen isLoading={loading} />
     </div>

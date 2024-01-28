@@ -1,18 +1,15 @@
-import { useSearchParams } from "react-router-dom";
-import Introduction from "./Introduction";
-import Collection from "./Collection";
 import classNames from "classnames/bind";
+import Collection from "./Collection";
+import Introduction from "./Introduction";
 
-import styles from "./Main.module.sass";
+import PropTypes from "prop-types";
 import Details from "./Details";
 import HashList from "./HashList";
+import styles from "./Main.module.sass";
 import SubmitNFT from "./SubmitNFT";
 
 const cx = classNames.bind(styles);
-const Main = () => {
-  const [searchParams] = useSearchParams();
-  const currentSource = searchParams.get("source");
-
+const Main = ({ data, currentSource }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("content")}>
@@ -27,7 +24,7 @@ const Main = () => {
                         <div className={cx("container")}>
                           <div className={cx("contentContainer")}>
                             {currentSource === "intro" && <Introduction />}
-                            {currentSource === "collection" && <Collection />}
+                            {currentSource === "collection" && <Collection data={data} />}
                             {currentSource === "details" && <Details />}
                             {currentSource === "hashList" && <HashList />}
                             {currentSource === "submit" && <SubmitNFT />}
@@ -44,6 +41,11 @@ const Main = () => {
       </div>
     </div>
   );
+};
+
+Main.propTypes = {
+  data: PropTypes.object.isRequired,
+  currentSource: PropTypes.string.isRequired,
 };
 
 export default Main;
