@@ -1,69 +1,57 @@
 import classNames from "classnames/bind";
 
+import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { uploadToIPFS } from "~/NFTMarketplace/NFTMarketplace";
+import { updateHistoryCreateNFT } from "~/api/CreatorNFT";
 import Button from "~/components/Button";
-import Select from "~/components/Select";
 import TextArea from "~/components/TextArea";
 import TextInput from "~/components/TextInput";
 import Title from "~/components/Title";
-import styles from "./Details.module.sass";
-import { uploadToIPFS } from "~/NFTMarketplace/NFTMarketplace";
-import { setGlobalState, useGlobalState } from "~/store";
-import { useNavigate } from "react-router-dom";
 import routesConfig from "~/configs";
+import { auth } from "~/firebase/config";
+import { setGlobalState, useGlobalState } from "~/store";
+import Category from "./Category/Category";
+import styles from "./Details.module.sass";
+
 const cx = classNames.bind(styles);
 
-const items = [
-  {
-    name: "-",
-    value: "",
-  },
-  {
-    name: "fpst",
-    value: "fpst",
-  },
-  {
-    name: "game",
-    value: "game",
-  },
-  {
-    name: "art",
-    value: "art",
-  },
-  {
-    name: "music",
-    value: "music",
-  },
-];
-const Details = () => {
+const Details = ({ data }) => {
   const navigate = useNavigate();
-  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
   const fileInputRef = useRef();
-  const [avatar, setAvatar] = useState(formDataCreateNFT.currentUrlImage);
-  const [description, setDescription] = useState(formDataCreateNFT.collectionDescription);
-  const [categories, setCategories] = useState({
-    primary: "",
-    secondary: "",
+  const [loading] = useGlobalState("loading");
+  const [disable, setDisable] = useState(false);
+
+  const [formState, setFormState] = useState({
+    description: "",
+    primaryCategories: "",
+    secondaryCategories: "",
+    imageURL: "",
+    twitterURL: "",
+    discordURL: "",
+    websitesURL: "",
   });
 
-  const handleSelectPrimaryCategory = (value) => {
-    setCategories((prev) => ({ ...prev, primary: value }));
-  };
-  const handleSelectSecondaryCategory = (value) => {
-    setCategories((prev) => ({ ...prev, secondary: value }));
-  };
-
-  // useEffect(() => {
-  //   return () => {
-  //     avatar && URL.revokeObjectURL(avatar);
-  //   };
-  // }, [avatar]);
+  useEffect(() => {
+    setFormState((prev) => ({
+      ...prev,
+      description: data.description || "",
+      primaryCategories: data.id_primary_category || "",
+      secondaryCategories: data.id_secondary_category || "",
+      imageURL: data.image_url || "",
+      twitterURL: data.twitter_url || "",
+      discordURL: data.discord_url || "",
+      websitesURL: data.website_url || "",
+    }));
+  }, [data]);
 
   const onFileDrop = async (e) => {
     const files = e.target.files[0];
     if (files.type.split("/")[0] !== "image") return;
-    files.preview = URL.createObjectURL(files);
-    setAvatar(files);
+    const url = await uploadToIPFS(files);
+    setFormState((prev) => ({ ...prev, imageURL: url }));
   };
 
   const handleUpload = (e) => {
@@ -71,16 +59,52 @@ const Details = () => {
     fileInputRef.current.click();
   };
 
-  const handleChangeDescription = (e) => {
-    const value = e.target.value.trim();
-    setDescription(value);
+  const handleAuthenticationWithTwitter = async () => {
+    const provider = new TwitterAuthProvider();
+    try {
+      const res = await signInWithPopup(auth, provider);
+      const screenName = res._tokenResponse.screenName;
+      setFormState((prev) => ({ ...prev, twitterURL: `https://twitter.com/${screenName}` }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = async () => {
-    const collectionImage = await uploadToIPFS(avatar);
-    setGlobalState("formDataCreateNFT", { ...formDataCreateNFT, currentUrlImage: avatar.preview, collectionImage: collectionImage, collectionDescription: description });
-    navigate(`${routesConfig.creator}?source=hashList`);
+    const fetchData = async () => {
+      const currentData = {
+        id: data.id,
+        description: formState.description,
+        image_url: formState.imageURL,
+        id_primary_category: formState.primaryCategories,
+        id_secondary_category: formState.secondaryCategories,
+        twitter_url: formState.twitterURL,
+        discord_url: formState.discordURL,
+        website_url: formState.websitesURL,
+      };
+      try {
+        setGlobalState("loading", true);
+        await updateHistoryCreateNFT(currentData);
+        setGlobalState("loading", false);
+        navigate(`${routesConfig.creator.replace(":id", data.id)}?source=hashList`);
+      } catch (error) {
+        console.log(error);
+        setGlobalState("loading", false);
+      }
+    };
+
+    fetchData();
   };
+
+  useEffect(() => {
+    const { description, primaryCategories, secondaryCategories, twitterURL } = formState;
+    setDisable(description.length === 0 || primaryCategories.length === 0 || secondaryCategories.length === 0 || twitterURL.length === 0);
+  }, [formState]);
 
   return (
     <div className={cx("wrapper")}>
@@ -90,7 +114,7 @@ const Details = () => {
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="Collection Description" white xl fontMedium nowrap={false} />
-        <TextArea type="text" name="description" value={description} placeholder="2000 unique NFTs governed by DAO" onChange={handleChangeDescription} />
+        <TextArea type="text" name="description" value={formState.description} placeholder="2000 unique NFTs governed by DAO" onChange={handleChange} />
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
@@ -100,23 +124,10 @@ const Details = () => {
           <Button title="Upload" background className={cx("buttonUploadImage")} onClick={handleUpload} />
         </div>
         <Title title="Max file size 5MB. This is the image that will show on your collection profile page." nowrap={false} gallery xl fontMedium />
-        {avatar && <img src={avatar.preview} alt="uploadImage" className={cx("imageUpload")} />}
+        {formState.imageURL && <img src={formState.imageURL} alt="uploadImage" className={cx("imageUpload")} />}
       </div>
 
-      <div className={cx("contentCategory")}>
-        <Title title="Categories" white nowrap={false} fontBold xxxl />
-        <div className={`${cx("containerContent")} ${cx("mb")}`}>
-          <Title title="Primary Category" gallery xl fontMedium nowrap={false} />
-          <Select translate placement="auto" data={items} disableValue={categories.secondary} value={categories.primary} onChange={handleSelectPrimaryCategory} />
-          <Title title="Select the primary category that you would like for this collection to be listed under" nowrap={false} gallery xl fontMedium />
-        </div>
-
-        <div className={`${cx("containerContent")} ${cx("mb")}`}>
-          <Title title="Secondary Category" gallery xl fontMedium nowrap={false} />
-          <Select translate placement="auto" data={items} disableValue={categories.primary} value={categories.secondary} onChange={handleSelectSecondaryCategory} />
-          <Title title="Select the  secondary category for this collection to be listed under" nowrap={false} gallery xl fontMedium />
-        </div>
-      </div>
+      <Category primaryCategories={formState.primaryCategories} secondaryCategories={formState.secondaryCategories} setPrimaryCategories={(value) => handleChange({ target: { name: "primaryCategories", value } })} setSecondaryCategories={(value) => handleChange({ target: { name: "secondaryCategories", value } })} />
 
       <div className={`${cx("mb")}`}>
         <Title title="Social & Web Links" white nowrap={false} fontBold xxxl />
@@ -127,26 +138,35 @@ const Details = () => {
       <div className={`${cx("containerContent")}`}>
         <Title title="Please link your Twitter" white xl fontMedium nowrap={false} />
         <div>
-          <Button title="Link Twitter" border className={cx("buttonLinkTwitter")} />
+          <Button title="Link Twitter" border className={cx("buttonLinkTwitter")} onClick={handleAuthenticationWithTwitter} />
         </div>
+        {formState.twitterURL && (
+          <Link to={formState.twitterURL} target="_blank" rel="noopener noreferrer" className={cx("linkTwitterProfile")}>
+            {formState.twitterURL}
+          </Link>
+        )}
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="Discord Invite Code (Optional)" white nowrap={false} fontMedium xl />
         <Title title={`https://discord.gg/`} gallery medium />
-        <TextInput type="text" name="discord" placeholder="98yXPI" />
+        <TextInput type="text" name="discordURL" value={formState.discordURL} placeholder="98yXPI" onChange={handleChange} />
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="Website Url (Optional)" white nowrap={false} fontMedium xl />
-        <TextInput type="text" name="websiteUrl" placeholder="https://supercollection.io" />
+        <TextInput type="text" name="websitesURL" value={formState.websitesURL} placeholder="https://supercollection.io" onChange={handleChange} />
       </div>
 
       <div className={`${cx("mb")}`}>
-        <Button title="Save & Proceed" className={cx("buttonSave")} onClick={handleSave} />
+        <Button title="Save & Proceed" disabled={disable || loading} className={`${cx("buttonSave")} ${disable ? cx("disable") : ""}`} onClick={handleSave} />
       </div>
     </div>
   );
+};
+
+Details.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default Details;

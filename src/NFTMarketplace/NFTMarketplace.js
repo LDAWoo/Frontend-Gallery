@@ -12,6 +12,7 @@ const client = ipfsHttpClient({
   host: "ipfs.infura.io",
   port: "5001",
   protocol: "https",
+  apiPath: "/api/v0",
   headers: {
     authorization: auth,
   },
@@ -66,11 +67,14 @@ const checkIfWalletConnected = async () => {
 // UPLOAD TO IPFS
 const uploadToIPFS = async (file) => {
   try {
-    const added = await client.add(file);
-    const url = `${subdomain}/ipfs/${added.path}`;
+    const added = await client.add({ content: file });
+
+    const url = `https://cloudflare-ipfs.com/ipfs/${added.path}`;
     return url;
   } catch (error) {
-    console.log("Error Upload ipfs");
+    // Log the error for debugging
+    console.error("Error uploading to IPFS:", error);
+    return null;
   }
 };
 

@@ -25,8 +25,8 @@ const Main = ({ data, currentSource }) => {
                           <div className={cx("contentContainer")}>
                             {currentSource === "intro" && <Introduction />}
                             {currentSource === "collection" && <Collection data={data} />}
-                            {currentSource === "details" && <Details />}
-                            {currentSource === "hashList" && <HashList />}
+                            {currentSource === "details" && <Details data={data} />}
+                            {currentSource === "hashList" && <HashList data={data} />}
                             {currentSource === "submit" && <SubmitNFT />}
                           </div>
                         </div>

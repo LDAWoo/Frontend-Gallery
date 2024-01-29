@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 const TimePickerCustom = ({ ...props }) => {
   return (
     <div className={cx("wrapper")}>
-      <TimePicker className={cx("timePicker")} hourPlaceholder="--" minutePlaceholder="--" format="hh : mm aa" clearIcon {...props} disableClock={true} closeClock={true} />
+      <TimePicker className={cx("timePicker")} hourPlaceholder="--" minutePlaceholder="--" format="hh : mm aa" {...props} disableClock={true} closeClock={true} />
     </div>
   );
 };

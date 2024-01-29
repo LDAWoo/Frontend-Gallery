@@ -41,6 +41,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showModalWelcome: true,
   showModalInboxEmail: false,
   showModalEmailExpired: false,
+  currentSourceCreator: "",
   loading: false,
 });
 

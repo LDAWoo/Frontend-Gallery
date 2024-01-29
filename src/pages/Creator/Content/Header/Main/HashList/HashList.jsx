@@ -1,24 +1,38 @@
 import classNames from "classnames/bind";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "~/components/Button";
 import Title from "~/components/Title";
 import Tooltip from "~/components/Tooltip";
 import styles from "./HashList.module.sass";
 import Time from "./Time";
 import TextInput from "~/components/TextInput";
-import { setGlobalState, useGlobalState } from "~/store";
 import { useNavigate } from "react-router-dom";
 import routesConfig from "~/configs";
+import PropTypes from "prop-types";
+
 const cx = classNames.bind(styles);
 
-const HashList = () => {
+const HashList = ({ data }) => {
   const navigate = useNavigate();
-  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
-  const [price, setPrice] = useState(0);
+  const [supply, setSupply] = useState("");
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  console.log(data);
+
+  useEffect(() => {
+    if (data.supply) {
+      setSupply(data.supply);
+    }
+    if (data.mint_date) {
+      if (new Date(data.mint_date) > new Date()) {
+        setDate(new Date(data.mint_date));
+      }
+    }
+  }, [data]);
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -28,16 +42,16 @@ const HashList = () => {
   };
 
   const handleChangePrice = (e) => {
-    const value = e.target.value.trim();
-    setPrice(value);
+    let numericValue = e.target.value.replace(/[^0-9]/g, "");
+    e.target.value = numericValue;
+    setSupply(numericValue);
   };
-
-  const handleKeyDown = (e) => {};
 
   const handleReview = () => {
-    setGlobalState("formDataCreateNFT", { ...formDataCreateNFT, collectionPrice: price });
     navigate(`${routesConfig.creator}?source=submit`);
   };
+
+  useEffect(() => (supply.length === 0 ? setDisabled(true) : setDisabled(false)), [supply]);
 
   return (
     <div className={cx("wrapper")}>
@@ -47,7 +61,7 @@ const HashList = () => {
       <div className={`${cx("mb")}`}></div>
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="When is  Your Expected Mint Collection Calendar Date And Time (UTC)" white xl fontMedium nowrap={false} />
-        <Tooltip translate interactive={true} isVisible={open} placement="bottom-start" onClickOutside={() => setOpen(false)} items={open && <Time date={date} setDate={setDate} time={time} setTime={setTime} onChange={handleChangeTime} />}>
+        <Tooltip translate interactive={true} isVisible={open} placement="bottom-start" onClickOutside={() => setOpen(false)} items={<Time date={date} setDate={setDate} time={time} setTime={setTime} onChange={handleChangeTime} />}>
           <div>
             <Button className={cx("button")} classButton={cx("buttonDate")} onClick={handleClick} title={`${format(date, "LLLL dd, yyyy")} ${time}` || "Pick a date and tim"} xl border />
           </div>
@@ -56,14 +70,18 @@ const HashList = () => {
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <Title title="Total Supply" white xl fontMedium nowrap={false} />
-        <TextInput type="type" placeholder="678" onKeyDown={handleKeyDown} onChange={handleChangePrice} />
+        <TextInput type="text" pattern="[0-9]*" placeholder="10" value={supply} onChange={handleChangePrice} />
         <Title gallery title="Number of total items in the collection existing or expected" fontMedium large nowrap={false} />
       </div>
       <div className={`${cx("mb")}`}>
-        <Button title="Review" className={cx("buttonReview")} onClick={handleReview} />
+        <Button title="Review" disabled={disabled} className={`${cx("buttonReview")} ${disabled ? cx("disable") : ""}`} onClick={handleReview} />
       </div>
     </div>
   );
+};
+
+HashList.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default HashList;
