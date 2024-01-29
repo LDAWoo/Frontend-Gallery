@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import styles from "~/components/layouts/MainLayout.module.sass";
 import ModalDetailsNFT from "~/pages/Marketplaces/Content/Main/ModalDetailsNFT";
-import { setGlobalState } from "~/store";
+import { setGlobalState, useGlobalState } from "~/store";
+import LoadingFullScreen from "../Loading/LoadingFullScreen";
 import ModalConnectedWallet from "../Navbar/ModalConnectedWallet";
 const cx = classNames.bind(styles);
 
 const MainLayout = ({ children }) => {
+  const [loading] = useGlobalState("loading");
   useEffect(() => {
     const handleResize = () => {
       setGlobalState("WidthAndHeightWindow", { width: window.innerWidth, height: window.innerHeight });
@@ -25,6 +27,7 @@ const MainLayout = ({ children }) => {
       <div className={`${cx("container")}`}>{children}</div>
       <ModalConnectedWallet />
       <ModalDetailsNFT />
+      <LoadingFullScreen isLoading={loading} />
     </div>
   );
 };

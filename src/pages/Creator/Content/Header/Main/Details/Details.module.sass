@@ -25,11 +25,6 @@
 .mb
     margin-bottom: 28px    
 
-.contentCategory
-    display: flex
-    flex-direction: column
-    gap: 16px    
-
 .buttonLinkTwitter
     width: auto
     padding: 12px 44px 
@@ -43,7 +38,17 @@
     border: none
     border-radius: 4px
     color: $n
-    cursor: pointer
     transition-duration: 300ms
     &:hover
-        background-color: $p2        
+        background-color: $p2     
+        cursor: pointer  
+        &.disable
+            cursor: not-allowed
+
+
+.linkTwitterProfile
+    color: $p1
+    font-size: 12px
+    font-weight: 600
+    &:hover
+        text-decoration: underline

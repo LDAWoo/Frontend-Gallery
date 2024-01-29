@@ -38,14 +38,14 @@ const Collection = ({ data }) => {
 
   const handleSave = () => {
     const fetchData = async () => {
-      const data2 = {
+      const currentData = {
         id: data.id,
         name: collectionName,
         symbol: collectionSymbol,
       };
       try {
         setLoading(true);
-        await updateHistoryCreateNFT(data2);
+        await updateHistoryCreateNFT(currentData);
         setLoading(false);
         navigate(`${routesConfig.creator.replace(":id", data.id)}?source=details`);
       } catch (error) {

@@ -1,18 +1,16 @@
+import classNames from "classnames/bind";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { findOwnerByToken } from "~/api/Owner";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
-import LoadingFullScreen from "~/components/Loading/LoadingFullScreen";
 import routesConfig from "~/configs";
 import getCookie from "~/hooks/useRegisterGetCookie";
 import setCookie from "~/hooks/useRegisterSetCookie";
-import { useGlobalState } from "~/store";
+import Collection from "./Collection/Collection";
+import styles from "./Dashboard.module.sass";
 import ModalCheckInboxEmail from "./ModalCheckInboxEmail";
 import ModalEmailExpired from "./ModalEmailExpired/ModalEmailExpired";
 import ModalWelcomeBack from "./ModalWelcomeBack/ModalWelcomeBack";
-import Collection from "./Collection/Collection";
-import classNames from "classnames/bind";
-import styles from "./Dashboard.module.sass";
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +19,7 @@ const Dashboard = () => {
   const paramsToken = searchParams.get("token") || "";
 
   const navigate = useNavigate();
-  const [loading] = useGlobalState("loading");
+
   const [visible, setVisible] = useState(false);
   const { setOwner } = useContext(UserContext);
   const token = getCookie("token");
@@ -76,7 +74,6 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-      <LoadingFullScreen isLoading={loading} />
     </div>
   );
 };

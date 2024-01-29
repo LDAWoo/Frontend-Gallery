@@ -19,12 +19,20 @@ const Select = ({ data, value, disableValue, onChange, ...props }) => {
     value: "",
   });
   const selectRef = useRef();
-
+  const prevValue = useRef(values.value);
   useEffect(() => {
     if (data && data.length > 0) {
-      setValues({ name: data[0].name, value: data[0].value });
+      data.forEach((check) => {
+        if (value) {
+          if (check.value === value) {
+            setValues({ name: check?.name, value: check?.value });
+          }
+        } else {
+          setValues({ name: data[0].name, value: data[0].value });
+        }
+      });
     }
-  }, [data]);
+  }, [data, value]);
 
   useEffect(() => {
     if (selectRef.current) {
@@ -33,10 +41,11 @@ const Select = ({ data, value, disableValue, onChange, ...props }) => {
   }, [selectRef, WidthAndHeightWindow]);
 
   useEffect(() => {
-    if (onChange) {
+    if (onChange && values.value !== prevValue.current) {
       onChange(values.value);
+      prevValue.current = values.value; // Lưu giá trị mới vào prevValue để so sánh trong lần render tiếp theo
     }
-  }, [values]);
+  }, [values.value, onChange]);
 
   return (
     <Tooltip interactive={true} items={<Item data={data} disableValue={disableValue} value={value} visible={visible} setVisible={setVisible} setValues={setValues} />} width={width} onClickOutside={() => setVisible(false)} visible={visible} {...props}>
