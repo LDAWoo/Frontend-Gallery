@@ -3,24 +3,54 @@ import Button from "~/components/Button";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
 import styles from "./SubmitNFT.module.sass";
-import { useGlobalState } from "~/store";
-import { createNFT } from "~/NFTMarketplace/NFTMarketplace";
+import { setGlobalState, useGlobalState } from "~/store";
 import { createNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
+import PropTypes from "prop-types";
+
+import { format } from "date-fns";
+import { postCreateNFT, updateHistoryCreateNFT } from "~/api/CreatorNFT";
+import { useContext, useEffect, useState } from "react";
+import { getCategoryById } from "~/api/Category";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
+
 const cx = classNames.bind(styles);
-const SubmitNFT = () => {
-  const [formDataCreateNFT] = useGlobalState("formDataCreateNFT");
+const SubmitNFT = ({ data }) => {
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const [loading] = useGlobalState("loading");
+  const [primaryCategory, setPrimaryCategory] = useState("");
+  const [secondaryCategory, setSecondaryCategory] = useState("");
+  const { owner } = useContext(UserContext);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (data) {
+        try {
+          const categoryIds = [data.id_primary_category, data.id_secondary_category];
+
+          console.log(categoryIds);
+          const results = await Promise.all(categoryIds.map(getCategoryById));
+          const [primaryCategoryData, secondaryCategoryData] = results;
+
+          setPrimaryCategory(primaryCategoryData);
+          setSecondaryCategory(secondaryCategoryData);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    };
+    fetchData();
+  }, [data]);
+
   const items = [
     {
       id: 2,
       data: [
         {
           name: "name",
-          value: formDataCreateNFT.collectionName,
+          value: data?.name,
         },
         {
           name: "symbol",
-          value: formDataCreateNFT.collectionSymbol,
+          value: data?.symbol,
         },
       ],
     },
@@ -29,19 +59,19 @@ const SubmitNFT = () => {
       data: [
         {
           name: "total supply",
-          value: formDataCreateNFT.collectionPrice,
+          value: data?.supply,
         },
         {
           name: "description",
-          value: formDataCreateNFT.collectionDescription,
+          value: data?.description,
         },
         {
           name: "categories primary",
-          value: "games",
+          value: primaryCategory.name,
         },
         {
           name: "categories secondary",
-          value: "virtual_worlds",
+          value: secondaryCategory.name,
         },
       ],
     },
@@ -50,7 +80,7 @@ const SubmitNFT = () => {
       data: [
         {
           name: "collection pfp",
-          url: formDataCreateNFT.currentUrlImage,
+          url: data?.image_url,
           type: "image",
         },
       ],
@@ -60,17 +90,17 @@ const SubmitNFT = () => {
       data: [
         {
           name: "twitter",
-          url: "https://www.googleapis.com/",
+          url: data?.twitter_url,
           type: "link",
         },
         {
           name: "discord",
-          url: "https://www.googleapis.com/",
+          url: "https://discord/" + data?.discord_url,
           type: "link",
         },
         {
           name: "website",
-          url: "https://www.googleapis.com/",
+          url: data?.website_url,
           type: "link",
         },
       ],
@@ -80,7 +110,8 @@ const SubmitNFT = () => {
       data: [
         {
           name: "mint date",
-          value: "March 17, 2024 9:00 PM GMT ( GMT )",
+          type: "date",
+          value: data?.mint_date,
         },
       ],
     },
@@ -88,16 +119,67 @@ const SubmitNFT = () => {
 
   const handleCreateNFT = async () => {
     const address = connectedAccount.address;
-    const name = formDataCreateNFT.collectionName;
-    const symbol = formDataCreateNFT.collectionSymbol;
-    const description = formDataCreateNFT.collectionDescription;
-    const external_url = "";
-    const royalty = 10;
-    const supply = formDataCreateNFT.collectionPrice;
-    const image = formDataCreateNFT.currentUrlImage;
+    if (!address) {
+      setGlobalState("connectedModal", true);
+      return;
+    }
+    const currentData = {
+      id: data.id,
+      wallet_address: address,
+    };
+    try {
+      setGlobalState("loading", true);
 
-    console.log(formDataCreateNFT);
-    createNFTPhantomSolana(address, name, symbol, description, external_url, supply, royalty, image, address);
+      if (data.wallet_address !== address) {
+        await updateHistoryCreateNFT(currentData);
+      }
+
+      const dataCreateNFT = {
+        address: address,
+        name: data?.name,
+        symbol: data?.symbol,
+        description: data?.description,
+        externalURL: "https://gardeneden.io",
+        royalty: 10,
+        amount: 0.01,
+        supply: data?.supply,
+        image: data?.image_url,
+      };
+
+      const signature = await createNFTPhantomSolana(dataCreateNFT);
+
+      //const signature = "3mp1oz5wCKyea7CxC5UgbgHfmWRCfWk62anJVWcH56Pt7j7MPxTXqcH5AaZEZ7ucJ4pm3fPunEG2KPZgt1PvfFoh";
+      const dataSaveCreateNFT = {
+        artworkRequest: {
+          id_history_create_nft: data.id,
+          id_owner: owner.id,
+          wallet_address: address,
+          name: data?.name,
+          symbol: data?.symbol,
+          description: data?.description,
+          image_url: data?.image_url,
+          supply: data?.supply,
+          royalty: 10,
+          minted: 0,
+          mint_date: data?.mint_date,
+        },
+        transactionRequest: {
+          signature: signature,
+          amount: 0.01,
+          fee: 0.000005,
+          royalty_amount: 10,
+        },
+        categoryIds: [data.id_primary_category, data.id_secondary_category],
+      };
+
+      await postCreateNFT(dataSaveCreateNFT);
+
+      console.log("Successfully created");
+      setGlobalState("loading", false);
+    } catch (e) {
+      console.log(e);
+      setGlobalState("loading", false);
+    }
   };
 
   return (
@@ -113,13 +195,16 @@ const SubmitNFT = () => {
               {item?.data.map((x, index) => (
                 <div key={index} className={cx("containerItem")}>
                   <div className={cx("nameItem")}>{x?.name}:</div>
-                  {x?.value && <div className={cx("valueItem")}>{x?.value}</div>}
-                  {x?.url && x?.type === "image" && (
-                    <div className={cx("containerImage")}>
-                      <Image lazy={false} src={x?.url} className={cx("image")} />
-                    </div>
-                  )}
-                  {x?.url && x?.type === "link" && <div className={cx("linkValue")}>{x?.url}</div>}
+                  <div className={cx("containerValue")}>
+                    {x?.value && x?.type !== "date" && <div className={cx("valueItem")}>{x?.value}</div>}
+                    {x?.url && x?.type === "image" && (
+                      <div className={cx("containerImage")}>
+                        <Image lazy={false} src={x?.url} className={cx("image")} />
+                      </div>
+                    )}
+                    {x?.url && x?.type === "link" && <div className={cx("linkValue")}>{x?.url}</div>}
+                    {x?.type === "date" && <div className={cx("valueItem")}>{x?.value && format(x?.value, "MMMM dd, yyyy pppp")} </div>}
+                  </div>
                 </div>
               ))}
             </div>
@@ -127,10 +212,14 @@ const SubmitNFT = () => {
         </div>
       </div>
       <div className={`${cx("mb")}`}>
-        <Button title="Submit" className={cx("buttonSubmit")} onClick={handleCreateNFT} />
+        <Button title="Submit" disabled={loading} className={`${cx("buttonSubmit")} ${loading ? cx("disabled") : ""}`} onClick={handleCreateNFT} />
       </div>
     </div>
   );
+};
+
+SubmitNFT.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default SubmitNFT;

@@ -19,3 +19,8 @@ export const findAllHistoryCreateNFTByEmail = async (email) => {
   const response = await get(`/gardeneden/findAllHistoryCreateNFTByEmail/${email}`);
   return response;
 };
+
+export const postCreateNFT = async (data) => {
+  const response = await post(`/artwork/add-artwork`, data);
+  return response;
+};

@@ -42,24 +42,28 @@ const getBalanceWalletPhantomSolana = async (address) => {
   }
 };
 
-const createNFTPhantomSolana = async (address, name, symbol, description, external_url = "", supply, royalty, image, receiver) => {
+const createNFTPhantomSolana = async (data) => {
   try {
-    const fileBlob = await fetch(image).then((response) => response.blob());
-    const formdata = new FormData();
-    formdata.append("file", fileBlob, "index.png");
-    formdata.append("network", network);
-    formdata.append("wallet", address);
-    formdata.append("name", name);
-    formdata.append("symbol", symbol);
-    formdata.append("description", description);
-    formdata.append("attributes", '[{"trait_type":"dev power","value":"over 900"}]');
-    formdata.append("external_url", external_url);
-    formdata.append("max_supply", supply);
-    formdata.append("royalty", royalty);
-    formdata.append("nft_receiver", "5KW2twHzRsAaiLeEx4zYNV35CV2hRrZGw7NYbwMfL4a2");
-    formdata.append("service_charge", '{"receiver": "499qpPLdqgvVeGvvNjsWi27QHpC8GPkPfuL5Cn2DtZJe", "amount": 0.01}');
+    const imageUrl = data.image;
+    const responseImage = await fetch(imageUrl);
+    const imageBuffer = await responseImage.arrayBuffer();
+    const imageBlob = new Blob([imageBuffer], { type: responseImage.headers.get("content-type") });
 
-    const response = await post("https://api.shyft.to/sol/v1/nft/create_detach", formdata, "", {
+    const formdata = new FormData();
+    formdata.append("file", imageBlob, "index.png");
+    formdata.append("network", network);
+    formdata.append("wallet", data.address);
+    formdata.append("name", data.name);
+    formdata.append("symbol", data.symbol);
+    formdata.append("description", data.description);
+    formdata.append("attributes", "[{}]");
+    formdata.append("external_url", data.externalURL);
+    formdata.append("max_supply", data.supply);
+    formdata.append("royalty", data.royalty);
+    formdata.append("nft_receiver", data.address);
+    formdata.append("service_charge", `{"receiver": "${data.address}", "amount": "${data.amount}"}`);
+
+    const response = await post("/sol/v1/nft/create_detach", formdata, "", {
       headers: {
         "x-api-key": secretKey,
         "Content-Type": "multipart/form-data",
@@ -72,8 +76,7 @@ const createNFTPhantomSolana = async (address, name, symbol, description, extern
     const connection = new Connection("https://api.devnet.solana.com");
     const signature = await connection.sendRawTransaction(signedTransaction.serialize());
 
-    console.log(signature);
-    console.log("Transaction Confirm");
+    return signature;
   } catch (error) {
     console.error("Error:", error);
   }

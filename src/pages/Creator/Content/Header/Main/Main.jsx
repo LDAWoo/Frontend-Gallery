@@ -27,7 +27,7 @@ const Main = ({ data, currentSource }) => {
                             {currentSource === "collection" && <Collection data={data} />}
                             {currentSource === "details" && <Details data={data} />}
                             {currentSource === "hashList" && <HashList data={data} />}
-                            {currentSource === "submit" && <SubmitNFT />}
+                            {currentSource === "submit" && <SubmitNFT data={data} />}
                           </div>
                         </div>
                       </div>

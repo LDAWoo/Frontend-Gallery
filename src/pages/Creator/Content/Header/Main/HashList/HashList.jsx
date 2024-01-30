@@ -10,6 +10,8 @@ import TextInput from "~/components/TextInput";
 import { useNavigate } from "react-router-dom";
 import routesConfig from "~/configs";
 import PropTypes from "prop-types";
+import { setGlobalState } from "~/store";
+import { updateHistoryCreateNFT } from "~/api/CreatorNFT";
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +22,6 @@ const HashList = ({ data }) => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
   const [disabled, setDisabled] = useState(false);
-  console.log(data);
 
   useEffect(() => {
     if (data.supply) {
@@ -41,6 +42,15 @@ const HashList = ({ data }) => {
     setTime(e);
   };
 
+  useEffect(() => {
+    if (!time) {
+      const currentDate = new Date();
+      const currentHours = currentDate.getHours();
+      const currentMinutes = currentDate.getMinutes();
+      setTime(`${currentHours}:${currentMinutes}`);
+    }
+  }, [time]);
+
   const handleChangePrice = (e) => {
     let numericValue = e.target.value.replace(/[^0-9]/g, "");
     e.target.value = numericValue;
@@ -48,7 +58,29 @@ const HashList = ({ data }) => {
   };
 
   const handleReview = () => {
-    navigate(`${routesConfig.creator}?source=submit`);
+    const fetchData = async () => {
+      const combinedDate = new Date(date);
+      const [hours, minutes] = time.split(":");
+
+      combinedDate.setHours(Number(hours));
+      combinedDate.setMinutes(Number(minutes));
+
+      const currentData = {
+        id: data.id,
+        supply: supply,
+        mint_date: combinedDate.toISOString(),
+      };
+
+      try {
+        setGlobalState("loading", true);
+        await updateHistoryCreateNFT(currentData);
+        setGlobalState("loading", false);
+        navigate(`${routesConfig.creator.replace(":id", data.id)}?source=submit`);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
   };
 
   useEffect(() => (supply.length === 0 ? setDisabled(true) : setDisabled(false)), [supply]);
