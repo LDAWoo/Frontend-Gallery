@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 const Collection = () => {
   const navigate = useNavigate();
-  const { owner } = useContext(UserContext);
+  const { artist } = useContext(UserContext);
   const [active, setActive] = useState("drafts");
   const [data, setDate] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const Collection = () => {
   };
 
   const handleCreateNewCollection = async () => {
-    const email = owner.email;
+    const email = artist.email;
 
     try {
       const results = await postCreateHistoryNFT({ email });
@@ -35,10 +35,10 @@ const Collection = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (owner) {
+      if (artist) {
         try {
           setLoading(true);
-          const results = await findAllHistoryCreateNFTByEmail(owner.email);
+          const results = await findAllHistoryCreateNFTByEmail(artist.email);
           setDate(results.listResult);
           setLoading(false);
         } catch (e) {
@@ -48,7 +48,7 @@ const Collection = () => {
     };
 
     fetchData();
-  }, [owner]);
+  }, [artist]);
 
   const items = [
     {

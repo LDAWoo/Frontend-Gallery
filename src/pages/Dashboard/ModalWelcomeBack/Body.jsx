@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { authenticated } from "~/api/Owner";
+import { authenticated } from "~/api/Artist";
 import Button from "~/components/Button";
 import Image from "~/components/Image";
 import TextInput from "~/components/TextInput";

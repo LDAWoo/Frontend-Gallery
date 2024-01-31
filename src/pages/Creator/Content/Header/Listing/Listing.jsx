@@ -16,7 +16,7 @@ const Listing = ({ data }) => {
     {
       source: "collection",
       name: "Collection",
-      complete: data?.name && data?.symbol,
+      complete: data?.name && data?.symbolNFT && data?.symbolArtist,
     },
     {
       source: "details",

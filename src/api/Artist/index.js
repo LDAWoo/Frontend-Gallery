@@ -5,7 +5,7 @@ export const authenticated = async (data) => {
   return response;
 };
 
-export const findOwnerByToken = async (token) => {
-  const response = await post(`/gardeneden/findOwnerByToken?token=${token}`);
+export const findArtistByToken = async (token) => {
+  const response = await post(`/gardeneden/findArtistByToken?token=${token}`);
   return response;
 };

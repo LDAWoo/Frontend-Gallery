@@ -45,7 +45,7 @@ const Main = ({ data, currentSource }) => {
 
 Main.propTypes = {
   data: PropTypes.object.isRequired,
-  currentSource: PropTypes.string.isRequired,
+  currentSource: PropTypes.string,
 };
 
 export default Main;

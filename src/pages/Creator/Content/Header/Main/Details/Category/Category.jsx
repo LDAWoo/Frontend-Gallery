@@ -14,7 +14,6 @@ const Category = ({ primaryCategories, setPrimaryCategories, secondaryCategories
       try {
         const results = await getAllCategory();
         const updateCategory = [{ value: "", name: "-" }];
-
         results.listResult.forEach((category) => {
           updateCategory.push({ value: category.id, name: category.name });
         });

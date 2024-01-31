@@ -118,12 +118,12 @@ const Details = ({ data }) => {
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
-        <Title title="Profile Image (500x500px)" gallery xl fontMedium nowrap={false} />
+        <Title title="NFT Image (500x500px)" gallery xl fontMedium nowrap={false} />
         <div>
           <input ref={fileInputRef} type="file" className={cx("inputFileImage")} onChange={onFileDrop} />
           <Button title="Upload" background className={cx("buttonUploadImage")} onClick={handleUpload} />
         </div>
-        <Title title="Max file size 5MB. This is the image that will show on your collection profile page." nowrap={false} gallery xl fontMedium />
+        <Title title="Max file size 5MB. This is the image that will show on your collection page." nowrap={false} gallery xl fontMedium />
         {formState.imageURL && <img src={formState.imageURL} alt="uploadImage" className={cx("imageUpload")} />}
       </div>
 

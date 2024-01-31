@@ -5,7 +5,7 @@ import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
-import { authenticated } from "~/api/Owner";
+import { authenticated } from "~/api/Artist";
 
 const cx = classNames.bind(styles);
 

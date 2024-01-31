@@ -6,6 +6,10 @@ import ModalDetailsNFT from "~/pages/Marketplaces/Content/Main/ModalDetailsNFT";
 import { setGlobalState, useGlobalState } from "~/store";
 import LoadingFullScreen from "../Loading/LoadingFullScreen";
 import ModalConnectedWallet from "../Navbar/ModalConnectedWallet";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const cx = classNames.bind(styles);
 
 const MainLayout = ({ children }) => {
@@ -28,6 +32,7 @@ const MainLayout = ({ children }) => {
       <ModalConnectedWallet />
       <ModalDetailsNFT />
       <LoadingFullScreen isLoading={loading} />
+      <ToastContainer />
     </div>
   );
 };

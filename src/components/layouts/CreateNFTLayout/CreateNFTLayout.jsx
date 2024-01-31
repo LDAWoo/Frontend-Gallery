@@ -3,14 +3,17 @@ import MainLayout from "..";
 import classNames from "classnames/bind";
 import styles from "./CreateNFTLayout.module.sass";
 import NavbarCreator from "~/components/NavbarCreator";
+import { useContext } from "react";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
 
 const cx = classNames.bind(styles);
 
 const CreateNFTLayout = ({ children }) => {
+  const { artistLoading } = useContext(UserContext);
   return (
     <MainLayout>
       <div className={cx("wrapper")}>
-        <NavbarCreator />
+        {!artistLoading && <NavbarCreator />}
         {children}
       </div>
     </MainLayout>

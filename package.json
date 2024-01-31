@@ -37,6 +37,7 @@
     "react-router-dom": "^6.21.2",
     "react-split-pane": "^0.1.92",
     "react-time-picker": "^6.6.0",
+    "react-toastify": "^10.0.4",
     "sass": "^1.69.7",
     "web3modal": "^1.9.12"
   },

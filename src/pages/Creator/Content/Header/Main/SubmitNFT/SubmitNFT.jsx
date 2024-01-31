@@ -12,6 +12,9 @@ import { postCreateNFT, updateHistoryCreateNFT } from "~/api/CreatorNFT";
 import { useContext, useEffect, useState } from "react";
 import { getCategoryById } from "~/api/Category";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
+import { Bounce, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import routesConfig from "~/configs";
 
 const cx = classNames.bind(styles);
 const SubmitNFT = ({ data }) => {
@@ -19,14 +22,13 @@ const SubmitNFT = ({ data }) => {
   const [loading] = useGlobalState("loading");
   const [primaryCategory, setPrimaryCategory] = useState("");
   const [secondaryCategory, setSecondaryCategory] = useState("");
-  const { owner } = useContext(UserContext);
+  const { artist } = useContext(UserContext);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
-      if (data) {
+      if (Object.keys(data).length > 0) {
         try {
           const categoryIds = [data.id_primary_category, data.id_secondary_category];
-
-          console.log(categoryIds);
           const results = await Promise.all(categoryIds.map(getCategoryById));
           const [primaryCategoryData, secondaryCategoryData] = results;
 
@@ -50,7 +52,7 @@ const SubmitNFT = ({ data }) => {
         },
         {
           name: "symbol",
-          value: data?.symbol,
+          value: data?.symbolNFT,
         },
       ],
     },
@@ -137,7 +139,7 @@ const SubmitNFT = ({ data }) => {
       const dataCreateNFT = {
         address: address,
         name: data?.name,
-        symbol: data?.symbol,
+        symbol: data?.symbolNFT,
         description: data?.description,
         externalURL: "https://gardeneden.io",
         royalty: 10,
@@ -146,16 +148,23 @@ const SubmitNFT = ({ data }) => {
         image: data?.image_url,
       };
 
-      const signature = await createNFTPhantomSolana(dataCreateNFT);
+      // const signature = await createNFTPhantomSolana(dataCreateNFT);
 
-      //const signature = "3mp1oz5wCKyea7CxC5UgbgHfmWRCfWk62anJVWcH56Pt7j7MPxTXqcH5AaZEZ7ucJ4pm3fPunEG2KPZgt1PvfFoh";
+      const signature = "3mp1oz5wCKyea7CxC5UgbgHfmWRCfWk62anJVWcH56Pt7j7MPxTXqcH5AaZEZ7ucJ4pm3fPunEG2KPZgt1PvfFoh";
       const dataSaveCreateNFT = {
+        artistRequest: {
+          id_artist: artist.id,
+          email: artist.email,
+          symbol: data?.symbolArtist,
+          discord_url: data?.discord_url,
+          twitter_url: data?.twitter_url,
+          website_url: data?.website_url,
+        },
         artworkRequest: {
           id_history_create_nft: data.id,
-          id_owner: owner.id,
           wallet_address: address,
           name: data?.name,
-          symbol: data?.symbol,
+          symbolNFT: data?.symbolNFT,
           description: data?.description,
           image_url: data?.image_url,
           supply: data?.supply,
@@ -173,13 +182,31 @@ const SubmitNFT = ({ data }) => {
       };
 
       await postCreateNFT(dataSaveCreateNFT);
-
-      console.log("Successfully created");
       setGlobalState("loading", false);
+      handleSuccessfully();
     } catch (e) {
       console.log(e);
       setGlobalState("loading", false);
     }
+  };
+
+  const handleSuccessfully = () => {
+    toast("🦄 Create NFT Successfully!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+      onClose: () => onClose(),
+    });
+  };
+
+  const onClose = () => {
+    navigate(routesConfig.dashboard);
   };
 
   return (

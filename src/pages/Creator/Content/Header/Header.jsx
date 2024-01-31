@@ -1,11 +1,12 @@
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { findHistoryCreateNFTById } from "~/api/CreatorNFT";
 import routesConfig from "~/configs";
 import styles from "./Header.module.sass";
 import Listing from "./Listing";
 import Main from "./Main";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
 
 const cx = classNames.bind(styles);
 
@@ -16,11 +17,17 @@ const Header = () => {
   const [data, setData] = useState({});
   const { id } = useParams();
 
+  const { artist } = useContext(UserContext);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const results = await findHistoryCreateNFTById(id);
         setData(results);
+
+        if (artist.symbol) {
+          setData((prev) => ({ ...prev, symbolArtist: artist.symbol }));
+        }
       } catch (e) {
         setData({});
         navigate(routesConfig.dashboard);
@@ -28,7 +35,7 @@ const Header = () => {
     };
 
     fetchData();
-  }, [id, navigate, currentSource]);
+  }, [id, navigate, currentSource, artist]);
 
   return (
     <div className={cx("wrapper")}>
