@@ -28,10 +28,7 @@ function TextInput({ className, classBorder, classInput, error, icon, classIcon,
         )}
 
         {error && !active && (
-          <div
-            className={`${cx("wrapperError")} ${copy ? `${cx("copyActive")}` : `${cx("copy")}`}"
-          }`}
-          >
+          <div className={`${cx("wrapperError")} ${copy ? cx("copyActive") : cx("copy")}`}>
             <Icon icon={MdOutlineErrorOutline} size={sizeIcon} />
           </div>
         )}
@@ -54,7 +51,7 @@ TextInput.propTypes = {
   iconCopy: PropTypes.elementType,
   error: PropTypes.bool,
   copy: PropTypes.bool,
-  currency: PropTypes.string,
+  currency: PropTypes.node,
   tooltip: PropTypes.string,
   placeholder: PropTypes.string,
   classCurrency: PropTypes.string,

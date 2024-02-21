@@ -1,4 +1,5 @@
 import { createGlobalState } from "react-hooks-global-state";
+import { Bounce, toast } from "react-toastify";
 
 const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   connectedAccount: { address: "", chain: "", name: "" },
@@ -14,7 +15,10 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showActivity: false,
   showAnalytics: false,
   showSettings: false,
-  showNFTDetails: false,
+  showNFTDetails: {
+    active: false,
+    data: [],
+  },
   showActiveNFTDetails: {
     overview: false,
     activity: false,
@@ -29,18 +33,16 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   activeSetting: "",
   WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },
   showModalCart: false,
-  formDataCreateNFT: {
-    collectionName: "",
-    collectionSymbol: "",
-    collectionDescription: "",
-    collectionImage: "",
-    currentUrlImage: "",
-    collectionPrice: 0,
-  },
   emailLoginOrSignUp: "",
   showModalWelcome: true,
   showModalInboxEmail: false,
   showModalEmailExpired: false,
+  showModalAddAttributeNFT: {
+    active: false,
+    data: [],
+  },
+  currentAttribute: [],
+  currentFavoriteArtwork: {},
   currentSourceCreator: "",
   loading: false,
 });
@@ -58,4 +60,33 @@ const truncate = (text, startChars, endChars, maxLength) => {
   return text;
 };
 
-export { useGlobalState, setGlobalState, getGlobalState, truncate };
+const copyText = (text) => {
+  if (text) {
+    const tempInput = document.createElement("input");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    handleSuccessfully();
+    return true;
+  }
+
+  return false;
+};
+
+const handleSuccessfully = () => {
+  toast("🦄 Copy Successfully!", {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+
+export { useGlobalState, setGlobalState, getGlobalState, truncate, copyText };

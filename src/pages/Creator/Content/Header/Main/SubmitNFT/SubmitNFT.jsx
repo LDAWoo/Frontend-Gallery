@@ -141,16 +141,13 @@ const SubmitNFT = ({ data }) => {
         name: data?.name,
         symbol: data?.symbolNFT,
         description: data?.description,
-        externalURL: "https://gardeneden.io",
-        royalty: 10,
-        amount: 0.01,
+        externalURL: data?.website_url,
         supply: data?.supply,
         image: data?.image_url,
       };
 
-      // const signature = await createNFTPhantomSolana(dataCreateNFT);
+      const signature = await createNFTPhantomSolana(dataCreateNFT);
 
-      const signature = "3mp1oz5wCKyea7CxC5UgbgHfmWRCfWk62anJVWcH56Pt7j7MPxTXqcH5AaZEZ7ucJ4pm3fPunEG2KPZgt1PvfFoh";
       const dataSaveCreateNFT = {
         artistRequest: {
           id_artist: artist.id,
@@ -167,16 +164,12 @@ const SubmitNFT = ({ data }) => {
           symbolNFT: data?.symbolNFT,
           description: data?.description,
           image_url: data?.image_url,
+          chain: connectedAccount.chain,
           supply: data?.supply,
-          royalty: 10,
-          minted: 0,
           mint_date: data?.mint_date,
         },
         transactionRequest: {
           signature: signature,
-          amount: 0.01,
-          fee: 0.000005,
-          royalty_amount: 10,
         },
         categoryIds: [data.id_primary_category, data.id_secondary_category],
       };

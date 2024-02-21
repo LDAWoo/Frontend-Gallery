@@ -1,0 +1,56 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)
+
+.container
+    display: flex
+    flex-direction: column
+
+
+.titleWrapper
+    color: $-n1
+    margin: 1.5rem 0       
+
+.containerHistory
+    display: flex
+    flex-direction: column
+    gap: 16px
+    margin-top: 24px
+    +m
+        display: grid   
+        grid-template-columns: repeat(2,minmax(0,1fr))
+    +t    
+        display: grid   
+        grid-template-columns: repeat(3,minmax(0,1fr))
+    +w    
+        display: grid   
+        grid-template-columns: repeat(4,minmax(0,1fr))
+    +q 
+        display: grid   
+        grid-template-columns: repeat(6,minmax(0,1fr))
+
+.wrapperHistoryItem
+    border-radius: 0.45rem
+    border: 1px solid $n3
+
+
+.relative
+    position: relative        
+
+.containerImage
+    border-top-left-radius: 0.45rem
+    border-top-right-radius: 0.45rem
+    overflow: hidden
+
+.containerContentHistory
+    padding: 12px
+    position: relative
+    display: flex
+    flex-direction: column
+    gap: 4px
+
+.dateHistoryCreateNFT
+    +text-xs
+    color: $n1
+    font-weight: 600

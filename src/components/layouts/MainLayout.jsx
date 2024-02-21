@@ -9,6 +9,7 @@ import ModalConnectedWallet from "../Navbar/ModalConnectedWallet";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalAddAttributeNFT from "~/pages/Reviewed/Content/Header/Main/ModalAddAttributeNFT/ModalAddAttributeNFT";
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +32,7 @@ const MainLayout = ({ children }) => {
       <div className={`${cx("container")}`}>{children}</div>
       <ModalConnectedWallet />
       <ModalDetailsNFT />
+      <ModalAddAttributeNFT />
       <LoadingFullScreen isLoading={loading} />
       <ToastContainer />
     </div>

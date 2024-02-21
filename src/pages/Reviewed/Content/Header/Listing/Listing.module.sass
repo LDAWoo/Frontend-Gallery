@@ -1,0 +1,61 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    width: var(--full-w)
+
+.container
+    display: flex
+    flex-direction: column  
+    width: var(--full-w)   
+    gap: 8px  
+
+.containerNFT
+    display: flex
+    flex-direction: row     
+    align-items: center
+    gap: 16px
+    width: var(--full-w)  
+    height: 100px 
+
+.wrapperMetaData
+    height: 80px
+    width: 80px 
+    border-radius: 9999px  
+    overflow: hidden
+
+.wrapperNameNFT
+    display: flex
+    flex-direction: column
+    gap: 6px
+    color: $n1 
+    height: var(--full-h)
+    justify-content: center
+    
+
+.wrapperWalletAddress
+    padding: 2px 8px
+    border-radius: 12px
+    border: 1px solid $n3  
+    display: flex
+    align-items: center
+    gap: 6px
+    cursor: pointer
+    transition-property: background-color
+    transition-duration: 150ms
+    &:hover
+        background-color: $n5
+
+
+.wrapperCopyIcon
+    color: $n1   
+
+.containerTabTip
+    height: 52px
+
+.wrapperTabTip
+    display: flex
+    gap: 12px 
+    overflow-y: auto     
+
+

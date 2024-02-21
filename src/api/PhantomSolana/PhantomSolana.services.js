@@ -56,12 +56,9 @@ const createNFTPhantomSolana = async (data) => {
     formdata.append("name", data.name);
     formdata.append("symbol", data.symbol);
     formdata.append("description", data.description);
-    formdata.append("attributes", "[{}]");
     formdata.append("external_url", data.externalURL);
     formdata.append("max_supply", data.supply);
-    formdata.append("royalty", data.royalty);
     formdata.append("nft_receiver", data.address);
-    formdata.append("service_charge", `{"receiver": "${data.address}", "amount": "${data.amount}"}`);
 
     const response = await post("/sol/v1/nft/create_detach", formdata, "", {
       headers: {
@@ -82,6 +79,51 @@ const createNFTPhantomSolana = async (data) => {
   }
 };
 
+const updateNFTPhantomSolana = async (data) => {
+  try {
+    const formdata = new FormData();
+    formdata.append("network", network);
+    formdata.append("wallet", data.address);
+    formdata.append("token_address", data.tokenAddress);
+    formdata.append("name", data.name);
+    formdata.append("symbol", data.symbol);
+    formdata.append("description", data.description);
+    formdata.append("attributes", JSON.stringify(data.attributes));
+
+    const response = await post("/sol/v1/nft/update_detach", formdata, "", {
+      headers: {
+        "x-api-key": secretKey,
+      },
+    });
+
+    const transaction = toTransaction(response.result.encoded_transaction);
+
+    const signedTransaction = await window.phantom.solana.signTransaction(transaction);
+    const connection = new Connection("https://api.devnet.solana.com");
+    const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+
+    return signature;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+const getTransactionParsedPhantomSolana = async (signature) => {
+  try {
+    const response = await get(`/sol/v1/transaction/parsed?network=${network}&txn_signature=${signature}`, {
+      headers: {
+        "x-api-key": secretKey,
+        redirect: "follow",
+      },
+    });
+
+    const data = await response.result;
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 const disconnectedWalletPhantomSolana = () => {
   window.phantom.solana.disconnect();
   localStorage.removeItem(keyLocalStorage);
@@ -93,4 +135,4 @@ const isConnectedWalletPhantomSolana = () => {
   return isConnected;
 };
 
-export { connectedWalletPhantomSolana, createNFTPhantomSolana, disconnectedWalletPhantomSolana, getBalanceWalletPhantomSolana, isConnectedWalletPhantomSolana };
+export { connectedWalletPhantomSolana, createNFTPhantomSolana, updateNFTPhantomSolana, getTransactionParsedPhantomSolana, disconnectedWalletPhantomSolana, getBalanceWalletPhantomSolana, isConnectedWalletPhantomSolana };

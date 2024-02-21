@@ -45,4 +45,16 @@ export const put = async (path, data = {}, token, options = {}) => {
   return response.data;
 };
 
+export const Delete = async (path, data = {}, token, options = {}) => {
+  const headers = token
+    ? {
+        Authorization: `Bearer ${token}`,
+        ...(options.headers || {}),
+      }
+    : options.headers || {};
+
+  const response = await request.delete(path, data, { headers });
+  return response.data;
+};
+
 export default request;

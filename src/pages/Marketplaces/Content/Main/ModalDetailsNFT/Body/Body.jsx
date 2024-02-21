@@ -2,12 +2,19 @@ import classNames from "classnames/bind";
 import styles from "./Body.module.sass";
 import Button from "~/components/Button";
 import { setGlobalState, useGlobalState } from "~/store";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Overview from "./Overview";
 const cx = classNames.bind(styles);
 
 const Body = () => {
   const [showActiveNFTDetails] = useGlobalState("showActiveNFTDetails");
+
+  const [showNFTDetails] = useGlobalState("showNFTDetails");
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    setData(showNFTDetails.data);
+  }, [showNFTDetails]);
 
   const items = [
     {
@@ -52,7 +59,7 @@ const Body = () => {
           ))}
         </div>
       </div>
-      {showActiveNFTDetails.overview && <Overview />}
+      {showActiveNFTDetails.overview && <Overview data={data} />}
     </div>
   );
 };

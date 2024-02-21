@@ -5,11 +5,12 @@ import ItemCollection from "./ItemCollection";
 import MarketplaceTabsTip from "./MarketplaceTabsTip";
 import ActiveAndFilterTip from "./ActiveAndFilterTip";
 import Navigation from "./Navigation";
+import PropTypes from "prop-types";
 import { useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 
-const Header = () => {
+const Header = ({ data, loading }) => {
   const [showNavigation] = useGlobalState("showNavigation");
   return (
     <div className={`${cx("wrapper")} ${showNavigation ? cx("active") : ""}`}>
@@ -20,8 +21,8 @@ const Header = () => {
               <div className={cx("wrapperInfo")}>
                 <div className={`${cx("info")} no-scrollbar`}>
                   <div></div>
-                  <Information />
-                  <ItemCollection />
+                  <Information data={data} loading={loading} />
+                  {!loading && <ItemCollection />}
                 </div>
               </div>
             </div>
@@ -38,6 +39,9 @@ const Header = () => {
   );
 };
 
-Header.propTypes = {};
+Header.propTypes = {
+  data: PropTypes.object,
+  loading: PropTypes.bool,
+};
 
 export default Header;

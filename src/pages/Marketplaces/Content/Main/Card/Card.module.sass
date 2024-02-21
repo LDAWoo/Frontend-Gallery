@@ -48,7 +48,7 @@
     max-height: var(--full-h)
     object-fit: cover  
 
-.buttonLucky
+.buttonFavoriteArtwork
     display: flex
     position: absolute
     top: 8px
@@ -59,8 +59,18 @@
     transition-property: opacity
     transition-timing-function: cubic-bezier(.4,0,.2,1)        
     transition-duration: .15s
-    border-radius: 100%
-    background-color: $n1 
+
+.iconStarFill
+    color: $p1
+    cursor: pointer
+
+.iconStar
+    color: $n2
+    cursor: pointer
+    transition-property: color
+    transition-duration: 150ms
+    &:hover
+       color: $p1     
 
 .buttonAdd
     display: flex
@@ -140,6 +150,7 @@
     display: flex
     gap: 4px
     align-items: center
+    color: $n1
 
 .iconMoney
     color: $p3

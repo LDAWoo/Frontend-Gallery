@@ -3,6 +3,7 @@ import styles from "./Content.module.sass";
 import { useGlobalState } from "~/store";
 import NoConnectionWallet from "./NoConnectionWallet";
 import Header from "./Header";
+import Main from "./Main";
 
 const cx = classNames.bind(styles);
 
@@ -12,10 +13,11 @@ const Content = () => {
   return (
     <div className={cx("container")}>
       <div className={cx("wrapper")}>
-        {connectedAccount.address.length > 0 ? (
+        {connectedAccount.address ? (
           <div className={cx("wrapper")}>
             <div className={cx("container")}>
               <Header />
+              <Main />
             </div>
           </div>
         ) : (

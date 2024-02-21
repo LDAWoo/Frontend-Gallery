@@ -1,0 +1,46 @@
+@import "~/styles/helpers"
+    
+.wrapper
+    display: inline-flex
+    position: relative
+    align-items: center
+    gap: 8px
+
+
+.wrapperToggle
+    height: 0
+    width: 0
+    visibility: hidden
+    display: none
+
+.containerToggle
+    width: 36px
+    height: 20px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    cursor: pointer
+    background: $n7
+    border: 1px solid $n3
+    border-radius: 100px
+    position: relative
+    transition: background-color .2s
+    &.checked
+        background: $p1
+
+.toggleButton
+    width: 16px
+    height: 16px
+    position: absolute    
+    border-radius: 21px
+    transition: .2s
+    background: $n
+    box-shadow: 0 0 2px 0 hsla(0,0%,4%,.29)
+    top: 2px
+    transform: translateX(1px)
+
+    &.checked
+        transform: translateX(calc(100% + 3px))
+    
+        
+

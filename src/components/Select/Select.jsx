@@ -10,7 +10,7 @@ import Item from "./Item";
 import styles from "./Select.module.sass";
 const cx = classNames.bind(styles);
 
-const Select = ({ data, value, disableValue, onChange, ...props }) => {
+const Select = ({ data, value, disableValue, onChange, icon, visibleItemNoValue, ...props }) => {
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const [visible, setVisible] = useState(false);
   const [width, setWidth] = useState(0);
@@ -43,12 +43,12 @@ const Select = ({ data, value, disableValue, onChange, ...props }) => {
   useEffect(() => {
     if (onChange && values.value !== prevValue.current) {
       onChange(values.value);
-      prevValue.current = values.value; // Lưu giá trị mới vào prevValue để so sánh trong lần render tiếp theo
+      prevValue.current = values.value;
     }
   }, [values.value, onChange]);
 
   return (
-    <Tooltip interactive={true} items={<Item data={data} disableValue={disableValue} value={value} visible={visible} setVisible={setVisible} setValues={setValues} />} width={width} onClickOutside={() => setVisible(false)} visible={visible} {...props}>
+    <Tooltip interactive={true} items={<Item data={data} icon={icon} visibleItemNoValue={visibleItemNoValue} disableValue={disableValue} value={value} visible={visible} setVisible={setVisible} setValues={setValues} />} width={width} onClickOutside={() => setVisible(false)} visible={visible} {...props}>
       <div onClick={() => setVisible(!visible)} ref={selectRef} style={{ width: "100%", position: "relative" }}>
         <input type="hidden" value={values?.value} />
         <div>
@@ -64,6 +64,8 @@ Select.propTypes = {
   value: PropTypes.string,
   disableValue: PropTypes.string,
   onChange: PropTypes.func,
+  icon: PropTypes.elementType,
+  visibleItemNoValue: PropTypes.bool,
 };
 
 export default Select;

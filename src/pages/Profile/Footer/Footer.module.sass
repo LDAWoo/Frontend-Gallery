@@ -1,0 +1,47 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    +t
+        display: none
+
+.container
+    width: var(--full-w)
+    background-color: $n8
+    border-top: 1px solid $n3
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 24px
+    height: 40px
+    padding: 0 12px
+    +t
+        padding: 0 16px
+
+.containerItem
+    display: flex
+    flex-direction: row
+    width: 32px
+    gap: 12px
+
+.buttonWrapper
+    display: flex
+    gap: 12px 0
+    height: 32px
+    min-width: var(--full-w)
+
+.buttonActive
+    border: none
+    transition-duration: 300ms
+    cursor: pointer
+    border-radius: 4px
+    background-color: $n8
+    min-height: 32px
+    min-width: 32px
+    &.active
+        background-color: $n6
+        &:hover
+            background-color: $n7  
+
+    &:hover
+        background-color: $n6    

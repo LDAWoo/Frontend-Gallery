@@ -8,6 +8,7 @@ import routesConfig from "~/configs";
 import { useGlobalState } from "~/store";
 import Profile from "./Profile";
 import styles from "./Settings.module.sass";
+import PropTypes from "prop-types";
 const cx = classNames.bind(styles);
 
 const items = [
@@ -25,7 +26,7 @@ const items = [
   },
 ];
 
-const Settings = () => {
+const Settings = ({ data }) => {
   const navigate = useNavigate();
   const [activeSetting] = useGlobalState("activeSetting");
 
@@ -42,9 +43,13 @@ const Settings = () => {
 
       <TabsTip data={items} className={cx("tabsTip")} stateKey="activeSetting" />
 
-      <div className={`${cx("containerContent")} no-scrollbar`}>{activeSetting === "profile" && <Profile />}</div>
+      <div className={`${cx("containerContent")} no-scrollbar`}>{activeSetting === "profile" && <Profile data={data} />}</div>
     </div>
   );
+};
+
+Settings.propTypes = {
+  data: PropTypes.object,
 };
 
 export default Settings;

@@ -1,0 +1,72 @@
+@import '~/styles/helpers'
+
+.wrapper
+    flex: 1 1 auto
+    position: relative
+    display: flex
+    flex-direction: column
+    background-color: $n8
+
+.content
+    display: flex
+    flex: 1 1 auto
+    height: var(--full-h)
+
+.wrapperContent
+    display: flex
+    width: var(--full-w)
+    flex-direction: column
+    flex: 1 1 auto
+
+.firstTip
+    display: flex
+    flex-direction: column
+    height: var(--full-h)
+    gap: 12px
+    +t
+        gap:16px
+
+.wrapperContainer
+    display: flex
+    flex: 1 1 auto
+
+.gridContainer
+    overflow: hidden
+    height: var(--full-h)
+  
+
+.scrollContainer
+    position: relative
+    outline: none
+    overflow-x: hidden
+    overflow-y: scroll 
+    height: var(--full-h)
+    padding-right: 4px
+    margin-top: 155px
+    +t
+      margin-top: 0px  
+    &.active
+        margin-top: 0px
+
+.container
+    position: absolute
+    width: var(--full-w)
+    height: var(--full-h)
+    top: 0
+    
+.grid
+    display: grid
+    gap: 0 8px
+    margin-top: 0px
+    padding: 0 6px 0 12px
+    grid-template-columns: repeat(2,minmax(0,1fr))
+    +a
+        grid-template-columns: repeat(auto-fill,minmax(180px,1fr))
+    +t
+        grid-template-columns: repeat(auto-fill,minmax(200px,1fr))
+        margin-top: 0px
+        padding: 0 10px 0 16px
+    +w
+        grid-template-columns: repeat(auto-fill,minmax(240px,1fr))
+    +q 
+        grid-template-columns: repeat(auto-fill,minmax(260px,1fr))      

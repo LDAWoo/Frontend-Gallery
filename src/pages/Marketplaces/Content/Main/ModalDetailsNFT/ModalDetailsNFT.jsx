@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 const ModalDetailsNFT = () => {
   const [showNFTDetails] = useGlobalState("showNFTDetails");
-  return <ModalCenter type="showNFTDetails" isOpen={showNFTDetails} header={<Header />} close={<PageDetails />} body={<Body />} classClose={cx("classClose")} classContainer={cx("classContainer")} classContent={cx("classContent")} size={24} />;
+  return <ModalCenter type="showNFTDetails" isOpen={showNFTDetails.active} header={<Header />} close={<PageDetails />} body={<Body />} classClose={cx("classClose")} classContainer={cx("classContainer")} classContent={cx("classContent")} size={24} />;
 };
 
 export default ModalDetailsNFT;

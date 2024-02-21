@@ -6,16 +6,19 @@ import { lineIcon } from "~/assets/Icon";
 import Title from "~/components/Title";
 import ChartPriceHistory from "./ChartPriceHistory";
 import Listed from "./Listed";
+import Attribute from "./Attribute/Attribute";
+import Details from "./Details";
+import PropTypes from "prop-types";
 const cx = classNames.bind(styles);
 
-const Overview = () => {
+const Overview = ({ data }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
         <div>
           <Link>
             <div className={cx("imageContainer")}>
-              <img src="https://img-cdn.magiceden.dev/rs:fit:640:0:0/plain/https%3A%2F%2Farweave.net%2F_8pe6IP2CHmjekKMuYI2-2Y5TG8750vDvA1Y86a_Z4c%3Fext%3Dpng" className={cx("image")} />
+              <img src={data?.image_url || "https://img-cdn.magiceden.dev/rs:fit:640:0:0/plain/https%3A%2F%2Farweave.net%2F_8pe6IP2CHmjekKMuYI2-2Y5TG8750vDvA1Y86a_Z4c%3Fext%3Dpng"} className={cx("image")} />
             </div>
           </Link>
         </div>
@@ -28,10 +31,16 @@ const Overview = () => {
         </div>
       </div>
       <div className={cx("container")}>
-        <Listed />
+        <Listed data={data} />
+        <Attribute data={data} />
+        <Details data={data} />
       </div>
     </div>
   );
+};
+
+Overview.propTypes = {
+  data: PropTypes.object,
 };
 
 export default Overview;

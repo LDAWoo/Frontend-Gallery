@@ -8,7 +8,7 @@ import styles from "./TabsTip.module.sass";
 
 const cx = classNames.bind(styles);
 
-const TabsTip = ({ data, params, stateKey, ...props }) => {
+const TabsTip = ({ data, className, params, stateKey, ...props }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { [params]: tabs } = searchParams;
@@ -18,9 +18,8 @@ const TabsTip = ({ data, params, stateKey, ...props }) => {
   const handleChooseTab = (tab) => {
     if (params) {
       navigate(`?${params}=${tab}`);
-    } else {
-      setActive(tab);
     }
+    setActive(tab);
   };
 
   useEffect(() => {
@@ -29,13 +28,19 @@ const TabsTip = ({ data, params, stateKey, ...props }) => {
     }
   }, [active, stateKey]);
 
+  useEffect(() => {
+    if (params) {
+      navigate(`?${params}=${active}`);
+    }
+  }, [params, navigate, active]);
+
   return (
     <div className={cx("wrapper")} {...props}>
-      <div className={`${cx("content")} scrollbarCustom`}>
+      <div className={`${className ? className : cx("content")} scrollbarCustom`}>
         {data &&
           data.map((item, index) => (
             <div key={index} className={`${cx("wrapperItem")}`}>
-              <Button title={item?.name} xl className={cx("itemButton")} classTitle={`${cx("itemTitle")} ${active === item?.tabs ? cx("active") : ""}`} onClick={() => handleChooseTab(item?.tabs)} />
+              <Button title={item?.name} xl className={cx("itemButton")} titlePosition="before" classTitle={`${cx("itemTitle")} ${active === item?.tabs ? cx("active") : ""}`} onClick={() => handleChooseTab(item?.tabs)} />
               <div className={`${cx("itemActive")} ${active === item?.tabs ? cx("active") : ""}`} />
             </div>
           ))}
@@ -47,6 +52,7 @@ const TabsTip = ({ data, params, stateKey, ...props }) => {
 TabsTip.propTypes = {
   data: PropTypes.array.isRequired,
   params: PropTypes.string,
+  className: PropTypes.string,
   stateKey: PropTypes.string,
 };
 

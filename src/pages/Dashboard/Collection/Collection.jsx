@@ -7,6 +7,7 @@ import { UserContext } from "~/components/Contexts/AppUserProvider";
 import routesConfig from "~/configs";
 import styles from "./Collection.module.sass";
 import Drafts from "./Drafts";
+import Reviewed from "./Reviewed";
 
 const cx = classNames.bind(styles);
 
@@ -62,6 +63,11 @@ const Collection = () => {
       name: "Submissions",
       value: 0,
     },
+    {
+      tab: "reviewed",
+      name: "Reviewed",
+      value: 0,
+    },
   ];
 
   return (
@@ -87,6 +93,7 @@ const Collection = () => {
         </div>
 
         <div>{active === "drafts" && <Drafts data={data} loading={loading} />}</div>
+        <div>{active === "reviewed" && <Reviewed />}</div>
       </div>
     </div>
   );

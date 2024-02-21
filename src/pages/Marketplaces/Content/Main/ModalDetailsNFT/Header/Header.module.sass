@@ -8,7 +8,19 @@
     display: flex
     flex-direction: row
     align-items: center
-    gap: 2px
+    gap: 8px
+
+.iconStarFill
+    color: $p1
+    cursor: pointer
+
+.iconStar
+    color: $n2
+    cursor: pointer
+    transition-property: color
+    transition-duration: 150ms
+    &:hover
+       color: $p1     
 
 .nameNFT
     font-size: 1.5rem
