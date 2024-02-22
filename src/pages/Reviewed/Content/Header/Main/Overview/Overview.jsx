@@ -20,7 +20,7 @@ const Overview = ({ data }) => {
   const [symbol, setSymbol] = useState("");
   const [description, setDescription] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const [currentAttributes] = useGlobalState("currentAttribute");
+  const [currentAttribute] = useGlobalState("currentAttribute");
 
   useEffect(() => {
     if (data?.artwork) {
@@ -77,8 +77,7 @@ const Overview = ({ data }) => {
       setGlobalState("loading", true);
       const results = await getTransactionParsedPhantomSolana(transaction?.signature);
 
-      // eslint-disable-next-line no-unused-vars
-      const newAttributes = currentAttributes.map(({ id, ...rest }) => rest);
+      const newAttributes = currentAttribute.map((att) => ({ trait_type: att.trait_type, value: att.value }));
 
       const dataUpdateNFT = {
         address: data.wallet_address,
@@ -141,7 +140,7 @@ const Overview = ({ data }) => {
               <div className={cx("containerItems")}>
                 <Title title="Attribute NFT" white large fontMedium />
                 <div>
-                  <Button className={cx("wrapperButtonAttribute")} classButton={cx("buttonAttribute")} iconPosition="right" active border title={`Attribute count (${attributes.length})`} titlePosition="before" icon={arrowDownUp} onClick={handleShowModalAddAttribute} />
+                  <Button className={cx("wrapperButtonAttribute")} classButton={cx("buttonAttribute")} iconPosition="right" active border title={`Attribute count (${currentAttribute.length})`} titlePosition="before" icon={arrowDownUp} onClick={handleShowModalAddAttribute} />
                 </div>
                 <Title title="This nft attribute will appear on the trading platform." large nowrap={false} />
               </div>

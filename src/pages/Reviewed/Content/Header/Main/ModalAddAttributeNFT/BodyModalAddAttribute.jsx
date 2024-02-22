@@ -25,7 +25,7 @@ const BodyModalAddAttribute = () => {
 
   const fetchData = async () => {
     try {
-      const results = await findAttributeByIdArtwork(showModalAddAttributeNFT.data.id);
+      const results = await findAttributeByIdArtwork(showModalAddAttributeNFT.data.artwork.id);
       setGlobalState("currentAttribute", results);
     } catch (e) {
       setGlobalState("currentAttribute", []);
@@ -53,7 +53,7 @@ const BodyModalAddAttribute = () => {
 
         const data = {
           attributeRequest: {
-            _id_artwork: showModalAddAttributeNFT.data.id,
+            _id_artwork: showModalAddAttributeNFT.data.artwork.id,
             email: artist?.email,
           },
           attributes: [{ trait_type: traitType.trim(), value: name.trim() }],

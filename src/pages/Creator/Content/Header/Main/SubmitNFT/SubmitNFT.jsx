@@ -148,6 +148,8 @@ const SubmitNFT = ({ data }) => {
 
       const signature = await createNFTPhantomSolana(dataCreateNFT);
 
+      if (!signature) return;
+
       const dataSaveCreateNFT = {
         artistRequest: {
           id_artist: artist.id,

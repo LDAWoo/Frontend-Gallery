@@ -14,11 +14,14 @@ const Toggle = ({ title, isChecked, onChange }) => {
   }, [isChecked]);
 
   const handleChecked = () => {
-    setChecked(!checked);
+    const newChecked = !checked;
+    setChecked(newChecked);
+    onChange(newChecked);
   };
+
   return (
     <label className={cx("wrapper")}>
-      <input type="checkbox" value={checked} className={cx("wrapperToggle")} checked={checked} onChange={onChange} />
+      <input type="checkbox" value={checked} className={cx("wrapperToggle")} checked={checked} onChange={() => {}} />
       <div className={`${cx("containerToggle")} ${checked ? cx("checked") : ""}`} onClick={handleChecked}>
         <span className={`${cx("toggleButton")} ${checked ? cx("checked") : ""}`} />
       </div>

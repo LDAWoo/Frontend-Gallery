@@ -43,6 +43,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   },
   currentAttribute: [],
   currentFavoriteArtwork: {},
+  currentShowDisplayArtwork: null,
   currentSourceCreator: "",
   loading: false,
 });
