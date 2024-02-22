@@ -92,7 +92,7 @@ const Navbar = () => {
               </div>
             </div>
             <div className={cx("wrapperSearch")}>
-              <TextInput className={cx("contentSearch")} icon={IoSearchOutline} sizeIcon={20} copy iconCopy={SlOptions} placeholder="Search all of Magic Eden" />
+              <TextInput className={cx("contentSearch")} icon={IoSearchOutline} sizeIcon={20} copy iconCopy={SlOptions} placeholder="Search all of Garden Eden" />
             </div>
           </div>
           {!showHeaderSearch ? (

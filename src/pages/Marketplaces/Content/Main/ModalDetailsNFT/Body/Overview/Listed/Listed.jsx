@@ -9,6 +9,7 @@ import routesConfig from "~/configs";
 import { copyText, truncate } from "~/store";
 import PropTypes from "prop-types";
 import styles from "./Listed.module.sass";
+import ToolTipItemNFT from "../../../../ToolTipItemNFT";
 
 const cx = classNames.bind(styles);
 const Listed = ({ data }) => {
@@ -23,15 +24,7 @@ const Listed = ({ data }) => {
           {data?.price ? (
             <>
               <Title title="Listed" white fontBold extraLarge5 />
-              <Tooltip
-                toolTip
-                content={
-                  <div>
-                    <div>123</div>
-                    <div>2345</div>
-                  </div>
-                }
-              >
+              <Tooltip toolTip content={<ToolTipItemNFT items={data} />}>
                 <div>
                   <Icon icon={PiWarningCircleLight} size={24} classIcon={cx("iconWarning")} />
                 </div>
@@ -51,7 +44,7 @@ const Listed = ({ data }) => {
               </div>
               <div className={cx("currentPriceNFT")}>
                 <Title title={data?.price} white fontMedium extraLarge5 />
-                <Title title="SQL" gallery xl />
+                {data?.chain === "solana" && <Title title="SOL" gallery xl />}
               </div>
             </>
           ) : (

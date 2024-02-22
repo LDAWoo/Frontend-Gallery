@@ -72,16 +72,20 @@
         opacity: 0.7
 
 .buttonLoading
-    display: inline-block
-    height: 26px
-    width: 26px
+    border: 2px solid transparent
+    border-radius: 50%
+    border-top: 2px solid $n
+    border-right: 2px solid $n
+    border-bottom: 2px solid $n
+    height: 12px
+    width: 12px
+    -webkit-animation: spin 1s linear infinite
     animation: spin 1s linear infinite
-    border-radius: 100%
-    border: 3px solid $p1
-    border-right: transpanrent
-    vertical-align: -0.125remt
-    @keyframes spin 
-    to 
-        transform: rotate(360deg)
+
+@keyframes spin 
+  0%  
+    transform: rotate(0deg)
+  100%  
+    transform: rotate(360deg)
 
 

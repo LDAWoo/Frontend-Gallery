@@ -9,6 +9,12 @@
     border: 1px solid $n3
     position: relative
     background-color: $n6
+    height: var(--full-h)
+    display: flex
+    flex-direction: column
+    &.active
+        border: 1px solid $p1
+
 
 .cardHeading
     flex: 1 1 auto
@@ -35,10 +41,6 @@
 
 .wrapperImage
     display: flex
-    width: var(--full-w)
-    height: var(--full-h)
-    max-width: var(--full-w)
-    max-height: var(--full-h)  
     background-color: $n6
     aspect-ratio: auto
     margin: none
@@ -72,11 +74,13 @@
     &:hover
        color: $p1     
 
-.buttonAdd
-    display: flex
+.wrapperButton
     position: absolute
     top: 8px
     right: 8px
+
+.buttonAdd
+    display: flex
     padding: 5px 6px
     cursor: pointer
     border: none
@@ -84,6 +88,20 @@
     transition-duration: 300ms
     background-color: rgba(18,12,24,.2)
    
+    +t
+        display: none
+        &.active
+            display: flex
+
+.buttonCheck
+    display: flex
+    padding: 5px 6px
+    cursor: pointer
+    border: none
+    border-radius: 100%
+    transition-duration: 300ms
+    background-color: $p1
+    
 
 .cardFooter
     position: relative
@@ -154,7 +172,18 @@
 
 .iconMoney
     color: $p3
-    transform: translateY(1px)
+    transform: translateY(0px)
+
+.containerItems
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+
+.iconInfor
+    color: $n1
+    transform: translateY(1px)        
+
 
 .wrapperPriceNft
     display: flex
@@ -165,7 +194,7 @@
 
 .iconShopping
     color: $n1
-    transform: translateY(1px)    
+    transform: translateY(0px)    
 
 .titlePriceNft
     color: $n1

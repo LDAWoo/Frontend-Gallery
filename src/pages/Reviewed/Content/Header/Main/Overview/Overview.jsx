@@ -9,6 +9,7 @@ import TextInput from "~/components/TextInput";
 import Title from "~/components/Title";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Overview.module.sass";
+import { Bounce, toast } from "react-toastify";
 
 const cx = classNames.bind(styles);
 
@@ -80,7 +81,7 @@ const Overview = ({ data }) => {
       const newAttributes = currentAttribute.map((att) => ({ trait_type: att.trait_type, value: att.value }));
 
       const dataUpdateNFT = {
-        address: data.wallet_address,
+        address: artwork?.wallet_address,
         tokenAddress: results.actions[0].info.nft_address,
         name: name,
         symbol: symbol,
@@ -89,7 +90,7 @@ const Overview = ({ data }) => {
       };
 
       const dataUpdateArtwork = {
-        id: data.id,
+        id: artwork?.id,
         name,
         symbol,
         description,
@@ -100,9 +101,39 @@ const Overview = ({ data }) => {
       await updateArtwork(dataUpdateArtwork);
 
       setGlobalState("loading", false);
+      handleSuccessfully();
     } catch (error) {
       setGlobalState("loading", false);
+      handleError();
     }
+  };
+
+  const handleSuccessfully = () => {
+    toast("🦄 Update NFT Successfully!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
+  const handleError = () => {
+    toast("🦄 Update NFT Error!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   };
 
   const handleShowModalAddAttribute = () => {

@@ -92,6 +92,7 @@
     display: flex
     flex-direction: row
     gap: 2px
+    cursor: default
 
 .keyNFT
     cursor: pointer
@@ -121,6 +122,10 @@
     flex-direction: column
     gap: 0.25rem
 
+.iconSolana
+    color: $p3
+    transform: translateY(0.5px)    
+
 .itemSummaryPrice
     flex-direction: row
     display: flex
@@ -131,19 +136,19 @@
 
 .namePrice
     color: $n1
+    margin-left: 0.5rem
 
 .containerPrice
     display: flex
     flex-direction: row
     gap: 4px    
-    color: $n
-    font-weight: 600
+    color: $n1
     align-items: center
 
 
 .iconPrice
     color: $p3    
-    transform: translateY(2px)
+    transform: translateY(0px)
 
 .containerServices
     color: $n1
@@ -158,6 +163,18 @@
     &:hover
         opacity: 0.8
         color: $-n1
+
+.containerTotalPrice
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+
+.wrapperTotalPriceSummary
+    display: flex
+    flex-direction: row
+    gap: 4px
+    align-items: center
 
 .containerBuy
     width: var(--full-w)

@@ -44,8 +44,16 @@
         &.active
             display: flex
             
+.wrapperTick
+    position: absolute 
+    top: -2px
+    right: -2px
+    height: 8px
+    width: 8px
+    border-radius: 100%
+    background-color: $p1
+
 .buttonActive
-    padding: 4px
     border: none
     width: var(--full-w)
     transition-duration: 300ms
@@ -61,6 +69,9 @@
     &:hover
         background-color: $n6
 
+    padding: 4px
+    +t
+        padding: 6px
 
 .buttonContent
     display: flex
@@ -69,5 +80,10 @@
     gap: 0px
     &.activeIcon
         gap: 4px
-            
     
+.wrapperPriceFloor
+    font-weight: 600
+    +text-sm
+    display: flex
+    align-items: center
+    gap: 4px

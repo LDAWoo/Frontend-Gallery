@@ -33,6 +33,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   activeSetting: "",
   WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },
   showModalCart: false,
+  carts: [],
   emailLoginOrSignUp: "",
   showModalWelcome: true,
   showModalInboxEmail: false,

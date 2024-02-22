@@ -1,26 +1,20 @@
 import classNames from "classnames/bind";
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { setGlobalState, useGlobalState } from "~/store";
-import PropTypes from "prop-types";
 
 import Card from "./Card";
-import styles from "./Main.module.sass";
-import { getArtworkByIdOwner } from "~/api/Artwork";
 import CardSkeleton from "./Card/CardSkeleton";
+import styles from "./Main.module.sass";
 
 const cx = classNames.bind(styles);
 
-const Main = ({ data, loading }) => {
+const Main = ({ data, loading, updateItemsStatus }) => {
   const [showNavigation] = useGlobalState("showNavigation");
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const scrollRef = useRef();
   const [scroll, setScroll] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
-  const [currentNFTs, setCurrentNFTs] = useState([]);
-  const [loadingNFTs, setLoadingNFTs] = useState(true);
-
-  const [currentFavoriteArtwork] = useGlobalState("currentFavoriteArtwork");
 
   const handleScroll = (event) => {
     if (WidthAndHeightWindow.width >= 768) return;
@@ -35,45 +29,6 @@ const Main = ({ data, loading }) => {
     setGlobalState("showNavigation", scroll);
   }, [scroll]);
 
-  useEffect(() => {
-    if (loading || !data) return;
-
-    const fetchData = async () => {
-      for (const owner of data.owners) {
-        const ownerId = owner.id;
-        try {
-          setLoadingNFTs(true);
-          const results = await getArtworkByIdOwner(ownerId);
-          setCurrentNFTs(results.listResult);
-          setLoadingNFTs(false);
-        } catch (error) {
-          setLoadingNFTs(true);
-        }
-      }
-    };
-
-    fetchData();
-  }, [data, loading]);
-
-  const updateItemsStatus = (updatedItems) => {
-    const updatedItemList = currentNFTs.map((item) => {
-      const updatedFavoriteArtWorks = item.favoriteArtWorks.map((fva) => {
-        if (fva.id_artwork === updatedItems.id_artwork) {
-          return { ...fva, status: updatedItems.status };
-        }
-        return fva;
-      });
-      return { ...item, favoriteArtWorks: updatedFavoriteArtWorks };
-    });
-    setCurrentNFTs(updatedItemList);
-  };
-
-  useEffect(() => {
-    if (Object.keys(currentFavoriteArtwork).length > 0) {
-      updateItemsStatus(currentFavoriteArtwork);
-    }
-  }, [currentFavoriteArtwork]);
-
   return (
     <div className={cx("wrapper")}>
       <div className={cx("content")}>
@@ -87,7 +42,7 @@ const Main = ({ data, loading }) => {
                       <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
                         <div className={cx("container")}>
                           <div className={cx("grid")} tabIndex={0}>
-                            {loadingNFTs ? (
+                            {loading ? (
                               Array.from({ length: 8 }).map((_, index) => (
                                 <div key={index} className={cx("wrapperSkeleton")}>
                                   <CardSkeleton />
@@ -95,8 +50,8 @@ const Main = ({ data, loading }) => {
                               ))
                             ) : (
                               <>
-                                {currentNFTs.map((items, index) => (
-                                  <Card key={index} items={items} onUpdateItems={updateItemsStatus} />
+                                {data.map((items, index) => (
+                                  <Card key={index} items={items} index={index} onUpdateItems={updateItemsStatus} />
                                 ))}
                               </>
                             )}
@@ -118,6 +73,7 @@ const Main = ({ data, loading }) => {
 Main.propTypes = {
   data: PropTypes.object,
   loading: PropTypes.bool,
+  updateItemsStatus: PropTypes.func.isRequired,
 };
 
 export default Main;

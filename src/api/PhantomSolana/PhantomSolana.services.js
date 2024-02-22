@@ -85,10 +85,22 @@ const updateNFTPhantomSolana = async (data) => {
     formdata.append("network", network);
     formdata.append("wallet", data.address);
     formdata.append("token_address", data.tokenAddress);
-    formdata.append("name", data.name);
-    formdata.append("symbol", data.symbol);
-    formdata.append("description", data.description);
-    formdata.append("attributes", JSON.stringify(data.attributes));
+
+    if (data?.name) {
+      formdata.append("name", data.name);
+    }
+    if (data?.symbol) {
+      formdata.append("symbol", data.symbol);
+    }
+    if (data?.description) {
+      formdata.append("description", data.description);
+    }
+    if (data?.attributes) {
+      formdata.append("attributes", JSON.stringify(data.attributes));
+    }
+    if (data?.royalty) {
+      formdata.append("royalty", JSON.stringify(data.royalty));
+    }
 
     const response = await post("/sol/v1/nft/update_detach", formdata, "", {
       headers: {
