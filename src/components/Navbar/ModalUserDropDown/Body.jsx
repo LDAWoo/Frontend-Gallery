@@ -1,13 +1,15 @@
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
+import { disconnectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 import { disconnectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 import { disconnectIcon, dollarIcon } from "~/assets/Icon";
+import { useContext } from "react";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import routesConfig from "~/configs";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
-import { disconnectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 const cx = classNames.bind(styles);
 
 const Body = () => {
@@ -15,6 +17,9 @@ const Body = () => {
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [balances] = useGlobalState("currentBalances");
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
+  const [showModalUserSignIn] = useGlobalState("showModalUserSignIn");
+  const { artist } = useContext(UserContext);
+  console.log(artist);
   const items = [
     {
       id: "blockchain",
@@ -64,7 +69,9 @@ const Body = () => {
         {
           name: "Rewards",
           subName: "Sign in",
-          url: "",
+          type: "showModalUserSignIn",
+          modal: showModalUserSignIn,
+          active: Object.keys(artist).length > 0,
         },
         {
           name: "Account Settings",
@@ -73,10 +80,6 @@ const Body = () => {
         {
           name: "Manage Wallets",
           url: routesConfig.profile + "?tab=manage-wallet",
-        },
-        {
-          name: "Marketplace",
-          url: routesConfig.marketplace,
         },
       ],
     },
@@ -102,12 +105,19 @@ const Body = () => {
     }
   };
 
-  const handleClickMenuItem = (url) => {
-    setGlobalState("closeModalUserDropDown", !closeModalUserDropDown);
+  const handleClickUrlMenuItem = (url) => {
+    handleCloseModalUserDropDown();
     navigate(url);
   };
 
-  console.log(connectedAccount?.chain);
+  const handleClickModalMenuItem = (type, modal) => {
+    handleCloseModalUserDropDown();
+    setGlobalState(type, !modal);
+  };
+
+  const handleCloseModalUserDropDown = () => {
+    setGlobalState("closeModalUserDropDown", !closeModalUserDropDown);
+  };
 
   return (
     <div className={cx("wrapper")}>
@@ -141,11 +151,24 @@ const Body = () => {
           {item?.id === "menu" && (
             <div className={cx("itemMenu")}>
               {item?.groups.map((group, index) => (
-                <div key={index} className={cx("menuGroup")} onClick={() => handleClickMenuItem(group?.url)}>
-                  <div className={cx("containerMenu")}>
-                    <Title title={group?.name} fontBold />
-                    {group?.subName && <div className={cx("subName")}>{group?.subName}</div>}
-                  </div>
+                <div key={index}>
+                  <>
+                    {group?.url && (
+                      <div className={cx("menuGroup")} onClick={() => handleClickUrlMenuItem(group?.url)}>
+                        <div className={cx("containerMenu")}>
+                          <Title title={group?.name} fontBold />
+                        </div>
+                      </div>
+                    )}
+                    {group?.modal && !group?.active && (
+                      <div className={cx("menuGroup")} onClick={() => handleClickModalMenuItem(group?.type, group?.modal)}>
+                        <div className={cx("containerMenu")}>
+                          <Title title={group?.name} fontBold />
+                          {group?.subName && <div className={cx("subName")}>{group?.subName}</div>}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 </div>
               ))}
             </div>

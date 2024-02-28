@@ -29,6 +29,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   closeModalConnectWallet: false,
   showModalUserDropDown: false,
   closeModalUserDropDown: false,
+  showModalUserSignIn: false,
   activeSettingAndManageWallet: "",
   activeSetting: "",
   WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },

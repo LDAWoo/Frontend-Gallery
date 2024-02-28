@@ -14,7 +14,7 @@ const connectedWalletPhantomSolana = async (chain, name) => {
   await window.phantom.solana.connect();
 
   let publicKey = window.phantom.solana.publicKey.toBase58();
-  const balances = 0; //await getBalanceWalletPhantomSolana(publicKey);
+  const balances = await getBalanceWalletPhantomSolana(publicKey);
 
   const data = {
     address: publicKey,

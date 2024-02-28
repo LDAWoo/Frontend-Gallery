@@ -15,8 +15,8 @@ export const getArtworkByIdAndEmail = async (id, email) => {
   return response;
 };
 
-export const getArtworkByIdOwner = async (id) => {
-  const response = await get(`/artwork/getArtworkByIdOwner/${id}`);
+export const getArtworkByIdArtist = async (id) => {
+  const response = await get(`/artwork/getArtworkByIdArtist/${id}`);
   return response;
 };
 

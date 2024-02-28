@@ -29,7 +29,7 @@ function TextInput({ className, classBorder, classInput, error, icon, classIcon,
 
         {error && !active && (
           <div className={`${cx("wrapperError")} ${copy ? cx("copyActive") : cx("copy")}`}>
-            <Icon icon={MdOutlineErrorOutline} size={sizeIcon} />
+            <Icon icon={MdOutlineErrorOutline} size={sizeIcon} classIcon={cx("iconError")} />
           </div>
         )}
         {copy && (

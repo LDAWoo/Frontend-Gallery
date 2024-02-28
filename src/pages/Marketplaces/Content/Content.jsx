@@ -6,7 +6,8 @@ import Footer from "./Footer";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "~/store";
-import { getArtworkByIdOwner } from "~/api/Artwork";
+import { getArtworkByIdArtist } from "~/api/Artwork";
+import Filter from "./Filter";
 
 const cx = classNames.bind(styles);
 
@@ -20,16 +21,14 @@ const Content = ({ data, loading }) => {
     if (loading || !data) return;
 
     const fetchData = async () => {
-      for (const owner of data.owners) {
-        const ownerId = owner.id;
-        try {
-          setLoadingNFTs(true);
-          const results = await getArtworkByIdOwner(ownerId);
-          setCurrentNFTs(results.listResult);
-          setLoadingNFTs(false);
-        } catch (error) {
-          setLoadingNFTs(true);
-        }
+      const artistId = data.id;
+      try {
+        setLoadingNFTs(true);
+        const results = await getArtworkByIdArtist(artistId);
+        setCurrentNFTs(results.listResult);
+        setLoadingNFTs(false);
+      } catch (error) {
+        setLoadingNFTs(true);
       }
     };
 
@@ -56,13 +55,16 @@ const Content = ({ data, loading }) => {
   }, [currentFavoriteArtwork]);
 
   return (
-    <div className={cx("wrapper")}>
-      <div className={cx("container")}>
-        <Header data={data} loading={loading} />
-        <Main data={currentNFTs} loading={loadingNFTs} updateItemsStatus={updateItemsStatus} />
+    <>
+      <Filter data={currentNFTs} loading={loadingNFTs} />
+      <div className={cx("wrapper")}>
+        <div className={cx("container")}>
+          <Header data={data} loading={loading} />
+          <Main data={currentNFTs} loading={loadingNFTs} updateItemsStatus={updateItemsStatus} />
+        </div>
+        <Footer data={currentNFTs} loading={loadingNFTs} />
       </div>
-      <Footer data={currentNFTs} loading={loadingNFTs} />
-    </div>
+    </>
   );
 };
 

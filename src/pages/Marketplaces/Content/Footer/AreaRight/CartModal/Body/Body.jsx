@@ -62,8 +62,8 @@ const Body = () => {
       setTotalItemsPrice(totalItemsPrice);
       setTotalItemsPriceRoyaltySummary(totalItemsPriceRoyalty);
       setTotalItemsPriceTankerFeeSummary(totalItemsPriceTankerFee);
-      setTotalItemsPercentRoyaltySummary(totalRoyalty / carts.length);
-      setTotalItemsPercentTankerFeeSummary(totalTankerFee / carts.length);
+      setTotalItemsPercentRoyaltySummary(totalRoyalty / carts.length || 0);
+      setTotalItemsPercentTankerFeeSummary(totalTankerFee / carts.length || 0);
       setMinItemsPrice(minPrice);
       setMaxItemsPrice(maxPrice);
     }

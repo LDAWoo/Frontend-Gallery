@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
-import styles from "./Header.module.sass";
 import Title from "~/components/Title";
-
+import styles from "./Header.module.sass";
 const cx = classNames.bind(styles);
 
 const Header = () => {
