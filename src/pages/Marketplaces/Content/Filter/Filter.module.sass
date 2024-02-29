@@ -1,15 +1,19 @@
 @import '~/styles/helpers'
 
-
 .wrapper
-    width: 240px 
-    display: flex
+    display: none 
     flex-shrink: 0
     background-color: $n8
     border-right: 1px solid $n3   
     height: var(--full-h)
-    +q
-        width: 280px 
+    &.show
+        display: flex
+        width: var(--full-w)
+        +t
+            width: 240px
+        +q
+            width: 280px
+     
 
 .wrapperContainer
     display: flex
@@ -17,27 +21,6 @@
     width: var(--full-w)
     flex-shrink: 0
 
-.containerHeader
-    display: flex
-    flex-direction: row
-    align-items: center
-    color: $n
-    justify-content: space-between
-
-.wrapperHeaderRight
-    display: flex
-    flex-direction: row
-    align-items: center
-    padding: 0 16px 0 0 
-    gap: 8px    
-
-.buttonCloseFilter    
-    transform: translateY(2px)
-    cursor: pointer
-    color: $n
-    transition-duration: 150ms
-    &:hover
-        color: $n1
 
 .wrapperBody        
     flex: 1 1 auto
@@ -60,6 +43,7 @@
     display: flex
     align-items: center
     flex-direction: row   
+    width: var(--full-w)
 
 .button
     min-width: 35px
@@ -89,6 +73,29 @@
     gap: 6px
     flex: 1 1 auto
 
+.containerListFilter
+    display: flex
+    flex-direction: column
+    outline: none
+    overflow-x: hidden
+    height: var(--full-h)
+    padding: 0 0 16px 0
+    overflow-y: auto
+    flex: 1 1 auto
+
+.containerAttribute
+    display: flex
+    flex-direction: row  
+    justify-content: space-between
+    background-color: $n6
+    padding: 6px 16px
+    border-bottom: 1px solid $n2
+    cursor: pointer
+    transition-duration: 300ms
+    transition-property: background-color
+    &:hover
+        background-color: $n4
+
 .wrapperAttribute
     display: flex
     flex-direction: row  
@@ -96,3 +103,16 @@
     gap: 4px
     margin-bottom: 4px  
     text-transform: capitalize
+
+.containerTraitItems
+    overflow: hidden
+    position: relative
+    height: 0px
+    &.active
+        height: initial
+
+.gridTraitItems
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr))
+    gap: 0.5rem
+    padding: 0.5rem        

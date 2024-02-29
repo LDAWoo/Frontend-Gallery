@@ -1,0 +1,26 @@
+@import '~/styles/helpers'
+    
+.containerHeader
+    display: flex
+    flex-direction: row
+    align-items: center
+    color: $n
+    justify-content: space-between
+
+.wrapperHeaderRight
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0 16px 0 0 
+    gap: 8px    
+
+.buttonCloseFilter    
+    display: none
+    transform: translateY(2px)
+    cursor: pointer
+    color: $n
+    transition-duration: 150ms
+    +t
+        display: flex
+    &:hover
+        color: $n1

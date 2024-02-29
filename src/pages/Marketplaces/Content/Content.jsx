@@ -1,13 +1,14 @@
 import classNames from "classnames/bind";
-import styles from "./Content.module.sass";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { useGlobalState } from "~/store";
 import { getArtworkByIdArtist } from "~/api/Artwork";
+import { useGlobalState } from "~/store";
+import styles from "./Content.module.sass";
 import Filter from "./Filter";
+import FilterModal from "./FilterModal";
+import Footer from "./Footer";
+import Header from "./Header";
+import Main from "./Main";
 
 const cx = classNames.bind(styles);
 
@@ -57,6 +58,7 @@ const Content = ({ data, loading }) => {
   return (
     <>
       <Filter data={currentNFTs} loading={loadingNFTs} />
+      <FilterModal data={currentNFTs} loading={loadingNFTs} />
       <div className={cx("wrapper")}>
         <div className={cx("container")}>
           <Header data={data} loading={loading} />

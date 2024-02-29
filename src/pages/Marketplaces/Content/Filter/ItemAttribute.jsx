@@ -40,13 +40,11 @@ const ItemAttribute = ({ item }) => {
         {item?.artwork && <Title title={item?.artwork.length} white large fontSemiBold />}
       </div>
       <div className={cx("wrapperFooter")}>
-        {totalPriceSummary > 0 && (
-          <div className={cx("wrapperPriceFloor")}>
-            {itemPriceBuyFloor?.chain === "solana" && <Icon icon={dollarIcon} classIcon={cx("iconSolana")} />}
-            <Title title={totalPriceSummary} large fontSemiBold />
-            <Title title="floor" large fontSemiBold />
-          </div>
-        )}
+        <div className={cx("wrapperPriceFloor")}>
+          <Icon icon={dollarIcon} classIcon={cx("iconSolana")} />
+          <Title title={totalPriceSummary > 0 ? totalPriceSummary : "---"} large fontSemiBold />
+          <Title title="floor" large fontSemiBold />
+        </div>
       </div>
     </div>
   );

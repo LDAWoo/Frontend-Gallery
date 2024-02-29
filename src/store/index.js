@@ -15,6 +15,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showActivity: false,
   showAnalytics: false,
   showSettings: false,
+  showFilter: false,
   showNFTDetails: {
     active: false,
     data: [],

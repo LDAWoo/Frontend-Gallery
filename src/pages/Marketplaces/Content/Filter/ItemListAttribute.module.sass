@@ -1,0 +1,40 @@
+@import '~/styles/helpers'
+
+.wrapper
+    border: 1px solid $n3 
+    overflow: hidden
+    border-radius: 0.25rem
+    width: 100%
+    &.active
+        border: 1px solid $p1   
+
+.wrapperMetaData
+    position: relative
+    margin-bottom: 100%  
+
+.containerMetaData
+    position: absolute
+    top: 0
+    left: 0
+    width: var(--full-w)
+    height: var(--full-h)
+    cursor: pointer    
+
+.wrapperContent
+    display: flex
+    flex-direction: column
+    text-align: left
+    padding: 4px
+    color: $-n1
+    +text-xxs
+
+.iconSolana
+    color: $p3  
+    transform: translateY(2px)  
+
+.wrapperItemPriceArtwork
+    display: flex
+    align-items: center
+    gap: 4px
+    color: $n1   
+    +text-xs
