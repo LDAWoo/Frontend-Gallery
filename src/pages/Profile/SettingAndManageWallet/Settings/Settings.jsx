@@ -41,7 +41,9 @@ const Settings = ({ data }) => {
         <Icon icon={MdClose} size={24} classIcon={cx("headerIconClose")} onClick={handleCloseSettings} />
       </div>
 
-      <TabsTip data={items} className={cx("tabsTip")} stateKey="activeSetting" />
+      <div className={cx("wrapperTabsTip")}>
+        <TabsTip data={items} stateKey="activeSetting" />
+      </div>
 
       <div className={`${cx("containerContent")} no-scrollbar`}>{activeSetting === "profile" && <Profile data={data} />}</div>
     </div>

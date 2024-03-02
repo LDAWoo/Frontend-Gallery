@@ -4,6 +4,8 @@ import Title from "~/components/Title";
 import Button from "~/components/Button";
 import TextInput from "~/components/TextInput";
 import { useEffect, useState } from "react";
+import { setGlobalState, useGlobalState } from "~/store";
+import { signIn } from "~/api/Artist";
 
 const cx = classNames.bind(styles);
 
@@ -13,16 +15,38 @@ const Body = () => {
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [connectedAccount] = useGlobalState("connectedAccount");
 
   const handleChangeEmail = (e) => {
     const value = e.target.value;
     setEmail(value);
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     if (!active) {
       setActive(!active);
     } else {
+      const address = connectedAccount.address;
+      if (!address) {
+        setGlobalState("connectedModal", true);
+        return;
+      }
+
+      try {
+        const data = {
+          email,
+          walletAddress: address,
+        };
+
+        setLoading(true);
+        await signIn(data);
+        setLoading(false);
+        setGlobalState("showModalUserSignIn", false);
+        setGlobalState("emailLoginOrSignUp", email);
+        setGlobalState("showModalUserInboxEmail", true);
+      } catch (e) {
+        setLoading(false);
+      }
     }
   };
 

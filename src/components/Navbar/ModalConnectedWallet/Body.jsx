@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import { useEffect } from "react";
 import { connectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 import { connectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
-import { backpackIcon, dollarIcon, ethereumIcon, metaMaskIcon, phantomIcon } from "~/assets/Icon";
+import { dollarIcon, phantomIcon } from "~/assets/Icon";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import { setGlobalState, useGlobalState } from "~/store";
@@ -24,36 +24,36 @@ const blockChains = [
         recommended: true,
         background: "#ab9ff2",
       },
-      {
-        id: "backpack",
-        name: "Backpack",
-        icon: backpackIcon,
-        active: true,
-        background: "transparent",
-      },
+      // {
+      //   id: "backpack",
+      //   name: "Backpack",
+      //   icon: backpackIcon,
+      //   active: true,
+      //   background: "transparent",
+      // },
     ],
   },
-  {
-    id: "ethereum",
-    name: "Ethereum",
-    icon: ethereumIcon,
-    data: [
-      {
-        id: "phantom",
-        name: "Phantom",
-        icon: phantomIcon,
-        recommended: true,
-        active: true,
-        background: "#ab9ff2",
-      },
-      {
-        id: "metamask",
-        name: "MetaMask",
-        icon: metaMaskIcon,
-        background: "transparent",
-      },
-    ],
-  },
+  // {
+  //   id: "ethereum",
+  //   name: "Ethereum",
+  //   icon: ethereumIcon,
+  //   data: [
+  //     {
+  //       id: "phantom",
+  //       name: "Phantom",
+  //       icon: phantomIcon,
+  //       recommended: true,
+  //       active: true,
+  //       background: "#ab9ff2",
+  //     },
+  //     {
+  //       id: "metamask",
+  //       name: "MetaMask",
+  //       icon: metaMaskIcon,
+  //       background: "transparent",
+  //     },
+  //   ],
+  // },
 ];
 
 const Body = () => {

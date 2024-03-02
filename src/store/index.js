@@ -6,6 +6,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showModalNavbarDiscover: false,
   showModalNavbarMint: false,
   currentBalances: 0,
+  showPanelSearch: false,
   modalConnectedWallet: {
     active: "",
     data: [],
@@ -31,7 +32,9 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showModalUserDropDown: false,
   closeModalUserDropDown: false,
   showModalUserSignIn: false,
+  showModalUserInboxEmail: false,
   activeSettingAndManageWallet: "",
+  showModalAvatar: false,
   activeSetting: "",
   WidthAndHeightWindow: { width: window.innerWidth, height: window.innerHeight },
   showModalCart: false,
@@ -49,6 +52,9 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   currentShowDisplayArtwork: null,
   currentSourceCreator: "",
   loading: false,
+  profiles: {
+    avatarPreview: "",
+  },
 });
 
 const truncate = (text, startChars, endChars, maxLength) => {

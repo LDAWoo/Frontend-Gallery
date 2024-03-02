@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 const AreaRight = ({ data, loading }) => {
   const [carts] = useGlobalState("carts");
   const [showModalCart] = useGlobalState("showModalCart");
-
+  const [connectedAccount] = useGlobalState("connectedAccount");
   const [totalPriceSummary, setTotalPriceSummary] = useState(0);
   const [itemPriceBuyFloor, setItemPriceBuyFloor] = useState({});
 
@@ -52,6 +52,7 @@ const AreaRight = ({ data, loading }) => {
           icon: LiaBroomSolid,
           size: 20,
           buttonActive: true,
+          active: true,
         },
       ],
     },
@@ -81,6 +82,7 @@ const AreaRight = ({ data, loading }) => {
           icon: FaCanadianMapleLeaf,
           backgroundGallery: true,
           size: 20,
+          active: true,
         },
       ],
     },
@@ -93,10 +95,18 @@ const AreaRight = ({ data, loading }) => {
           title: `Buy ${Object.keys(itemPriceBuyFloor).length > 0 && carts.length === 0 ? "floor" : carts.length > 0 ? `${carts.length} item` : ""}`,
           type: "button",
           background: true,
-          active: true,
+          active: connectedAccount.address,
           items: itemPriceBuyFloor,
           loading: loading,
           disabled: Object.keys(itemPriceBuyFloor).length === 0 && carts.length === 0,
+        },
+        {
+          id: "connectWallet",
+          name: "ConnectWallet",
+          title: "Connect Wallet",
+          type: "button",
+          background: true,
+          active: !connectedAccount.address,
         },
         {
           id: "topOffers",
@@ -105,6 +115,7 @@ const AreaRight = ({ data, loading }) => {
           type: "button",
           background: true,
           backgroundGallery: true,
+          active: true,
           icon: dollarIcon,
         },
       ],
@@ -171,9 +182,9 @@ const AreaRight = ({ data, loading }) => {
   return (
     <div className={cx("wrapper")}>
       {items?.map((item, index) => (
-        <div className={`${cx("contentWrapper")} ${item?.hidden ? cx("hidden") : ""}`} key={index}>
+        <div className={`${cx("contentWrapper")} ${item?.hidden ? cx("hidden") : ""} `} key={index}>
           {item?.groups.map((group, index) => (
-            <div key={index} className={`${cx("buttonWrapper")} ${group?.active ? cx("active") : ""}`}>
+            <div key={index} className={`${cx("buttonWrapper")} ${group?.active ? cx("active") : group?.visible ? cx("visible") : ""}`}>
               {group?.type === "button" && group?.title ? (
                 <Button loading={group?.loading} loadingPosition="right" onClick={() => handleClick(group?.id)} background={group?.background} disabled={group?.disabled} xl fontSemiBold backgroundGallery={group?.backgroundGallery} title={group?.title} titlePosition="before" icon={group?.icon} size={group?.size} classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`}>
                   {!group?.loading && (

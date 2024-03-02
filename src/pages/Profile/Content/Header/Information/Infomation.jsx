@@ -6,22 +6,45 @@ import { truncate, useGlobalState } from "~/store";
 import { dollarIcon, twitter } from "~/assets/Icon";
 import { FaDiscord } from "react-icons/fa6";
 import Icon from "~/components/Icon";
+import { imagesWalletAddress } from "~/assets/Image";
+import { useContext } from "react";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
+import Tooltip from "~/components/Tooltip";
 const cx = classNames.bind(styles);
 
 const Information = () => {
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const { artist } = useContext(UserContext);
+
   return (
     <div className={cx("contentInfo")}>
       <div className={`${cx("overInfo")} no-scrollbar`}>
         <div className={cx("containerImage")}>
-          <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:250:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
+          <Image className={cx("imageUser")} src={imagesWalletAddress(connectedAccount.address)} />
         </div>
 
         <div className={cx("containerUser")}>
           <div className={cx("content")}>
             <Button icon={dollarIcon} xl size={16} classIcon={cx("buttonIcon")} classButton={cx("buttonContent")} className={cx("buttonAction")} border title={truncate(connectedAccount.address, 5, 4, 12)} />
-            <Button icon={twitter} xl size={16} classButton={cx("buttonContent")} className={cx("buttonAction")} border title="Add" />
-            <Button icon={FaDiscord} xl size={16} classButton={cx("buttonContent")} className={cx("buttonAction")} border title="Add" />
+            {artist.twitter_url.length > 0 ? (
+              <Tooltip toolTip content={`${artist.twitter_url}`} placement="bottom">
+                <div>
+                  <Icon icon={twitter} size={16} />
+                </div>
+              </Tooltip>
+            ) : (
+              <Button icon={twitter} xl size={16} classButton={cx("buttonContent")} className={cx("buttonAction")} border title="Add" />
+            )}
+
+            {artist.discord_url.length > 0 ? (
+              <Tooltip toolTip content={`@${artist.discord_url}`} placement="bottom">
+                <div>
+                  <Icon icon={FaDiscord} size={16} />
+                </div>
+              </Tooltip>
+            ) : (
+              <Button icon={FaDiscord} xl size={16} classButton={cx("buttonContent")} className={cx("buttonAction")} border title="Add" />
+            )}
           </div>
         </div>
 

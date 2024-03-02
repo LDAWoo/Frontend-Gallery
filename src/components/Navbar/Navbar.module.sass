@@ -11,6 +11,8 @@
     display: flex
     align-items: center
     padding: 0 16px
+    &.active
+        padding: 0
     +t
         column-gap: 4px
     +x 
@@ -105,6 +107,7 @@
         display: inline-flex
 
 .contentSearch
+    position: relative
     width: var(--full-w)
 
     +x
@@ -125,6 +128,15 @@
     align-items: center
     justify-content: center
     padding: 4px
+    border-radius: 9999px
+    width: 30px
+    height: 30px
+    overflow: hidden
+
+.borderInputSearch
+    border: 1px solid transparent    
+    +t
+        border: 1px solid $n3
 
 .searchIcon
     display: flex

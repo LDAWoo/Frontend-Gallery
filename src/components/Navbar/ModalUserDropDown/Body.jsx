@@ -10,6 +10,7 @@ import Title from "~/components/Title";
 import routesConfig from "~/configs";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
+import removeCookie from "~/hooks/useRegisterRemoveCookie";
 const cx = classNames.bind(styles);
 
 const Body = () => {
@@ -18,8 +19,7 @@ const Body = () => {
   const [balances] = useGlobalState("currentBalances");
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const [showModalUserSignIn] = useGlobalState("showModalUserSignIn");
-  const { artist } = useContext(UserContext);
-  console.log(artist);
+  const { artist, setArtist } = useContext(UserContext);
   const items = [
     {
       id: "blockchain",
@@ -96,6 +96,7 @@ const Body = () => {
       setTimeout(() => {
         if (name === "phantom" && chain === "solana") {
           disconnectedWalletPhantomSolana();
+          handleSignOut();
         }
 
         if (name === "metamask" && chain === "ethereum") {
@@ -103,6 +104,11 @@ const Body = () => {
         }
       }, 300);
     }
+  };
+
+  const handleSignOut = () => {
+    removeCookie("token");
+    setArtist({});
   };
 
   const handleClickUrlMenuItem = (url) => {
@@ -133,7 +139,7 @@ const Body = () => {
                   <div className={cx("containerContent")}>
                     <div className={cx("contentGroup")}>
                       <div className={cx("content")}>{group?.name}</div>
-                      {!group.balances && group.chain && <div className={cx("content")}>{group.balances + group.chain}</div>}
+                      {group.balances && group.chain && <div className={cx("content")}>{group.balances + group.chain}</div>}
                     </div>
                     <div className={cx("contentGroup")}>
                       {group?.actions.map((action, index) => (
@@ -160,7 +166,7 @@ const Body = () => {
                         </div>
                       </div>
                     )}
-                    {group?.modal && !group?.active && (
+                    {!group?.active && !group?.url && (
                       <div className={cx("menuGroup")} onClick={() => handleClickModalMenuItem(group?.type, group?.modal)}>
                         <div className={cx("containerMenu")}>
                           <Title title={group?.name} fontBold />

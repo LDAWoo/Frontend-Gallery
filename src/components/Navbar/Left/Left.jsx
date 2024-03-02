@@ -14,6 +14,7 @@ import ModalFull from "~/components/Modal/ModalFull/ModalFull";
 import BodyModalUserDropDown from "../ModalUserDropDown/Body";
 import HeaderModalUserDropDown from "../ModalUserDropDown/Header";
 import PropTypes from "prop-types";
+import { imagesWalletAddress } from "~/assets/Image";
 const cx = classNames.bind(styles);
 
 const Left = ({ setShowHeaderSearch }) => {
@@ -34,6 +35,7 @@ const Left = ({ setShowHeaderSearch }) => {
 
   const handleShowSearch = () => {
     setShowHeaderSearch(true);
+    setGlobalState("showPanelSearch", true);
   };
 
   const handleConnectedWallet = () => {
@@ -55,8 +57,8 @@ const Left = ({ setShowHeaderSearch }) => {
         <ModalRight isClickOutside={WidthAndHeightWindow.width >= 768 ? true : false} classHeader={cx("headerModalUserDropDown")} type="showModalUserDropDown" header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown} closeModal={closeModalUserDropDown}>
           <ModalFull isClickOutside={false} classHeader={cx("headerModalUserDropDown")} classBody={cx("bodyModalUserDropDown")} type="showModalUserDropDown" classContent={cx("classContentModal")} header={<HeaderModalUserDropDown />} body={<BodyModalUserDropDown />} isOpen={showModalUserDropDown}>
             <div className={cx("wrapperUser")} onClick={handleModalUserDropDown}>
-              <span className={cx("priceUser")}>{`${balances} ${connectedAccount.chain === "solana" ? " SOL" : ""}`}</span>
-              <Image className={cx("imageUser")} src="https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fapi.dicebear.com%2F7.x%2Fidenticon%2Fsvg%3FbackgroundType%3DgradientLinear%26seed%3DEFuPGjn9FamSohPz5PDHEgebUxkiY11TJyFMcnBuYFmX" />
+              <span className={cx("priceUser")}>{`${Number(balances.toFixed(3))} ${connectedAccount.chain === "solana" ? " SOL" : ""}`}</span>
+              <Image className={cx("imageUser")} src={imagesWalletAddress(connectedAccount.address)} />
               <Icon classIcon={cx("iconDropdown")} icon={IoIosArrowDown} size={18} />
             </div>
           </ModalFull>

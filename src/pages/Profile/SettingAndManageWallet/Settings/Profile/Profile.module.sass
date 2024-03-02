@@ -12,6 +12,60 @@
     gap: 8px
     color: $-n1
 
+.wrapperContainer
+    display: flex
+    flex-direction: row
+    gap: 12px
+
+.classNameInput
+    width: var(--full-w)
+    cursor: default
+
+.wrapperMetaData
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    gap: 24px
+
+.relativeMetaData
+    position: relative
+
+.containerMetaData
+    width: 80px
+    height: 80px
+    border-radius: 9999px
+    overflow: hidden
+.avatarPreview
+    width: var(--full-w)
+    height: var(--full-h)
+    object-fit: cover
+
+.arrowShuffle
+    color: $p1
+    transform: translateY(2px)    
+
+.editMetaData
+    position: absolute
+    padding: 4px
+    background-color: $n3
+    right: 0
+    bottom: -10px
+    z-index: 100
+    display: flex
+    justify-items: center
+    align-items: center
+    border-radius: 9999px
+    color: $p1
+    cursor: pointer
+    transition-duration: 300ms
+    transition-property: color
+    &:hover
+        color: $p2
+
+.fileMetaData
+    display: none       
+
 .wrapperInput
     width: calc( 100% - 25px )
     padding: 10px    
