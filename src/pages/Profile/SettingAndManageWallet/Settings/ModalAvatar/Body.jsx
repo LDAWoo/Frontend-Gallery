@@ -15,7 +15,7 @@ const Body = () => {
     if (selectedFile.type.split("/")[0] !== "image") return;
 
     const imageURL = URL.createObjectURL(selectedFile);
-    setGlobalState("profiles", { ...profiles, avatarPreview: imageURL });
+    setGlobalState("profiles", { ...profiles, avatarName: selectedFile, avatarPreview: imageURL });
   };
 
   useEffect(() => {

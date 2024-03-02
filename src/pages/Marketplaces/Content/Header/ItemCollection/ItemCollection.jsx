@@ -9,36 +9,36 @@ const cx = classNames.bind(styles);
 const items = [
   {
     title: "Floor price",
-    value: 3994,
+    value: "--",
     icon: dollarIcon,
   },
   {
     title: "Top offer",
-    value: 3250,
+    value: "--",
     icon: dollarIcon,
   },
   {
     title: "24h Voi",
-    value: 85.2,
+    value: "--",
     icon: "",
   },
   {
     title: "24h Sales",
-    value: 20,
+    value: "--",
     icon: "",
   },
   {
     title: "24h Attempts",
-    value: 6,
+    value: "--",
     icon: FaCanadianMapleLeaf,
   },
   {
     title: "All Voi",
-    value: 7704000,
+    value: "--",
   },
   {
     title: "Listed/ Supply",
-    value: 711,
+    value: "--",
   },
 ];
 

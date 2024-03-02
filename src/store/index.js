@@ -53,6 +53,8 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   currentSourceCreator: "",
   loading: false,
   profiles: {
+    data: {},
+    avatarName: "",
     avatarPreview: "",
   },
 });

@@ -26,7 +26,7 @@ const Information = () => {
         <div className={cx("containerUser")}>
           <div className={cx("content")}>
             <Button icon={dollarIcon} xl size={16} classIcon={cx("buttonIcon")} classButton={cx("buttonContent")} className={cx("buttonAction")} border title={truncate(connectedAccount.address, 5, 4, 12)} />
-            {artist.twitter_url.length > 0 ? (
+            {artist?.twitter_url ? (
               <Tooltip toolTip content={`${artist.twitter_url}`} placement="bottom">
                 <div>
                   <Icon icon={twitter} size={16} />
@@ -36,7 +36,7 @@ const Information = () => {
               <Button icon={twitter} xl size={16} classButton={cx("buttonContent")} className={cx("buttonAction")} border title="Add" />
             )}
 
-            {artist.discord_url.length > 0 ? (
+            {artist?.discord_url ? (
               <Tooltip toolTip content={`@${artist.discord_url}`} placement="bottom">
                 <div>
                   <Icon icon={FaDiscord} size={16} />

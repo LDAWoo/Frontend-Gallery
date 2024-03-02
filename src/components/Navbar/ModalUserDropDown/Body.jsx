@@ -1,16 +1,16 @@
 import classNames from "classnames/bind";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { disconnectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 import { disconnectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 import { disconnectIcon, dollarIcon } from "~/assets/Icon";
-import { useContext } from "react";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import routesConfig from "~/configs";
+import removeCookie from "~/hooks/useRegisterRemoveCookie";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
-import removeCookie from "~/hooks/useRegisterRemoveCookie";
 const cx = classNames.bind(styles);
 
 const Body = () => {
@@ -95,8 +95,8 @@ const Body = () => {
       setGlobalState("closeModalUserDropDown", !closeModalUserDropDown);
       setTimeout(() => {
         if (name === "phantom" && chain === "solana") {
-          disconnectedWalletPhantomSolana();
           handleSignOut();
+          disconnectedWalletPhantomSolana();
         }
 
         if (name === "metamask" && chain === "ethereum") {
