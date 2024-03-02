@@ -11,6 +11,7 @@ import routesConfig from "~/configs";
 import removeCookie from "~/hooks/useRegisterRemoveCookie";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
+import setCookie from "~/hooks/useRegisterSetCookie";
 const cx = classNames.bind(styles);
 
 const Body = () => {
@@ -107,7 +108,7 @@ const Body = () => {
   };
 
   const handleSignOut = () => {
-    removeCookie("token");
+    setCookie("token", "");
     setArtist({});
   };
 

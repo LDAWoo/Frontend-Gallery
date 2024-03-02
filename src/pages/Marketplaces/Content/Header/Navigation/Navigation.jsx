@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { BsGrid, BsGrid3X3Gap } from "react-icons/bs";
 import { FiRefreshCw } from "react-icons/fi";
@@ -17,6 +17,18 @@ const cx = classNames.bind(styles);
 
 const Navigation = () => {
   const [showFilter] = useGlobalState("showFilter");
+  const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
+  const localMarketPlaceGridStyle = localStorage.getItem("marketplace-gridstyle");
+
+  useEffect(() => {
+    if (!localMarketPlaceGridStyle) {
+      localStorage.setItem("marketplace-gridstyle", "grids");
+      setGlobalState("showMarketplaceGridStyle", "grids");
+    } else {
+      setGlobalState("showMarketplaceGridStyle", localMarketPlaceGridStyle);
+    }
+  }, [localMarketPlaceGridStyle]);
+
   const items = [
     {
       id: 1,
@@ -36,20 +48,29 @@ const Navigation = () => {
       id: 2,
       groups: [
         {
-          id: "girds",
+          id: "grids",
           name: "girds",
+          localStore: "marketplace-gridstyle",
           type: "button",
+          show: showMarketplaceGridStyle === "grids",
+          showType: "showMarketplaceGridStyle",
           icon: BsGrid3X3Gap,
         },
         {
-          id: "gird",
+          id: "grid",
           name: "grid",
+          localStore: "marketplace-gridstyle",
+          show: showMarketplaceGridStyle === "grid",
+          showType: "showMarketplaceGridStyle",
           type: "button",
           icon: BsGrid,
         },
         {
           id: "list",
+          localStore: "marketplace-gridstyle",
           name: "list",
+          show: showMarketplaceGridStyle === "list",
+          showType: "showMarketplaceGridStyle",
           type: "button",
           icon: AiOutlineUnorderedList,
         },
@@ -114,22 +135,16 @@ const Navigation = () => {
     },
   ];
   const [sortValue, setSortValue] = useState();
-  const data = [
-    { name: "Price: Low to High", value: "low_to_high" },
-    { name: "Price: High to Low", value: "high_to_low" },
-    { name: "Inscription: Low to High", value: "inscription_low_to_high" },
-    { name: "Inscription: High to Low", value: "inscription_high_to_low" },
-    { name: "Recently", value: "recently" },
-    { name: "Common to Rare", value: "common_to_rare" },
-    { name: "Rare to Common", value: "rare_to_common" },
-  ];
 
   const handleSort = (v) => {
     setSortValue(v);
   };
 
-  const handleClickButton = (showType, show) => {
-    setGlobalState(showType, !show);
+  const handleClickButton = (showType, id, localStore) => {
+    if (localStore) {
+      localStorage.setItem(localStore, id);
+    }
+    setGlobalState(showType, id);
   };
 
   const ButtonNavigation = ({ group }) => {
@@ -139,7 +154,7 @@ const Navigation = () => {
           <Button className={cx("buttonNavigation")} classButton={cx("contentButtonNavigation")} xl fontMedium title={group?.title} backgroundGallery icon={group?.icon} size={20} onClick={() => handleClickButton(group?.showType, group?.show)} />
         ) : (
           <>
-            <Button className={cx("buttonNavigation")} onClick={() => handleClickButton(group?.showType, group?.show)} background={group?.show} backgroundGallery={!group?.show} icon={group?.icon} size={20} />
+            <Button className={cx("buttonNavigation")} onClick={() => handleClickButton(group?.showType, group?.id, group?.localStore)} background={group?.show} backgroundGallery={!group?.show} icon={group?.icon} size={20} />
           </>
         )}
       </>

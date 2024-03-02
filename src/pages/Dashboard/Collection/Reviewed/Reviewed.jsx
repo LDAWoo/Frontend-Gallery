@@ -14,7 +14,6 @@ const Reviewed = () => {
   const { artist } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     if (artist) {
       const fetchData = async () => {

@@ -1,19 +1,19 @@
 import classNames from "classnames/bind";
+import { useContext } from "react";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
 import styles from "./Content.module.sass";
-import { useGlobalState } from "~/store";
-import NoConnectionWallet from "./NoConnectionWallet";
 import Header from "./Header";
 import Main from "./Main";
+import NoSignIn from "./NoSignIn";
 
 const cx = classNames.bind(styles);
 
 const Content = () => {
-  const [connectedAccount] = useGlobalState("connectedAccount");
-
+  const { artist } = useContext(UserContext);
   return (
     <div className={cx("container")}>
       <div className={cx("wrapper")}>
-        {connectedAccount.address ? (
+        {Object.keys(artist).length > 0 ? (
           <div className={cx("wrapper")}>
             <div className={cx("container")}>
               <Header />
@@ -21,7 +21,7 @@ const Content = () => {
             </div>
           </div>
         ) : (
-          <NoConnectionWallet />
+          <NoSignIn />
         )}
       </div>
     </div>

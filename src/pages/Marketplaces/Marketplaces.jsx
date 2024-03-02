@@ -30,7 +30,7 @@ const Marketplaces = () => {
     };
 
     fetchData();
-  }, []);
+  }, [symbol]);
 
   return (
     <div className={cx("wrapper")}>

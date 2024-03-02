@@ -7,7 +7,7 @@ const cx = classnames.bind(styles);
 
 function Skeleton({ children, viewBox = "0 0 400 500", className }) {
   return (
-    <ContentLoader title="" viewBox={viewBox} className={`${className ? className : cx("wrapper")}`} strokeWidth={2} backgroundColor="#1C1326" foregroundColor="#40324E" speed={3}>
+    <ContentLoader title="" viewBox={viewBox} className={`${className ? className : cx("wrapper")}`} animate strokeWidth={2} backgroundColor="#1C1326" foregroundColor="#40324E" speed={3}>
       {children}
     </ContentLoader>
   );

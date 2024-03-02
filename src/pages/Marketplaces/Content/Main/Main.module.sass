@@ -25,9 +25,11 @@
     display: flex
     flex-direction: column
     height: var(--full-h)
+    padding: 0 12px 0 12px
     gap: 12px
     +t
         gap:16px
+        padding: 0 16px 0 16px
 
 .wrapperContainer
     display: flex
@@ -61,15 +63,25 @@
     display: grid
     gap: 0 8px
     margin-top: 0px
-    padding: 0 6px 0 12px
     grid-template-columns: repeat(2,minmax(0,1fr))
     +a
         grid-template-columns: repeat(auto-fill,minmax(180px,1fr))
     +t
         grid-template-columns: repeat(auto-fill,minmax(200px,1fr))
-        margin-top: 0px
-        padding: 0 10px 0 16px
     +w
         grid-template-columns: repeat(auto-fill,minmax(220px,1fr))
     +q 
-        grid-template-columns: repeat(auto-fill,minmax(240px,1fr))      
+        grid-template-columns: repeat(auto-fill,minmax(240px,1fr))  
+
+.grids
+    display: grid
+    gap: 0 8px
+    margin-top: 0px
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr))
+
+
+.containerList
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    height: var(--full-h)      

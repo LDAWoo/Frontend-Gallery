@@ -9,7 +9,7 @@ import Image from "~/components/Image";
 import ModalFull from "~/components/Modal/ModalFull/ModalFull";
 import Title from "~/components/Title";
 import routesConfig from "~/configs";
-import { useGlobalState } from "~/store";
+import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./PanelSearch.module.sass";
 
 const cx = classNames.bind(styles);
@@ -31,116 +31,9 @@ const PanelSearch = ({ children, data, loading }) => {
 };
 
 const Body = ({ data, loading }) => {
-  const artists = [
-    {
-      name: "Cets1 hohohohohoho hohohohohoho hohohohohoho hohohohohoho",
-      floor: 1000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets2",
-      floor: 2000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets3",
-      floor: 3000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets4",
-      floor: 4000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets5",
-      floor: 5000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets6",
-      floor: 6000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-    {
-      name: "Cets7",
-      floor: 7000,
-      image_url: "https://cloudflare-ipfs.com/ipfs/QmeBcx9wVUvUeYkXc1GUNPBkkytAEjvbk1ZyaXVxGFsP8k",
-    },
-  ];
-
-  console.log(data);
-
+  const handleLinkSearchClick = () => {
+    setGlobalState("showPanelSearch", false);
+  };
   return (
     <div className={cx("wrapper")}>
       <div className={`${cx("container")} scrollbarCustom`}>
@@ -161,7 +54,7 @@ const Body = ({ data, loading }) => {
                 {data.length > 0 ? (
                   <>
                     {data.map((artist, index) => (
-                      <Link to={`${routesConfig.marketplace.replace(":symbol", artist.symbol)}`} key={index} className={cx("wrapperCollections")}>
+                      <Link onClick={handleLinkSearchClick} to={`${routesConfig.marketplace.replace(":symbol", artist.symbol)}`} key={index} className={cx("wrapperCollections")}>
                         <div className={cx("wrapperMetaData")}>
                           <div className={cx("metaData")}>
                             <Image src={artist?.image_url || imagesWalletAddress(artist?.wallet_address)} />

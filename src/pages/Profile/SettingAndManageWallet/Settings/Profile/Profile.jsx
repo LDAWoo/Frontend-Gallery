@@ -174,7 +174,6 @@ const Profile = ({ data }) => {
       progress: undefined,
       theme: "dark",
       transition: Bounce,
-      type: "success",
     });
   };
 
@@ -189,7 +188,6 @@ const Profile = ({ data }) => {
       progress: undefined,
       theme: "dark",
       transition: Bounce,
-      type: "error",
     });
   };
 
@@ -232,17 +230,17 @@ const Profile = ({ data }) => {
       </div>
       <div className={cx("container")}>
         <Title title="Email" large fontBold />
-        <TextInput type="email" onChange={handleChange} name="email" value={state.email} classInput={cx("wrapperInput")} />
+        <TextInput type="email" disabled readOnly onChange={handleChange} name="email" value={state.email} classInput={cx("wrapperInput")} />
         <span className={cx("subName")}>{`Your email for marketplace notifcations`}</span>
       </div>
       <div className={cx("container")}>
         <Title title="Twitter" large fontBold />
         {state.twitterURL.length > 0 ? (
           <div className={cx("wrapperContainer")}>
-            <TextInput className={cx("classNameInput")} type="text" readOnly onChange={handleChange} name="twitterURL" value={state.twitterURL} classInput={cx("wrapperInput")} />
+            <TextInput className={cx("classNameInput")} type="text" disabled readOnly onChange={handleChange} name="twitterURL" value={state.twitterURL.split("/").pop()} classInput={cx("wrapperInput")} />
 
             <div>
-              <Button title="Un Link" backgroundGallery xxl style={{ height: "37px" }} onClick={handleUpdateLinkTwitter} />
+              <Button title="Unlink" backgroundGallery xxl style={{ height: "37px" }} onClick={handleUpdateLinkTwitter} />
             </div>
           </div>
         ) : (
@@ -253,9 +251,9 @@ const Profile = ({ data }) => {
         <Title title="Discord" large fontBold />
         {state.discordURL.length > 0 ? (
           <div className={cx("wrapperContainer")}>
-            <TextInput className={cx("classNameInput")} type="text" readOnly onChange={handleChange} name="discordURL" value={state.discordURL} classInput={cx("wrapperInput")} />
+            <TextInput className={cx("classNameInput")} type="text" disabled readOnly onChange={handleChange} name="discordURL" value={state.discordURL} classInput={cx("wrapperInput")} />
             <div>
-              <Button title="Un Link" backgroundGallery xxl style={{ height: "37px" }} onClick={handleUpdateLinkDiscord} />
+              <Button title="Unlink" backgroundGallery xxl style={{ height: "37px" }} onClick={handleUpdateLinkDiscord} />
             </div>
           </div>
         ) : (

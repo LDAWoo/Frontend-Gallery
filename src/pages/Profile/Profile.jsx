@@ -1,9 +1,6 @@
 import classNames from "classnames/bind";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { updateArtist } from "~/api/Artist";
-import { getArtworkByWalletAddress } from "~/api/Artwork";
-import { getOwnerByWalletAddress } from "~/api/Owner";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
 import { setGlobalState, useGlobalState } from "~/store";
 import { supabase } from "~/supabase";
@@ -15,43 +12,21 @@ import SettingAndManageWallet from "./SettingAndManageWallet";
 const cx = classNames.bind(styles);
 
 const Profile = () => {
-  const navigate = useNavigate();
-
   const [activeSettingAndManageWallet] = useGlobalState("activeSettingAndManageWallet");
-  const [connectedAccount] = useGlobalState("connectedAccount");
   const { artist } = useContext(UserContext);
   const [profiles] = useGlobalState("profiles");
 
   useEffect(() => {
-    if (connectedAccount.address) {
-      const fetchData = async () => {
-        try {
-          const results = await getOwnerByWalletAddress(connectedAccount?.address);
-          setGlobalState("profiles", {
-            ...profiles,
-            data: {
-              ...profiles.data,
-              ...results,
-            },
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      };
-
-      // const fetchDataGetNFT = async () => {
-      //   try {
-      //     const result = await getArtworkByWalletAddress(connectedAccount?.address);
-      //     console.log(result);
-      //   } catch (e) {
-      //     console.log(e);
-      //   }
-      // };
-
-      fetchData();
-      // fetchDataGetNFT();
+    if (Object.keys(artist).length > 0) {
+      setGlobalState("profiles", {
+        ...profiles,
+        data: {
+          ...profiles.data,
+          ...artist,
+        },
+      });
     }
-  }, [navigate, connectedAccount]);
+  }, [artist]);
 
   useEffect(() => {
     const getSessionData = async () => {
