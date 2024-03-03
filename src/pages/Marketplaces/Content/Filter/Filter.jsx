@@ -24,7 +24,7 @@ const Filter = ({ data, loading }) => {
   const [searchActive, setSearchActive] = useState(false);
   const [showTrait, setShowTrait] = useState("");
   const [value, setValue] = useState("");
-  const [filterList, setFilterList] = useState(true);
+  const [filterList, setFilterList] = useState(false);
   const [sortedAttributeMap, setSortedAttributeMap] = useState({});
   const [filteredData, setFilteredData] = useState({});
   const [options, setOptions] = useState({});

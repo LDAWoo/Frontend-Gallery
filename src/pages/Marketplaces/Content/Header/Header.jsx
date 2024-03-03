@@ -7,6 +7,7 @@ import ActiveAndFilterTip from "./ActiveAndFilterTip";
 import Navigation from "./Navigation";
 import PropTypes from "prop-types";
 import { useGlobalState } from "~/store";
+import ArtistInformationAndModal from "./ArtistInformationAndModal";
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +27,10 @@ const Header = ({ data, loading }) => {
                 </div>
               </div>
             </div>
-            <MarketplaceTabsTip />
+            <div className={cx("wrapperArtist")}>
+              <MarketplaceTabsTip />
+              <ArtistInformationAndModal data={data} loading={loading} />
+            </div>
           </div>
 
           <ActiveAndFilterTip />

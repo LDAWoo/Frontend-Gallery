@@ -35,7 +35,7 @@ const Body = ({ data, loading }) => {
     setGlobalState("showPanelSearch", false);
   };
   return (
-    <div className={cx("wrapper")}>
+    <div className={`${cx("wrapper")} ${loading ? cx("loading") : ""}`}>
       <div className={`${cx("container")} scrollbarCustom`}>
         <div className={cx("containerHeader")}>
           <div className={cx("wrapperHeader")}>
@@ -45,7 +45,7 @@ const Body = ({ data, loading }) => {
             </div>
           </div>
         </div>
-        <div className={`${cx("containerBody")}`}>
+        <div className={`${cx("containerBody")} ${loading ? cx("loading") : ""}`}>
           <div className={cx("wrapperBody")}>
             {loading ? (
               <div className={cx("wrapperLoading")}>Loading</div>

@@ -23,10 +23,14 @@
     gap: 8px    
     align-items: center
     margin: auto
-    &:nth-child(5)
+    width: var(--full-w)
+    &.active
+        width: auto
+        &:nth-child(3)
             width: var(--full-w)
             flex: 1 1 auto
     +t
+        width: auto
         &:nth-child(3)
             flex: 1 1 auto
         &:nth-child(5)
@@ -38,15 +42,20 @@
     height: var(--full-h)
 
     &.active
+        &.show
+            display: none
         &:nth-child(1)
             display: none
-        &:nth-child(3)
-            display: none
         +t
+            display: flex
             &:nth-child(1)
                 display: flex
+            &:nth-child(2)
+                display: flex    
             &:nth-child(3)
                 display: flex
+    
+
 
 .wrapperButton
     width: var(--full-w)
@@ -72,13 +81,17 @@
 
 .buttonSearch
     display: flex
+    &.active
+        display: none
     +t
         display: none
 
 .inputSearch
     width: var(--full-w)
-
+    height: 34px
     display: none
+    &.active
+        display: flex
     +t
         display: flex
         
@@ -86,9 +99,15 @@
     width: var(--full-w)
     border: 1px solid $n3
     transition-property: border
-    transition-property: 3000ms
+    transition-duration: 300ms
     padding-right: 16px
+    max-height: 35px
     &:hover
         border: 1px solid $n2
+
+.classInput        
+    border: none
+    &:focus
+        outline: none
 
                

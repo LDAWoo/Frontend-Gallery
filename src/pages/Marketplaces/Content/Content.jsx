@@ -9,6 +9,7 @@ import FilterModal from "./FilterModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
+import ArtistInformationModal from "./Header/ArtistInformationAndModal/ArtistInformationModal";
 
 const cx = classNames.bind(styles);
 
@@ -59,6 +60,7 @@ const Content = ({ data, loading }) => {
     <>
       <Filter data={currentNFTs} loading={loadingNFTs} />
       <FilterModal data={currentNFTs} loading={loadingNFTs} />
+      <ArtistInformationModal data={data} loading={loading} />
       <div className={cx("wrapper")}>
         <div className={cx("container")}>
           <Header data={data} loading={loading} />

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { BsGrid, BsGrid3X3Gap } from "react-icons/bs";
 import { FiRefreshCw } from "react-icons/fi";
-import { IoSearchOutline } from "react-icons/io5";
+import { IoClose, IoSearchOutline } from "react-icons/io5";
 import { PiCoins } from "react-icons/pi";
 import { VscListFilter } from "react-icons/vsc";
 import { arrowDownUp } from "~/assets/Icon";
@@ -17,8 +17,10 @@ const cx = classNames.bind(styles);
 
 const Navigation = () => {
   const [showFilter] = useGlobalState("showFilter");
+  const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
   const localMarketPlaceGridStyle = localStorage.getItem("marketplace-gridstyle");
+  const [searchActive, setSearchActive] = useState(false);
 
   useEffect(() => {
     if (!localMarketPlaceGridStyle) {
@@ -38,6 +40,7 @@ const Navigation = () => {
           name: "Traits Filter",
           type: "button",
           icon: VscListFilter,
+          categories: "boolean",
           show: showFilter,
           showType: "showFilter",
           toolTip: true,
@@ -113,18 +116,6 @@ const Navigation = () => {
       id: 5,
       groups: [
         {
-          id: "modal",
-          name: "Make Offer",
-          title: "Make Offer",
-          type: "button",
-          icon: PiCoins,
-        },
-      ],
-    },
-    {
-      id: 6,
-      groups: [
-        {
           id: "refresh",
           name: "Refresh",
           type: "button",
@@ -140,11 +131,17 @@ const Navigation = () => {
     setSortValue(v);
   };
 
-  const handleClickButton = (showType, id, localStore) => {
-    if (localStore) {
-      localStorage.setItem(localStore, id);
+  const handleClickButton = (group) => {
+    if (group.categories === "boolean") {
+      setGlobalState(group?.showType, !group?.show);
+      return;
     }
-    setGlobalState(showType, id);
+
+    if (group?.localStore) {
+      localStorage.setItem(group?.localStore, group?.id);
+      setGlobalState(group?.showType, group?.id);
+      return;
+    }
   };
 
   const ButtonNavigation = ({ group }) => {
@@ -154,7 +151,7 @@ const Navigation = () => {
           <Button className={cx("buttonNavigation")} classButton={cx("contentButtonNavigation")} xl fontMedium title={group?.title} backgroundGallery icon={group?.icon} size={20} onClick={() => handleClickButton(group?.showType, group?.show)} />
         ) : (
           <>
-            <Button className={cx("buttonNavigation")} onClick={() => handleClickButton(group?.showType, group?.id, group?.localStore)} background={group?.show} backgroundGallery={!group?.show} icon={group?.icon} size={20} />
+            <Button id={group?.id} className={cx("buttonNavigation")} onClick={() => handleClickButton(group)} background={group?.show} backgroundGallery={!group?.show} icon={group?.icon} size={20} />
           </>
         )}
       </>
@@ -164,19 +161,28 @@ const Navigation = () => {
   const InputNavigation = ({ group }) => {
     return (
       <div className={cx("wrapperSearch")}>
-        <Button icon={group?.icon} size={20} backgroundGallery className={`${cx("buttonNavigation")} ${cx("buttonSearch")}`} />
-        <TextInput className={cx("inputSearch")} classBorder={cx("borderInputSearch")} icon={group?.icon} sizeIcon={20} placeholder={group?.placeHolder} />
+        <Button icon={group?.icon} size={20} backgroundGallery className={`${cx("buttonNavigation")} ${cx("buttonSearch")} ${searchActive ? cx("active") : ""}`} onClick={() => setSearchActive(true)} />
+        <TextInput className={`${cx("inputSearch")} ${searchActive ? cx("active") : ""}`} classBorder={cx("borderInputSearch")} icon={group?.icon} sizeIcon={20} placeholder={group?.placeHolder} copy iconCopy={IoClose} onClickCopy={() => setSearchActive(false)} />
       </div>
     );
   };
+
+  useEffect(() => {
+    if (WidthAndHeightWindow.width < 768) {
+      if (showMarketplaceGridStyle === "grids") {
+        localStorage.setItem("marketplace-gridstyle", "grid");
+        setGlobalState("showMarketplaceGridStyle", "grid");
+      }
+    }
+  }, [WidthAndHeightWindow]);
 
   return (
     <div className={cx("wrapper")}>
       <div className={cx("content")}>
         {items.map((item, index) => (
-          <div key={index} className={cx("wrapperContent")}>
+          <div key={index} className={`${cx("wrapperContent")} ${searchActive ? cx("active") : ""}`}>
             {item?.groups.map((group, index) => (
-              <div key={index} className={`${cx("wrapperGroups")} ${item?.groups.length > 1 ? cx("active") : ""}`}>
+              <div key={index} className={`${cx("wrapperGroups")} ${item?.groups.length > 1 ? cx("active") : ""} ${group?.show ? cx("show") : ""}`}>
                 {group?.type === "button" && (
                   <>
                     {group?.toolTip ? (

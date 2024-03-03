@@ -15,15 +15,18 @@ const Information = ({ data, loading }) => {
   const items = [
     {
       icon: discordIcon,
-      url: "/discord/" + data?.discord_url,
+      type: "url",
+      url: data?.discord_url ? "/discord/" + data?.discord_url : "",
     },
     {
       icon: twitter,
-      url: data?.twitter_url,
+      type: "url",
+      url: data?.twitter_url || "",
     },
     {
       icon: words,
-      url: data?.website_url,
+      type: "url",
+      url: data?.website_url || "",
     },
     {
       icon: IoIosShareAlt,
@@ -54,10 +57,10 @@ const Information = ({ data, loading }) => {
             <div className={cx("itemsInfo")}>
               {items.map((item, index) => (
                 <span key={index}>
-                  {item?.url ? (
+                  {item?.type === "url" ? (
                     <>
                       {item?.url && (
-                        <Link to={item?.url}>
+                        <Link to={item?.url} target="_blank">
                           <Icon icon={item?.icon} classIcon={cx("item")} size={24} />
                         </Link>
                       )}

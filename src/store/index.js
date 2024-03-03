@@ -17,6 +17,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showAnalytics: false,
   showSettings: false,
   showFilter: false,
+  showArtistInfo: false,
   showMarketplaceGridStyle: "",
   showNFTDetails: {
     active: false,
