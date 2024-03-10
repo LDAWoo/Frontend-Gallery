@@ -10,7 +10,7 @@
     width: var(--full-w)
     display: flex
     align-items: center
-    padding: 0 16px
+    padding: 0 8px
     &.active
         padding: 0
     +t
@@ -55,12 +55,15 @@
     +t
         display: none
 
-.logoGardeneden
+.logoGardenEden
     width: 176px
     height: 20px
     object-fit: cover 
     background-image: none
-    background: none        
+    background: none     
+    display: none
+    +t   
+        display: flex
 
 .menuIcon
     color: $n1

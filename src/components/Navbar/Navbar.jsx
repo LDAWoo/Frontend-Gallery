@@ -110,7 +110,7 @@ const Navbar = () => {
                   <Button icon={MdOutlineMenu} size={24} classIcon={cx("menuIcon")} />
                 </div>
                 <Link className={cx("logo")} to={routesConfig.home}>
-                  <Image src="/images/logogardeneden.png" className={cx("logoGardeneden")} />
+                  <Image src="/images/logogardeneden.png" className={cx("logoGardenEden")} />
                 </Link>
               </div>
             </div>
