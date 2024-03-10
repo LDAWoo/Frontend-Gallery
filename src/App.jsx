@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { publicRouterPathComponent } from "~/routes";
-import AppUserProvider from "./components/Contexts/AppUserProvider";
 import AppTokenProvider from "./components/Contexts/AppTokenProvider";
+import AppUserProvider from "./components/Contexts/AppUserProvider";
 
 function App() {
   return (

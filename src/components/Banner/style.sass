@@ -1,0 +1,59 @@
+@import '~/styles/helpers'
+
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal 
+    bottom: 0%
+    width: 100%
+
+.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet 
+    margin-left: 2px
+    margin-right: 2px
+    +t
+        margin-left: 4px
+        margin-right: 4px
+
+
+.swiper-pagination-bullet 
+    width: 13px
+    height: 13px
+    border-radius: 10px
+    margin-right: 2px
+    margin-left: 2px
+    background-color: $p1
+    opacity: 0.4
+    transform: scale(0.4)
+    +t
+        transform: scale(0.6)
+    transition-duration: 500ms
+
+
+.swiper-pagination-bullet-active 
+    width: 13px
+    height: 13px
+    border-radius: 10px
+    margin-right: 2px
+    margin-left: 2px
+    background-color: $p1
+    transform: scale(0.8)
+    opacity: 1
+    +t
+        transform: scale(1)
+    transition-duration: 500ms
+
+.swiper-button-prev,.swiper-button-next 
+    color: $n
+    transition-duration: 500ms
+    &:hover
+        color: $p2
+        filter: drop-shadow($p2 0px 0px 8px)
+    &::after
+        font-size: 25px
+        font-weight: 800
+    display: none
+    +t
+        display: flex    
+
+.swiper-button-disabled
+    transition-duration: 500ms
+    opacity: 0!important

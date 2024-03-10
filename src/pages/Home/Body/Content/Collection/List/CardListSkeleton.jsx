@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 const CardListSkeleton = ({ index }) => {
   return (
     <Skeleton viewBox={`${index === 0 ? "0 0 500 500" : index === 7 ? "0 0 1000 259" : "0 0 500 65"}`} className={cx("wrapperSkeleton")}>
-      <rect x={index === 0 ? "15%" : "0"} y="10%" rx="5" ry="5" width={index === 0 ? "70%" : "60%"} height={index === 0 ? "80%" : "80%"} />
+      <rect x={index === 1 ? "0" : index === 0 ? "15%" : "50%"} y="10%" rx="5" ry="5" width={index === 0 ? "70%" : "60%"} height={index === 0 ? "80%" : "80%"} />
     </Skeleton>
   );
 };

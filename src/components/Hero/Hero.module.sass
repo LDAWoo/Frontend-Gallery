@@ -1,0 +1,119 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 1rem 0.5rem
+    -webkit-box-align: center
+    flex-direction: column
+    text-align: center
+
+.heading
+    +text-lg 
+    +m
+        +text-3xl
+    +t
+        +text-4xl
+    color: $n     
+    fill: $n 
+    filter: url(#filter)
+
+.content
+    color:$n1
+    font-weight: 600
+    +text-xxs
+    +m
+        +text-xs
+    +t
+        +text-sm
+    margin: 0
+    padding: 0
+
+.filterWrapper
+    position: absolute
+    z-index: -1
+    pointer-events: none
+    opacity: 0
+
+.bot-g, .bot-r, .top-g, .top-r 
+    stroke: $n 
+
+.top-r 
+    animation: topani 3.5s linear infinite
+
+
+.bot-r, .top-r 
+    stroke-width: 100px
+
+
+.bot-r 
+    animation: botani 4s linear infinite
+
+
+.top-g 
+    stroke-width: 50px
+    animation: topani 4s linear infinite reverse
+
+
+.bot-g 
+    stroke-width: 50%
+    animation: botani 3.5s linear infinite reverse
+
+
+@keyframes topani 
+    9% 
+        stroke-width: 64px
+    
+    21% 
+        stroke-width: 25px
+    
+    35% 
+        stroke-width: 112px
+    
+    55% 
+        stroke-width: 196px
+    
+    56% 
+        stroke-width: 84px
+    
+    78% 
+        stroke-width: 71px
+    
+    93% 
+        stroke-width: 95px
+    
+
+
+@keyframes botani 
+    3% 
+        stroke-width: 45px
+    
+    11% 
+        stroke-width: 194px
+    
+    20% 
+        stroke-width: 133px
+    
+    33% 
+        stroke-width: 68px
+    
+    43% 
+        stroke-width: 22px
+    
+    58% 
+        stroke-width: 107px
+    
+    60% 
+        stroke-width: 39px
+    
+    75% 
+        stroke-width: 143px
+    
+    83% 
+        stroke-width: 194px
+    
+    97% 
+        stroke-width: 172px
+    
+    

@@ -1,0 +1,61 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)
+    position: sticky
+    top: 0px
+    background: $n7
+    z-index: 2    
+
+.container
+    overflow-x: auto
+    padding: 0.5rem  
+
+.content
+    display: flex
+    -webkit-box-pack: justify
+    justify-content: space-between
+    -webkit-box-align: center
+    align-items: center
+    min-width: 900px    
+
+.contentCollection
+    display: flex
+    align-items: center
+    gap: 12px    
+
+.contentFilter 
+    display: flex
+    align-items: center
+    gap: 12px    
+
+.wrapperItems
+    color: $n1    
+
+.button
+    background-color: transparent
+    border: none
+    color: $n1
+    cursor: pointer
+    border-radius: 5px
+    padding: 0px
+    margin: 0
+    transition-property: color
+    transition-duration: 150ms
+    &.active
+        text-shadow: $p2 0px 0px 8px   
+        color: $p2
+    &:hover
+        text-shadow: $p2 0px 0px 8px   
+        color: $p2
+
+.contentSearchCollection
+    display: flex
+    -webkit-box-align: center
+    align-items: center
+    flex-direction: row
+    margin: 0 1.25rem
+    flex: 1 1 0%
+
+.wrapperInputSearch
+    width: var(--full-w)  

@@ -1,0 +1,61 @@
+@import  '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)
+    height: var(--full-h)
+
+.wrapperBackground
+    position: relative
+    height: 140px
+    +s
+        height: 180px
+    +a
+        height: 220px
+    +m
+        height: 240px
+    +t
+        height: 325px
+    +d
+        height: 425px
+
+.content
+    display: flex
+    -webkit-box-align: start
+    align-items: start
+    -webkit-box-pack: end
+    justify-content: end
+    flex-direction: column
+    padding: var(--chakra-space-2)
+    background: linear-gradient(rgba(18,12,24, 0.4), rgba(18,12,24, 0.4), rgba(18,12,24, 0.7), rgb(18,12,24))
+    position: absolute
+    bottom: 0px
+    top: 0px
+    right: 0px
+    left: 0px
+    padding: 2.5rem
+
+.itemContent
+    width: 25px
+    height: 25px
+    +t
+        width: 50px
+        height: 50px
+    top: 2.5rem
+    left: 2.5rem
+    position: absolute
+    background: #181c1e
+    border-radius: 100px
+    overflow: hidden
+
+.containerItem
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+
+.chakra
+    display: flex
+    flex-direction: column
+    color: $-n1
+
+

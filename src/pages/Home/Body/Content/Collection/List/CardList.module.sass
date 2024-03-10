@@ -1,7 +1,13 @@
 @import '~/styles/helpers'
+@import '~/styles/reset'
 
 .wrapperTb
     background-color: $n7  
+
+.position    
+    margin-left: 8px
+    font-weight: 500
+    +text-sm
     
 .buttonAddItemCard
     width: 20px
@@ -21,8 +27,9 @@
 .wrapperTrTb
     display: flex
     min-width: 0px
-    border-bottom: 1px solid $n3
-    height: 3rem    
+    height: 3rem  
+    +t  
+        height: 3.75rem 
     transition-duration: 200ms
     transition-property: background-color
     background-color: $n7
@@ -37,19 +44,19 @@
     display: flex
     align-items: center
     &:nth-child(1)
-        flex: 0 0 36px
-        width: 36px
+        flex: 0 0 72px
+        width: 72px
         left: 0px
         position: sticky
         overflow: auto
         z-index: 2
-        justify-content: center
+        justify-content: start
         background-color: $n7
         
     &:nth-child(2)
         flex: 1 0 auto
         width: 160px
-        left: 36px
+        left: 72px
         position: sticky
         overflow: auto
         z-index: 2
@@ -85,50 +92,58 @@
     align-items: center
     gap: 16px
     min-width: 0
+    height: var(--full-h)
 
 .metaData
     display: flex
-    width: 36px
-    height: 36px
+    min-width: 40px
+    min-height: 40px
+    max-width: 40px
+    max-height: 40px
     overflow: hidden    
-    border-radius: 0.25rem
-    cursor: pointer
-    transition-duration: 300ms
-    transition-property: opacity
-    opacity: 1
-    &:hover
-        opacity: 0.6
+    border-radius: 999px
 
 .wrapperContainerPrice
     display: flex
     flex-direction: row
     align-items: center
     gap: 4px        
+    width: var(--full-w)
+    justify-content: end
+    height: var(--full-h)
 
 .wrapperChain
     color: $n1
 
-.priceDFF
-    color: $p6  
 
-.wrapperLinkWalletAddress
-    color: $n1
-    &:hover
-        color: $n1
-        opacity: 0.6
-
-.wrapperListedTime
+.wrapperListed
     +text-sm            
+    width: var(--full-w)
+    justify-content: end
+    display: flex
+    align-items: end
+    flex-direction: column
+    height: var(--full-h)
 
-.wrapperButtonAddFunds
-    position: absolute
-    width: auto
-    top: 0.375rem
-    bottom: 0.375rem
-    left: 0
-    right: 0.375rem
+.listed
+    color: $n
     +text-sm
-    display: none
+    align-items: center
+
+.wrapperContent
+    height: var(--full-h)
+    display: flex
+    align-items: center
+    flex-direction: column
+    justify-content: center    
+
+.wrapperContentListed
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+    +text-xs    
+    color: $n1
 
 .buttonCheck
     padding: 5px
