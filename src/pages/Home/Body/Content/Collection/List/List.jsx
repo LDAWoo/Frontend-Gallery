@@ -1,15 +1,15 @@
 import classNames from "classnames/bind";
-import styles from "./List.module.sass";
 import { useState } from "react";
-import CardList from "./CardList";
 import { BsStarFill } from "react-icons/bs";
 import Icon from "~/components/Icon";
 import Tooltip from "~/components/Tooltip";
+import CardList from "./CardList";
 import CardListSkeleton from "./CardListSkeleton";
+import styles from "./List.module.sass";
 
 const cx = classNames.bind(styles);
-const List = () => {
-  const [loading, setLoading] = useState(true);
+const List = ({ data }) => {
+  const [loading, setLoading] = useState(false);
   const itemsHeading = [
     {
       id: 1,
@@ -44,21 +44,6 @@ const List = () => {
     {
       id: 7,
       name: "Listed",
-    },
-  ];
-
-  const data = [
-    {
-      name: "Frogana",
-      image_url: "https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fimg.reservoir.tools%2Fimages%2Fv2%2Fmainnet%2Fz9JRSpLYGu7%252BCZoKWtAuAJXt3VAp54pSaUsIEJ3nSlXy2mBtINU59f5tUQ2c6EFv4Eddsqp6ySUiNlk%252BZnSyZyEUjg4skoxxfq6YneaRAeQj3TFEnYc4FaoWjkYhr3zY%3Fwidth%3D250",
-    },
-    {
-      name: "meowmeowmeowmeowmeowmeow",
-      image_url: "https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fimg.reservoir.tools%2Fimages%2Fv2%2Fmainnet%2Fz9JRSpLYGu7%252BCZoKWtAuAJXt3VAp54pSaUsIEJ3nSlXy2mBtINU59f5tUQ2c6EFv4Eddsqp6ySUiNlk%252BZnSyZyEUjg4skoxxfq6YneaRAeQj3TFEnYc4FaoWjkYhr3zY%3Fwidth%3D250",
-    },
-    {
-      name: "CETS",
-      image_url: "https://img-cdn.magiceden.dev/rs:fill:128:0:0/plain/https%3A%2F%2Fimg.reservoir.tools%2Fimages%2Fv2%2Fmainnet%2Fz9JRSpLYGu7%252BCZoKWtAuAJXt3VAp54pSaUsIEJ3nSlXy2mBtINU59f5tUQ2c6EFv4Eddsqp6ySUiNlk%252BZnSyZyEUjg4skoxxfq6YneaRAeQj3TFEnYc4FaoWjkYhr3zY%3Fwidth%3D250",
     },
   ];
 
@@ -106,7 +91,7 @@ const List = () => {
               </thead>
               <tbody className={cx("wrapperTb")}>
                 {loading ? (
-                  Array.from({ length: 4 }).map((_, index) => (
+                  Array.from({ length: 8 }).map((_, index) => (
                     <tr key={index} className={cx("wrapperTr")}>
                       {Array.from({ length: itemsHeading.length }).map((_, index) => (
                         <tr key={index} className={cx("wrapperTh")}>

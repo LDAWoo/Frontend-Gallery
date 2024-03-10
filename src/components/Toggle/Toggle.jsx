@@ -25,7 +25,7 @@ const Toggle = ({ title, isChecked, onChange }) => {
       <div className={`${cx("containerToggle")} ${checked ? cx("checked") : ""}`} onClick={handleChecked}>
         <span className={`${cx("toggleButton")} ${checked ? cx("checked") : ""}`} />
       </div>
-      <Title title={title} large fontMedium white />
+      {title && <Title title={title} large fontMedium white />}
     </label>
   );
 };

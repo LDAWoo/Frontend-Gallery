@@ -14,7 +14,7 @@
   }
 
   :root {
-      --max-width: 1150px;
+      --max-width: 90rem;
       --full-vh: 100vh;
       --full-dvh: 100dvh;
       --full-w: 100%;

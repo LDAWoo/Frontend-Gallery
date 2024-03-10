@@ -5,9 +5,16 @@ import Title from "~/components/Title";
 import { BiRefresh } from "react-icons/bi";
 import Toggle from "~/components/Toggle";
 import { TiArrowSortedUp } from "react-icons/ti";
+import { setGlobalState, useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 const Header = () => {
+  const [showHomeGridStyle] = useGlobalState("showHomeGridStyle");
+
+  const handleHomeStyle = () => {
+    showHomeGridStyle === "list" ? setGlobalState("showHomeGridStyle", "grid") : setGlobalState("showHomeGridStyle", "list");
+  };
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("wrapperButtonRefresh")}>
@@ -16,7 +23,7 @@ const Header = () => {
 
       <div className={cx("wrapperSwitch")}>
         <Title title="CARDS" fontSemiBold xl />
-        <Toggle />
+        <Toggle isChecked={showHomeGridStyle === "list"} onChange={handleHomeStyle} />
         <Title title="TABLE" fontSemiBold xl />
       </div>
 

@@ -1,0 +1,156 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)
+    height: var(--full-h)
+    padding-bottom: 8px 
+
+.container
+    width: var(--full-w)
+    height: var(--full-h)  
+
+.wrapperContainer
+    display: flex
+    -webkit-box-align: center
+    align-items: center
+    -webkit-box-pack: center
+    justify-content: center
+    width: var(--full-w)
+
+.wrapperContent
+    position: relative
+    margin-top: 30px
+    background: $n6
+    flex: 1 1 0%
+    border: 2px solid $n6
+    width: var(--full-w)
+    height: var(--full-h)   
+    &:hover
+        background: $n5
+        border-color: $p2
+        filter: drop-shadow($p1 0px 0px 8px)
+        .wrapperOwner
+            background-color: $p2
+
+.forwardOwner
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    opacity: 0
+    
+
+
+.content
+    display: flex
+    -webkit-box-align: center
+    align-items: center
+    flex-direction: column
+    height: var(--full-h)   
+    margin-top: -30px
+    padding: 0 8px
+    justify-content: space-between
+
+.wrapperOwner
+    padding: 2px
+    background-color: $n7
+    width: 60px
+    height: 60px
+    overflow: hidden
+
+.wrapperInfo
+    display: flex
+    flex-direction: column
+    flex: 1 1 0%
+    justify-content: space-evenly
+    margin: 0.5rem 0
+    width: var(--full-w)
+
+.contentOwnerInfo     
+    display: flex
+    flex-direction: row
+    -webkit-box-pack: center
+    justify-content: center
+    align-items: center
+    gap: 4px
+
+.ownerName
+    +text-base
+
+.wrapperIconFavoriteFill
+    cursor: pointer
+    transform: translateY(2px)
+    color: $p9   
+
+.wrapperIconFavorite 
+    cursor: pointer  
+    transform: translateY(2px)
+    color: $n2
+    transition-duration: 150ms
+    transition-property: color
+    &:hover
+        color: $p9
+
+.contentOwnerWorking        
+    display: flex
+    -webkit-box-align: center
+    align-items: center
+    flex-direction: column
+    width: var(--full-w)
+
+.wrapperSpread
+    +text-xs
+    color: $p2
+    font-weight: 600    
+
+.containerWorking
+    display: flex
+    flex-direction: row
+    -webkit-box-pack: justify
+    justify-content: space-between
+    width: var(--full-w)
+    margin-top: 0.5rem
+    margin-inline: 0px
+    margin-bottom: 0px   
+
+.contentWorkingStart
+    display: flex
+    align-items: flex-start
+    flex-direction: column
+    white-space: nowrap  
+
+.contentWorkingEnd
+    display: flex
+    align-items: flex-end
+    flex-direction: column
+    white-space: nowrap    
+
+.wrapperPrice
+    display: flex
+    align-items: flex-start
+    flex-direction: column
+    white-space: nowrap
+
+.highLightGreen    
+    font-weight: 600
+    +text-sm
+    color: $p7
+    text-shadow: $p7 0px 0px 8px
+
+.highLightPink
+    font-weight: 600
+    +text-sm
+    color: $p2
+    text-shadow: $p2 0px 0px 8px    
+
+.highLightWhite
+    font-weight: 600
+    +text-sm
+    color: $n
+    text-shadow: $p2 0px 0px 8px     
+
+.workingTitle
+    color: $n1
+    +text-xxs
+    font-weight: 500
