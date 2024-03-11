@@ -17,7 +17,7 @@ const CardGrid = ({ items }) => {
       <div className={cx("container")}>
         <div className={cx("wrapperContainer")}>
           <div className={cx("wrapperContent")}>
-            <Link className={cx("forwardOwner")} to={routesConfig.marketplace.replace(":symbol", items?.name)}></Link>
+            <Link className={cx("forwardOwner")} to={routesConfig.marketplace.replace(":symbol", items?.symbol)}></Link>
             <div className={cx("content")}>
               <div className={cx("wrapperOwner")}>
                 <Image src={items?.image_url} />
@@ -25,10 +25,10 @@ const CardGrid = ({ items }) => {
               <div className={cx("wrapperInfo")}>
                 <div className={cx("contentOwnerInfo")}>
                   {favorite ? <Icon icon={BsStarFill} size={16} classIcon={cx("wrapperIconFavoriteFill")} /> : <Icon icon={BsStar} size={16} classIcon={cx("wrapperIconFavorite")} />}
-                  <Title title={items?.name} white fontSemiBold className={cx("ownerName")} />
+                  <Title title={items?.name || items?.symbol} white fontSemiBold className={cx("ownerName")} />
                 </div>
                 <div className={cx("contentOwnerWorking")}>
-                  <p className={cx("wrapperSpread")}>Spread: {items?.spread ? items?.spread : "--"}%</p>
+                  <p className={cx("wrapperSpread")}>Floor: {items?.floorPrice ? items?.floorPrice : "--"}</p>
                   <div className={cx("containerWorking")}>
                     <div className={cx("contentWorkingStart")}>
                       <div className={cx("wrapperPrice")}>
@@ -47,14 +47,14 @@ const CardGrid = ({ items }) => {
                   <div className={cx("containerWorking")}>
                     <div className={cx("contentWorkingStart")}>
                       <div className={cx("wrapperPrice")}>
-                        <span className={cx("highLightWhite")}>{items?.listed ? items?.listed : "--"}</span>
+                        <span className={cx("highLightWhite")}>{items?.percentListed >= 0 ? items?.listed : "--"}%</span>
                       </div>
                       <span className={cx("workingTitle")}>LISTED</span>
                     </div>
                     <div className={cx("contentWorkingEnd")}>
                       <div className={cx("wrapperPrice")}>
                         <span className={cx("highLightWhite")}>
-                          {items?.listed ? items?.listed : "--"} / {items?.listed ? items?.listed : "--"}
+                          {items?.listed ? items?.listed : "--"} / {items?.supply ? items?.supply : "--"}
                         </span>
                       </div>
                       <span className={cx("workingTitle")}>LISTED</span>

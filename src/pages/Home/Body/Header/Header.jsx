@@ -12,7 +12,17 @@ const Header = () => {
   const [showHomeGridStyle] = useGlobalState("showHomeGridStyle");
 
   const handleHomeStyle = () => {
-    showHomeGridStyle === "list" ? setGlobalState("showHomeGridStyle", "grid") : setGlobalState("showHomeGridStyle", "list");
+    showHomeGridStyle === "list" ? setStyleGrid() : setStyleList();
+  };
+
+  const setStyleGrid = () => {
+    localStorage.setItem("home-gridstyle", "grid");
+    setGlobalState("showHomeGridStyle", "grid");
+  };
+
+  const setStyleList = () => {
+    localStorage.setItem("home-gridstyle", "list");
+    setGlobalState("showHomeGridStyle", "list");
   };
 
   return (

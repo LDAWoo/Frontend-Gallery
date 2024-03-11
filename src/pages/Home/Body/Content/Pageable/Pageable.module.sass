@@ -1,0 +1,42 @@
+@import '~/styles/helpers'
+
+
+.wrapper
+    display: flex
+    flex-direction: row
+    margin-top: 16px
+    width: var(--full-w)
+    align-items: center
+
+.container
+    display: flex
+    gap: 1px
+    border-radius: 3px
+    overflow: hidden
+
+.wrapperTitleShowTop
+    margin-right: 12px
+    text-transform: uppercase
+    color: $p1
+    border-radius: 5px
+    padding: 0
+    text-shadow: $p1 0px 0px 8px
+
+.button
+    border:none
+    background-color: $n6
+    color: $n1
+    cursor: pointer
+    padding: 8px 12px
+    transition-duration: 300ms
+    transition-property: color, background-color
+    &.active
+        color: $-n1
+        background-color: $n5
+        &:hover
+            background-color: $n6
+    &:hover
+        background-color: $n5
+        color: $-n1
+
+

@@ -1,5 +1,4 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import Icon from "~/components/Icon";
 import Tooltip from "~/components/Tooltip";
@@ -8,8 +7,7 @@ import CardListSkeleton from "./CardListSkeleton";
 import styles from "./List.module.sass";
 
 const cx = classNames.bind(styles);
-const List = ({ data }) => {
-  const [loading, setLoading] = useState(false);
+const List = ({ data, loading }) => {
   const itemsHeading = [
     {
       id: 1,
@@ -101,11 +99,7 @@ const List = ({ data }) => {
                     </tr>
                   ))
                 ) : (
-                  <>
-                    {data.map((items, index) => (
-                      <CardList items={items} key={index} index={index} />
-                    ))}
-                  </>
+                  <>{data && data.map((items, index) => <CardList items={items} key={index} index={index} />)}</>
                 )}
               </tbody>
             </table>
