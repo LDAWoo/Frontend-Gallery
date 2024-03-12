@@ -11,18 +11,20 @@ import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./CardList.module.sass";
 
 const cx = classNames.bind(styles);
-const CardList = ({ items, index }) => {
+const CardList = ({ items, index, onUpdateItems }) => {
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const [trendingHomeFilter] = useGlobalState("trendingHomeFilter");
   const [loading, setLoading] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
   const handleFavoriteArtist = async () => {
     if (loading) return;
-    if (!connectedAccount?.address.length > 0) {
-      setGlobalState("modalConnectedWallet", true);
+    if (!connectedAccount) {
+      setGlobalState("connectedModal", true);
       return;
     }
+
     try {
       const data = {
         id_artist: items?.id,
@@ -47,75 +49,75 @@ const CardList = ({ items, index }) => {
     }
   }, [favorites, connectedAccount, items]);
 
-  const onUpdateItems = (item) => {
-    const updatedFavoriteArtists = [...favorites.filter((f) => !(f.id_artist === item.id_artist && f.wallet_address === item.wallet_address)), item];
-    setFavorites(updatedFavoriteArtists);
+  const ComponentCardList = () => {
+    return (
+      <tr className={cx("wrapperTrTb")}>
+        <td className={cx("wrapperTd")}>
+          {favorite ? <Button icon={!loading && BsStarFill} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={16} classIcon={cx("iconStarFill")} onClick={handleFavoriteArtist} /> : <Button icon={!loading && BsStar} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={16} classIcon={cx("iconStar")} onClick={handleFavoriteArtist} />}
+          <div className={cx("position")}>{index + 1}</div>
+        </td>
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerMetaData")}>
+            <div className={cx("metaData")}>
+              <img src={items?.image_url} width="100%" height="100%" alt="metadata" />
+            </div>
+
+            <Title title={items?.name || items?.symbol} white fontSemiBold xl className={cx("wrapperOwnerName")} />
+          </Link>
+        </td>
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
+            {items?.floorPrice > 0 ? items?.floorPrice : "--"}
+            <span className={cx("wrapperChain")}>{items?.chain && items?.floorPrice > 0 === "solana" ? "SOL" : ""}</span>
+          </Link>
+        </td>
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
+            <span>{items?.sellNow ? items?.sellNow : "--"}</span>
+            <span className={cx("wrapperChain")}>{items?.chain && items?.sellNow === "solana" ? "SOL" : ""}</span>
+          </Link>
+        </td>
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
+            <span>{items?.volume ? items?.volume : "--"}</span>
+            <span className={cx("wrapperChain")}>{items?.chain && items?.volume === "solana" ? "SOL" : ""}</span>
+          </Link>
+        </td>
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
+            <span>{items?.sales ? items?.sales : "--"}</span>
+          </Link>
+        </td>
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
+            <span>{items?.totalPrice > 0 ? items?.totalPrice : "--"}</span>
+            <span className={cx("wrapperChain")}>{items?.chain === "solana" && items?.totalPrice > 0 ? "SOL" : ""}</span>
+          </Link>
+        </td>
+
+        <td className={cx("wrapperTd")}>
+          <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperListed")}>
+            <div className={cx("wrapperContent")}>
+              <div className={cx("listed")}>{items?.percentListed >= 0 ? items.percentListed : "--"}%</div>
+              <div className={cx("wrapperContentListed")}>
+                <span>{items?.listed ? items.listed : "--"}</span>
+                <span>/</span>
+                <span>{items?.supply ? items.supply : "--"}</span>
+              </div>
+            </div>
+          </Link>
+        </td>
+      </tr>
+    );
   };
 
-  return (
-    <tr className={cx("wrapperTrTb")}>
-      <td className={cx("wrapperTd")}>
-        {favorite ? <Button icon={!loading && BsStarFill} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={16} classIcon={cx("iconStarFill")} onClick={handleFavoriteArtist} /> : <Button icon={!loading && BsStar} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={16} classIcon={cx("iconStar")} onClick={handleFavoriteArtist} />}
-        <div className={cx("position")}>{index + 1}</div>
-      </td>
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerMetaData")}>
-          <div className={cx("metaData")}>
-            <img src={items?.image_url} width="100%" height="100%" alt="metadata" />
-          </div>
-
-          <Title title={items?.name || items?.symbol} white fontSemiBold xl className={cx("wrapperOwnerName")} />
-        </Link>
-      </td>
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
-          {items?.floorPrice > 0 ? items?.floorPrice : "--"}
-          <span className={cx("wrapperChain")}>{items?.chain && items?.floorPrice > 0 === "solana" ? "SOL" : ""}</span>
-        </Link>
-      </td>
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
-          <span>{items?.sellNow ? items?.sellNow : "--"}</span>
-          <span className={cx("wrapperChain")}>{items?.chain && items?.sellNow === "solana" ? "SOL" : ""}</span>
-        </Link>
-      </td>
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
-          <span>{items?.volume ? items?.volume : "--"}</span>
-          <span className={cx("wrapperChain")}>{items?.chain && items?.volume === "solana" ? "SOL" : ""}</span>
-        </Link>
-      </td>
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
-          <span>{items?.sales ? items?.sales : "--"}</span>
-        </Link>
-      </td>
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerPrice")}>
-          <span>{items?.totalPrice > 0 ? items?.totalPrice : "--"}</span>
-          <span className={cx("wrapperChain")}>{items?.chain === "solana" && items?.totalPrice > 0 ? "SOL" : ""}</span>
-        </Link>
-      </td>
-
-      <td className={cx("wrapperTd")}>
-        <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperListed")}>
-          <div className={cx("wrapperContent")}>
-            <div className={cx("listed")}>{items?.percentListed >= 0 ? items.percentListed : "--"}%</div>
-            <div className={cx("wrapperContentListed")}>
-              <span>{items?.listed ? items.listed : "--"}</span>
-              <span>/</span>
-              <span>{items?.supply ? items.supply : "--"}</span>
-            </div>
-          </div>
-        </Link>
-      </td>
-    </tr>
-  );
+  return <>{trendingHomeFilter.favorites ? <>{favorite && <ComponentCardList />}</> : <ComponentCardList />}</>;
 };
 
 CardList.propTypes = {
   items: PropTypes.object,
   index: PropTypes.number,
+  onUpdateItems: PropTypes.func,
 };
 
 export default CardList;

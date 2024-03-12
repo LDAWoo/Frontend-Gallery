@@ -19,6 +19,19 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   showFilter: false,
   showArtistInfo: false,
   showHomeGridStyle: "",
+  trendingHomeRefresh: {
+    data: [],
+    loading: false,
+  },
+  trendingHomeFilter: {
+    dataSearch: "",
+    dataFilter: {
+      floorPrice: 0,
+    },
+    modalFilter: false,
+    favorites: false,
+  },
+  showBannerHome: true,
   showMarketplaceGridStyle: "",
   showNFTDetails: {
     active: false,

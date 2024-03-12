@@ -5,9 +5,10 @@ import Tooltip from "~/components/Tooltip";
 import CardList from "./CardList";
 import CardListSkeleton from "./CardListSkeleton";
 import styles from "./List.module.sass";
+import NoDataCollection from "../NoDataCollection/NoDataCollection";
 
 const cx = classNames.bind(styles);
-const List = ({ data, loading }) => {
+const List = ({ data, loading, onUpdateItems }) => {
   const itemsHeading = [
     {
       id: 1,
@@ -99,7 +100,17 @@ const List = ({ data, loading }) => {
                     </tr>
                   ))
                 ) : (
-                  <>{data && data.map((items, index) => <CardList items={items} key={index} index={index} />)}</>
+                  <>
+                    {data && data.length > 0 ? (
+                      <>
+                        {data.map((items, index) => (
+                          <CardList items={items} key={index} index={index} onUpdateItems={onUpdateItems} />
+                        ))}
+                      </>
+                    ) : (
+                      <NoDataCollection />
+                    )}
+                  </>
                 )}
               </tbody>
             </table>

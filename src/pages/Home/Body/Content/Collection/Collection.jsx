@@ -7,7 +7,7 @@ import List from "./List/List";
 
 const cx = classNames.bind(styles);
 
-const Collection = ({ data, loading, onUpdateItems }) => {
+const Collection = ({ data, setData, loading }) => {
   const [showHomeGridStyle] = useGlobalState("showHomeGridStyle");
 
   useEffect(() => {
@@ -21,10 +21,19 @@ const Collection = ({ data, loading, onUpdateItems }) => {
     }
   }, []);
 
+  const onUpdateItems = (item) => {
+    const updateData = data.map((d) => {
+      const updatedFavorites = [...d.favoriteArtists.filter((f) => !(f.id_artist === item.id_artist && f.wallet_address === item.wallet_address)), item];
+      return { ...d, favoriteArtists: updatedFavorites };
+    });
+
+    setData(updateData);
+  };
+
   return (
     <div className={cx("wrapper")}>
       {showHomeGridStyle === "list" && <List data={data} loading={loading} onUpdateItems={onUpdateItems} />}
-      {showHomeGridStyle === "grid" && <Grid data={data} loading={loading} />}
+      {showHomeGridStyle === "grid" && <Grid data={data} loading={loading} onUpdateItems={onUpdateItems} />}
     </div>
   );
 };

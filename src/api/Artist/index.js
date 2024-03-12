@@ -30,6 +30,13 @@ export const getAllArtistByTrending = async () => {
   return response;
 };
 
+export const getAllArtistByCondition = async (data) => {
+  const response = await get(`/gardeneden/getArtistsByCondition`, {
+    params: data,
+  });
+  return response;
+};
+
 export const updateArtist = async (data) => {
   const response = await post(`/gardeneden/updateArtist`, data);
   return response;

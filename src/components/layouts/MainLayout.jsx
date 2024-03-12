@@ -32,7 +32,9 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className={`${cx("wrapper")}`}>
-      <div className={`${cx("container")}`}>{children}</div>
+      <div className={`${cx("container")}`}>
+        <div className={`${cx("wrapperScroll")} no-scrollbar scrollbarCustom`}>{children}</div>
+      </div>
       <ModalConnectedWallet />
       <ModalUserSignIn />
       <ModalCheckInboxEmail />
