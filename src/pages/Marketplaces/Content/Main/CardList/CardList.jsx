@@ -119,7 +119,7 @@ const CardList = ({ items, onUpdateItems }) => {
       <td className={cx("wrapperTd")}>
         <span className={cx("wrapperListedTime")}>--</span>
         <div className={cx("wrapperButtonAddFunds")}>
-          <Button title="Add funds" background xl fontSemiBold />
+          <Button title="Add funds" disabled={true} background xl fontSemiBold />
         </div>
       </td>
     </tr>

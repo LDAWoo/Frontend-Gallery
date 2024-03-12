@@ -1,14 +1,16 @@
 import classNames from "classnames/bind";
-import styles from "./ComponentCardList.module.sass";
 import PropTypes from "prop-types";
+import { BsStarFill } from "react-icons/bs";
+import Icon from "~/components/Icon";
 import CardList from "./CardList";
 import CardListSkeleton from "./CardList/CardListSkeleton";
+import styles from "./ComponentCardList.module.sass";
 const cx = classNames.bind(styles);
 
 const itemsHeading = [
   {
     id: 1,
-    name: "",
+    icon: BsStarFill,
   },
   {
     id: 2,
@@ -50,7 +52,8 @@ const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => 
               <tr className={cx("wrapperTr")}>
                 {itemsHeading.map((itemHead, index) => (
                   <th key={index} className={cx("wrapperTh")}>
-                    {itemHead?.name}
+                    {itemHead?.name && itemHead.name}
+                    {itemHead?.icon && <Icon icon={itemHead.icon} size={16} classIcon={cx("wrapperIconStarFill")} />}
                   </th>
                 ))}
               </tr>
@@ -67,11 +70,7 @@ const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => 
                   </tr>
                 ))
               ) : (
-                <>
-                  {data.map((items, index) => (
-                    <CardList items={items} key={index} onUpdateItems={onUpdateItems} />
-                  ))}
-                </>
+                <>{data && data.map((items, index) => <CardList items={items} key={index} onUpdateItems={onUpdateItems} />)}</>
               )}
             </tbody>
           </table>
@@ -81,6 +80,11 @@ const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => 
   );
 };
 
-ComponentCardList.propTypes = {};
+ComponentCardList.propTypes = {
+  data: PropTypes.array,
+  showNavigation: PropTypes.bool,
+  onUpdateItems: PropTypes.func,
+  loading: PropTypes.bool,
+};
 
 export default ComponentCardList;

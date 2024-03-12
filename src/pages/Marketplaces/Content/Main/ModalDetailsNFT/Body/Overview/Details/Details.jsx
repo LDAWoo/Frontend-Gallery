@@ -27,8 +27,6 @@ const Details = ({ data }) => {
     setActive(!active);
   };
 
-  console.log(data);
-
   return (
     <div className={cx("wrapper")}>
       <div className={cx("wrapperContainer")}>
