@@ -1,22 +1,23 @@
 import classNames from "classnames/bind";
-import styles from "./Header.module.sass";
-import Title from "~/components/Title";
-import Icon from "~/components/Icon";
-import Tooltip from "~/components/Tooltip";
-import { BsStar } from "react-icons/bs";
-
-import { BsStarFill } from "react-icons/bs";
-const cx = classNames.bind(styles);
-import { LuShare2 } from "react-icons/lu";
-import { setGlobalState, useGlobalState } from "~/store";
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import { LuShare2 } from "react-icons/lu";
 import { addFavoriteArtwork } from "~/api/FavoriteArtwork";
-const Header = () => {
+import Button from "~/components/Button";
+import Icon from "~/components/Icon";
+import Title from "~/components/Title";
+import Tooltip from "~/components/Tooltip";
+import { setGlobalState, useGlobalState } from "~/store";
+import styles from "./Header.module.sass";
+const cx = classNames.bind(styles);
+const Header = ({ onUpdateItems }) => {
   const [connectedAccount] = useGlobalState("connectedAccount");
+  const [loading, setLoading] = useState(false);
   const [showNFTDetails] = useGlobalState("showNFTDetails");
   const [data, setData] = useState({});
   const [favorite, setFavorite] = useState(false);
-  const [currentFavoriteArtwork] = useGlobalState("currentFavoriteArtwork");
+  const [item, setItem] = useState({});
 
   useEffect(() => {
     setData(showNFTDetails.data);
@@ -29,29 +30,45 @@ const Header = () => {
   }, [data, connectedAccount]);
 
   useEffect(() => {
-    if (Object.keys(currentFavoriteArtwork).length > 0) {
-      setFavorite(currentFavoriteArtwork.id_artwork === data?.id && currentFavoriteArtwork.wallet_address === connectedAccount?.address && currentFavoriteArtwork?.status);
+    if (Object.keys(item).length > 0) {
+      const updatedFavoriteArtWorks = data.favoriteArtWorks.map((favoriteArtWork) => {
+        return favoriteArtWork.id_artwork === item.id_artwork ? item : favoriteArtWork;
+      });
+
+      const updatedData = { ...data, favoriteArtWorks: updatedFavoriteArtWorks };
+
+      setData(updatedData);
     }
-  }, [currentFavoriteArtwork, data, connectedAccount]);
+  }, [item]);
 
   const handleFavoriteNFT = async () => {
+    if (loading) return;
+    if (!connectedAccount) {
+      setGlobalState("connectedModal", true);
+      return;
+    }
+
     try {
       const dataAddFavoriteArtwork = {
         walletAddress: connectedAccount?.address,
         idArtwork: data?.id,
       };
-
+      setLoading(true);
       const results = await addFavoriteArtwork(dataAddFavoriteArtwork);
-      setGlobalState("currentFavoriteArtwork", results);
+      onUpdateItems(results);
+      setItem(results);
+      setLoading(false);
     } catch (e) {
-      console.log(e);
+      onUpdateItems({});
+      setItem({});
+      setLoading(false);
     }
   };
 
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
-        <>{favorite ? <Icon icon={BsStarFill} size={20} classIcon={cx("iconStarFill")} onClick={handleFavoriteNFT} /> : <Icon icon={BsStar} size={20} classIcon={cx("iconStar")} onClick={handleFavoriteNFT} />}</>
+        <> {favorite ? <Button icon={!loading && BsStarFill} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={20} classIcon={cx("iconStarFill")} onClick={handleFavoriteNFT} /> : <Button icon={!loading && BsStar} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={20} classIcon={cx("iconStar")} onClick={handleFavoriteNFT} />}</>
         <Title title={data?.name || data?.symbol} white fonMedium className={cx("nameNFT")} />
         {/* <div className={cx("wrapperNft")}>
           <span>⍜</span>
@@ -68,5 +85,9 @@ const Header = () => {
       </div>
     </div>
   );
+};
+
+Header.propTypes = {
+  onUpdateItems: PropTypes.func,
 };
 export default Header;

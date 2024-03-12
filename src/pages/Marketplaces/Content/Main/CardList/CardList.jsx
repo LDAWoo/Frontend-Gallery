@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
@@ -19,6 +20,7 @@ const CardList = ({ items, onUpdateItems }) => {
   const [itemsShowModal, setItemShowModal] = useState(items);
   const [favorite, setFavorite] = useState(false);
   const [visibleAddItemsCart, setVisibleAddItemsCart] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleNFTDetail = () => {
     setGlobalState("showNFTDetails", { active: true, data: itemsShowModal });
@@ -56,22 +58,31 @@ const CardList = ({ items, onUpdateItems }) => {
   }, [carts, items]);
 
   const handleFavoriteNFT = async () => {
+    if (!connectedAccount) {
+      setGlobalState("connectedModal", true);
+      return;
+    }
     try {
       const dataAddFavoriteArtwork = {
         walletAddress: connectedAccount?.address,
         idArtwork: items?.id,
       };
-
+      setLoading(true);
       const results = await addFavoriteArtwork(dataAddFavoriteArtwork);
       onUpdateItems(results);
+      setLoading(false);
     } catch (e) {
-      console.log(e);
+      onUpdateItems({});
+      setLoading(false);
     }
   };
 
   return (
     <tr className={cx("wrapperTrTb")}>
-      <td className={cx("wrapperTd")}>{items?.price && <div className={cx("buttonAddItemCard")}>{visibleAddItemsCart ? <Icon icon={FaPlus} classIcon={cx("wrapperIconAdd")} size={12} onClick={handleAddItemCart} /> : <Icon icon={HiMiniCheck} size={12} classIcon={`${cx("buttonCheck")}`} onClick={handleRemoveItemCart} />}</div>}</td>
+      <td className={cx("wrapperTd")}>
+        {favorite ? <Button icon={!loading && BsStarFill} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={16} classIcon={cx("iconStarFill")} onClick={handleFavoriteNFT} /> : <Button icon={!loading && BsStar} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={16} classIcon={cx("iconStar")} onClick={handleFavoriteNFT} />}
+        <div className={cx("buttonAddItemCard")}>{items?.price && <>{visibleAddItemsCart ? <Icon icon={FaPlus} classIcon={cx("wrapperIconAdd")} size={12} onClick={handleAddItemCart} /> : <Icon icon={HiMiniCheck} size={12} classIcon={`${cx("buttonCheck")}`} onClick={handleRemoveItemCart} />}</>}</div>
+      </td>
       <td className={cx("wrapperTd")}>
         <div className={cx("wrapperContainerMetaData")}>
           <div className={cx("metaData")} onClick={handleNFTDetail}>
@@ -79,7 +90,6 @@ const CardList = ({ items, onUpdateItems }) => {
           </div>
 
           <Title title={items?.name} white fontSemiBold xl />
-          {favorite ? <Icon icon={BsStarFill} size={18} classIcon={cx("iconStarFill")} onClick={handleFavoriteNFT} /> : <Icon icon={BsStar} size={18} classIcon={cx("iconStar")} onClick={handleFavoriteNFT} />}
         </div>
       </td>
       <td className={cx("wrapperTd")}>
@@ -116,6 +126,9 @@ const CardList = ({ items, onUpdateItems }) => {
   );
 };
 
-CardList.propTypes = {};
+CardList.propTypes = {
+  items: PropTypes.object,
+  onUpdateItems: PropTypes.func,
+};
 
 export default CardList;

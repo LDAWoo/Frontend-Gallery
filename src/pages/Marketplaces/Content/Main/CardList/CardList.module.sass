@@ -9,15 +9,21 @@
     display: flex
     justify-content: center
     align-items: center  
-    border-radius: 999px
     overflow: hidden 
-    cursor: pointer
-    background-color: $n4
+    border-radius: 999px
 
 .wrapperIconAdd
     color: $n1
     transform: translateY(1px)
-
+    background-color: $n4
+    border-radius: 999px
+    width: var(--full-w)
+    height: var(--full-h)
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer 
+    
 .wrapperTrTb
     display: flex
     min-width: 0px
@@ -37,19 +43,20 @@
     display: flex
     align-items: center
     &:nth-child(1)
-        flex: 0 0 36px
-        width: 36px
+        flex: 0 0 72px
+        width: 72px
         left: 0px
         position: sticky
         overflow: auto
         z-index: 2
         justify-content: center
         background-color: $n7
+        gap: 8px
         
     &:nth-child(2)
         flex: 1 0 auto
         width: 160px
-        left: 36px
+        left: 72px
         position: sticky
         overflow: auto
         z-index: 2
@@ -151,4 +158,8 @@
     transition-duration: 300ms
     transition-property: color
     &:hover
-        color: rgb(255, 170, 0)    
+        color: rgb(255, 170, 0) 
+
+.buttonFavorite
+    border:none
+    background-color: transparent   

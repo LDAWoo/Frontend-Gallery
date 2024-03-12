@@ -2,7 +2,6 @@ import classNames from "classnames/bind";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import styles from "~/components/layouts/MainLayout.module.sass";
-import ModalDetailsNFT from "~/pages/Marketplaces/Content/Main/ModalDetailsNFT";
 import { setGlobalState, useGlobalState } from "~/store";
 import LoadingFullScreen from "../Loading/LoadingFullScreen";
 import ModalConnectedWallet from "../Navbar/ModalConnectedWallet";
@@ -39,7 +38,6 @@ const MainLayout = ({ children }) => {
       <ModalUserSignIn />
       <ModalCheckInboxEmail />
       <ModalAvatar />
-      <ModalDetailsNFT />
       <ModalAddAttributeNFT />
       <LoadingFullScreen isLoading={loading} />
       <ToastContainer />

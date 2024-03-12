@@ -64,7 +64,6 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
     data: [],
   },
   currentAttribute: [],
-  currentFavoriteArtwork: {},
   currentShowDisplayArtwork: null,
   currentSourceCreator: "",
   loading: false,

@@ -10,7 +10,7 @@ import styles from "./Main.module.sass";
 
 const cx = classNames.bind(styles);
 
-const Main = ({ data, loading, updateItemsStatus }) => {
+const Main = ({ data, loading, onUpdateItems }) => {
   const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
 
   const [showNavigation] = useGlobalState("showNavigation");
@@ -55,7 +55,7 @@ const Main = ({ data, loading, updateItemsStatus }) => {
                               ) : (
                                 <>
                                   {data.map((items, index) => (
-                                    <Card key={index} items={items} index={index} onUpdateItems={updateItemsStatus} />
+                                    <Card key={index} items={items} index={index} onUpdateItems={onUpdateItems} />
                                   ))}
                                 </>
                               )}
@@ -67,7 +67,7 @@ const Main = ({ data, loading, updateItemsStatus }) => {
                     {showMarketplaceGridStyle === "list" && (
                       <div className={cx("containerList")}>
                         <>
-                          <ComponentCardList data={data} onUpdateItems={updateItemsStatus} showNavigation={showNavigation} loading={loading} />
+                          <ComponentCardList data={data} onUpdateItems={onUpdateItems} showNavigation={showNavigation} loading={loading} />
                         </>
                       </div>
                     )}

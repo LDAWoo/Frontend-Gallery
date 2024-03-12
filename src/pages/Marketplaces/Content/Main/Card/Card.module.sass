@@ -63,16 +63,22 @@
     transition-duration: .15s
 
 .iconStarFill
-    color: rgb(255, 170, 0)  
-    cursor: pointer
+    color: rgb(255, 170, 0)   
+    cursor: pointer     
+    transform: translateY(1px)
 
 .iconStar
-    color: $n2
+    color: $n1
+    transform: translateY(1px)
     cursor: pointer
+    transition-duration: 300ms
     transition-property: color
-    transition-duration: 150ms
     &:hover
-       color: rgb(255, 170, 0)    
+        color: rgb(255, 170, 0) 
+
+.buttonFavorite
+    border:none
+    background-color: transparent      
 
 .wrapperButton
     position: absolute

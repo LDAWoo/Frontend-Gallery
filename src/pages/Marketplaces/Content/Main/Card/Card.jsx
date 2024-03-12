@@ -20,12 +20,12 @@ import ToolTipItemNFT from "../ToolTipItemNFT";
 const cx = classNames.bind(styles);
 
 const Card = ({ items, index, onUpdateItems }) => {
+  const [loading, setLoading] = useState(false);
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [carts] = useGlobalState("carts");
   const [favorite, setFavorite] = useState(false);
   const [active, setActive] = useState(false);
   const [itemsShowModal, setItemShowModal] = useState(items);
-
   const [listPrice, setListPrice] = useState(0);
   const [tankerFee, setTankerFee] = useState(0);
   const [royalty, setRoyalty] = useState(0);
@@ -71,16 +71,22 @@ const Card = ({ items, index, onUpdateItems }) => {
   }, [items, connectedAccount]);
 
   const handleFavoriteNFT = async () => {
+    if (!connectedAccount) {
+      setGlobalState("connectedModal", true);
+      return;
+    }
     try {
       const dataAddFavoriteArtwork = {
         walletAddress: connectedAccount?.address,
         idArtwork: items?.id,
       };
-
+      setLoading(true);
       const results = await addFavoriteArtwork(dataAddFavoriteArtwork);
       onUpdateItems(results);
+      setLoading(false);
     } catch (e) {
-      console.log(e);
+      onUpdateItems({});
+      setLoading(false);
     }
   };
 
@@ -117,7 +123,9 @@ const Card = ({ items, index, onUpdateItems }) => {
               <div className={cx("wrapperImage")}>
                 <Image src={items?.image_url || "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Farweave.net%2FTmrD-CZFywoMXI7-4CqZVwx75X07nW5OWiK-cCCPLc0%3Fext%3Dpng"} className={cx("image")} />
               </div>
-              <div className={cx("buttonFavoriteArtwork")}>{favorite ? <Icon icon={BsStarFill} size={20} classIcon={cx("iconStarFill")} onClick={handleFavoriteNFT} /> : <Icon icon={BsStar} size={20} classIcon={cx("iconStar")} onClick={handleFavoriteNFT} />}</div>
+              <div className={cx("buttonFavoriteArtwork")}>
+                {favorite ? <Button icon={!loading && BsStarFill} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={20} classIcon={cx("iconStarFill")} onClick={handleFavoriteNFT} /> : <Button icon={!loading && BsStar} loading={loading} loadingPosition="right" className={cx("buttonFavorite")} size={20} classIcon={cx("iconStar")} onClick={handleFavoriteNFT} />}
+              </div>
               {items?.price && <div className={cx("wrapperButton")}>{visibleAddItemsCart ? <Button icon={IoIosAdd} className={`${cx("buttonAdd")} ${active ? cx("active") : ""}`} size={18} onClick={handleAddItemCart} /> : <Button icon={HiMiniCheck} className={`${cx("buttonCheck")}`} size={18} onClick={handleRemoveItemCart} />}</div>}
             </div>
           </div>

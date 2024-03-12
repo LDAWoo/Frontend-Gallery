@@ -40,7 +40,7 @@ const itemsHeading = [
   },
 ];
 
-const ComponentCardList = ({ data, showNavigation, loading, updateItemsStatus }) => {
+const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={`${cx("wrapperScroll")} ${showNavigation ? cx("active") : ""} scrollbarCustom`}>
@@ -69,7 +69,7 @@ const ComponentCardList = ({ data, showNavigation, loading, updateItemsStatus })
               ) : (
                 <>
                   {data.map((items, index) => (
-                    <CardList items={items} key={index} onUpdateItems={updateItemsStatus} />
+                    <CardList items={items} key={index} onUpdateItems={onUpdateItems} />
                   ))}
                 </>
               )}
