@@ -11,6 +11,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
     active: "",
     data: [],
   },
+  showModalAppShortCut: false,
   showAreaLeft: false,
   showNavigation: true,
   showActivity: false,

@@ -1,13 +1,13 @@
 import classNames from "classnames/bind";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
-import { SlOptions } from "react-icons/sl";
 import Button from "~/components/Button";
 import Header from "~/components/Header";
 import TextInput from "~/components/TextInput";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAllArtist } from "~/api/Artist";
 import styles from "~/components/Navbar/Navbar.module.sass";
 import routesConfig from "~/configs";
 import { setGlobalState, useGlobalState } from "~/store";
@@ -16,7 +16,6 @@ import ModalFull from "../Modal/ModalFull/ModalFull";
 import Left from "./Left";
 import BodyModalDropdownMenuItem from "./ModalDropdownMenuItem/Body";
 import PanelSearch from "./PanelSearch";
-import { getAllArtist } from "~/api/Artist";
 
 const cx = classNames.bind(styles);
 
@@ -87,9 +86,19 @@ const Navbar = () => {
     if (WidthAndHeightWindow) {
       if (WidthAndHeightWindow.width > 991) {
         setShowHeaderSearch(false);
+      } else {
+        if (showPanelSearch) {
+          setShowHeaderSearch(true);
+        } else {
+          setShowHeaderSearch(false);
+        }
       }
     }
   }, [WidthAndHeightWindow, showPanelSearch]);
+
+  const handleSearchFocus = () => {
+    setGlobalState("showPanelSearch", true);
+  };
 
   return (
     <div className={`${cx("wrapper")}`}>
@@ -98,7 +107,19 @@ const Navbar = () => {
           {showHeaderSearch && (
             <div className={cx("headerSearch")}>
               <div className={cx("wrapperHeader")}>
-                <TextInput onFocus={() => setShowHeaderSearch(true)} classBorder={cx("borderInputSearch")} className={cx("contentSearch")} icon={IoSearchOutline} sizeIcon={20} copy iconCopy={SlOptions} placeholder="Search all of Garden Eden" />
+                <TextInput
+                  onFocus={() => {
+                    setShowHeaderSearch(true);
+                    handleSearchFocus();
+                  }}
+                  onFocusInput={showPanelSearch}
+                  classBorder={cx("borderInputSearch")}
+                  className={cx("contentSearch")}
+                  icon={IoSearchOutline}
+                  sizeIcon={20}
+                  currency
+                  placeholder="Search all of Garden Eden"
+                />
               </div>
               {showPanelSearch && <PanelSearch data={artists} loading={loading} />}
             </div>
@@ -128,7 +149,7 @@ const Navbar = () => {
             <div className={cx("wrapperSearch")}>
               <div className={cx("contentSearch")}>
                 <PanelSearch data={artists} loading={loading}>
-                  <TextInput onClick={handleShowPanelSearch} icon={IoSearchOutline} sizeIcon={20} copy iconCopy={SlOptions} placeholder="Search all of Garden Eden" />
+                  <TextInput onFocusInput={showPanelSearch} onFocus={() => handleSearchFocus()} onClick={handleShowPanelSearch} icon={IoSearchOutline} sizeIcon={20} copy currency={<div>⌘k</div>} classCurrency={cx("comboKeySearch")} placeholder="Search all of Garden Eden" />
                 </PanelSearch>
               </div>
             </div>

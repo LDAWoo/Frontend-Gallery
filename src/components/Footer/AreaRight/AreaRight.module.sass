@@ -10,17 +10,12 @@
     gap: 4px
     align-items: center
     justify-content: center
-    padding: 0 16px
-
-    &:nth-child(3)
-        padding: 0 0
-
-    &:nth-child(4)
-        padding: 0 0
-
-    &:not(:nth-child(4))
+    padding: 0
+    &:nth-child(1)
+        padding: 0 12px 0 0
         border-right: 1px solid $n3
-        
+    &:nth-child(4)
+        padding: 0 12px 0 12px
 
 .wrapperText
     display: flex
@@ -38,13 +33,21 @@
 
 .button
     background-color: transparent
-    border: none
+    border-right: 1px solid $n3 
     cursor: pointer
     height: var(--full-h)
     padding: 0px 12px
     transition-duration: 300ms
     &:hover
         background-color: $n6
+    &.active
+        background-color: $p1
+        &:hover
+            background-color: $p2
+
+.wrapperIcon
+    color: $n
+    transform: translateY(2px)    
 
 .buttonContent
     gap: 4px

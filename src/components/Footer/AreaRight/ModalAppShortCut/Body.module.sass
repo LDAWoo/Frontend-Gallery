@@ -1,0 +1,56 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)
+
+
+.container        
+    width: var(--full-w)
+
+.wrapperContainer
+    width: var(--full-w)
+    display: flex
+    flex-direction: column
+    gap: 4px
+
+.wrapperItems
+    display: flex
+    flex-direction: column
+    padding: 10px 16px
+    gap: 4px
+
+.itemsName
+    color: $n
+
+.wrapperName
+    display: flex
+    align-items: center
+    +text-xs
+    font-weight: 700
+    border-bottom: 1px solid $n3
+    padding: 0 0 1px 0
+
+.wrapperItem
+    display: flex
+    align-items: center
+    gap: 8px
+
+.wrapperAppKey 
+    padding: 3px
+    border-radius: 6px
+    border: 1px solid $n3
+    color: $n      
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: $n6
+    min-width: 15px
+    min-height: 15px
+    max-height: 15px
+    +text-xs
+    font-weight: 700
+
+.wrapperAppName    
+    color: $n
+    +text-xs
+    font-weight: 700

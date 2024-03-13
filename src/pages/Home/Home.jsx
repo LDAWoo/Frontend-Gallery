@@ -7,8 +7,8 @@ const cx = classNames.bind(styles);
 
 const Home = () => {
   return (
-    <div className={`${cx("wrapper")} no-scrollbar scrollbarCustom`}>
-      <div className={cx("container")}>
+    <div className={`${cx("wrapper")}`}>
+      <div className={`${cx("container")} no-scrollbar scrollbarCustom`}>
         <Banner />
         <Hero />
         <Body />

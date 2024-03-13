@@ -1,40 +1,50 @@
 import classNames from "classnames/bind";
+import { Fragment } from "react";
+import { BsKeyboard } from "react-icons/bs";
+import { CiSettings } from "react-icons/ci";
+import { dollarIcon } from "~/assets/Icon";
+import Button from "~/components/Button";
+import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import { formatPrice } from "~/format";
+import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./AreaRight.module.sass";
-import { dollarIcon } from "~/assets/Icon";
-import { CiSettings } from "react-icons/ci";
-import { LuMessageSquare } from "react-icons/lu";
-import { Fragment } from "react";
-import Icon from "~/components/Icon";
-import Button from "~/components/Button";
+import ModalAppShortCut from "./ModalAppShortCut/ModalAppShortCut";
 const cx = classNames.bind(styles);
 
-const items = [
-  {
-    type: "text",
-    price: 100.72,
-    icon: dollarIcon,
-  },
-  {
-    type: "text",
-    title: "TPS",
-    price: 2750,
-  },
-  {
-    type: "button",
-    icon: CiSettings,
-    size: 24,
-  },
-  {
-    type: "button",
-    title: "Support",
-    icon: LuMessageSquare,
-    size: 20,
-  },
-];
-
 export const AreaRight = () => {
+  const [showModalAppShortCut] = useGlobalState("showModalAppShortCut");
+
+  const items = [
+    {
+      type: "text",
+      price: 100.72,
+      icon: dollarIcon,
+    },
+    {
+      type: "button",
+      icon: CiSettings,
+      size: 20,
+    },
+    {
+      type: "button",
+      icon: BsKeyboard,
+      size: 18,
+      action: "showModalAppShortCut",
+      active: showModalAppShortCut,
+      modal: ModalAppShortCut,
+    },
+    {
+      type: "text",
+      title: "TPS",
+      price: 2750,
+    },
+  ];
+
+  const handleClick = (type, active) => {
+    setGlobalState(type, !active);
+  };
+
   return (
     <div className={cx("wrapper")}>
       {items.map((item, index) => (
@@ -55,7 +65,17 @@ export const AreaRight = () => {
               )}
             </div>
           )}
-          {item?.type === "button" && <div className={cx("wrapperItem")}>{item?.title ? <Button title={item?.title} icon={item?.icon} size={item?.size} classButton={cx("buttonContent")} className={cx("button")} /> : <Button icon={item?.icon} size={item?.size} className={cx("button")} />}</div>}
+          {item?.type === "button" && (
+            <div className={`${cx("wrapperItem")}`}>
+              {item?.modal ? (
+                <item.modal>
+                  <Button icon={item?.icon} size={item?.size} className={`${cx("button")} ${item?.active ? cx("active") : ""}`} classIcon={`${cx("wrapperIcon")} ${item?.active ? cx("active") : ""}`} onClick={() => handleClick(item?.action, item?.active)} />
+                </item.modal>
+              ) : (
+                <Button icon={item?.icon} size={item?.size} className={cx("button")} />
+              )}
+            </div>
+          )}
         </Fragment>
       ))}
     </div>
