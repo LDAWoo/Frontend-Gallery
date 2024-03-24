@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { setGlobalState, useGlobalState } from "~/store";
 
 import Card from "./Card";
@@ -10,7 +10,7 @@ import styles from "./Main.module.sass";
 
 const cx = classNames.bind(styles);
 
-const Main = ({ data, loading, onUpdateItems }) => {
+const Main = ({ data, loading }) => {
   const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
 
   const [showNavigation] = useGlobalState("showNavigation");
@@ -62,7 +62,7 @@ const Main = ({ data, loading, onUpdateItems }) => {
                                 ) : (
                                   <>
                                     {data.map((items, index) => (
-                                      <Card key={index} items={items} index={index} onUpdateItems={onUpdateItems} />
+                                      <Card key={index} items={items} index={index}/>
                                     ))}
                                   </>
                                 )}
@@ -74,7 +74,7 @@ const Main = ({ data, loading, onUpdateItems }) => {
                       {showMarketplaceGridStyle === "list" && (
                         <div className={cx("containerList")}>
                           <>
-                            <ComponentCardList data={data} onUpdateItems={onUpdateItems} showNavigation={showNavigation} loading={loading} />
+                            <ComponentCardList data={data} showNavigation={showNavigation} loading={loading} />
                           </>
                         </div>
                       )}
@@ -94,7 +94,6 @@ const Main = ({ data, loading, onUpdateItems }) => {
 Main.propTypes = {
   data: PropTypes.object,
   loading: PropTypes.bool,
-  onUpdateItems: PropTypes.func.isRequired,
 };
 
-export default Main;
+export default memo(Main);

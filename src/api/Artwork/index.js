@@ -5,6 +5,11 @@ export const getArtworkByWalletAddress = async (walletAddress) => {
   return response;
 };
 
+export const getArtworkByWalletAddressAndByCondition = async (walletAddress, symbol) => {
+  const response = await get(`/artwork/getArtworkByWalletAddressAndByCondition/${walletAddress}?symbol=${symbol}`);
+  return response;
+};
+
 export const getArtworkReviewedByEmail = async (email) => {
   const response = await get(`/artwork/getArtworkReviewedByEmail?email=${email}`);
   return response;

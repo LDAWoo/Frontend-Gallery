@@ -1,7 +1,5 @@
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
-import { BsStarFill } from "react-icons/bs";
-import Icon from "~/components/Icon";
 import CardList from "./CardList";
 import CardListSkeleton from "./CardList/CardListSkeleton";
 import styles from "./ComponentCardList.module.sass";
@@ -10,7 +8,7 @@ const cx = classNames.bind(styles);
 const itemsHeading = [
   {
     id: 1,
-    icon: BsStarFill,
+    name: "#",
   },
   {
     id: 2,
@@ -35,7 +33,7 @@ const itemsHeading = [
 
 ];
 
-const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => {
+const ComponentCardList = ({ data, showNavigation, loading }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={`${cx("wrapperScroll")} ${showNavigation ? cx("active") : ""} scrollbarCustom`}>
@@ -46,7 +44,6 @@ const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => 
                 {itemsHeading.map((itemHead, index) => (
                   <th key={index} className={cx("wrapperTh")}>
                     {itemHead?.name && itemHead.name}
-                    {itemHead?.icon && <Icon icon={itemHead.icon} size={16} classIcon={cx("wrapperIconStarFill")} />}
                   </th>
                 ))}
               </tr>
@@ -63,7 +60,7 @@ const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => 
                   </tr>
                 ))
               ) : (
-                <>{data && data.map((items, index) => <CardList items={items} key={index} onUpdateItems={onUpdateItems} />)}</>
+                <>{data && data.map((items, index) => <CardList items={items} position={index + 1} key={index} />)}</>
               )}
             </tbody>
           </table>
@@ -76,7 +73,6 @@ const ComponentCardList = ({ data, showNavigation, loading, onUpdateItems }) => 
 ComponentCardList.propTypes = {
   data: PropTypes.array,
   showNavigation: PropTypes.bool,
-  onUpdateItems: PropTypes.func,
   loading: PropTypes.bool,
 };
 

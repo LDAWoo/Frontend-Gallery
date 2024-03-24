@@ -3,6 +3,7 @@ import styles from "./Header.module.sass";
 import Information from "./Information";
 import MarketplaceTabsTip from "../MarketplaceTabsTip";
 import Navigation from "./Navigation";
+import { memo } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -24,4 +25,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

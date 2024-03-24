@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArtworkByWalletAddress } from "~/api/Artwork";
+import { getArtworkByWalletAddress, getArtworkByWalletAddressAndByCondition } from "~/api/Artwork";
 import { getListOwnerByWalletAddress } from "~/api/Owner";
 import { setGlobalState } from "~/store";
 import styles from "./Content.module.sass";
@@ -15,6 +15,7 @@ const Content = () => {
     const [loading, setLoading] = useState(false)
     const {address} = useParams();
     const [currentNFTs, setCurrentNFTs] = useState([]);
+    const [currentSymbol, setCurrentSymbol] = useState("")
 
     useEffect(() => { 
         if(!address.trim()) return;
@@ -33,25 +34,41 @@ const Content = () => {
         fetchData();
     },[address])
 
+    const handleFilterSymbol = (symbol) => {
+        if(loading) return;
+        if(symbol === currentSymbol){
+            setCurrentSymbol("") 
+            return;
+        }
+        setCurrentSymbol(symbol)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
-            try {
+            try{
+                if(!currentSymbol) {
+                    setLoading(true);
+                    const results = await getArtworkByWalletAddress(address);
+                    setCurrentNFTs(results?.listResult)
+                    setLoading(false);
+                }else{
+                    setLoading(true);
+                    const results = await getArtworkByWalletAddressAndByCondition(address, currentSymbol);
+                    setCurrentNFTs(results?.listResult)
+                    setLoading(false);
+                }
+            }catch (error) {
                 setLoading(true);
-                const results = await getArtworkByWalletAddress(address);
-                setCurrentNFTs(results?.listResult)
-                setLoading(false);
-            } catch (error) {
-                setLoading(false)
-                setCurrentNFTs([])
             }
-        }
 
+        }
         fetchData()
-    },[address])
+
+    },[currentSymbol,address])
 
     return (
         <>
-            <Filter/>
+            <Filter currentSymbol={currentSymbol} onClick={handleFilterSymbol}/>
             <div className={cx("container")}>
                 <div className={cx("wrapper")}>
                     <div className={cx("wrapper")}>

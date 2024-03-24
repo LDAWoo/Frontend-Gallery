@@ -1,19 +1,20 @@
 import classNames from "classnames/bind";
-import styles from './ItemCollection.module.sass'
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { BiCheck } from "react-icons/bi";
+import { dollarIcon } from "~/assets/Icon";
+import { imagesWalletAddress } from "~/assets/Image";
+import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
-import Icon from "~/components/Icon";
-import { dollarIcon } from "~/assets/Icon";
-import { BiCheck } from "react-icons/bi";
-import { imagesWalletAddress } from "~/assets/Image";
+import styles from './ItemCollection.module.sass';
 
 const cx = classNames.bind(styles);
 
-function ItemCollection({data}) {
+function ItemCollection({data, currentSymbol, onClick}) {
+
     return ( 
         <div className={cx('wrapper')}>
-            <div className={cx('container')}>
+            <div className={`${cx('container')} ${currentSymbol === data?.symbol && cx('active')}`} onClick={() => onClick(data?.symbol)}>
                 <div className={cx('wrapperMetadata')}>
                     <Image src={data?.image_url || imagesWalletAddress(data?.walletAddress)}/>
                 </div>
@@ -66,7 +67,9 @@ function ItemCollection({data}) {
 }
 
 ItemCollection.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    currentSymbol: PropTypes.string,
+    onClick: PropTypes.func
 }
 
 export default ItemCollection;

@@ -13,7 +13,7 @@ import ItemListCollection from "./ItemListCollection";
 
 
 const cx = classNames.bind(styles);
-const Filter = () => {
+const Filter = ({currentSymbol, onClick}) => {
 
     const dataSort= [
         { name: "Price: Low to High", value: "low_to_high" },
@@ -78,7 +78,7 @@ const Filter = () => {
                         <div className={`${cx('containerFilter')} no-scrollbar`}>
                             {tabsActive === "all" && <div className={cx('wrapperContainerFilter')}>
                                 {owners?.data && owners?.data.map((collection, index) => (
-                                    <ItemCollection key={index} data={collection}/>
+                                    <ItemCollection key={index} data={collection} currentSymbol={currentSymbol} onClick={onClick}/>
                                 ))}
                             </div>}
 
