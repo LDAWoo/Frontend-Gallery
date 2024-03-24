@@ -8,11 +8,11 @@ import Title from "~/components/Title";
 
 const cx = classNames.bind(styles);
 
-function Button({ className, classButton, background, backgroundGallery, loadingPosition, border, classIcon, active, icon, classTitle, title, size, disabled, loading, classImg, src, alt, onClick, iconPosition, srcPosition, titlePosition, fontBold, fontMedium, fontSemiBold, xxxl, xxl, xl, large, medium, small, nowrap, children, ...props }) {
+function Button({ className, classButton, background, backgroundGallery, loadingPosition,loadingPrimary, border, classIcon, active, icon, classTitle, title, size, disabled, loading, classImg, src, alt, onClick, iconPosition, srcPosition, titlePosition, fontBold, fontMedium, fontSemiBold, xxxl, xxl, xl, large, medium, small, nowrap, children, ...props }) {
   return (
     <button className={`${background ? (disabled ? cx("buttonDisabled") : `${cx("buttonBackground")}`) : ""} ${backgroundGallery ? cx("backgroundGallery") : ""} ${border ? (disabled ? "" : `${cx("buttonBorder")}`) : ""} ${disabled ? `${cx("buttonDisabled")}` : ""} ${className ? className : `${cx("button")}`}`} type="button" disabled={disabled} onClick={onClick} {...props}>
       <div className={`${classButton ? classButton : cx("classButton")}`}>
-        {loading && loadingPosition === "before" && <div className={`${cx("buttonLoading")}`} role="status" />}
+        {loading && loadingPosition === "before" && <div className={`${cx("buttonLoading")} ${loadingPrimary ? cx('primary') : ''}`} role="status" />}
         {srcPosition === "before" && src && <Image className={classImg} src={src} alt={alt} />}
         {titlePosition === "before" && <Title title={title} fontSemiBold={fontSemiBold} fontBold={fontBold} fontMedium={fontMedium} xxxl={xxxl} xxl={xxl} xl={xl} large={large} medium={medium} small={small} nowrap={nowrap} className={classTitle} />}
         {iconPosition !== "right" && icon && <Icon classIcon={classIcon} icon={icon} size={size} />}
@@ -21,7 +21,7 @@ function Button({ className, classButton, background, backgroundGallery, loading
           {titlePosition !== "before" && title && <Title title={title} fontSemiBold={fontSemiBold} fontBold={fontBold} fontMedium={fontMedium} xxxl={xxxl} xxl={xxl} xl={xl} large={large} medium={medium} small={small} nowrap={nowrap} className={classTitle} />}
         </div>
         {active && iconPosition === "right" && icon && <Icon classIcon={classIcon} icon={icon} size={size} />}
-        {loading && loadingPosition === "right" && <div className={`${cx("buttonLoading")}`} role="status" />}
+        {loading && loadingPosition === "right" && <div className={`${cx("buttonLoading")} ${loadingPrimary ? cx('primary') : ''}`} role="status" />}
         {children}
       </div>
     </button>
@@ -61,6 +61,7 @@ Button.propTypes = {
   nowrap: PropTypes.bool,
   loadingPosition: PropTypes.string,
   children: PropTypes.node,
+  loadingPrimary: PropTypes.bool
 };
 
 export default Button;

@@ -1,0 +1,79 @@
+@import '~/styles/helpers'
+
+.wrapper
+    padding: 16px
+    width: auto
+    display: flex
+    flex-direction: column
+    gap: 10px
+    background-color: $n6
+    border-radius: 20px
+
+.wrapperContainer
+    flex: 1 1 auto
+    display: flex
+    align-items: center
+
+.container
+    flex: 1 1 auto  
+    gap: 4px 
+    display: flex  
+    align-items: center       
+
+.iconWarning
+    color: $n1    
+    transform: translateY(2px)
+
+.wrapperContent
+    display: flex
+    flex-direction: column
+    text-align: right
+    align-items: flex-end
+
+.listedContent
+    display: flex
+    flex-direction: row
+    gap: 4px
+
+.currentPriceNFT
+    display: flex
+    align-items: center
+    gap: 4px
+
+.buttonBuy
+    padding: 12px
+    width: var(--full-w)
+
+.agreeContainer
+    +text-xs
+    color: $n1
+
+.titleAgree    
+    color: $-n1
+    opacity: 0.8
+    &:hover
+        color: $-n1
+        opacity: 0.9
+
+.linkAddress
+    color: $n1        
+
+.wrapperWalletAddress
+    padding: 4px 8px
+    border-radius: 12px
+    border: 1px solid $n3  
+    display: flex
+    align-items: center
+    gap: 6px
+    cursor: pointer
+    color: $n1
+    transition-property: background-color
+    transition-duration: 150ms
+    background-color: $n8  
+    &:hover
+        background-color: $n7  
+
+.toolTipOwnerWalletAddress
+    padding: 8px
+    color: $n        
+    +text-sm

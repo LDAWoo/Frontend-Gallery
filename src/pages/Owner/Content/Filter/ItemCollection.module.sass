@@ -1,0 +1,88 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)    
+
+.container
+    background-color: $n6
+    display: flex
+    gap: 8px
+    cursor: pointer
+    transition-duration: 300ms
+    transition-property: background-color
+    border-radius: 0.5rem
+    padding: 0.5rem
+    &:hover
+        background-color: $n5
+
+.wrapperMetadata    
+    min-width: 50px
+    min-height: 50px
+    max-width: 50px
+    max-height: 50px
+    border-radius: 9999px
+    overflow: hidden
+    display: flex
+    align-items: center
+    justify-content: center
+
+.wrapperName
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+    text-transform: capitalize
+
+.wrapperTick
+    display: flex
+    align-items: center
+    background-color: $p1
+    border-radius: 9999px
+    width: 12px
+    height: 12px
+    justify-content: center
+
+.wrapperIconTick
+    display: flex
+    transform: translateY(-1px)
+    color: $n    
+
+.wrapperContainer
+    display: flex
+    flex-direction: column
+    gap: 4px        
+    width: var(--full-w)
+    color: $n
+    overflow: hidden
+
+.wrapperContent    
+    display: flex
+    flex-direction: row
+    width: var(--full-w)
+    justify-content: space-between
+
+.wrapperItems
+    display: flex
+    flex-direction: column
+    gap: 4px
+
+.wrapperItem
+    color: $n1
+    +text-xxs
+    text-transform: uppercase
+    text-align: left
+    font-weight: 500
+
+.wrapperIcon
+    color: $p3
+    transform: translateY(2px)    
+
+.wrapperValue
+    color: $n
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+    font-weight: 600    
+    +text-xs
+

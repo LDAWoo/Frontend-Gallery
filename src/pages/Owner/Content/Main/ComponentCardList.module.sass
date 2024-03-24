@@ -1,0 +1,95 @@
+@import '~/styles/helpers'
+
+.wrapper
+    height: var(--full-h)
+    color: $n
+    +text-sm 
+    position: relative   
+
+.wrapperScroll
+    outline: none
+    overflow-y: auto
+    position: relative
+    overscroll-behavior: none
+    margin-top: 160px
+    height: calc( var(--full-h) - 160px )
+    +t
+      margin-top: 0px  
+      height: var(--full-h)
+    &.active
+        margin-top: 0px
+
+.wrapperContainer
+    position: absolute
+    height: var(--full-h)
+    width: var(--full-w)
+    top: 0
+
+.wrapperTable
+    border-spacing: 0px
+    overflow-anchor: none
+    width: var(--full-w)
+
+.wrapperHead
+    position: sticky
+    top: 0
+    z-index: 10    
+
+.wrapperTr
+    height: var(--full-h)
+    display: flex
+    min-width: 0
+    width: var(--full-w)
+    flex: 1 0 auto
+    background-color: $n6   
+
+.wrapperTh
+    width: auto
+    flex: 1 0 auto
+    font-weight: 500
+    height: 3rem
+    align-items: center
+    display: flex
+    &:nth-child(1)
+        flex: 0 0 72px
+        width: 72px
+        left: 0px
+        position: sticky
+        overflow: auto
+        z-index: 2
+        justify-content: start
+        background-color: $n6
+        
+    &:nth-child(2)
+        flex: 1 0 auto
+        width: 160px
+        left: 72px
+        position: sticky
+        overflow: auto
+        z-index: 2
+        background-color: $n6
+
+    &:nth-child(3)
+        flex: 1 0 auto
+        width: 150px
+
+    &:nth-child(4)
+        flex: 1 0 auto
+        width: 120px 
+
+    &:nth-child(5)
+        flex: 1 0 auto
+        width: 120px
+
+    &:nth-child(6)
+        flex: 1 0 auto
+        width: 120px
+        
+    &:nth-child(7)
+        flex: 0 0 150px    
+        width: 150px    
+
+.wrapperIconStarFill        
+    color: $p9
+    transform: translateY(2px)
+    margin-left: 15px

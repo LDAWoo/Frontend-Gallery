@@ -1,0 +1,48 @@
+@import '~/styles/helpers'
+    
+.containerHeader
+    display: flex
+    flex-direction: row
+    align-items: center
+    color: $n
+    justify-content: space-between
+    width: var(--full-w)
+
+.wrapperContent
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+    padding: 16px 0 16px 16px
+
+.wrapperCollections
+    display: flex
+    flex-direction: row
+    border-radius: 9999px
+    background-color: $p1
+    +text-xs
+    min-width: 20px
+    min-height: 20px
+    width: fit-content
+    height: fit-content
+    justify-content: center
+    align-items: center
+    font-weight: 700
+
+.wrapperHeaderRight
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0 16px 0 0 
+    gap: 8px    
+
+.buttonCloseFilter    
+    display: none
+    transform: translateY(2px)
+    cursor: pointer
+    color: $n
+    transition-duration: 150ms
+    +t
+        display: flex
+    &:hover
+        color: $n1

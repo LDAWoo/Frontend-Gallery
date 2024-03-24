@@ -34,6 +34,7 @@ const CardGrid = ({ items, onUpdateItems }) => {
       };
       setLoading(true);
       const results = await addFavoriteArtist(data);
+      console.log(results);
       onUpdateItems(results);
       setLoading(false);
     } catch (e) {

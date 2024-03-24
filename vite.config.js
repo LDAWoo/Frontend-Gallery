@@ -9,4 +9,9 @@ export default defineConfig({
       "~": "/src", // Adjust the path accordingly
     },
   },
+  server: {
+    hmr: {
+      overlay: false,
+    },
+  },
 });

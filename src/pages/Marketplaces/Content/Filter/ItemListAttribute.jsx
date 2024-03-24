@@ -15,7 +15,6 @@ const ItemListAttribute = ({ data, traitType, options = {}, onClick, handleRemov
       {data.map((item, index) => {
         const traits = options[traitType]?.filter((trait) => trait.value === item.value);
         const isActive = traits && traits.length > 0 && traits[0].value === item.value;
-
         const handleClick = () => {
           if (isActive) {
             handleRemoveAttribute(traits[0], traitType);
@@ -36,7 +35,6 @@ const ItemListAttribute = ({ data, traitType, options = {}, onClick, handleRemov
             <div className={cx("wrapperContent")}>
               <Title title={item?.value} white large fontSemiBold />
               <ItemPriceArtwork item={item} />
-              {item?.artwork && <Title title={item?.artwork.length} fontSemiBold />}
             </div>
           </div>
         );
@@ -48,6 +46,8 @@ const ItemListAttribute = ({ data, traitType, options = {}, onClick, handleRemov
 const ItemPriceArtwork = ({ item }) => {
   const [itemPriceBuyFloor, setItemPriceBuyFloor] = useState({});
   const [totalPriceSummary, setTotalPriceSummary] = useState(0);
+  const [countArtworkSupply, setCountArtworkSupply] = useState(0);
+
   useEffect(() => {
     if (item?.artwork && item?.artwork.length > 0) {
       const nftsWithPrice = item.artwork.filter((nft) => nft.price !== null && nft.price !== 0 && nft.price !== undefined && !isNaN(nft.price));
@@ -57,6 +57,7 @@ const ItemPriceArtwork = ({ item }) => {
       if (currentIndexNftFloor >= 0 && currentIndexNftFloor < nftsWithPrice.length) {
         setItemPriceBuyFloor(nftsWithPrice[currentIndexNftFloor]);
       }
+      setCountArtworkSupply(nftsWithPrice.length);
     }
   }, [item]);
 
@@ -70,12 +71,21 @@ const ItemPriceArtwork = ({ item }) => {
     }
   }, [itemPriceBuyFloor]);
   return (
-    <div className={cx("wrapperItemPriceArtwork")}>
-      <Icon icon={dollarIcon} classIcon={cx("iconSolana")} />
-      <Title title={totalPriceSummary > 0 ? totalPriceSummary : "---"} fontSemiBold />
-    </div>
+    <>
+      <div className={cx("wrapperItemPriceArtwork")}>
+        <Icon icon={dollarIcon} classIcon={cx("iconSolana")} />
+        <Title title={totalPriceSummary > 0 ? totalPriceSummary : "---"} fontSemiBold />
+      </div>
+
+      <div>
+        <Title title={countArtworkSupply} fontSemiBold white />
+        <Title title=" / " fontSemiBold white />
+        <Title title={item?.artwork.length} fontSemiBold white />
+      </div>
+    </>
   );
 };
+
 
 ItemListAttribute.propTypes = {
   data: PropTypes.array.isRequired,

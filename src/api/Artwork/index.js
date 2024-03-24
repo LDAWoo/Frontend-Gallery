@@ -20,6 +20,11 @@ export const getArtworkByIdArtist = async (id) => {
   return response;
 };
 
+export const getArtworkByIdArtistAndCondition = async (id, data) => {
+  const response = await get(`/artwork/getArtworkByIdArtistAndCondition?id=${id}&attributes=${data.attributes}&name=${data?.name}`);
+  return response;
+};
+
 export const updateArtwork = async (data) => {
   const response = await put(`/artwork/updateArtwork`, data);
   return response;

@@ -1,0 +1,84 @@
+@import '~/styles/helpers'
+
+.wrapper
+    padding: 16px
+    width: auto
+    display: flex
+    flex-direction: column
+    gap: 10px
+    background-color: $n6
+    border-radius: 20px
+
+.wrapperContainer
+    display: flex
+    flex-direction: column
+
+.containerHeader
+    display: flex
+    flex-direction: row
+    align-items: center
+    cursor: pointer
+
+.detailsIcon
+    color: $n1
+    transform: translateY(2px)    
+
+.wrapperDetails
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 8px
+    flex: 1 1 0%
+
+.wrapperArrow
+    color: $n
+    transform: translateY(2px)
+    transition-duration: 300ms
+    &.notActive
+        rotate: 180deg       
+
+.wrapperBody
+    height: 0px
+    margin-top: 0px
+    transition: height 300ms ease 0s
+    overflow: hidden
+    &.active
+        height: auto
+        margin-top: 8px
+
+
+.bodyAnimation
+    width: var(--full-w)
+    height: var(--full-h)
+
+.bodyDetails
+    display: flex
+    flex-direction: column
+    gap: 0.5rem          
+
+.containerDetails
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+
+.wrapperItems
+    display: flex
+    flex-direction: row     
+    align-items: center
+    gap: 4px
+
+.wrapperImageChain
+    width: 16px
+    height: 16px
+    transition-duration: 150ms
+    transition-property: opacity
+    &:hover
+        opacity: 0.5
+
+.wrapperLink
+    color: $n1
+    transition-property: color
+    transition-duration: 150ms
+    &:hover
+        color: $-n1

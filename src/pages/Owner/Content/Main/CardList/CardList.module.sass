@@ -1,0 +1,181 @@
+@import '~/styles/helpers'
+
+.wrapperTb
+    background-color: $n7  
+    
+.buttonAddItemCard
+    width: 20px
+    height: 20px
+    display: flex
+    justify-content: center
+    align-items: center  
+    overflow: hidden 
+    border-radius: 999px
+
+.wrapperIconAdd
+    color: $n1
+    transform: translateY(1px)
+    background-color: $n4
+    border-radius: 999px
+    width: var(--full-w)
+    height: var(--full-h)
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer 
+
+.wrapperName
+    display: flex
+    flex-direction: column
+    gap: 4px
+    overflow: hidden
+    margin-right: 8px
+
+.wrapperTick
+    display: flex
+    align-items: center
+    background-color: $p1
+    border-radius: 9999px
+    width: 12px
+    height: 12px
+    justify-content: center
+
+.wrapperIconTick
+    display: flex
+    transform: translateY(-1px)
+    color: $n        
+
+.wrapperArtist
+    display: flex
+    flex-direction: row
+    align-items: center
+    color: $n1
+    +text-xs
+    gap: 4px    
+    
+.wrapperTrTb
+    display: flex
+    min-width: 0px
+    border-bottom: 1px solid $n3
+    height: 3rem    
+    transition-duration: 200ms
+    transition-property: background-color
+    background-color: $n7
+    flex: 1 0 auto
+    &:hover
+        .wrapperTd
+            background-color: $n6 !important
+        .wrapperButtonAddFunds
+            display: flex    
+
+.wrapperTd
+    display: flex
+    align-items: center
+    &:nth-child(1)
+        flex: 0 0 72px
+        width: 72px
+        left: 0px
+        position: sticky
+        overflow: auto
+        z-index: 2
+        justify-content: center
+        background-color: $n7
+        gap: 8px
+        
+    &:nth-child(2)
+        flex: 1 0 auto
+        width: 160px
+        left: 72px
+        position: sticky
+        overflow: auto
+        z-index: 2
+        background-color: $n7
+
+    &:nth-child(3)
+        flex: 1 0 auto
+        width: 150px
+            
+    &:nth-child(4)
+        flex: 1 0 auto
+        width: 120px 
+
+    &:nth-child(5)
+        flex: 1 0 auto
+        width: 120px
+
+    &:nth-child(6)
+        flex: 1 0 auto
+        width: 120px
+    &:nth-child(7)
+        position: relative
+        flex: 0 0 auto
+        min-width: 150px
+        max-width: 100%
+
+
+.wrapperContainerMetaData
+    display: flex
+    align-items: center
+    gap: 16px
+    min-width: 0
+
+.metaData
+    display: flex
+    min-width: 36px
+    min-height: 36px
+    max-width: 36px
+    max-height: 36px
+    overflow: hidden    
+    border-radius: 0.25rem
+    cursor: pointer
+    transition-duration: 300ms
+    transition-property: opacity
+    opacity: 1
+    &:hover
+        opacity: 0.6
+
+.wrapperContainerPrice
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px        
+
+.wrapperChain
+    color: $n1
+
+.priceDFF
+    color: $p6  
+
+.wrapperLinkWalletAddress
+    color: $n1
+    &:hover
+        color: $n1
+        opacity: 0.6
+
+.wrapperListedTime
+    +text-sm            
+
+.buttonCheck
+    padding: 5px
+    cursor: pointer
+    border: none
+    border-radius: 100%
+    background-color: $p1    
+
+.iconStarFill
+    color: rgb(255, 170, 0)   
+    cursor: pointer     
+    transform: translateY(1px)
+
+.iconStar
+    color: $n1
+    transform: translateY(1px)
+    cursor: pointer
+    transition-duration: 300ms
+    transition-property: color
+    &:hover
+        color: rgb(255, 170, 0) 
+
+.buttonFavorite
+    border:none
+    background-color: transparent   

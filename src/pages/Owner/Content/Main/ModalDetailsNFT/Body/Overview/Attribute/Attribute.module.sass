@@ -1,0 +1,96 @@
+@import '~/styles/helpers'
+
+.wrapper
+    padding: 16px
+    width: auto
+    display: flex
+    flex-direction: column
+    gap: 10px
+    background-color: $n6
+    border-radius: 20px
+
+.wrapperContainer
+    display: flex
+    flex-direction: column
+
+.containerHeader
+    display: flex
+    flex-direction: row
+    align-items: center
+    cursor: pointer
+
+.wrapperAttribute
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 8px
+    flex: 1 1 0%
+
+
+.wrapperCountAttribute
+    padding: 1px 0.25rem    
+    background-color: $n2
+    +text-sm
+    color: $n
+    font-weight: 700
+    border-radius: 0.125rem
+
+.wrapperArrow
+    color: $n
+    transform: translateY(2px)
+    transition-duration: 300ms
+    &.notActive
+        rotate: 180deg
+
+.wrapperBody
+    height: 0px
+    margin-top: 0px
+    transition: height 300ms ease 0s
+    overflow: hidden
+    &.active
+        height: auto
+    &.activeAttr
+        margin-top: 8px
+
+
+.bodyAnimation
+    width: var(--full-w)
+    height: var(--full-h)
+
+.bodyAttribute
+    display: grid
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr)) 
+    gap: 0.5rem       
+
+.containerItemsAttribute
+    padding: 0.5rem
+    +text-sm
+    background-color: $n5
+    border-radius: 0.375rem
+    min-width: 170px
+    display: flex
+    flex-direction: column
+    color: $n1
+    gap: 4px
+
+.wrapperAttributePrice    
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.wrapperPercent
+    background-color: rgba(228,37,117,.2)
+    padding: 1px 4px
+    border-radius: 2px
+    color: $p2 
+    +text-sm
+
+.containerAttributePrice
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 2px    
+
+.chainIcon
+    transform: translateY(1px)
+    color: $p3

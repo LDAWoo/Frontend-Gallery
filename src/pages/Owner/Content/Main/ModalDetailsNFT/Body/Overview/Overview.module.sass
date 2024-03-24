@@ -1,0 +1,46 @@
+@import '~/styles/helpers'
+
+.wrapper
+    margin-top: 12px
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    gap: 12px
+    +t
+        flex-direction: row 
+
+.container
+    display: flex
+    flex-direction: column
+    width: 100%
+    gap: 12px
+    +t
+        width: 50%
+        
+.imageContainer
+    aspect-ratio: 20/20
+    border-radius: 20px
+    overflow: hidden
+
+.image
+    width: var(--full-w)
+    height: var(--full-h) 
+    object-fit: cover     
+
+.wrapperChartPrice
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    margin-top: 28px
+    gap: 8px
+
+.contentChartPrice
+    display: flex
+    gap: 12px
+    align-items: center
+
+.iconPriceHistory
+    color: $p1
+
+.titlePriceHistory
+    color: $n2        

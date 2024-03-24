@@ -16,7 +16,7 @@ const items = [
 ];
 
 const MarketplaceTabsTip = () => {
-  return <TabsTip data={items} params="activeTabs" />;
+  return <TabsTip data={items} />;
 };
 
 MarketplaceTabsTip.propTypes = {};

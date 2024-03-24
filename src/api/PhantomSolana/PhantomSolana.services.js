@@ -45,13 +45,14 @@ const getBalanceWalletPhantomSolana = async (address) => {
 
 const createNFTPhantomSolana = async (data) => {
   try {
-    const imageUrl = data.image;
-    const responseImage = await fetch(imageUrl);
-    const imageBuffer = await responseImage.arrayBuffer();
-    const imageBlob = new Blob([imageBuffer], { type: responseImage.headers.get("content-type") });
+    // const imageUrl = data.image;
+    // const responseImage = await fetch(imageUrl);
+    // const imageBuffer = await responseImage.arrayBuffer();
+    // const imageBlob = new Blob([imageBuffer], { type: responseImage.headers.get("content-type") });
 
+    // console.log(imageBlob);
     const formdata = new FormData();
-    formdata.append("file", imageBlob, "index.png");
+    formdata.append("file", data.image);
     formdata.append("network", network);
     formdata.append("wallet", data.address);
     formdata.append("name", data.name);
@@ -61,19 +62,20 @@ const createNFTPhantomSolana = async (data) => {
     formdata.append("max_supply", data.supply);
     formdata.append("nft_receiver", data.address);
 
-    const response = await post("/sol/v1/nft/create_detach", formdata, "", {
+    const response = await post("/sol/v1/nft/create", formdata, "", {
       headers: {
-        "x-api-key": secretKey,
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
 
-    const transaction = toTransaction(response.result.encoded_transaction);
+
+    const transaction = toTransaction(response.signature.encoded_transaction);
 
     const signedTransaction = await window.phantom.solana.signTransaction(transaction);
     const connection = new Connection("https://api.devnet.solana.com");
     const signature = await connection.sendRawTransaction(signedTransaction.serialize());
 
+    console.log(signature);
     return signature;
   } catch (error) {
     console.error("Error:", error);

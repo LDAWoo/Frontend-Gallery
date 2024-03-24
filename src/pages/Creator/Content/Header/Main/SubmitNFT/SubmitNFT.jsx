@@ -148,37 +148,37 @@ const SubmitNFT = ({ data }) => {
 
       const signature = await createNFTPhantomSolana(dataCreateNFT);
 
-      if (!signature) return;
+      // if (!signature) return;
 
-      const dataSaveCreateNFT = {
-        artistRequest: {
-          id_artist: artist.id,
-          email: artist.email,
-          symbol: data?.symbolArtist,
-          discord_url: data?.discord_url,
-          twitter_url: data?.twitter_url,
-          website_url: data?.website_url,
-        },
-        artworkRequest: {
-          id_history_create_nft: data.id,
-          wallet_address: address,
-          name: data?.name,
-          symbolNFT: data?.symbolNFT,
-          description: data?.description,
-          image_url: data?.image_url,
-          chain: connectedAccount.chain,
-          supply: data?.supply,
-          mint_date: data?.mint_date,
-        },
-        transactionRequest: {
-          signature: signature,
-        },
-        categoryIds: [data.id_primary_category, data.id_secondary_category],
-      };
+      // const dataSaveCreateNFT = {
+      //   artistRequest: {
+      //     id_artist: artist.id,
+      //     email: artist.email,
+      //     symbol: data?.symbolArtist,
+      //     discord_url: data?.discord_url,
+      //     twitter_url: data?.twitter_url,
+      //     website_url: data?.website_url,
+      //   },
+      //   artworkRequest: {
+      //     id_history_create_nft: data.id,
+      //     wallet_address: address,
+      //     name: data?.name,
+      //     symbolNFT: data?.symbolNFT,
+      //     description: data?.description,
+      //     image_url: data?.image_url,
+      //     chain: connectedAccount.chain,
+      //     supply: data?.supply,
+      //     mint_date: data?.mint_date,
+      //   },
+      //   transactionRequest: {
+      //     signature: signature,
+      //   },
+      //   categoryIds: [data.id_primary_category, data.id_secondary_category],
+      // };
 
-      await postCreateNFT(dataSaveCreateNFT);
+      // await postCreateNFT(dataSaveCreateNFT);
       setGlobalState("loading", false);
-      handleSuccessfully();
+      // handleSuccessfully();
     } catch (e) {
       console.log(e);
       setGlobalState("loading", false);

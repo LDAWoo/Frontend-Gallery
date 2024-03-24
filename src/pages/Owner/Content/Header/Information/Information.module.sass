@@ -1,0 +1,98 @@
+@import '~/styles/helpers'
+
+.contentInfo
+    flex-shrink: 0 
+    width: var(--full-w)
+    overflow: hidden
+
+.overInfo
+    width: var(--full-w)
+    display: flex
+    align-items: center
+    column-gap: 8px
+    flex-direction: row
+    padding: 16px 16px 8px 16px
+    overflow-x: auto
+    +m
+        column-gap: 12px
+    +t
+        column-gap: 16px
+
+.containerImage
+    flex-shrink: 0
+
+.imageUser
+    object-fit: cover
+    border-radius: 100%
+    height: 40px
+    +t
+        height: 80px
+
+
+.containerUser
+    display: none
+    flex-direction: column
+    justify-content: center
+    gap: 8px
+    height: var(--full-h)
+    +t 
+        display: flex
+
+.content
+    display: flex
+    gap: 16px
+    flex-direction: row
+    align-items: center
+
+.wrapperContent    
+    display: flex
+    flex-direction: column
+    gap: 12px
+    max-width: 120px
+
+.buttonAction
+    border-radius: 200px
+    padding: 0.25rem 0.625rem
+    color: $n
+
+.buttonIcon
+    color: $p3
+    transform: translateY(2px)
+
+.buttonContent
+    display: flex
+    gap: 8px
+    justify-content: center
+    align-items: center
+
+.containerBalance
+    margin-left: 16px
+    display: flex
+    gap: 16px
+    flex-shrink: 0
+
+.summaryBalance
+    display: flex
+    flex-direction: column
+
+.titleBalance
+    text-align: left
+    color: $n1
+    opacity: 0.8
+    font-size: .625rem   
+
+.valueBalance
+    margin-top: 4px
+    gap: 4px
+    display: flex
+    align-items: baseline
+
+.iconSol
+    color: $p3    
+    transform: translateY(2px)
+
+.balance
+    font-weight: 600
+    font-size: 1rem
+    line-height: 1.5rem
+    color: $n                        

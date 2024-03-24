@@ -39,7 +39,6 @@ const MainLayout = ({ children }) => {
 
     const handleKeyDown = (e) => {
       if (e.code === "ArrowUp") {
-        e.preventDefault();
         keyComboActivity.ArrowUp = true;
         keyComboAnalytics.ArrowUp = true;
         keyComboCards.ArrowUp = true;
@@ -47,32 +46,26 @@ const MainLayout = ({ children }) => {
       }
 
       if (e.key === "Control") {
-        e.preventDefault();
         keyComboSearchBar.Control = true;
       }
 
       if (e.key === "k") {
-        e.preventDefault();
         keyComboSearchBar.K = true;
       }
 
       if (e.key === "a") {
-        e.preventDefault();
         keyComboActivity.A = true;
       }
 
       if (e.key === "n") {
-        e.preventDefault();
         keyComboAnalytics.N = true;
       }
 
       if (e.key === "c") {
-        e.preventDefault();
         keyComboCards.C = true;
       }
 
       if (e.key === "f") {
-        e.preventDefault();
         keyComboFilters.F = true;
       }
 

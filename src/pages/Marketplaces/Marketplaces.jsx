@@ -26,11 +26,13 @@ const Marketplaces = () => {
         setLoading(false);
       } catch (e) {
         setLoading(true);
+        setData([]);
       }
     };
 
     fetchData();
   }, [symbol]);
+
 
   return (
     <div className={cx("wrapper")}>

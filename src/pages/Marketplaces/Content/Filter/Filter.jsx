@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { IoIosList } from "react-icons/io";
 import { MdOutlineClose } from "react-icons/md";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 import SelectOption from "~/components/SelectOption";
@@ -20,6 +21,8 @@ import ItemListAttribute from "./ItemListAttribute";
 const cx = classNames.bind(styles);
 
 const Filter = ({ data, loading }) => {
+  const navigate = useNavigate();
+  const location = useLocation()
   const [showFilter] = useGlobalState("showFilter");
   const [searchActive, setSearchActive] = useState(false);
   const [showTrait, setShowTrait] = useState("");
@@ -28,6 +31,8 @@ const Filter = ({ data, loading }) => {
   const [sortedAttributeMap, setSortedAttributeMap] = useState({});
   const [filteredData, setFilteredData] = useState({});
   const [options, setOptions] = useState({});
+  const params = new URLSearchParams(location.search);
+  const attributes = params.get("attributes");
 
   function normalizeTraitType(traitType) {
     return traitType.toLowerCase();
@@ -35,7 +40,6 @@ const Filter = ({ data, loading }) => {
 
   useEffect(() => {
     const attributeMap = {};
-
     data.forEach((artwork) => {
       artwork.attributes.forEach((attribute) => {
         const status = true;
@@ -54,6 +58,7 @@ const Filter = ({ data, loading }) => {
         }
       });
     });
+
     const attributeArray = Object.entries(attributeMap);
     attributeArray.sort((a, b) => a[0].localeCompare(b[0]));
     setSortedAttributeMap(Object.fromEntries(attributeArray));
@@ -142,6 +147,63 @@ const Filter = ({ data, loading }) => {
   const handleShowTrait = (trait) => {
     trait === showTrait ? setShowTrait("") : setShowTrait(trait);
   };
+
+  useEffect(() => {
+    const convertOptions = {};
+    if (Object.keys(options).length > 0) {
+      Object.keys(options).forEach((traitType) => {
+        convertOptions[traitType] = options[traitType].filter((option) => {
+          return option.value;
+        }).map((option) => {
+          return {
+            value: option.value
+          };
+        });
+      });
+    }
+
+    if (Object.keys(convertOptions).length > 0) {
+      let hasValue = false;
+      Object.keys(convertOptions).forEach((traitType) => {
+        const optionsArray = convertOptions[traitType];
+        if (optionsArray.length > 0) {
+            hasValue = true;
+        }else{
+          delete convertOptions[traitType]
+        }
+      })
+
+      if (hasValue) {
+        try {
+          const encodeFilter = encodeURIComponent(JSON.stringify(convertOptions));
+          if(attributes){
+            params.set("attributes", encodeFilter)
+          }else{
+            params.append("attributes", encodeFilter)
+          }
+
+          navigate(`${location.pathname}?${params.toString()}`);
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+        
+      } else {
+        navigate(location.pathname);
+      }
+  }
+    
+  },[options])
+
+  useEffect(() => {
+    if (!attributes) return;
+    try {
+        const decodedAttributes = decodeURIComponent(attributes);
+        const objects = JSON.parse(decodedAttributes);
+        setOptions(objects);
+    } catch (error) {
+        console.error("Error parsing JSON:", error);
+    }
+  },[attributes])
 
   return (
     <div className={`${cx("wrapper")} ${showFilter ? cx("show") : ""}`}>

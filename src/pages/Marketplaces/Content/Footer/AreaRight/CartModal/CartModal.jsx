@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 const CartModal = ({ children }) => {
   const [showModalCart] = useGlobalState("showModalCart");
   return (
-    <ModalFull isOpen={showModalCart} isClickOutside={false} type="showModalCart" header={<Header />} body={<Body />} classContent={cx("classContentModal")} classHeader={cx("classHeader")} classBody={cx("classBody")} topLeft>
+    <ModalFull isOpen={showModalCart} isClickOutside={true} type="showModalCart" header={<Header />} body={<Body />} classContent={cx("classContentModal")} classHeader={cx("classHeader")} classBody={cx("classBody")} topLeft>
       {children}
     </ModalFull>
   );

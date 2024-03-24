@@ -3,16 +3,15 @@ import { useEffect, useState } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { BsGrid, BsGrid3X3Gap } from "react-icons/bs";
 import { FiRefreshCw } from "react-icons/fi";
-import { IoClose, IoSearchOutline } from "react-icons/io5";
-import { PiCoins } from "react-icons/pi";
+import { IoSearchOutline } from "react-icons/io5";
 import { VscListFilter } from "react-icons/vsc";
 import { arrowDownUp } from "~/assets/Icon";
 import Button from "~/components/Button";
-import TextInput from "~/components/TextInput";
 import Tooltip from "~/components/Tooltip";
 import { setGlobalState, useGlobalState } from "~/store";
 import DropDownSort from "./DropDownSort";
 import styles from "./Navigation.module.sass";
+import Search from "./Search/Search";
 const cx = classNames.bind(styles);
 
 const Navigation = () => {
@@ -158,15 +157,6 @@ const Navigation = () => {
     );
   };
 
-  const InputNavigation = ({ group }) => {
-    return (
-      <div className={cx("wrapperSearch")}>
-        <Button icon={group?.icon} size={20} backgroundGallery className={`${cx("buttonNavigation")} ${cx("buttonSearch")} ${searchActive ? cx("active") : ""}`} onClick={() => setSearchActive(true)} />
-        <TextInput className={`${cx("inputSearch")} ${searchActive ? cx("active") : ""}`} classBorder={cx("borderInputSearch")} icon={group?.icon} sizeIcon={20} placeholder={group?.placeHolder} copy iconCopy={IoClose} onClickCopy={() => setSearchActive(false)} />
-      </div>
-    );
-  };
-
   useEffect(() => {
     if (WidthAndHeightWindow.width < 768) {
       if (showMarketplaceGridStyle === "grids") {
@@ -199,7 +189,12 @@ const Navigation = () => {
                   </>
                 )}
                 {group?.type === "dropDown" && <DropDownSort data={group.data} value={sortValue} onChange={handleSort} />}
-                {group?.type === "input" && <InputNavigation group={group} />}
+                {group?.type === "input" && 
+                <Search 
+                  group={group}
+                  searchActive={searchActive} 
+                  setSearchActive={setSearchActive}
+                />}
               </div>
             ))}
           </div>

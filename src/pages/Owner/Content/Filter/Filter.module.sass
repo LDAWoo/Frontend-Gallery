@@ -1,0 +1,132 @@
+@import '~/styles/helpers'
+
+.wrapper
+    display: none 
+    flex-shrink: 0
+    background-color: $n8
+    border-right: 1px solid $n3   
+    height: var(--full-h)
+    &.show
+        display: flex
+        width: var(--full-w)
+        +t
+            width: 280px
+        +q
+            width: 320px
+
+.wrapperContainer
+    display: flex
+    flex-direction: column
+    width: var(--full-w)
+    flex-shrink: 0
+
+.wrapperBody        
+    flex: 1 1 auto
+    height: 0px
+
+.containerBody
+    display: flex
+    flex-direction: column
+    height: var(--full-h)
+    gap: 12px
+
+.containerSearch
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    padding: 4px 16px
+    
+.wrapperSearch
+    display: flex
+    align-items: center
+    flex-direction: row   
+    width: auto
+    margin-right: 8px
+    &.active
+        width: var(--full-w)
+        margin-right: 0
+
+.button
+    min-width: 35px
+    min-height: 35px
+
+.wrapperSelectSort    
+    width: var(--full-w)
+    transition-duration: 1700ms
+    transition-property: width, opacity,
+    opacity: 100
+    visibility: visible
+    &.active
+        transition-duration: 500ms
+        width: 0
+        visibility: hidden
+        opacity: 0
+
+.inputSearch
+    display: flex
+    height: 37px 
+    transition-property: width, visibility, opacity
+    transition-duration: 500ms     
+    width: 0px
+    opacity: 0
+    visibility: hidden
+    &.active
+        width: var(--full-w)
+        visibility: visible
+        opacity: 1
+
+.containerFilter    
+    display: flex
+    flex-direction: column
+    outline: none
+    overflow-x: hidden
+    height: var(--full-h)
+    padding: 0 16px 16px 16px
+    overflow-y: auto
+    flex: 1 1 auto     
+
+.wrapperContainerFilterList
+    display: flex
+    flex-direction: column
+
+.wrapperContainerFilter
+    display: flex
+    flex-direction: column
+    gap: 8px
+
+.wrapperTabs
+    color: $n
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0 16px
+
+.containerTabs
+    display: flex
+    width: var(--full-w)
+    border-radius: 9999px
+    border: 1px solid $n3
+    background-color: $n6
+    justify-content: space-between
+
+.wrapperItem
+    width: var(--full-w)
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0.625rem 1.25rem
+    cursor: pointer
+    display: flex
+    justify-content: center
+    align-items: center
+    +text-xs
+    font-weight: 500
+    border-radius: 9999px
+    transition-duration: 300ms
+    &:hover
+        opacity: 0.8
+    &.active
+        background-color: $p1
+        &:hover
+            background-color: $p2

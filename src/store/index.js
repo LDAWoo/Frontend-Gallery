@@ -73,6 +73,9 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
     avatarName: "",
     avatarPreview: "",
   },
+  owners: {
+    data: [],
+  }
 });
 
 const truncate = (text, startChars, endChars, maxLength) => {

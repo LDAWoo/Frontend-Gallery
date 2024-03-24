@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import { FaCanadianMapleLeaf } from "react-icons/fa6";
 import { LiaBroomSolid } from "react-icons/lia";
 import { PiShoppingCartLight } from "react-icons/pi";
@@ -9,6 +9,7 @@ import Button from "~/components/Button";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./AreaRight.module.sass";
 import CartModal from "./CartModal";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
 
 const cx = classNames.bind(styles);
 
@@ -18,24 +19,29 @@ const AreaRight = ({ data, loading }) => {
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [totalPriceSummary, setTotalPriceSummary] = useState(0);
   const [itemPriceBuyFloor, setItemPriceBuyFloor] = useState({});
+  const [connectedModal] = useGlobalState("connectedModal");
+  const [showModalUserSignIn] = useGlobalState("showModalUserSignIn");
+  const { artist } = useContext(UserContext);
 
   useEffect(() => {
     if (!loading && data.length > 0) {
-      const nftsWithPrice = data.filter((nft) => nft.price !== null && nft.price !== 0 && nft.price !== undefined && !isNaN(nft.price));
+      const nftsWithPrice = data.filter((nft) => nft.price && nft.price !== 0 && !isNaN(nft.price));
       const totalPrice = nftsWithPrice.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0);
       const averagePrice = totalPrice / nftsWithPrice.length;
       const currentIndexNftFloor = Math.floor(averagePrice / 2);
       if (currentIndexNftFloor >= 0 && currentIndexNftFloor < nftsWithPrice.length) {
         setItemPriceBuyFloor(nftsWithPrice[currentIndexNftFloor]);
+      } else {
+        setItemPriceBuyFloor({});
       }
     }
   }, [data, loading]);
 
   useEffect(() => {
     if (Object.keys(itemPriceBuyFloor).length > 0) {
-      const price = itemPriceBuyFloor?.price;
-      const totalPriceFee = (price * (itemPriceBuyFloor?.fee || 0)) / 100;
-      const totalPriceRoyalty = (price * (itemPriceBuyFloor?.royalty || 0)) / 100;
+      const price = itemPriceBuyFloor.price;
+      const totalPriceFee = (price * (itemPriceBuyFloor.fee || 0)) / 100;
+      const totalPriceRoyalty = (price * (itemPriceBuyFloor.royalty || 0)) / 100;
 
       setTotalPriceSummary(price + totalPriceFee + totalPriceRoyalty);
     }
@@ -99,6 +105,7 @@ const AreaRight = ({ data, loading }) => {
           items: itemPriceBuyFloor,
           loading: loading,
           disabled: Object.keys(itemPriceBuyFloor).length === 0 && carts.length === 0,
+          change: true
         },
         {
           id: "connectWallet",
@@ -106,7 +113,8 @@ const AreaRight = ({ data, loading }) => {
           title: "Connect Wallet",
           type: "button",
           background: true,
-          active: !connectedAccount.address,
+          active: !connectedAccount.address ? true: false,
+          change: connectedModal
         },
         {
           id: "topOffers",
@@ -132,7 +140,7 @@ const AreaRight = ({ data, loading }) => {
           backgroundGallery: true,
           size: 20,
           active: true,
-          change: showModalCart,
+          change: true,
           modal: true,
           tick: carts.length > 0,
           buttonActive: true,
@@ -141,22 +149,12 @@ const AreaRight = ({ data, loading }) => {
     },
   ];
 
-  const initialState = items.flatMap((item) => item.groups.map((group) => ({ id: group?.id, active: false })));
-
-  const handleBroomAction = (state, id) => {
-    return state.map((item) => (id === item.id ? { ...item, active: !item.active } : item));
-  };
-
-  const handleShoppingCartAction = (state, id) => {
-    return state.map((item) => (id === item.id ? { ...item, active: !item.change } : item));
-  };
+  const initialState = items.flatMap((item) => item.groups.map((group) => ({ id: group.id, active: false })));
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "broom":
-        return handleBroomAction(state, action.payload);
-      case "shoppingCart":
-        return handleShoppingCartAction(state, action.payload);
+      case "toggle":
+        return state.map((item) => (action.payload === item.id ? { ...item, active: !item.active } : item));
       default:
         return state;
     }
@@ -164,20 +162,44 @@ const AreaRight = ({ data, loading }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleClick = (id) => {
-    dispatch({ type: id, payload: id });
-  };
-
   useEffect(() => {
-    state.find((s) => {
-      if (s.id === "broom") {
-        setGlobalState("showAreaLeft", s.active);
-      }
-      if (s.id === "shoppingCart") {
-        setGlobalState("showModalCart", s.active);
+    state.forEach((s) => {
+      switch (s.id) {
+        case "broom":
+          setGlobalState("showAreaLeft", s.active);
+          break;
+        case "shoppingCart":
+          setGlobalState("showModalCart", s.active);
+          break;
+        case "connectWallet":
+          setGlobalState("connectedModal", s.active);
+          break;
+        case "buyFloor":
+          if (!connectedAccount.address) {
+            setGlobalState("connectedModal",s.active);
+            break;
+          }
+          if(!Object.keys(artist).length > 0){
+            setGlobalState("showModalUserSignIn", s.active);
+          }
+          break;
+        default:
+          break;
       }
     });
   }, [state]);
+
+  useEffect(() => {
+    if(!showModalCart){
+      dispatch({ type: "toggle", payload: "shoppingCart" });
+    }
+  }, [showModalCart]);
+
+  useEffect(() => {
+    if(!showModalUserSignIn){
+      dispatch({ type: "toggle", payload: "buyFloor" });
+    }
+  },[showModalUserSignIn])
 
   return (
     <div className={cx("wrapper")}>
@@ -186,7 +208,7 @@ const AreaRight = ({ data, loading }) => {
           {item?.groups.map((group, index) => (
             <div key={index} className={`${cx("buttonWrapper")} ${group?.active ? cx("active") : group?.visible ? cx("visible") : ""}`}>
               {group?.type === "button" && group?.title ? (
-                <Button loading={group?.loading} loadingPosition="right" onClick={() => handleClick(group?.id)} background={group?.background} disabled={group?.disabled} xl fontSemiBold backgroundGallery={group?.backgroundGallery} title={group?.title} titlePosition="before" icon={group?.icon} size={group?.size} classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`}>
+                <Button loading={group?.loading} loadingPrimary loadingPosition="right" onClick={() => dispatch({ type: "toggle", payload: group.id })} background={group?.background} disabled={group?.disabled || group?.loading} xl fontSemiBold backgroundGallery={group?.backgroundGallery} title={group?.title} titlePosition="before" icon={group?.icon} size={group?.size} classButton={`${cx("buttonContent")} ${group?.title ? cx("activeIcon") : ""}`}>
                   {!group?.loading && (
                     <>
                       {group?.items && Object.keys(group?.items).length > 0 && carts.length === 0 ? (
@@ -206,10 +228,11 @@ const AreaRight = ({ data, loading }) => {
                     <CartModal>
                       <>
                         <Button
-                          onClick={() => handleClick(group?.id)}
+                          onClick={() => dispatch({ type: "toggle", payload: group.id })}
                           className={`${group?.buttonActive ? (state.find((s) => s.id === group?.id)?.active ? `${group?.change ? `${cx("buttonActive")} ${cx("active")}` : ""}` : "") : ""}`}
                           background={group?.background}
                           xl
+                          disabled={group?.disabled}
                           fontSemiBold
                           backgroundGallery={group?.backgroundGallery}
                           icon={group?.icon}
@@ -221,7 +244,7 @@ const AreaRight = ({ data, loading }) => {
                     </CartModal>
                   ) : (
                     <Button
-                      onClick={() => handleClick(group?.id)}
+                    onClick={() => dispatch({ type: "toggle", payload: group.id })}
                       className={`${group?.buttonActive ? (state.find((s) => s.id === group?.id)?.active ? `${cx("active")} ${cx("buttonActive")}` : "") : ""}`}
                       background={group?.background}
                       xl
@@ -243,7 +266,7 @@ const AreaRight = ({ data, loading }) => {
 };
 
 AreaRight.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

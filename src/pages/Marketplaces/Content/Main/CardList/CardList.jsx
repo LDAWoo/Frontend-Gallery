@@ -93,7 +93,7 @@ const CardList = ({ items, onUpdateItems }) => {
         </div>
       </td>
       <td className={cx("wrapperTd")}>
-        <span className={cx("wrapperListedTime")}>{items?.royalty ? items?.royalty + " %" : "-- %"}</span>
+        <span className={cx("wrapperListedTime")}>{items?.royalty ? items?.royalty + " %" : "--"}</span>
       </td>
       <td className={cx("wrapperTd")}>
         <div className={cx("wrapperContainerPrice")}>
@@ -106,8 +106,8 @@ const CardList = ({ items, onUpdateItems }) => {
       </td>
       <td className={cx("wrapperTd")}>
         <div className={cx("wrapperContainerPrice")}>
-          <span>{items?.price ? items?.lastPrice : "--"}</span>
-          <span className={cx("wrapperChain")}>{items?.chain === "solana" && items?.price ? "SOL" : ""}</span>
+          <span>{items?.lastPrice ? items?.lastPrice : "--"}</span>
+          <span className={cx("wrapperChain")}>{items?.chain === "solana" && items?.lastPrice ? "SOL" : ""}</span>
         </div>
       </td>
       <td className={cx("wrapperTd")}>

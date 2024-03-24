@@ -1,0 +1,41 @@
+@import '~/styles/helpers'
+
+.wrapper
+    width: var(--full-w)
+
+.containerCollection
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    background-color: $n6
+    padding: 6px 16px
+    border-bottom: 1px solid $n2
+    border-bottom: 1px solid $n2
+    cursor: pointer
+    text-transform: capitalize
+    transition-duration: 300ms
+    transition-property: background-color
+    &:hover
+        background-color: $n4
+
+.wrapperCollection
+    display: flex
+    flex: 1 1 auto
+    color: $n1
+    gap: 4px
+    overflow: hidden
+    margin-right: 4px   
+
+
+.wrapperContainerCollection
+    width: var(--full-w)
+    display: none
+    &.active
+        display: flex    
+
+.gridCollection
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr))
+    gap: 0.5rem
+    width: var(--full-w)
+    padding: 0.5rem 0
