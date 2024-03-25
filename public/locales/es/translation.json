@@ -31,5 +31,52 @@
                     "manageWallets": "Administrar Billeteras"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "Principales mercado de NFT de Solana",
+                "subTitle": "Datos más rápidos · Liquidez más profunda · Divertidas recompensas"
+            },
+            "Navigation": {
+                "cards": "Tarjetas",
+                "table": "Tabla"
+            },
+            "Filter": {
+                "trending": "Tendencia",
+                "newMints": "Nuevas Mint",
+                "1hour": "1h",
+                "24hour": "24h",
+                "7day": "7d",
+                "placeholder": "Filtrar por colección",
+                "filters": "Filtros",
+                "favorites": "Favoritos"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "Colección",
+                        "floor": "Precio mínimo",
+                        "sellNow": "Vender ahora",
+                        "volume": "Volumen",
+                        "sales": "Ventas",
+                        "totalVolume": "Volumen total",
+                        "listed": "Listado"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "Precio mínimo",
+                        "buyNow": "Comprar ahora",
+                        "sellNow": "Vender ahora",
+                        "volume": "Volumen",
+                        "sales": "Ventas",
+                        "total": "Total",
+                        "listed": "Listado"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "Mostrar Top"
+            }
         }
 }

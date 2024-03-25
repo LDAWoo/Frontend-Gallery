@@ -31,5 +31,52 @@
                     "manageWallets": "管理钱包"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "Solana领先的NFT市场",
+                "subTitle": "最快的数据 · 最深的流动性 · 有趣的奖励"
+            },
+            "Navigation": {
+                "cards": "卡片",
+                "table": "表格"
+            },
+            "Filter": {
+                "trending": "热门",
+                "newMints": "新铸造",
+                "1hour": "1小时",
+                "24hour": "24小时",
+                "7day": "7天",
+                "placeholder": "按收藏品筛选",
+                "filters": "筛选",
+                "favorites": "收藏夹"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "收藏品",
+                        "floor": "地板价",
+                        "sellNow": "立即出售",
+                        "volume": "成交量",
+                        "sales": "销量",
+                        "totalVolume": "总成交量",
+                        "listed": "已上架"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "地板价",
+                        "buyNow": "立即购买",
+                        "sellNow": "立即出售",
+                        "volume": "成交量",
+                        "sales": "销量",
+                        "total": "总量",
+                        "listed": "已上架"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "显示顶部"
+            }
         }
 }

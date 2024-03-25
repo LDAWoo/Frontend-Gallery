@@ -31,5 +31,52 @@
                     "manageWallets": "지갑 관리"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "솔라나의 선도적인 NFT 마켓",
+                "subTitle": "가장 빠른 데이터 · 깊은 유동성 · 재미있는 보상"
+            },
+            "Navigation": {
+                "cards": "카드",
+                "table": "테이블"
+            },
+            "Filter": {
+                "trending": "트렌드",
+                "newMints": "신규 Mint",
+                "1hour": "1시간",
+                "24hour": "24시간",
+                "7day": "7일",
+                "placeholder": "컬렉션으로 필터링",
+                "filters": "필터",
+                "favorites": "즐겨찾기"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "컬렉션",
+                        "floor": "최저가",
+                        "sellNow": "지금 판매",
+                        "volume": "거래량",
+                        "sales": "판매",
+                        "totalVolume": "총 거래량",
+                        "listed": "나열됨"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "최저가",
+                        "buyNow": "지금 구매",
+                        "sellNow": "지금 판매",
+                        "volume": "거래량",
+                        "sales": "판매",
+                        "total": "합계",
+                        "listed": "나열됨"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "상위 표시"
+            }
         }
 }

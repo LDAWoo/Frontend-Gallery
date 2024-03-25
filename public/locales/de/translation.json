@@ -31,5 +31,52 @@
                     "manageWallets": "Brieftaschen verwalten"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "Solanas führender NFT-Marktplatz",
+                "subTitle": "Schnellste Daten · Tiefste Liquidität · Spaßige Belohnungen"
+            },
+            "Navigation": {
+                "cards": "Karten",
+                "table": "Tabelle"
+            },
+            "Filter": {
+                "trending": "Trendig",
+                "newMints": "Neue Prägungen",
+                "1hour": "1 Stunde",
+                "24hour": "24 Stunden",
+                "7day": "7 Tage",
+                "placeholder": "Nach Sammlung filtern",
+                "filters": "Filter",
+                "favorites": "Favoriten"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "Sammlung",
+                        "floor": "Boden",
+                        "sellNow": "Jetzt verkaufen",
+                        "volume": "Volumen",
+                        "sales": "Verkäufe",
+                        "totalVolume": "Gesamtvolumen",
+                        "listed": "Aufgelistet"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "Boden",
+                        "buyNow": "Jetzt kaufen",
+                        "sellNow": "Jetzt verkaufen",
+                        "volume": "Volumen",
+                        "sales": "Verkäufe",
+                        "total": "Gesamt",
+                        "listed": "Aufgelistet"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "Top anzeigen"
+            }
         }
 }

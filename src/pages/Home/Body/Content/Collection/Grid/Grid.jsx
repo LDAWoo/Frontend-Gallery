@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import CardGrid from "./CardGrid";
 import CardGridSkeleton from "./CardGridSkeleton";
 import styles from "./Grid.module.sass";
+import PropTypes from 'prop-types'
 
 const cx = classNames.bind(styles);
 const Grid = ({ data, loading, onUpdateItems }) => {
@@ -12,6 +13,10 @@ const Grid = ({ data, loading, onUpdateItems }) => {
   );
 };
 
-Grid.propTypes = {};
+Grid.propTypes = {
+  data: PropTypes.array,
+  loading: PropTypes.bool,
+  onUpdateItems: PropTypes.func,
+};
 
 export default Grid;

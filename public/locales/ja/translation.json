@@ -31,5 +31,52 @@
                     "manageWallets": "ウォレットの管理"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "Solana のリーディング NFT マーケットプレイス",
+                "subTitle": "最速のデータ · 最も深い流動性 · 楽しいリワード"
+            },
+            "Navigation": {
+                "cards": "カード",
+                "table": "テーブル"
+            },
+            "Filter": {
+                "trending": "トレンド",
+                "newMints": "新しいミント",
+                "1hour": "1時間",
+                "24hour": "24時間",
+                "7day": "7日",
+                "placeholder": "コレクションでフィルタリング",
+                "filters": "フィルター",
+                "favorites": "お気に入り"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "コレクション",
+                        "floor": "フロア価格",
+                        "sellNow": "今すぐ売る",
+                        "volume": "ボリューム",
+                        "sales": "販売",
+                        "totalVolume": "総ボリューム",
+                        "listed": "リスト済み"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "フロア価格",
+                        "buyNow": "今すぐ購入",
+                        "sellNow": "今すぐ売る",
+                        "volume": "ボリューム",
+                        "sales": "販売",
+                        "total": "合計",
+                        "listed": "リスト済み"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "トップを表示"
+            }
         }
 }

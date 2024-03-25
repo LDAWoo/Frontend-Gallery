@@ -1,8 +1,11 @@
 import classNames from "classnames/bind";
 import styles from "./Hero.module.sass";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 
 const Hero = () => {
+  const {t} = useTranslation();
+
   return (
     <div className={cx("wrapper")}>
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100%" height="1%" className={cx("filterWrapper")} style={{}}>
@@ -45,8 +48,8 @@ const Hero = () => {
           </filter>
         </defs>
       </svg>
-      <h2 className={`${cx("heading")}`}>Solana's Leading NFT Marketplace</h2>
-      <div className={cx("content")}>FASTEST DATA · DEEPEST LIQUIDITY · FUN REWARDS</div>
+      <h2 className={`${cx("heading")}`}>{t("Home.Hero.title")}</h2>
+      <div className={cx("content")}>{t("Home.Hero.subTitle")}</div>
     </div>
   );
 };

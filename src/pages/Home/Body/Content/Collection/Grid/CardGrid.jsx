@@ -10,6 +10,7 @@ import Title from "~/components/Title";
 import routesConfig from "~/configs";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./CardGrid.module.sass";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,7 @@ const CardGrid = ({ items, onUpdateItems }) => {
   const [loading, setLoading] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const {t} = useTranslation()
 
   const handleFavoriteArtist = async () => {
     if (loading) return;
@@ -73,19 +75,19 @@ const CardGrid = ({ items, onUpdateItems }) => {
                     <Title title={items?.name || items?.symbol} white fontSemiBold className={cx("ownerName")} />
                   </div>
                   <div className={cx("contentOwnerWorking")}>
-                    <p className={cx("wrapperSpread")}>Floor: {items?.floorPrice ? items?.floorPrice : "--"}</p>
+                    <p className={cx("wrapperSpread")}>{t("Home.Collection.grid.columns.floor")}: {items?.floorPrice ? items?.floorPrice : "--"}</p>
                     <div className={cx("containerWorking")}>
                       <div className={cx("contentWorkingStart")}>
                         <div className={cx("wrapperPrice")}>
                           <span className={cx("highLightGreen")}>{items?.priceBuy ? items?.priceBuy : "--"}</span>
                         </div>
-                        <span className={cx("workingTitle")}>BUY NOW</span>
+                        <span className={cx("workingTitle")}>{t("Home.Collection.grid.columns.buyNow")}</span>
                       </div>
                       <div className={cx("contentWorkingEnd")}>
                         <div className={cx("wrapperPrice")}>
                           <span className={cx("highLightPink")}>{items?.priceSell ? items?.priceSell : "--"}</span>
                         </div>
-                        <span className={cx("workingTitle")}>SELL NOW</span>
+                        <span className={cx("workingTitle")}>{t("Home.Collection.grid.columns.sellNow")}</span>
                       </div>
                     </div>
 
@@ -94,7 +96,7 @@ const CardGrid = ({ items, onUpdateItems }) => {
                         <div className={cx("wrapperPrice")}>
                           <span className={cx("highLightWhite")}>{items?.percentListed >= 0 ? items?.listed : "--"}%</span>
                         </div>
-                        <span className={cx("workingTitle")}>LISTED</span>
+                        <span className={cx("workingTitle")}>{t("Home.Collection.grid.columns.listed")}</span>
                       </div>
                       <div className={cx("contentWorkingEnd")}>
                         <div className={cx("wrapperPrice")}>
@@ -102,7 +104,7 @@ const CardGrid = ({ items, onUpdateItems }) => {
                             {items?.listed ? items?.listed : "--"} / {items?.supply ? items?.supply : "--"}
                           </span>
                         </div>
-                        <span className={cx("workingTitle")}>LISTED</span>
+                        <span className={cx("workingTitle")}>{t("Home.Collection.grid.columns.listed")}</span>
                       </div>
                     </div>
 
@@ -111,13 +113,13 @@ const CardGrid = ({ items, onUpdateItems }) => {
                         <div className={cx("wrapperPrice")}>
                           <span className={cx("highLightWhite")}>{items?.totalPrice ? items?.totalPrice : "--"}</span>
                         </div>
-                        <span className={cx("workingTitle")}>TOTAL</span>
+                        <span className={cx("workingTitle")}>{t("Home.Collection.grid.columns.total")}</span>
                       </div>
                       <div className={cx("contentWorkingEnd")}>
                         <div className={cx("wrapperPrice")}>
                           <span className={cx("highLightWhite")}>{items?.volume ? items?.volume : "--"}</span>
                         </div>
-                        <span className={cx("workingTitle")}>VOLUME</span>
+                        <span className={cx("workingTitle")}>{t("Home.Collection.grid.columns.volume")}</span>
                       </div>
                     </div>
                   </div>

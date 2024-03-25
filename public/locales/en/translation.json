@@ -31,5 +31,52 @@
                     "manageWallets": "Manage Wallets"
                 }
             }
+        },
+        "Home":{
+            "Hero": {
+                "title": "Solana's Leading NFT Marketplace",
+                "subTitle": "Fastest Data · Deepest Liquidity · Fun Rewards"
+            },
+            "Navigation": {
+                "cards": "Cards",
+                "table": "Table"
+            },
+            "Filter":{
+                "trending": "Trending",
+                "newMints": "New Mints",
+                "1hour": "1h",
+                "24hour": "24h",
+                "7day": "7d",
+                "placeholder": "Filter by collection",
+                "filters": "Filters",
+                "favorites": "Favorites"
+            },
+            "Collection": {
+                "table": {
+                    "columns":{
+                        "collection": "Collection",
+                        "floor": "Floor",
+                        "sellNow": "Sell Now",
+                        "volume": "Volume",
+                        "sales": "Sales",
+                        "totalVolume": "Total Vol",
+                        "listed": "Listed"
+                    }
+                },
+                "grid": {
+                    "columns":{
+                        "floor": "Floor",
+                        "buyNow": "Buy Now",
+                        "sellNow": "Sell Now",
+                        "volume": "Volume",
+                        "sales": "Sales",
+                        "total": "Total",
+                        "listed": "Listed"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "Show Top"
+            }
         }
 }

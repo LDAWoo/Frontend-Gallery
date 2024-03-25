@@ -31,5 +31,52 @@
                     "manageWallets": "Quản lý Ví"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "Thị trường NFT hàng đầu của Solana",
+                "subTitle": "Dữ liệu nhanh nhất · Thanh khoản sâu nhất · Phần thưởng thú vị"
+            },
+            "Navigation": {
+                "cards": "Thẻ",
+                "table": "Bảng"
+            },
+            "Filter": {
+                "trending": "Đang thịnh hành",
+                "newMints": "Mint mới",
+                "1hour": "1 giờ",
+                "24hour": "24 giờ",
+                "7day": "7 ngày",
+                "placeholder": "Lọc theo bộ sưu tập",
+                "filters": "Bộ lọc",
+                "favorites": "Yêu thích"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "Bộ sưu tập",
+                        "floor": "Giá thấp nhất",
+                        "sellNow": "Bán ngay",
+                        "volume": "Khối lượng",
+                        "sales": "Doanh số",
+                        "totalVolume": "Tổng khối lượng",
+                        "listed": "Đã niêm yết"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "Giá thấp nhất",
+                        "buyNow": "Mua ngay",
+                        "sellNow": "Bán ngay",
+                        "volume": "Khối lượng",
+                        "sales": "Doanh số",
+                        "total": "Tổng cộng",
+                        "listed": "Đã niêm yết"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "Hiển thị Top"
+            }
         }
 }

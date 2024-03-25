@@ -4,6 +4,7 @@ import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Collection.module.sass";
 import Grid from "./Grid/Grid";
 import List from "./List/List";
+import PropTypes from 'prop-types'
 
 const cx = classNames.bind(styles);
 
@@ -37,5 +38,11 @@ const Collection = ({ data, setData, loading }) => {
     </div>
   );
 };
+
+Collection.propTypes = {
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  loading: PropTypes.bool,
+}
 
 export default Collection;

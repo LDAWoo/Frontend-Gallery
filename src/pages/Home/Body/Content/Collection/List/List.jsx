@@ -6,9 +6,13 @@ import CardList from "./CardList";
 import CardListSkeleton from "./CardListSkeleton";
 import styles from "./List.module.sass";
 import NoDataCollection from "../NoDataCollection/NoDataCollection";
+import { useTranslation } from "react-i18next";
+import PropTypes from 'prop-types'
 
 const cx = classNames.bind(styles);
 const List = ({ data, loading, onUpdateItems }) => {
+  const {t} = useTranslation();
+
   const itemsHeading = [
     {
       id: 1,
@@ -18,31 +22,31 @@ const List = ({ data, loading, onUpdateItems }) => {
     },
     {
       id: 2,
-      name: "Collection",
+      name: t('Home.Collection.table.columns.collection'),
     },
     {
       id: 2,
-      name: "Floor",
+      name: t('Home.Collection.table.columns.floor'),
     },
     {
       id: 3,
-      name: "Sell now",
+      name: t('Home.Collection.table.columns.sellNow'),
     },
     {
       id: 4,
-      name: "Volume",
+      name: t('Home.Collection.table.columns.volume'),
     },
     {
       id: 5,
-      name: "Sales",
+      name: t('Home.Collection.table.columns.sales'),
     },
     {
       id: 6,
-      name: "Total vol",
+      name: t('Home.Collection.table.columns.totalVolume'),
     },
     {
       id: 7,
-      name: "Listed",
+      name: t('Home.Collection.table.columns.listed'),
     },
   ];
 
@@ -121,6 +125,10 @@ const List = ({ data, loading, onUpdateItems }) => {
   );
 };
 
-List.propTypes = {};
+List.propTypes = {
+  data: PropTypes.array,
+  loading: PropTypes.bool,
+  onUpdateItems: PropTypes.func,
+};
 
 export default List;

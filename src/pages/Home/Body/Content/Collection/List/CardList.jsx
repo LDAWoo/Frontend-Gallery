@@ -98,7 +98,7 @@ const CardList = ({ items, index, onUpdateItems }) => {
         <td className={cx("wrapperTd")}>
           <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperListed")}>
             <div className={cx("wrapperContent")}>
-              <div className={cx("listed")}>{items?.percentListed >= 0 ? items.percentListed : "--"}%</div>
+              <div className={cx("listed")}>{items?.percentListed >= 0 ? 0 : "--"}%</div>
               <div className={cx("wrapperContentListed")}>
                 <span>{items?.listed ? items.listed : "--"}</span>
                 <span>/</span>

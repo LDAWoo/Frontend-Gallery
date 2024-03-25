@@ -31,5 +31,52 @@
                     "manageWallets": "Gérer les Portefeuilles"
                 }
             }
+        },
+        "Home": {
+            "Hero": {
+                "title": "Marché NFT leader sur Solana",
+                "subTitle": "Données les plus rapides · Liquidité la plus profonde · Récompenses amusantes"
+            },
+            "Navigation": {
+                "cards": "Cartes",
+                "table": "Tableau"
+            },
+            "Filter": {
+                "trending": "Tendance",
+                "newMints": "Nouveaux Mint",
+                "1hour": "1h",
+                "24hour": "24h",
+                "7day": "7j",
+                "placeholder": "Filtrer par collection",
+                "filters": "Filtres",
+                "favorites": "Favoris"
+            },
+            "Collection": {
+                "table": {
+                    "columns": {
+                        "collection": "Collection",
+                        "floor": "Prix minimum",
+                        "sellNow": "Vendre maintenant",
+                        "volume": "Volume",
+                        "sales": "Ventes",
+                        "totalVolume": "Volume total",
+                        "listed": "Listé"
+                    }
+                },
+                "grid": {
+                    "columns": {
+                        "floor": "Prix minimum",
+                        "buyNow": "Acheter maintenant",
+                        "sellNow": "Vendre maintenant",
+                        "volume": "Volume",
+                        "sales": "Ventes",
+                        "total": "Total",
+                        "listed": "Listé"
+                    }
+                }
+            },
+            "PageAble": {
+                "title": "Afficher le Top"
+            }
         }
 }

@@ -10,6 +10,7 @@ import styles from "./Header.module.sass";
 import { useEffect, useState } from "react";
 import { getAllArtistByCondition, getAllArtistByTrending } from "~/api/Artist";
 import useDebounced from "~/hooks/useDebounced";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 const Header = () => {
@@ -18,6 +19,7 @@ const Header = () => {
   const [showBannerHome] = useGlobalState("showBannerHome");
   const [loading, setLoading] = useState(false);
   const [trendingHomeFilter] = useGlobalState("trendingHomeFilter");
+  const {t} = useTranslation()
 
   const debouncedValue = useDebounced(trendingHomeFilter.dataSearch, 1000);
 
@@ -108,9 +110,9 @@ const Header = () => {
       </div>
 
       <div className={cx("wrapperSwitch")}>
-        <Title title="CARDS" fontSemiBold xl />
+        <Title title={t('Home.Navigation.cards')} fontSemiBold xl />
         <Toggle isChecked={showHomeGridStyle === "list"} onChange={handleHomeStyle} />
-        <Title title="TABLE" fontSemiBold xl />
+        <Title title={t('Home.Navigation.table')} fontSemiBold xl />
       </div>
 
       <div className={cx("wrapperButtonCollapse")}>

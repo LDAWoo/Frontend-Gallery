@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CgClose } from "react-icons/cg";
 import { IoSearchOutline } from "react-icons/io5";
 import Button from "~/components/Button";
@@ -11,30 +12,31 @@ const cx = classNames.bind(styles);
 const Filter = () => {
   const [active, setActive] = useState("trending");
   const [trendingHomeFilter] = useGlobalState("trendingHomeFilter");
+  const {t} = useTranslation()
 
   const itemsCollection = [
     {
-      name: "TRENDING",
+      name: t("Home.Filter.trending"),
       type: "trending",
       active: "trending",
     },
     {
-      name: "NEW MINTS",
+      name: t("Home.Filter.newMints"),
       type: "newmint",
       active: "newmint",
     },
     {
-      name: "1h",
+      name: t("Home.Filter.1hour"),
       type: "oneHour",
       active: "1Hour",
     },
     {
-      name: "24h",
+      name: t("Home.Filter.24hour"),
       type: "oneHour",
       active: "24Hour",
     },
     {
-      name: "7d",
+      name: t("Home.Filter.7day"),
       type: "oneHour",
       active: "7days",
     },
@@ -42,13 +44,13 @@ const Filter = () => {
 
   const itemsFilter = [
     {
-      name: "FILTERS",
+      name: t("Home.Filter.filters"),
       type: "trendingHomeFilter",
       key: "modalFilter",
       active: trendingHomeFilter.modalFilter,
     },
     {
-      name: "FAVORITES",
+      name: t("Home.Filter.favorites"),
       type: "trendingHomeFilter",
       key: "favorites",
       active: trendingHomeFilter.favorites,
@@ -85,7 +87,7 @@ const Filter = () => {
             ))}
           </div>
           <div className={cx("contentSearchCollection")}>
-            <TextInput className={cx("wrapperInputSearch")} value={trendingHomeFilter.dataSearch} onChange={handleSearchCollection} copy iconCopy={trendingHomeFilter.dataSearch.length > 0 && CgClose} onClickCopy={handleClearSearch} icon={IoSearchOutline} sizeIcon={18} sizeIconCopy={18} placeholder="Filter by collection" />
+            <TextInput className={cx("wrapperInputSearch")} value={trendingHomeFilter.dataSearch} onChange={handleSearchCollection} copy iconCopy={trendingHomeFilter.dataSearch.length > 0 && CgClose} onClickCopy={handleClearSearch} icon={IoSearchOutline} sizeIcon={18} sizeIconCopy={18} placeholder={t("Home.Filter.placeholder")} />
           </div>
           <div className={cx("contentFilter")}>
             {itemsFilter.map((item, index) => (

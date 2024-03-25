@@ -1,13 +1,14 @@
-import PropTypes from "prop-types";
 import classNames from "classnames/bind";
-import styles from "./Pageable.module.sass";
-import Button from "~/components/Button";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Button from "~/components/Button";
 import Title from "~/components/Title";
+import styles from "./Pageable.module.sass";
 
 const cx = classNames.bind(styles);
 const Pageable = () => {
   const [currentPage, setCurrentPage] = useState(10);
+  const {t} = useTranslation()
   const itemsRank = [
     {
       page: 10,
@@ -32,7 +33,7 @@ const Pageable = () => {
   };
   return (
     <div className={cx("wrapper")}>
-      <Title title="Show top" className={cx("wrapperTitleShowTop")} fontSemiBold xl />
+      <Title title={t("Home.PageAble.title")} className={cx("wrapperTitleShowTop")} fontSemiBold xl />
       <div className={cx("container")}>
         {itemsRank.map((rank, index) => (
           <div key={index}>
