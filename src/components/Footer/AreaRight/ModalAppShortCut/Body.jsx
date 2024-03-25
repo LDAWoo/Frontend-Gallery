@@ -1,10 +1,6 @@
-import PropTypes from "prop-types";
 
 import classNames from "classnames/bind";
 import styles from "./Body.module.sass";
-import Title from "~/components/Title";
-import { useEffect } from "react";
-
 const cx = classNames.bind(styles);
 
 const Body = () => {

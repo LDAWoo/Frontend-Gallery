@@ -16,6 +16,8 @@ import ModalFull from "../Modal/ModalFull/ModalFull";
 import Left from "./Left";
 import BodyModalDropdownMenuItem from "./ModalDropdownMenuItem/Body";
 import PanelSearch from "./PanelSearch";
+import { useTranslation } from "react-i18next";
+import Title from "../Title";
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +29,7 @@ const Navbar = () => {
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const [loading, setLoading] = useState(false);
   const [artists, setArtists] = useState([]);
+  const {t} = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,25 +48,25 @@ const Navbar = () => {
 
   const items = [
     {
-      name: "Discover",
+      name: t("Navbar.Left.items.discover"),
       type: "showModalNavbarDiscover",
       action: showModalNavbarDiscover,
       visible: showModalNavbarDiscover,
       menu: [
-        {
-          name: "Game",
-          url: "/game",
-        },
+        // {
+        //   name: "Game",
+        //   url: "/game",
+        // },
       ],
     },
     {
-      name: "Mint",
+      name: t("Navbar.Left.items.mint"),
       type: "showModalNavbarMint",
       action: showModalNavbarMint,
       visible: showModalNavbarMint,
       menu: [
         {
-          name: "Creator Dashboard",
+          name: t("Navbar.Left.items.mints.creator"),
           url: routesConfig.dashboard,
         },
       ],
@@ -118,7 +121,7 @@ const Navbar = () => {
                   icon={IoSearchOutline}
                   sizeIcon={20}
                   currency
-                  placeholder="Search all of Garden Eden"
+                  placeholder={t("Navbar.Search.placeholder")}
                 />
               </div>
               {showPanelSearch && <PanelSearch data={artists} loading={loading} />}
@@ -140,7 +143,7 @@ const Navbar = () => {
                 {items.map((item, index) => (
                   <ModalFull bottomRight type={item?.type} key={index} isOpen={item?.visible} classContent={cx("classContentModalDropdownMenuItem")} classClose={cx("classCloseModalDropdownMenuItem")} classHeader={cx("classHeaderModalDropdownMenuItem")} classBody={cx("classBodyModalDropdownMenuItem")} body={<BodyModalDropdownMenuItem data={item?.menu} />}>
                     <span className={cx("item")} onClick={() => handleShowDropdownMenuItem(item?.type, item?.action)}>
-                      {item?.name}
+                      <Title title={item?.name}/>
                     </span>
                   </ModalFull>
                 ))}
@@ -149,7 +152,7 @@ const Navbar = () => {
             <div className={cx("wrapperSearch")}>
               <div className={cx("contentSearch")}>
                 <PanelSearch data={artists} loading={loading}>
-                  <TextInput onFocusInput={showPanelSearch} onFocus={() => handleSearchFocus()} onClick={handleShowPanelSearch} icon={IoSearchOutline} sizeIcon={20} copy currency={<div>⌘k</div>} classCurrency={cx("comboKeySearch")} placeholder="Search all of Garden Eden" />
+                  <TextInput onFocusInput={showPanelSearch} onFocus={() => handleSearchFocus()} onClick={handleShowPanelSearch} icon={IoSearchOutline} sizeIcon={20} copy currency={<div>⌘k</div>} classCurrency={cx("comboKeySearch")} placeholder={t("Navbar.Search.placeholder")} />
                 </PanelSearch>
               </div>
             </div>

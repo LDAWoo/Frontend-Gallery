@@ -1,0 +1,35 @@
+{
+        "Navbar": {
+            "Left": {
+                "items": {
+                    "discover": "발견",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "크리에이터 대시 보드"
+                    }
+                }
+            },
+            "Search": {
+                "placeholder": "가든 에덴 전체 검색",
+                "collections": "컬렉션",
+                "floor": "바닥",
+                "totalVolume": "총 용량",
+                "loadings": "로딩 중"
+            },
+            "Right": {
+                "connectWallet": "지갑 연결",
+                "main": "메인",
+                "mains": {
+                    "connectDifferent": "다른 지갑 연결",
+                    "disconnect": "연결 끊기"
+                },
+                "items": {
+                    "myItems": "내 품목",
+                    "rewards": "보상",
+                    "signIn": "로그인",
+                    "accountSettings": "계정 설정",
+                    "manageWallets": "지갑 관리"
+                }
+            }
+        }
+}

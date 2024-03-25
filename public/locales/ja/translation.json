@@ -1,0 +1,35 @@
+{
+        "Navbar":{
+            "Left":{
+                "items":{
+                    "discover": "発見する",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "クリエイターダッシュボード"
+                    }
+                }
+            },
+            "Search":{
+                "placeholder": "全体の Garden Eden を検索",
+                "collections": "コレクション",
+                "floor": "フロア",
+                "totalVolume": "総容積",
+                "loadings": "読み込み中"
+            },
+            "Right":{
+                "connectWallet": "ウォレットに接続",
+                "main": "メイン",
+                "mains": {
+                    "connectDifferent": "別のウォレットに接続",
+                    "disconnect": "切断"
+                },
+                "items": {
+                    "myItems": "私のアイテム",
+                    "rewards": "報酬",
+                    "signIn": "サインイン",
+                    "accountSettings": "アカウント設定",
+                    "manageWallets": "ウォレットの管理"
+                }
+            }
+        }
+}

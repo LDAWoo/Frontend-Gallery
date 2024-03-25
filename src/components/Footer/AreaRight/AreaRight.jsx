@@ -10,10 +10,12 @@ import { formatPrice } from "~/format";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./AreaRight.module.sass";
 import ModalAppShortCut from "./ModalAppShortCut/ModalAppShortCut";
+import ModalAppSettings from "./ModalAppSettings/ModalAppSettings";
 const cx = classNames.bind(styles);
 
 export const AreaRight = () => {
   const [showModalAppShortCut] = useGlobalState("showModalAppShortCut");
+  const [showModalAppSettings] = useGlobalState("showModalAppSettings");
 
   const items = [
     {
@@ -25,6 +27,9 @@ export const AreaRight = () => {
       type: "button",
       icon: CiSettings,
       size: 20,
+      action: "showModalAppSettings",
+      active: showModalAppSettings,
+      modal: ModalAppSettings,
     },
     {
       type: "button",

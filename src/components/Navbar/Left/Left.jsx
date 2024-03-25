@@ -15,6 +15,7 @@ import BodyModalUserDropDown from "../ModalUserDropDown/Body";
 import HeaderModalUserDropDown from "../ModalUserDropDown/Header";
 import PropTypes from "prop-types";
 import { imagesWalletAddress } from "~/assets/Image";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 
 const Left = ({ setShowHeaderSearch }) => {
@@ -24,6 +25,7 @@ const Left = ({ setShowHeaderSearch }) => {
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const [showDropdown, setShowDropdown] = useState(false);
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
+  const {t} = useTranslation()
 
   const handleShowDropDown = () => {
     setShowDropdown(true);
@@ -66,11 +68,11 @@ const Left = ({ setShowHeaderSearch }) => {
       ) : (
         <div className={cx("wrapperConnected")}>
           <div className={cx("contentConnected")}>
-            <Button className={cx("buttonConnected")} background title="Connect Wallet" onClick={handleConnectedWallet} />
+            <Button className={cx("buttonConnected")} background title={t("Navbar.Right.connectWallet")} onClick={handleConnectedWallet} />
             <Button backgroundGallery fontMedium classButton={cx("contentButtonDropdown")} icon={IoIosArrowDown} size={18} onClick={handleShowDropDown} />
             <div className={`${showDropdown ? cx("showDropDown") : cx("hiddenDropDown")} ${cx("wrapperDropdown")}`}>
               <div className={cx("headerDropdown")}>
-                <Button className={cx("buttonConnected")} fontMedium background title="Connect Wallet" onClick={handleConnectedWallet} />
+                <Button className={cx("buttonConnected")} fontMedium background title={t("Navbar.Right.connectWallet")} onClick={handleConnectedWallet} />
                 <Button icon={MdOutlineClose} size={24} classIcon={cx("buttonCloseDropdown")} onClick={handleCloseDropDown} />
               </div>
             </div>

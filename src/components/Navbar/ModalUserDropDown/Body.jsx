@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { disconnectedWalletMetaMaskEthereum } from "~/api/MetaMaskEthereum/MetaMaskEthereum.services";
 import { disconnectedWalletPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
@@ -8,10 +9,9 @@ import { UserContext } from "~/components/Contexts/AppUserProvider";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import routesConfig from "~/configs";
-import removeCookie from "~/hooks/useRegisterRemoveCookie";
+import setCookie from "~/hooks/useRegisterSetCookie";
 import { setGlobalState, truncate, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
-import setCookie from "~/hooks/useRegisterSetCookie";
 const cx = classNames.bind(styles);
 
 const Body = () => {
@@ -21,13 +21,15 @@ const Body = () => {
   const [closeModalUserDropDown] = useGlobalState("closeModalUserDropDown");
   const [showModalUserSignIn] = useGlobalState("showModalUserSignIn");
   const { artist, setArtist } = useContext(UserContext);
+  const {t} = useTranslation();
+
   const items = [
     {
       id: "blockchain",
       groups: [
         {
           icon: dollarIcon,
-          name: "Main",
+          name: t("Navbar.Right.main"),
           balances: balances,
           chain: connectedAccount.chain === "solana" ? " SOL" : "",
           actions: [
@@ -39,7 +41,7 @@ const Body = () => {
             },
             {
               id: "addFunds",
-              name: "Add Funds",
+              name: "",
               active: true,
             },
           ],
@@ -50,11 +52,11 @@ const Body = () => {
           actions: [
             {
               id: "connectDifferentWallet",
-              name: "Connect Different Wallet",
+              name: t("Navbar.Right.mains.connectDifferent"),
             },
             {
               id: "disconnect",
-              name: "Disconnect",
+              name: t("Navbar.Right.mains.disconnect"),
             },
           ],
         },
@@ -64,22 +66,22 @@ const Body = () => {
       id: "menu",
       groups: [
         {
-          name: "My Items",
+          name: t("Navbar.Right.items.myItems"),
           url: routesConfig.profile,
         },
         {
-          name: "Rewards",
-          subName: "Sign in",
+          name: t("Navbar.Right.items.rewards"),
+          subName: t("Navbar.Right.items.signIn"),
           type: "showModalUserSignIn",
           modal: showModalUserSignIn,
           active: Object.keys(artist).length > 0,
         },
         {
-          name: "Account Settings",
+          name: t("Navbar.Right.items.accountSettings"),
           url: routesConfig.profile + "?tab=settings",
         },
         {
-          name: "Manage Wallets",
+          name: t("Navbar.Right.items.manageWallets"),
           url: routesConfig.profile + "?tab=manage-wallet",
         },
       ],

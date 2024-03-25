@@ -1,0 +1,35 @@
+{
+        "Navbar":{
+            "Left":{
+                "items":{
+                    "discover": "Khám phá",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "Bảng điều khiển Tạo"
+                    }
+                }
+            },
+            "Search":{
+                "placeholder": "Tìm kiếm trong toàn bộ Garden Eden",
+                "collections": "Bộ sưu tập",
+                "floor": "Sàn",
+                "totalVolume": "Tổng Thể tích",
+                "loadings": "Đang tải"
+            },
+            "Right":{
+                "connectWallet": "Kết nối Ví",
+                "main": "Chính",
+                "mains": {
+                    "connectDifferent": "Kết nối Ví Khác",
+                    "disconnect": "Ngắt kết nối"
+                },
+                "items": {
+                    "myItems": "Các mặt hàng của tôi",
+                    "rewards": "Phần thưởng",
+                    "signIn": "Đăng nhập",
+                    "accountSettings": "Cài đặt tài khoản",
+                    "manageWallets": "Quản lý Ví"
+                }
+            }
+        }
+}

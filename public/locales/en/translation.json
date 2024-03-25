@@ -1,0 +1,35 @@
+{
+        "Navbar":{
+            "Left":{
+                "items":{
+                    "discover": "Discover",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "Creator Dashboard"
+                    }
+                }
+            },
+            "Search":{
+                "placeholder": "Search all of Garden Eden",
+                "collections": "Collections",
+                "floor": "Floor",
+                "totalVolume": "Total Volume",
+                "loadings": "Loading"
+            },
+            "Right":{
+                "connectWallet": "Connect Wallet",
+                "main": "Main",
+                "mains": {
+                    "connectDifferent": "Connect Different Wallet",
+                    "disconnect": "Disconnect"
+                },
+                "items": {
+                    "myItems": "My Items",
+                    "rewards": "Rewards",
+                    "signIn": "Sign in",
+                    "accountSettings": "Account Settings",
+                    "manageWallets": "Manage Wallets"
+                }
+            }
+        }
+}

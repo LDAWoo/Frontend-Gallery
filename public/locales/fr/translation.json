@@ -1,0 +1,35 @@
+{
+        "Navbar":{
+            "Left":{
+                "items":{
+                    "discover": "Découvrir",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "Tableau de bord du créateur"
+                    }
+                }
+            },
+            "Search":{
+                "placeholder": "Rechercher dans tout Garden Eden",
+                "collections": "Collections",
+                "floor": "Étage",
+                "totalVolume": "Volume total",
+                "loadings": "Chargement"
+            },
+            "Right":{
+                "connectWallet": "Connecter le Portefeuille",
+                "main": "Principal",
+                "mains": {
+                    "connectDifferent": "Connecter un Portefeuille Différent",
+                    "disconnect": "Déconnecter"
+                },
+                "items": {
+                    "myItems": "Mes Articles",
+                    "rewards": "Récompenses",
+                    "signIn": "Se connecter",
+                    "accountSettings": "Paramètres du compte",
+                    "manageWallets": "Gérer les Portefeuilles"
+                }
+            }
+        }
+}

@@ -1,112 +1,5 @@
 @import '~/styles/helpers'
 
-.wrapper
-    width: var(--full-w)
-    height: calc( var(--full-h) - 50px )
-    position: fixed
-    top: 49.5px
-    left: 0
-    background-color: $n7
-    transition-property: opacity
-    transition-duration: 150ms
-    transition-timing-function: ease
-    +t
-        top: 50.5px
-    +d
-        top: 50.5px  
-    +x
-        position: absolute
-        height: 300px
-        top: 5.5px
-        &.loading
-            height: 85px
-
-.container
-    border: 1px solid transparent
-    border-radius: 0px
-    height: var(--full-h)
-    overflow-y: auto
-    position: relative
-    background-color: $n7
-    +t
-        border-radius: 5px
-        border: 1px solid $n3
-
-.containerHeader
-    position: sticky
-    top: 0
-    left: 0
-    width: var(--full-w)    
-    margin: 0
-    background-color: $n7
-    z-index: 1
-
-.wrapperHeader
-    position: sticky
-    overflow-anchor: none
-
-.wrapperMetaData
-    display: flex
-    flex-direction: row
-    gap: 4px
-    align-items: center
-    flex: 1 1 auto
-    overflow: hidden
-
-.metaData
-    height: 32px
-    width: 32px 
-    border-radius: 5px
-    overflow: hidden
-    margin-right: 1rem   
-
-.wrapperItems
-    display: flex
-    justify-content: space-between
-    align-items: center
-    padding: 12px 16px
-
-.containerBody
-    position: absolute
-    height: var(--full-h)
-    top: 0    
-    width: var(--full-w)  
-    padding-top: 43px
-
-.wrapperCollections
-    display: flex
-    flex-direction: row
-    align-items: center    
-    padding: 8px 16px
-    opacity: 1
-    transition-duration: 300ms
-    transition-property: opacity, background-color
-    &:hover
-        background-color: $n4
-        opacity: 0.8
-
-.wrapperPriceFloorCollection
-    display: flex
-    align-items: center
-    flex-direction: row
-    color: $n1
-    gap: 4px
-    text-align: right
-
-.collectionTick
-    background-color: $p1
-    color: $n
-    width: 11px
-    height: 11px 
-    display: flex
-    align-items: center
-    justify-content: center
-    border-radius: 9999px   
-
-.iconSolana
-    color: $p3   
-    transform: translateY(-1px)
-
 .classContentModal
     display: none
     +t
@@ -114,21 +7,7 @@
         width: 520px   
 
 .classHeader    
-    display: none
-
-.wrapperLoading
-    display: flex
-    align-items: center
-    justify-content: center
-    color: $n1
-    +text-base
-
-.wrapperNoCollections  
-    display: flex
-    align-items: center
-    justify-content: center
-    color: $n1
-    +text-base  
+    display: none  
 
 .classBody   
     height: 80px

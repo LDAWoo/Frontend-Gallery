@@ -1,0 +1,35 @@
+{
+        "Navbar":{
+            "Left":{
+                "items":{
+                    "discover": "Entdecken",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "Ersteller-Dashboard"
+                    }
+                }
+            },
+            "Search":{
+                "placeholder": "Suche in ganz Garden Eden",
+                "collections": "Sammlungen",
+                "floor": "Boden",
+                "totalVolume": "Gesamtvolumen",
+                "loadings": "Laden"
+            },
+            "Right":{
+                "connectWallet": "Brieftasche verbinden",
+                "main": "Haupt",
+                "mains": {
+                    "connectDifferent": "Andere Brieftasche verbinden",
+                    "disconnect": "Trennen"
+                },
+                "items": {
+                    "myItems": "Meine Artikel",
+                    "rewards": "Belohnungen",
+                    "signIn": "Anmelden",
+                    "accountSettings": "Kontoeinstellungen",
+                    "manageWallets": "Brieftaschen verwalten"
+                }
+            }
+        }
+}

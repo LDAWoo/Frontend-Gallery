@@ -1,0 +1,35 @@
+{
+        "Navbar": {
+            "Left": {
+                "items": {
+                    "discover": "发现",
+                    "mint": "Mint",
+                    "mints": {
+                        "creator": "创作者仪表板"
+                    }
+                }
+            },
+            "Search": {
+                "placeholder": "搜索整个 Garden Eden",
+                "collections": "收藏品",
+                "floor": "地板",
+                "totalVolume": "总体积",
+                "loadings": "加载中"
+            },
+            "Right": {
+                "connectWallet": "连接钱包",
+                "main": "主要",
+                "mains": {
+                    "connectDifferent": "连接其他钱包",
+                    "disconnect": "断开连接"
+                },
+                "items": {
+                    "myItems": "我的物品",
+                    "rewards": "奖励",
+                    "signIn": "登录",
+                    "accountSettings": "帐户设置",
+                    "manageWallets": "管理钱包"
+                }
+            }
+        }
+}
