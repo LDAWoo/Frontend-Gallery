@@ -75,6 +75,15 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   },
   owners: {
     data: [],
+    loading: false,
+  },
+  showOwners: false,
+  ownerArtworksFilter: {
+    dataSearch: "",
+    sortValues: {
+      sortPrice: "high_to_low",
+      sortListed: "all"
+    },
   }
 });
 

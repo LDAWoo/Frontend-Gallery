@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
 import classNames from "classnames/bind";
-import styles from "~/components/Header/Header.module.sass";
-import { setGlobalState, useGlobalState } from "~/store";
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "~/components/Header/Header.module.sass";
 import routesConfig from "~/configs";
+import { setGlobalState, useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 

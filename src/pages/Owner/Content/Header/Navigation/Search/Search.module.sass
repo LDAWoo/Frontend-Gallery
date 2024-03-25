@@ -1,0 +1,28 @@
+@import '~/styles/helpers'
+.wrapperSearch
+    display: flex
+    gap: 8px
+    align-items: center
+    height: 36px
+    +t
+        height: 40px
+
+.inputSearch
+    width: var(--full-w)
+    height: var(--full-h)
+    display: flex
+        
+.borderInputSearch
+    width: var(--full-w)
+    border: 1px solid $n3
+    transition-property: border
+    transition-duration: 300ms
+    padding-right: 16px
+    max-height: var(--full-h)
+    &:hover
+        border: 1px solid $n2
+
+.classInput        
+    border: none
+    &:focus
+        outline: none

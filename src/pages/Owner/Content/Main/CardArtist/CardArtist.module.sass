@@ -1,0 +1,109 @@
+@import  '~/styles/helpers'
+
+.wrapper
+    display: flex
+    flex-direction: column
+    position: relative
+    transition: 0.3s
+    padding-bottom: 1.75rem
+    transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)
+    &:hover
+        transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(1.01) scaleY(1.01)
+        cursor: pointer
+
+.wrapperFooter        
+    position: relative
+
+.containerBorder
+    background-color: $n7
+    border-left: 1px solid $n3
+    border-right: 1px solid $n3
+    border-bottom: 1px solid $n3
+    border-radius: 0.75rem
+    height: 32px
+    position: absolute
+    top: -14px
+    z-index: 0
+    width: var(--full-w)
+    transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(0.8) scaleY(0.8)
+
+
+.wrapperContainer
+    display: flex
+    flex-direction: column
+    overflow: hidden
+    border: 1px solid $n3
+    border-radius: 0.75rem
+    background-color: $n7
+    z-index: 10
+
+.containerMetadata
+    aspect-ratio: 1/1
+    position: relative
+
+.wrapperArtworks
+    position: absolute
+    padding: 4px 8px
+    border-radius: 9999px
+    overflow: hidden
+    background-color: rgba(18, 12, 24, .2)
+    +text-xs
+    color: $n
+    top: 0.5rem
+    left: 0.5rem
+
+.wrapperImage
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 0.75rem
+    overflow: hidden    
+
+.wrapperName
+    display: flex
+    flex-direction: column
+    padding: 16px 12px    
+    text-transform: capitalize
+    gap: 8px
+
+.namePrimary
+    color: $p1 
+
+.containerTick
+    display: flex
+    flex-direction: row
+    gap: 6px
+    overflow: hidden
+    align-items: center
+    margin-right: 8px
+
+.wrapperTick
+    display: flex
+    align-items: center
+    background-color: $p1
+    border-radius: 9999px
+    width: 12px
+    height: 12px
+    justify-content: center
+
+.wrapperIconTick
+    display: flex
+    transform: translateY(-1px)
+    color: $n         
+
+.wrapperItems
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    color: $n
+    align-items: center
+    +text-base
+
+.wrapperItem
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+
+.iconSolana
+    color: $p3

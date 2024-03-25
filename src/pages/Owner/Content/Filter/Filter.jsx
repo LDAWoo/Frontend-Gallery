@@ -10,7 +10,7 @@ import styles from "./Filter.module.sass";
 import Header from './Header';
 import ItemCollection from './ItemCollection';
 import ItemListCollection from "./ItemListCollection";
-
+import PropTypes from 'prop-types'
 
 const cx = classNames.bind(styles);
 const Filter = ({currentSymbol, onClick}) => {
@@ -42,7 +42,7 @@ const Filter = ({currentSymbol, onClick}) => {
     }
 
     return (
-        <div className={`${cx("wrapper")} ${!showFilter ? cx("show") : ""}`}>
+        <div className={`${cx("wrapper")} ${showFilter ? cx("show") : ""}`}>
             <div className={cx("wrapperContainer")}>
                 <Header data={owners?.data || []}/>
                 <div className={cx("wrapperBody")}>
@@ -84,7 +84,7 @@ const Filter = ({currentSymbol, onClick}) => {
 
                             {tabsActive === "nfts" && <div className={cx('wrapperContainerFilterList')}>
                                 {owners?.data && owners?.data.map((collection, index) => (
-                                    <ItemListCollection key={index} data={collection}/>
+                                    <ItemListCollection key={index} data={collection} currentSymbol={currentSymbol} onClick={onClick}/>
                                 ))}
                             </div>}
                         </div>      
@@ -95,7 +95,10 @@ const Filter = ({currentSymbol, onClick}) => {
     )
 }
 
-Filter.propTypes = {}
+Filter.propTypes = {
+    currentSymbol: PropTypes.string,
+    onClick: PropTypes.func,
+}
 
 export default Filter
 

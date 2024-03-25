@@ -23,6 +23,8 @@
     gap: 8px    
     align-items: center
     margin: auto
+    &.hidden
+        display: none
     &:nth-child(5)
             display: none
     &:nth-child(6)
@@ -35,22 +37,27 @@
         &:nth-child(3)
             display: none
         &:nth-child(5)
-            display: flex             
+            display: flex   
+            width: 200px          
         &:nth-child(6)
-            display: flex    
+            display: flex   
+            width: 98px
 
 .wrapperGroups
     width: var(--full-w)
     height: var(--full-h)
 
     &.active
+        &.show
+            display: none
         &:nth-child(1)
             display: none
-        &:nth-child(3)
-            display: none
         +t
+            display: flex
             &:nth-child(1)
                 display: flex
+            &:nth-child(2)
+                display: flex    
             &:nth-child(3)
                 display: flex        
 

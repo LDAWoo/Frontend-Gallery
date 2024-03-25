@@ -8,30 +8,23 @@ import CardListCollection from "./CardListCollection";
 import PropTypes from 'prop-types'
 const cx = classNames.bind(styles);
 
-function ItemListCollection({data}) {
-    const [showCollection, setShowCollection] = useState(true)
-    const [symbol, setSymbol] = useState("")
-
-    const handleShowCollection =(symbol) => {
-        setSymbol(symbol)
-        setShowCollection(!showCollection)
-    }
+function ItemListCollection({data,currentSymbol, onClick}) {
 
     return ( 
         <div>
             <div className={cx('wrapper')}>
-                <div className={cx("containerCollection")} onClick={() => handleShowCollection(data?.symbol)}>
+                <div className={cx("containerCollection")} onClick={() => onClick(data?.symbol)}>
                     <div className={cx("wrapperCollection")}>
                         <Title title={data?.name || data?.symbol} white xl nowrap={false}/>
                         <div><Title title={"(" + (data?.artworks.length) + ")"} xl /></div>
                     </div>
                     <div>
-                        <Icon icon={showCollection && data?.symbol === symbol ? FaMinus : FaPlus} size={14} />
+                        <Icon icon={currentSymbol === data?.symbol ? FaMinus : FaPlus} size={14} />
                     </div>
                 </div>
             </div>
 
-            <div className={`${cx('wrapperContainerCollection')} ${showCollection && data?.symbol === symbol && cx('active')}`}>
+            <div className={`${cx('wrapperContainerCollection')} ${currentSymbol === data?.symbol && cx('active')}`}>
                 <div className={cx('gridCollection')}>
                     {data?.artworks.map((artwork, index) => (
                         <CardListCollection key={index} data={artwork}/>

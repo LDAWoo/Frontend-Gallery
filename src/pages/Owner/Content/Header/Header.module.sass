@@ -9,6 +9,11 @@
     top: 48px
     transition-timing-function: cubic-bezier(0.4,0,1,1)
     transition-duration: 325ms
+    &.active
+        transform: translateY(-178px)
+    +t
+        &.active
+            transform: translateY(0)
     +t
         position: relative
         top:0

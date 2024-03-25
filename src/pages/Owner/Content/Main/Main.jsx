@@ -7,12 +7,14 @@ import Card from "./Card";
 import CardSkeleton from "./Card/CardSkeleton";
 import ComponentCardList from "./ComponentCardList";
 import styles from "./Main.module.sass";
+import CardArtist from "./CardArtist";
 
 const cx = classNames.bind(styles);
 
-const Main = ({ data, loading }) => {
+const Main = ({ data, loading, onClick }) => {
   const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
-
+  const [showOwners] = useGlobalState("showOwners")
+  const [owners] = useGlobalState("owners");
   const [showNavigation] = useGlobalState("showNavigation");
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const scrollRef = useRef();
@@ -43,43 +45,59 @@ const Main = ({ data, loading }) => {
                   <div style={{ position: "relative", height: "100%" }}>
                     {
                       data.length === 0 ? 
-                      <div className={cx('wrapperNoCollection')}>
-                          No active listing for this collection 
-                      </div>
+                        <div className={cx('wrapperNoCollection')}>
+                            No active listing for this collection 
+                        </div>
                       :
-                    <>
-                      {(showMarketplaceGridStyle === "grid" || showMarketplaceGridStyle === "grids") && (
-                        <div className={cx("gridContainer")}>
-                          <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
-                            <div className={cx("container")}>
-                              <div className={`${showMarketplaceGridStyle === "grid" ? cx("grid") : cx("grids")}`} tabIndex={0}>
-                                {loading ? (
-                                  Array.from({ length: 8 }).map((_, index) => (
-                                    <div key={index} className={cx("wrapperSkeleton")}>
-                                      <CardSkeleton />
+                        <>
+                          { showOwners ?
+                              <div className={cx("gridContainer")}>
+                                <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
+                                  <div className={cx("container")}>
+                                    <div className={cx('grid')}>
+                                      {owners?.data.map((owner, index) => (
+                                        <CardArtist owner={owner} key={index} onClick={onClick}/>
+                                      ))}
                                     </div>
-                                  ))
-                                ) : (
-                                  <>
-                                    {data.map((items, index) => (
-                                      <Card key={index} items={items} index={index}/>
-                                    ))}
-                                  </>
-                                )}
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      {showMarketplaceGridStyle === "list" && (
-                        <div className={cx("containerList")}>
-                          <>
-                            <ComponentCardList data={data} showNavigation={showNavigation} loading={loading} />
-                          </>
-                        </div>
-                      )}
-                    </>
-                  }
+                              : 
+                              <>
+                              {(showMarketplaceGridStyle === "grid" || showMarketplaceGridStyle === "grids") && (
+                                <div className={cx("gridContainer")}>
+                                  <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
+                                    <div className={cx("container")}>
+                                      <div className={`${showMarketplaceGridStyle === "grid" ? cx("grid") : cx("grids")}`} tabIndex={0}>
+                                        {loading ? (
+                                          Array.from({ length: 8 }).map((_, index) => (
+                                            <div key={index} className={cx("wrapperSkeleton")}>
+                                              <CardSkeleton />
+                                            </div>
+                                          ))
+                                        ) : (
+                                          <>
+                                            {data.map((items, index) => (
+                                              <Card key={index} items={items} index={index}/>
+                                            ))}
+                                          </>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                              {showMarketplaceGridStyle === "list" && (
+                                <div className={cx("containerList")}>
+                                  <>
+                                    <ComponentCardList data={data} showNavigation={showNavigation} loading={loading} />
+                                  </>
+                                </div>
+                              )}
+                            </>
+                            }
+                        </>
+                      }
                   </div>
                 </div>
               </div>
@@ -94,6 +112,7 @@ const Main = ({ data, loading }) => {
 Main.propTypes = {
   data: PropTypes.object,
   loading: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default memo(Main);

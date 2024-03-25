@@ -6,6 +6,8 @@ import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import { setGlobalState } from "~/store";
 import styles from "./CardList.module.sass";
+import { Link } from "react-router-dom";
+import routesConfig from "~/configs";
 const cx = classNames.bind(styles);
 
 const CardList = ({ items,position }) => {
@@ -32,7 +34,7 @@ const CardList = ({ items,position }) => {
 
           <div className={cx('wrapperName')}>
             <Title title={items?.name} white fontSemiBold xl nowrap={false}/>
-            <div className={cx('wrapperArtist')}>
+            <Link to={routesConfig.marketplace.replace(":symbol",items?.artist?.symbol)} className={cx('wrapperArtist')}>
               <span className={cx('artistName')}>
                   {items?.artist?.name || items?.artist?.symbol}
               </span>
@@ -41,7 +43,7 @@ const CardList = ({ items,position }) => {
                     <Icon icon={BiCheck} size={12} classIcon={cx('wrapperIconTick')}/>
                   </span>
               }
-            </div>
+            </Link>
           </div>
         </div>
       </td>
