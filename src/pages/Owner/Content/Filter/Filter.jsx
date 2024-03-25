@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { MdOutlineClose } from 'react-icons/md';
 import Button from '~/components/Button';
@@ -15,31 +15,63 @@ import PropTypes from 'prop-types'
 const cx = classNames.bind(styles);
 const Filter = ({currentSymbol, onClick}) => {
 
-    const dataSort= [
+    const dataSort = [
         { name: "Price: Low to High", value: "low_to_high" },
         { name: "Price: High to Low", value: "high_to_low" },
-        { name: "Inscription: Low to High", value: "inscription_low_to_high" },
-        { name: "Inscription: High to Low", value: "inscription_high_to_low" },
-        { name: "Recently", value: "recently" },
-        { name: "Common to Rare", value: "common_to_rare" },
-        { name: "Rare to Common", value: "rare_to_common" },
-    ]
+    ];
 
     const items = [
         { name: "All", value: "all" },
         { name: "NFTs", value: "nfts" },
-    ]
+    ];
 
-    const [owners] = useGlobalState("owners")
-    const [tabsActive, setTabsActive] = useState("all")
+    const [owners] = useGlobalState("owners");
+    const [originalOwners, setOriginalOwners] = useState([]);
+    const [sortValues, setSortValues] = useState('high_to_low');
+    const [tabsActive, setTabsActive] = useState("all");
     const [showFilter] = useGlobalState("showFilter");
     const [searchActive, setSearchActive] = useState(false);
-    const [value, setValue] = useState("")
-
+    const [value, setValue] = useState("");
 
     const handleSearchCollection = (e) => {
         setValue(e.target.value);
-    }
+    };
+
+    const handleSortValue = (v) => {
+        setSortValues(v);
+    };
+
+    useEffect(() => { 
+        if (owners.data) {
+            setOriginalOwners(owners.data);
+        }
+    }, [owners.data]);
+
+    useEffect(() => { 
+        if (!value.trim()) {
+            setSearchActive(false)
+            setOriginalOwners(owners.data);
+            return;
+        }
+
+        const filteredOwners = owners.data.filter(owner =>
+            (owner.name || owner.symbol).toLowerCase().includes(value.toLowerCase())
+        );
+
+        filteredOwners.sort((a, b) => {
+            if (a.floorPrice != null && b.floorPrice != null) {
+                return sortValues === "low_to_high" ? (a.floorPrice - b.floorPrice) : (b.floorPrice - a.floorPrice);
+            } else if (a.floorPrice === null && b.floorPrice !== null) {
+                return sortValues === "low_to_high" ? 1 : -1;
+            } else if (a.floorPrice !== null && b.floorPrice === null) {
+                return sortValues === "low_to_high" ? -1 : 1;
+            } else {
+                return 0;
+            }
+        });
+
+        setOriginalOwners(filteredOwners);
+    }, [value, owners.data, sortValues]);
 
     return (
         <div className={`${cx("wrapper")} ${showFilter ? cx("show") : ""}`}>
@@ -52,12 +84,12 @@ const Filter = ({currentSymbol, onClick}) => {
                                 <TextInput icon={CiSearch} value={value} onChange={handleSearchCollection} placeholder="Search collections" sizeIcon={20} className={`${cx("inputSearch")} ${searchActive ? cx("active") : ""}`} copy iconCopy={MdOutlineClose} sizeIconCopy={20} onClickCopy={() => setSearchActive(!searchActive)} />
                                 {!searchActive && (
                                 <div className={cx("button")}>
-                                    <Button icon={searchActive ? MdOutlineClose : CiSearch} size={20} backgroundGallery onClick={() => setSearchActive(!searchActive)} />
+                                    <Button className={cx('buttonSearch')} icon={searchActive ? MdOutlineClose : CiSearch} size={20} backgroundGallery onClick={() => setSearchActive(!searchActive)} />
                                 </div>
                                 )}
                             </div>
                             <div className={`${cx("wrapperSelectSort")} ${searchActive && cx('active')}`}>
-                                <div><Select translate placement="top" data={dataSort} /></div>
+                                <Select value={sortValues} onChange={handleSortValue} placement="bottom" data={dataSort} />
                             </div>
                         </div>
 
@@ -77,13 +109,13 @@ const Filter = ({currentSymbol, onClick}) => {
 
                         <div className={`${cx('containerFilter')} no-scrollbar`}>
                             {tabsActive === "all" && <div className={cx('wrapperContainerFilter')}>
-                                {owners?.data && owners?.data.map((collection, index) => (
+                                {originalOwners && originalOwners.map((collection, index) => (
                                     <ItemCollection key={index} data={collection} currentSymbol={currentSymbol} onClick={onClick}/>
                                 ))}
                             </div>}
 
                             {tabsActive === "nfts" && <div className={cx('wrapperContainerFilterList')}>
-                                {owners?.data && owners?.data.map((collection, index) => (
+                                {originalOwners && originalOwners.map((collection, index) => (
                                     <ItemListCollection key={index} data={collection} currentSymbol={currentSymbol} onClick={onClick}/>
                                 ))}
                             </div>}

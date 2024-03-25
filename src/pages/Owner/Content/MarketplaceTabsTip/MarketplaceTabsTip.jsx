@@ -5,18 +5,18 @@ const items = [
     name: "Items",
     tabs: "myItem",
   },
-  {
-    name: "Offers",
-    tabs: "offers",
-  },
-  {
-    name: "AMM",
-    tabs: "AMM",
-  },
-  {
-    name: "Activity",
-    tabs: "activity",
-  },
+  // {
+  //   name: "Offers",
+  //   tabs: "offers",
+  // },
+  // {
+  //   name: "AMM",
+  //   tabs: "AMM",
+  // },
+  // {
+  //   name: "Activity",
+  //   tabs: "activity",
+  // },
 ];
 
 const MarketplaceTabsTip = () => {

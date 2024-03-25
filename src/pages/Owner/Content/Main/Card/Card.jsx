@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { shoppingIcon, zoomIcon } from "~/assets/Icon";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
-import Image from "~/components/Image";
 import Title from "~/components/Title";
 import Tooltip from "~/components/Tooltip";
 import routesConfig from '~/configs';
@@ -62,7 +61,7 @@ const Card = ({ items, index  }) => {
           <div className={cx("cardGroup")}>
             <div className={cx("wrapperGroup")}>
               <div className={`${cx("wrapperImage")} ${active && cx('active')}`}>
-                <Image src={items?.image_url || "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Farweave.net%2FTmrD-CZFywoMXI7-4CqZVwx75X07nW5OWiK-cCCPLc0%3Fext%3Dpng"} className={`${cx("image")} ${active && cx('active')}`} />
+                <img src={items?.image_url || "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Farweave.net%2FTmrD-CZFywoMXI7-4CqZVwx75X07nW5OWiK-cCCPLc0%3Fext%3Dpng"} className={`${cx("image")} ${active && cx('active')}`} />
               </div>
             </div>
           </div>

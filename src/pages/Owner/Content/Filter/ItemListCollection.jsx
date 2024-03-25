@@ -1,11 +1,10 @@
-import { useState } from "react";
+import classNames from "classnames/bind";
+import PropTypes from 'prop-types';
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
-import classNames from "classnames/bind";
-import styles from './ItemListCollection.module.sass'
 import CardListCollection from "./CardListCollection";
-import PropTypes from 'prop-types'
+import styles from './ItemListCollection.module.sass';
 const cx = classNames.bind(styles);
 
 function ItemListCollection({data,currentSymbol, onClick}) {
@@ -36,7 +35,9 @@ function ItemListCollection({data,currentSymbol, onClick}) {
 }
 
 ItemListCollection.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    currentSymbol: PropTypes.string,
+    onClick: PropTypes.func
 }
 
 export default ItemListCollection;

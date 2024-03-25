@@ -1,26 +1,29 @@
-import { useState } from "react";
+import classNames from "classnames/bind";
+import PropTypes from 'prop-types';
+import { dollarIcon } from "~/assets/Icon";
+import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
-import classNames from "classnames/bind";
-import styles from './CardListCollection.module.sass'
-import Icon from "~/components/Icon";
-import { dollarIcon } from "~/assets/Icon";
-import PropTypes from 'prop-types'
-
+import { setGlobalState, useGlobalState } from "~/store";
+import styles from './CardListCollection.module.sass';
 
 const cx = classNames.bind(styles);
 
 function CardListCollection({data}) {
-    const [active, setActive] = useState(false)
+  const [ownerArtworksFilter] = useGlobalState("ownerArtworksFilter");
 
-    const handleClick = () => {
-        setActive(!active)
+    const handleClick = (name) => {
+        if(ownerArtworksFilter.dataSearch === name) return;
+        setGlobalState("ownerArtworksFilter", {
+          ...ownerArtworksFilter,
+          dataSearch: name
+        });
     }
 
     return ( 
-        <div className={`${cx("wrapper")} ${active ? cx("active") : ""}`}>
+        <div className={`${cx("wrapper")} ${ownerArtworksFilter.dataSearch === data?.name ? cx("active") : ""}`}>
             <div className={cx("wrapperMetaData")}>
-              <div className={cx("containerMetaData")} onClick={handleClick}>
+              <div className={cx("containerMetaData")} onClick={() => handleClick(data?.name)}>
                 <div>
                   <Image lazy={false} src={data?.image_url} />
                 </div>

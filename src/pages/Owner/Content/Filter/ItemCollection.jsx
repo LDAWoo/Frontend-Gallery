@@ -22,7 +22,7 @@ function ItemCollection({data, currentSymbol, onClick}) {
                 <div className={cx('wrapperContainer')}>
                     <div className={cx('wrapperName')}>
                         <Title title={data?.name || data?.symbol} white large fontBold nowrap={false}/>
-                        {!data?.tick && 
+                        {data?.tick && 
                         <span className={cx('wrapperTick')}>
                             <Icon icon={BiCheck} size={12} classIcon={cx('wrapperIconTick')}/>
                         </span>}
