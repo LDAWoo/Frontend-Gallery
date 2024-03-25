@@ -78,5 +78,33 @@
             "PageAble": {
                 "title": "Afficher le Top"
             }
+        },
+        "Modal": {
+            "Settings": {
+                "title": "Paramètres de l'application",
+                "apps": {
+                    "language": "Langue",
+                    "items": {
+                        "chooseLanguages": "Choisir la langue"
+                    }
+                }
+            },
+            "ShortCuts": {
+                "title": "Raccourcis de l'application",
+                "apps": {
+                    "search": "Recherche",
+                    "searchs": {
+                        "searchBar": "Barre de recherche"
+                    },
+                    "widget": "Widgets",
+                    "widgets": {
+                        "activity": "Activité",
+                        "analytics": "Analyse",
+                        "filters": "Filtres",
+                        "cards": "Cartes",
+                        "settings": "Paramètres"
+                    }
+                }
+            }
         }
 }

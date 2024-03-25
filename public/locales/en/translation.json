@@ -78,5 +78,33 @@
             "PageAble": {
                 "title": "Show Top"
             }
+        },
+        "Modal":{
+            "Settings": {
+                "title": "App Settings",
+                "apps": {
+                    "language": "Language",
+                    "items": {
+                        "chooseLanguages": "Choose Languages"
+                    }
+                }
+            },
+            "ShortCuts": {
+                "title": "App Shortcuts",
+                "apps": {
+                    "search": "Search",
+                    "searchs": {
+                        "searchBar": "Search Bar"
+                    },
+                    "widget": "Widgets",
+                    "widgets":{
+                        "activity": "Activity",
+                        "analytics": "Analytics",
+                        "filters": "Filters",
+                        "cards": "Cards",
+                        "settings": "Settings"
+                    }
+                }
+            }
         }
 }

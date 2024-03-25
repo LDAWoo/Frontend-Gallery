@@ -4,12 +4,15 @@ import { GiPianoKeys } from "react-icons/gi";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import styles from "./Header.module.sass";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 const Header = () => {
+  const {t} = useTranslation();
+
   return (
     <div className={cx("wrapper")}>
-      <Title title="App shortcuts" fontSemiBold />
+      <Title title={t("Modal.ShortCuts.title")} fontSemiBold />
       <Icon icon={GiPianoKeys} size={16} />
     </div>
   );

@@ -78,5 +78,33 @@
             "PageAble": {
                 "title": "显示顶部"
             }
+        },
+        "Modal": {
+            "Settings": {
+                "title": "应用程序设置",
+                "apps": {
+                    "language": "语言",
+                    "items": {
+                        "chooseLanguages": "选择语言"
+                    }
+                }
+            },
+            "ShortCuts": {
+                "title": "应用程序快捷方式",
+                "apps": {
+                    "search": "搜索",
+                    "searchs": {
+                        "searchBar": "搜索栏"
+                    },
+                    "widget": "小部件",
+                    "widgets": {
+                        "activity": "活动",
+                        "analytics": "分析",
+                        "filters": "过滤器",
+                        "cards": "卡片",
+                        "settings": "设置"
+                    }
+                }
+            }
         }
 }

@@ -78,5 +78,33 @@
             "PageAble": {
                 "title": "상위 표시"
             }
+        },
+        "Modal": {
+            "Settings": {
+                "title": "앱 설정",
+                "apps": {
+                    "language": "언어",
+                    "items": {
+                        "chooseLanguages": "언어 선택"
+                    }
+                }
+            },
+            "ShortCuts": {
+                "title": "앱 바로 가기",
+                "apps": {
+                    "search": "검색",
+                    "searchs": {
+                        "searchBar": "검색 바"
+                    },
+                    "widget": "위젯",
+                    "widgets": {
+                        "activity": "활동",
+                        "analytics": "분석",
+                        "filters": "필터",
+                        "cards": "카드",
+                        "settings": "설정"
+                    }
+                }
+            }
         }
 }

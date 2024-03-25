@@ -78,5 +78,33 @@
             "PageAble": {
                 "title": "トップを表示"
             }
+        },
+        "Modal": {
+            "Settings": {
+                "title": "アプリ設定",
+                "apps": {
+                    "language": "言語",
+                    "items": {
+                        "chooseLanguages": "言語を選択"
+                    }
+                }
+            },
+            "ShortCuts": {
+                "title": "アプリショートカット",
+                "apps": {
+                    "search": "検索",
+                    "searchs": {
+                        "searchBar": "検索バー"
+                    },
+                    "widget": "ウィジェット",
+                    "widgets": {
+                        "activity": "アクティビティ",
+                        "analytics": "分析",
+                        "filters": "フィルター",
+                        "cards": "カード",
+                        "settings": "設定"
+                    }
+                }
+            }
         }
 }

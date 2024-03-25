@@ -1,15 +1,18 @@
 
 import classNames from "classnames/bind";
 import styles from "./Body.module.sass";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 
 const Body = () => {
+  const {t} = useTranslation();
+
   const items = [
     {
-      name: "SEARCH",
+      name: t("Modal.ShortCuts.apps.search"),
       apps: [
         {
-          name: "Search bar",
+          name: t("Modal.ShortCuts.apps.searchs.searchBar"),
           startKey: "control",
           startKeyName: "⌘",
           endKey: "k",
@@ -18,54 +21,42 @@ const Body = () => {
       ],
     },
     {
-      name: "WIDGETS",
+      name: t("Modal.ShortCuts.apps.widget"),
       apps: [
         {
-          name: "Activity",
+          name: t("Modal.ShortCuts.apps.widgets.activity"),
           startKey: "up",
           startKeyName: "⇧",
           endKey: "a",
           endKeyName: "A",
         },
         {
-          name: "Analytics",
+          name: t("Modal.ShortCuts.apps.widgets.analytics"),
           startKey: "up",
           startKeyName: "⇧",
           endKey: "n",
           endKeyName: "N",
         },
         {
-          name: "Filters",
+          name: t("Modal.ShortCuts.apps.widgets.filters"),
           startKey: "up",
           startKeyName: "⇧",
           endKey: "f",
           endKeyName: "F",
         },
         {
-          name: "Cards",
+          name: t("Modal.ShortCuts.apps.widgets.cards"),
           startKey: "up",
           startKeyName: "⇧",
           endKey: "c",
           endKeyName: "C",
         },
         {
-          name: "Settings",
+          name: t("Modal.ShortCuts.apps.widgets.settings"),
           startKey: "up",
           startKeyName: "⇧",
           endKey: "s",
           endKeyName: "S",
-        },
-      ],
-    },
-    {
-      name: "GALLERY",
-      apps: [
-        {
-          name: "Select range of NFTs",
-          startKey: "up",
-          startKeyName: "⇧",
-          endKey: "mouse",
-          endKeyName: "Click",
         },
       ],
     },

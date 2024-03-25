@@ -36,6 +36,7 @@ const MainLayout = ({ children }) => {
     let keyComboAnalytics = { ArrowUp: false, N: false };
     let keyComboCards = { ArrowUp: false, C: false };
     let keyComboFilters = { ArrowUp: false, F: false };
+    let keyComboSettings = { ArrowUp: false, S: false };
 
     const handleKeyDown = (e) => {
       if (e.code === "ArrowUp") {
@@ -43,6 +44,7 @@ const MainLayout = ({ children }) => {
         keyComboAnalytics.ArrowUp = true;
         keyComboCards.ArrowUp = true;
         keyComboFilters.ArrowUp = true;
+        keyComboSettings.ArrowUp = true;
       }
 
       if (e.key === "Control") {
@@ -69,6 +71,10 @@ const MainLayout = ({ children }) => {
         keyComboFilters.F = true;
       }
 
+      if (e.key === "s") {
+        keyComboSettings.S = true;
+      }
+
       if (keyComboSearchBar.Control && keyComboSearchBar.K) {
         setGlobalState("showPanelSearch", (prevStatus) => !prevStatus);
       }
@@ -89,6 +95,9 @@ const MainLayout = ({ children }) => {
         setGlobalState("showFilter", (prevStatus) => !prevStatus);
       }
 
+      if (keyComboSettings.ArrowUp && keyComboSettings.S) {
+        setGlobalState("showModalAppSettings", (prevStatus) => !prevStatus);
+      }
       setGlobalState("showModalAppShortCut", false);
     };
 
@@ -98,6 +107,7 @@ const MainLayout = ({ children }) => {
         keyComboAnalytics.ArrowUp = false;
         keyComboCards.ArrowUp = false;
         keyComboFilters.ArrowUp = false;
+        keyComboSettings.ArrowUp = false;
       }
 
       if (e.key === "Control") {
@@ -122,6 +132,10 @@ const MainLayout = ({ children }) => {
 
       if (e.key === "f") {
         keyComboFilters.F = false;
+      }
+
+      if (e.key === "s") {
+        keyComboSettings.S = false;
       }
     };
 

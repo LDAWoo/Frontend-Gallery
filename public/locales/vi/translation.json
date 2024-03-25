@@ -78,5 +78,33 @@
             "PageAble": {
                 "title": "Hiển thị Top"
             }
+        },
+        "Modal": {
+            "Settings": {
+                "title": "Cài đặt Ứng dụng",
+                "apps": {
+                    "language": "Ngôn ngữ",
+                    "items": {
+                        "chooseLanguages": "Chọn Ngôn ngữ"
+                    }
+                }
+            },
+            "ShortCuts": {
+                "title": "Phím tắt Ứng dụng",
+                "apps": {
+                    "search": "Tìm kiếm",
+                    "searchs": {
+                        "searchBar": "Thanh tìm kiếm"
+                    },
+                    "widget": "Tiện ích",
+                    "widgets": {
+                        "activity": "Hoạt động",
+                        "analytics": "Phân tích",
+                        "filters": "Bộ lọc",
+                        "cards": "Thẻ",
+                        "settings": "Cài đặt"
+                    }
+                }
+            }
         }
 }

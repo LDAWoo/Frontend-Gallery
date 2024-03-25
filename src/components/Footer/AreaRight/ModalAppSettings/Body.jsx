@@ -7,16 +7,19 @@ import ItemChildren from "./ItemChildren";
 import Item from "./Item";
 import i18next from "i18next";
 import { setGlobalState } from "~/store";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 
 function Body() {
     const [currentLanguage, setCurrentLanguage] = useState(i18next.language)
+    const {t} = useTranslation()
+    
     const data = [
         {
             icon: GiEarthAmerica,
-            title: "Language",
+            title: t("Modal.Settings.apps.language"),
             children: {
-                title: "Choose Language",
+                title: t("Modal.Settings.apps.items.chooseLanguages"),
                 data: [
                     {
                         title: "Tiếng Việt",
