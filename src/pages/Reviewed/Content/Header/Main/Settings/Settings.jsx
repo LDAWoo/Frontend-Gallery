@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateArtwork } from "~/api/Artwork";
 import { STATUS_NFT_ACTIVE, STATUS_NFT_NO_ACTIVE } from "~/components/Constaint/DashboardReviewd/Settings";
 import Title from "~/components/Title";
@@ -12,21 +12,26 @@ const cx = classNames.bind(styles);
 
 const Settings = ({ data }) => {
   const [currentShowDisplayArtwork] = useGlobalState("currentShowDisplayArtwork");
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (data && !currentShowDisplayArtwork) {
-      setGlobalState("currentShowDisplayArtwork", data.status === STATUS_NFT_ACTIVE);
+    if (data) {
+      setGlobalState("currentShowDisplayArtwork", data?.status === STATUS_NFT_ACTIVE);
     }
-  }, [data, currentShowDisplayArtwork]);
+  }, [data]);
 
   const handleToggleShowNFT = async (isChecked) => {
-    try {
-      const status = isChecked ? STATUS_NFT_ACTIVE : STATUS_NFT_NO_ACTIVE;
-      await updateArtwork({ id: data.id, status });
-      setGlobalState("currentShowDisplayArtwork", status);
-    } catch (error) {
-      console.log(error);
-    }
+      if(loading) return;
+      
+      try {
+        setLoading(true)
+        const status = isChecked ? STATUS_NFT_ACTIVE : STATUS_NFT_NO_ACTIVE;
+        await updateArtwork({ id: data.id, status });
+        setGlobalState("currentShowDisplayArtwork", status === STATUS_NFT_ACTIVE);
+        setLoading(false)
+      } catch (error) {
+        setLoading(true)
+      }
   };
 
   return (

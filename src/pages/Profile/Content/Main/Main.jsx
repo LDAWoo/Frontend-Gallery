@@ -39,9 +39,9 @@ const Main = () => {
                       <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
                         <div className={cx("container")}>
                           <div className={cx("grid")} tabIndex={0}>
-                            {Array.from({ length: 10 }).map((i, index) => (
+                            {/* {Array.from({ length: 10 }).map((i, index) => (
                               <Card items={i} index={index} key={index} />
-                            ))}
+                            ))} */}
                           </div>
                         </div>
                       </div>

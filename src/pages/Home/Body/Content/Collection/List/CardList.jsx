@@ -59,7 +59,13 @@ const CardList = ({ items, index, onUpdateItems }) => {
         <td className={cx("wrapperTd")}>
           <Link to={routesConfig.marketplace.replace(":symbol", items?.symbol)} className={cx("wrapperContainerMetaData")}>
             <div className={cx("metaData")}>
-              <img src={items?.image_url} width="100%" height="100%" alt="metadata" />
+              { items?.image_url ? 
+                <img src={items?.image_url} width="100%" height="100%" alt="metadata" /> 
+              : 
+                <div className={cx('metaData')}>
+                  {items?.symbol.substring(0, 2)}
+                </div>
+              }
             </div>
 
             <Title title={items?.name || items?.symbol} white fontSemiBold xl className={cx("wrapperOwnerName")} />

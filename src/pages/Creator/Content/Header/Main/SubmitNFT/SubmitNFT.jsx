@@ -15,13 +15,17 @@ import { UserContext } from "~/components/Contexts/AppUserProvider";
 import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import routesConfig from "~/configs";
+import { useTranslation } from "react-i18next";
+import { getLocale } from "~/locale/Locale";
 
 const cx = classNames.bind(styles);
 const SubmitNFT = ({ data }) => {
+  const {t} = useTranslation();
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [loading] = useGlobalState("loading");
   const [primaryCategory, setPrimaryCategory] = useState("");
   const [secondaryCategory, setSecondaryCategory] = useState("");
+  const locale = getLocale();
   const { artist } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -47,12 +51,14 @@ const SubmitNFT = ({ data }) => {
       id: 2,
       data: [
         {
-          name: "name",
+          name: t("Creator.Main.Submit.items.item1"),
           value: data?.name,
+          visible: data?.name,
         },
         {
-          name: "symbol",
+          name: t("Creator.Main.Submit.items.item2"),
           value: data?.symbolNFT,
+          visible: data?.symbolNFT,
         },
       ],
     },
@@ -60,20 +66,24 @@ const SubmitNFT = ({ data }) => {
       id: 2,
       data: [
         {
-          name: "total supply",
+          name: t("Creator.Main.Submit.items.item3"),
           value: data?.supply,
+          visible: data?.supply,
         },
         {
-          name: "description",
+          name: t("Creator.Main.Submit.items.item4"),
           value: data?.description,
+          visible: data?.description
         },
         {
-          name: "categories primary",
+          name: t("Creator.Main.Submit.items.item5"),
           value: primaryCategory.name,
+          visible: primaryCategory.name,
         },
         {
-          name: "categories secondary",
+          name: t("Creator.Main.Submit.items.item6"),
           value: secondaryCategory.name,
+          visible: secondaryCategory.name,
         },
       ],
     },
@@ -81,9 +91,10 @@ const SubmitNFT = ({ data }) => {
       id: 3,
       data: [
         {
-          name: "collection pfp",
+          name: t("Creator.Main.Submit.items.item7"),
           url: data?.image_url,
           type: "image",
+          visible: data?.image_url,
         },
       ],
     },
@@ -91,19 +102,22 @@ const SubmitNFT = ({ data }) => {
       id: 4,
       data: [
         {
-          name: "twitter",
+          name: t("Creator.Main.Submit.items.item8"),
           url: data?.twitter_url,
           type: "link",
+          visible: data?.twitter_url,
         },
         {
-          name: "discord",
+          name: t("Creator.Main.Submit.items.item9"),
           url: "https://discord/" + data?.discord_url,
           type: "link",
+          visible: data?.discord_url
         },
         {
-          name: "website",
+          name: t("Creator.Main.Submit.items.item10"),
           url: data?.website_url,
           type: "link",
+          visible: data?.website_url
         },
       ],
     },
@@ -111,9 +125,10 @@ const SubmitNFT = ({ data }) => {
       id: 5,
       data: [
         {
-          name: "mint date",
+          name: t("Creator.Main.Submit.items.item11"),
           type: "date",
           value: data?.mint_date,
+          visible: data?.mint_date
         },
       ],
     },
@@ -146,47 +161,54 @@ const SubmitNFT = ({ data }) => {
         image: data?.image_url,
       };
 
-      const signature = await createNFTPhantomSolana(dataCreateNFT);
+      
+      const {signature,tokenAddress} = await createNFTPhantomSolana(dataCreateNFT);
 
-      // if (!signature) return;
+      if (!signature) return;
 
-      // const dataSaveCreateNFT = {
-      //   artistRequest: {
-      //     id_artist: artist.id,
-      //     email: artist.email,
-      //     symbol: data?.symbolArtist,
-      //     discord_url: data?.discord_url,
-      //     twitter_url: data?.twitter_url,
-      //     website_url: data?.website_url,
-      //   },
-      //   artworkRequest: {
-      //     id_history_create_nft: data.id,
-      //     wallet_address: address,
-      //     name: data?.name,
-      //     symbolNFT: data?.symbolNFT,
-      //     description: data?.description,
-      //     image_url: data?.image_url,
-      //     chain: connectedAccount.chain,
-      //     supply: data?.supply,
-      //     mint_date: data?.mint_date,
-      //   },
-      //   transactionRequest: {
-      //     signature: signature,
-      //   },
-      //   categoryIds: [data.id_primary_category, data.id_secondary_category],
-      // };
+      const dataSaveCreateNFT = {
+        artistRequest: {
+          id_artist: artist.id,
+          email: artist.email,
+          symbol: data?.symbolArtist,
+          discord_url: data?.discord_url,
+          twitter_url: data?.twitter_url,
+          website_url: data?.website_url,
+        },
+        artworkRequest: {
+          id_history_create_nft: data.id,
+          wallet_address: address,
+          tokenAddress: tokenAddress,
+          name: data?.name,
+          symbolNFT: data?.symbolNFT,
+          description: data?.description,
+          image_url: data?.image_url,
+          chain: connectedAccount.chain,
+          supply: data?.supply,
+          mint_date: data?.mint_date,
+        },
+        transactionRequest: {
+          signature: signature,
+        },
+        categoryIds: [data.id_primary_category, data.id_secondary_category],
+      };
 
-      // await postCreateNFT(dataSaveCreateNFT);
+      await postCreateNFT(dataSaveCreateNFT);
       setGlobalState("loading", false);
-      // handleSuccessfully();
+      toastInformation(
+        t("Creator.Main.Submit.Success")
+      )
+
     } catch (e) {
-      console.log(e);
       setGlobalState("loading", false);
+      toastError(
+        t("Creator.Main.Submit.Error")
+      )
     }
   };
 
-  const handleSuccessfully = () => {
-    toast("🦄 Create NFT Successfully!", {
+  const toastInformation = (message) => {
+    toast(`🦄 ${message}`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -200,15 +222,31 @@ const SubmitNFT = ({ data }) => {
     });
   };
 
+  const toastError = (message) => {
+    toast(`🦄 ${message}`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
+
+
   const onClose = () => {
     navigate(routesConfig.dashboard);
   };
 
   return (
     <div className={cx("wrapper")}>
-      <Title gallery title="The last step" large nowrap={false} />
-      <Title title="Review & Submit" white nowrap={false} fontBold extraLarge6 />
-      <Title gallery title="You are ready to submit your listing application. Please  review the details below and confirm it is connect. Click submit when you are ready to submit." fontMedium xl nowrap={false} />
+      <Title gallery title={t("Creator.LastStep")} large nowrap={false} />
+      <Title title={t("Creator.Main.Submit.title")} white nowrap={false} fontBold extraLarge6 />
+      <Title gallery title={t("Creator.Main.Submit.subTitle")} fontMedium xl nowrap={false} />
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
         <div className={cx("container")}>
@@ -216,17 +254,21 @@ const SubmitNFT = ({ data }) => {
             <div key={index} className={cx("containerData")}>
               {item?.data.map((x, index) => (
                 <div key={index} className={cx("containerItem")}>
-                  <div className={cx("nameItem")}>{x?.name}:</div>
-                  <div className={cx("containerValue")}>
-                    {x?.value && x?.type !== "date" && <div className={cx("valueItem")}>{x?.value}</div>}
-                    {x?.url && x?.type === "image" && (
-                      <div className={cx("containerImage")}>
-                        <Image lazy={false} src={x?.url} className={cx("image")} />
+                  {x?.visible && 
+                    <>
+                      <div className={cx("nameItem")}>{x?.name}:</div>
+                        <div className={cx("containerValue")}>
+                          {x?.value && x?.type !== "date" && <div className={cx("valueItem")}>{x?.value}</div>}
+                          {x?.url && x?.type === "image" && (
+                            <div className={cx("containerImage")}>
+                              <Image lazy={false} src={x?.url} className={cx("image")} />
+                            </div>
+                          )}
+                          {x?.url && x?.type === "link" && <div className={cx("linkValue")}>{x?.url}</div>}
+                          {x?.type === "date" && <div className={cx("valueItem")}>{x?.value && format(x?.value, "MMMM dd, yyyy pppp", {locale})} </div>}
                       </div>
-                    )}
-                    {x?.url && x?.type === "link" && <div className={cx("linkValue")}>{x?.url}</div>}
-                    {x?.type === "date" && <div className={cx("valueItem")}>{x?.value && format(x?.value, "MMMM dd, yyyy pppp")} </div>}
-                  </div>
+                    </>
+                  }
                 </div>
               ))}
             </div>
@@ -234,7 +276,7 @@ const SubmitNFT = ({ data }) => {
         </div>
       </div>
       <div className={`${cx("mb")}`}>
-        <Button title="Submit" disabled={loading} className={`${cx("buttonSubmit")} ${loading ? cx("disabled") : ""}`} onClick={handleCreateNFT} />
+        <Button title={t("Creator.Submit")} disabled={loading} className={`${cx("buttonSubmit")} ${loading ? cx("disabled") : ""}`} onClick={handleCreateNFT} />
       </div>
     </div>
   );

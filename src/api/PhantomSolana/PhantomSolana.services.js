@@ -45,14 +45,13 @@ const getBalanceWalletPhantomSolana = async (address) => {
 
 const createNFTPhantomSolana = async (data) => {
   try {
-    // const imageUrl = data.image;
-    // const responseImage = await fetch(imageUrl);
-    // const imageBuffer = await responseImage.arrayBuffer();
-    // const imageBlob = new Blob([imageBuffer], { type: responseImage.headers.get("content-type") });
+    const imageUrl = data.image;
+    const responseImage = await fetch(imageUrl);
+    const imageBuffer = await responseImage.arrayBuffer();
+    const imageBlob = new Blob([imageBuffer], { type: responseImage.headers.get("content-type") });
 
-    // console.log(imageBlob);
     const formdata = new FormData();
-    formdata.append("file", data.image);
+    formdata.append("file", imageBlob);
     formdata.append("network", network);
     formdata.append("wallet", data.address);
     formdata.append("name", data.name);
@@ -62,21 +61,24 @@ const createNFTPhantomSolana = async (data) => {
     formdata.append("max_supply", data.supply);
     formdata.append("nft_receiver", data.address);
 
-    const response = await post("/sol/v1/nft/create", formdata, "", {
+    const response = await post("/sol/v1/nft/create_detach", formdata, "", {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
+        "x-api-key": secretKey,
       },
     });
 
-
-    const transaction = toTransaction(response.signature.encoded_transaction);
+    const transaction = toTransaction(response.result.encoded_transaction);
+    const tokenAddress = response.result.mint;
 
     const signedTransaction = await window.phantom.solana.signTransaction(transaction);
     const connection = new Connection("https://api.devnet.solana.com");
     const signature = await connection.sendRawTransaction(signedTransaction.serialize());
 
-    console.log(signature);
-    return signature;
+    return {
+        signature,
+        tokenAddress
+    }
   } catch (error) {
     console.error("Error:", error);
   }
@@ -128,7 +130,6 @@ const getTransactionParsedPhantomSolana = async (signature) => {
     const response = await get(`/sol/v1/transaction/parsed?network=${network}&txn_signature=${signature}`, {
       headers: {
         "x-api-key": secretKey,
-        redirect: "follow",
       },
     });
 
@@ -138,6 +139,209 @@ const getTransactionParsedPhantomSolana = async (signature) => {
     console.error("Error:", error);
   }
 };
+
+const transferManyPhantomSolana = async (tokenAddress, fromAddress, toAddress) => {
+  try{
+    const data = {
+      "network": network,
+      "wallet": "76ckaxb1P9YtBD3WpCsy7Rf6RpxmW4LTvDW6jpMwg6Zu",
+      "master_nft_address": "Fht6zMDoYD1LvRxpVk3NL5NAj94b5fq7cHQwpAoQ22c6",
+      "receiver": "EL2CHng3MNYdZs7D14tebyKKAootWLnZfNM6R3dnEp5Q",
+    }
+
+    const response = await post("sol/v1/nft/mint_detach", data, "", {
+      headers: {
+        "x-api-key": secretKey,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const transaction = toTransaction(response.result.encoded_transaction);
+
+    console.log(response);
+
+    const signedTransaction = await window.phantom.solana.signTransaction(transaction);
+    const connection = new Connection("https://api.devnet.solana.com");
+    const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+    return signature;
+  }catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+const getOwners = async (tokenAddress) => {
+    try{
+      const data = {
+        "network": network,
+        "nft_addresses": [
+          tokenAddress
+        ],
+      }
+  
+      const response = await post("sol/v1/nft/get_owners", data, "", {
+        headers: {
+          "x-api-key": secretKey,
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log(response);
+    }catch (error) {
+        console.log(error);
+    }
+}
+
+const transferSolPhantomSolana = async (fromAddress, toAddress,amount) => {
+    try{
+
+      const data = {
+        "network": network,
+        "from_address": fromAddress,
+        "to_address": toAddress,
+        "amount": amount,
+      }
+
+      const response = await post("/sol/v1/wallet/send_sol", data, "", {
+        headers: {
+          "x-api-key": secretKey,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const transaction = toTransaction(response.result.encoded_transaction);
+      const signedTransaction = await window.phantom.solana.signTransaction(transaction);
+      const connection = new Connection("https://api.devnet.solana.com");
+      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+      return signature;
+
+    }catch (error) {
+      console.error("Error:", error);
+    }
+}
+
+const createMarketplacePhantomSolana = async(creatorAddress) => {
+    try{
+
+      const data = {
+        "network": network,
+        "transaction_fee": 0.01,
+        "creator_wallet": creatorAddress,
+      }
+
+      const response = await post("/sol/v1/marketplace/create", data, "", {
+        headers: {
+          "x-api-key": secretKey,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const transaction = toTransaction(response.result.encoded_transaction);
+      const signedTransaction = await window.phantom.solana.signTransaction(transaction);
+      const connection = new Connection("https://api.devnet.solana.com");
+      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+
+      const marketplaceAddress = response.result.address;
+      const marketplaceAuthority = response.result.authority;
+      if(signature){
+        return {
+          signature,
+          marketplaceAddress,
+          marketplaceAuthority
+        }
+      }
+      
+    return null;
+
+    }catch (error) {
+      console.error("Error:", error);
+  }
+}
+
+const buyNftMarketplaceSolanaPhantom = async (marketplaceAddress,nftAddress, sellerAddress, buyerAddress, price, ) => {
+    try {
+
+      const data = {
+        "network": network,
+        "marketplace_address": marketplaceAddress,
+        "nft_address": nftAddress,
+        "seller_address": sellerAddress,
+        "buyer_wallet": buyerAddress,
+        "price": price,
+      }
+
+      const response = await post("/sol/v1/marketplace/buy", data, "", {
+        headers: {
+          "x-api-key": secretKey,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const transaction = toTransaction(response.result.encoded_transaction);
+      const signedTransaction = await window.phantom.solana.signTransaction(transaction);
+      const connection = new Connection("https://api.devnet.solana.com");
+      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+      console.log(response);
+      console.log(signature);
+
+    } catch (error) {
+      console.error("Error:", error);
+    }
+}
+
+const listNftMarketplaceSolanaPhantom = async (marketplaceAddress, tokenAddress, sellerAddress, price) => {
+    try{
+      const data = {
+        "network": network,
+        "marketplace_address": marketplaceAddress,
+        "nft_address": tokenAddress,
+        "seller_wallet": sellerAddress,
+        "price": 0.03,
+      }
+
+      const response = await post("/sol/v1/marketplace/list", data, "", {
+        headers: {
+          "x-api-key": secretKey,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const transaction = toTransaction(response.result.encoded_transaction);
+      console.log(response);
+
+      const signedTransaction = await window.phantom.solana.signTransaction(transaction);
+      const connection = new Connection("https://api.devnet.solana.com");
+      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+      console.log(signature);
+      if(signature){
+        return signature;
+      }
+      return null;
+    }catch(e){
+      console.error("Error:", e);
+    }
+}
+
+const findMarketplacePhantomSolana = async(createAddress,currentAddress) => {
+    try{
+
+      var myHeaders = new Headers();
+      myHeaders.append("x-api-key", secretKey);
+      
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+      
+      fetch("https://api.shyft.to/sol/v1/marketplace/my_markets?network=devnet", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+    }catch (error) {
+      console.error("Error:", error);
+    }
+}
 
 const disconnectedWalletPhantomSolana = () => {
   window.phantom.solana.disconnect();
@@ -150,4 +354,5 @@ const isConnectedWalletPhantomSolana = () => {
   return isConnected;
 };
 
-export { connectedWalletPhantomSolana, createNFTPhantomSolana, updateNFTPhantomSolana, getTransactionParsedPhantomSolana, disconnectedWalletPhantomSolana, getBalanceWalletPhantomSolana, isConnectedWalletPhantomSolana };
+export { connectedWalletPhantomSolana, createNFTPhantomSolana, disconnectedWalletPhantomSolana, getBalanceWalletPhantomSolana, getTransactionParsedPhantomSolana, isConnectedWalletPhantomSolana, transferManyPhantomSolana,transferSolPhantomSolana,createMarketplacePhantomSolana,listNftMarketplaceSolanaPhantom,buyNftMarketplaceSolanaPhantom,findMarketplacePhantomSolana,getOwners, updateNFTPhantomSolana };
+

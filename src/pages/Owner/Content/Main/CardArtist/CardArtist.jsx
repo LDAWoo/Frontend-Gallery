@@ -20,14 +20,14 @@ function CardArtist({owner, onClick}) {
                             Items: {owner?.artworks.length || 0}
                         </div>
                         <div className={cx('wrapperImage')}>
-                            <Image src={owner?.image_url} />
+                            {owner?.image_url ? <Image src={owner?.image_url} /> : <div>{owner?.name.substring(0, 2) || owner?.symbol.substring(0, 2)}</div>}
                         </div>
                     </div>
                     <div className={cx('wrapperName')}>
                         <Title title={owner?.name || owner?.symbol} white xl fontBold nowrap={false}/>
                         <div className={cx('containerTick')}>
                             <Title title={owner?.name || owner?.symbol} large nowrap={false} className={cx('namePrimary')}/>
-                            {!owner?.tick && 
+                            {owner?.tick && 
                             <span className={cx('wrapperTick')}>
                                 <Icon icon={BiCheck} size={12} classIcon={cx('wrapperIconTick')}/>
                             </span>

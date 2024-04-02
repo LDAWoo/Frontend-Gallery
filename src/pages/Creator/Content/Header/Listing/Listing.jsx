@@ -8,29 +8,32 @@ import Title from "~/components/Title";
 import routesConfig from "~/configs";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Listing.module.sass";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
 const Listing = ({ data }) => {
+  const {t} = useTranslation();
+
   const items = [
     {
       source: "collection",
-      name: "Collection",
+      name: t("Creator.Listing.items.item1"),
       complete: data?.name && data?.symbolNFT && data?.symbolArtist,
     },
     {
       source: "details",
-      name: "Details",
+      name: t("Creator.Listing.items.item2"),
       complete: data?.description && data?.id_primary_category && data?.id_secondary_category && data?.twitter_url,
     },
     {
       source: "hashList",
-      name: "Hash List",
+      name: t("Creator.Listing.items.item3"),
       complete: data?.mint_date && data?.supply,
     },
     {
       source: "submit",
-      name: "Submit",
+      name: t("Creator.Listing.items.item4"),
       complete: false,
     },
   ];
@@ -75,7 +78,7 @@ const Listing = ({ data }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
-        <Title title="Apply for Listing" fontBold xxl />
+        <Title title={t("Creator.Listing.title")} fontBold xxl />
         <div className={cx("content")}>
           {items.map((item, index) => (
             <div key={index} className={`${cx("item")} ${item?.source === currentSource ? cx("active") : ""}`} onClick={() => handleApplyListing(item?.source, index)}>

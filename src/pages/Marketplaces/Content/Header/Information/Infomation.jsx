@@ -43,7 +43,7 @@ const Information = ({ data, loading }) => {
   return (
     <div className={cx("contentInfo")}>
       <div className={cx("wrapperAvatar")}>
-        <>{loading ? <InformationSkeleton avatar /> : <Image src={data?.image_url || "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https://nftstorage.link/ipfs/bafkreicloy7xn3h2gxr3rj5aditynulgi2lsebnufchddp7agzjeu3mmiu"} />}</>
+        <>{loading ? <InformationSkeleton avatar /> : data?.image_url ? <Image src={data?.image_url} /> : <div>{data?.name && data?.name.substring(0,2) || data?.symbol.substring(0,2)}</div>}</>
       </div>
       <div className={cx("overInfo")}>
         {loading ? (

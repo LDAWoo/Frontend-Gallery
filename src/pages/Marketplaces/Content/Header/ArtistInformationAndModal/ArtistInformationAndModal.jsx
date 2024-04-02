@@ -18,7 +18,7 @@ const ArtistInformationAndModal = ({ data, loading }) => {
           <ArtistInformationAndModalSkeleton />
         ) : (
           <>
-            <img src={data?.image_url} className={cx("metaData")} />
+            {data?.image_url ? <img src={data?.image_url} className={cx("metaData")} /> : <div>{data?.name && data?.name.substring(0, 2) || data?.symbol.substring(0, 2)}</div>}
             {data?.tick && <Icon icon={FaCheck} size={8} classIcon={cx("wrapperTick")} />}
           </>
         )}

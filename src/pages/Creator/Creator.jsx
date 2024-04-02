@@ -1,21 +1,22 @@
 import classNames from "classnames/bind";
-import styles from "./Creator.module.sass";
-import { useGlobalState } from "~/store";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "~/components/Contexts/AppUserProvider";
 import routesConfig from "~/configs";
 import Content from "./Content";
+import styles from "./Creator.module.sass";
 
 const cx = classNames.bind(styles);
 
 const Creator = () => {
   const navigate = useNavigate();
-  const [connectedAccount] = useGlobalState("connectedAccount");
-  // useEffect(() => {
-  //   if (!connectedAccount.address.length > 0) {
-  //     navigate(routesConfig.home);
-  //   }
-  // }, [connectedAccount, navigate]);
+  const { artistLoading,artist } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!artistLoading && Object.keys(artist).length === 0) {
+      navigate(routesConfig.dashboard);
+    }
+  }, [artistLoading,artist,navigate]);
 
   return (
     <div className={cx("wrapper")}>

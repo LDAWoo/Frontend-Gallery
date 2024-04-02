@@ -32,6 +32,120 @@
                 }
             }
         },
+        "NavarCreator": {
+            "Right": {
+                "logout": "로그아웃"
+            }
+        },
+        "DashBoard": {
+            "Collection": {
+                "items": {
+                    "item1": "초안",
+                    "item2": "검토 완료",
+                    "item3": "목록화됨"
+                },
+                "Drafts": {
+                    "title": "이것들은 제출되지 않은 응용 프로그램입니다 - 당신만이 볼 수 있습니다. 언제든지 돌아와 업데이트할 수 있습니다."
+                },
+                "Reviewed": {
+                    "title": "이 응용 프로그램은 검토되어 목록화되기 전에 언제든지 업데이트할 수 있습니다. 목록에 추가하려면 최종 해시 목록을 제출하십시오. 검토된 컬렉션은 사전 승인되지 않으며 목록화되기 전에 최종 검토를 거칩니다."
+                },
+                "Listed": {
+                    "title": "이 응용 프로그램은 활성 상태입니다. 언제든지 업데이트할 수 있습니다. 업데이트는 계속해서 검토 및 승인되어야 하며 그 후에 라이브로 반영됩니다."
+                }
+            },
+            "CreateNewCollection": "새로운 컬렉션 만들기"
+        },
+        "Creator": {
+            "Listing": {
+                "title": "목록에 등록",
+                "items": {
+                    "item1": "컬렉션",
+                    "item2": "세부 정보",
+                    "item3": "해시 목록",
+                    "item4": "제출"
+                }
+            },
+            "Main": {
+                "Collection": {
+                    "title": "컬렉션 정보",
+                    "subTitle": "제작 중인 컬렉션에 대해 알려주세요!",
+                    "name": "컬렉션 이름",
+                    "namePlaceholder": "슈퍼 NFT 컬렉션",
+                    "symbol": "NFT 심볼",
+                    "symbolPlaceholder": "GAE",
+                    "collectionSymbol": "컬렉션 심볼",
+                    "collectionSymbolPlaceholder": "super_nft_collection"
+                },
+                "Details": {
+                    "title": "목록 세부 정보",
+                    "subTitle": "마켓 페이지에 사용될 컬렉션 세부 정보를 입력하세요",
+                    "description": "컬렉션 설명",
+                    "descriptionPlaceholder": "DAO가 관리하는 2000개의 고유한 NFT",
+                    "image": "NFT 이미지 (500x500px)",
+                    "upload": "업로드",
+                    "imageDescription": "최대 파일 크기 5MB. 이 이미지는 컬렉션 페이지에 표시됩니다.",
+                    "Categories": {
+                        "title": "카테고리",
+                        "items": {
+                            "item1": "기본 카테고리",
+                            "item2": "이 컬렉션을 등록할 기본 카테고리를 선택하세요",
+                            "item3": "보조 카테고리",
+                            "item4": "이 컬렉션을 등록할 보조 카테고리를 선택하세요"
+                        }
+                    },
+                    "SocialWebLinks": {
+                        "title": "소셜 및 웹 링크",
+                        "subTitle": "컬렉션에 대한 소셜 및 웹 사이트 링크를 입력하세요. 이 링크는 컬렉션 페이지에 표시됩니다",
+                        "Twitter": {
+                            "title": "Twitter를 연결하십시오",
+                            "link": "Twitter 링크"
+                        },
+                        "Discord": {
+                            "title": "Discord 초대 코드 (선택 사항)",
+                            "placeholder": "98yXPI"
+                        },
+                        "Website": {
+                            "title": "웹 사이트 URL (선택 사항)",
+                            "placeholder": "https://suppercollection.io"
+                        }
+                    }
+                },
+                "HashList": {
+                    "title": "NFT 해시 목록",
+                    "subTitle": "NFT의 민트 해시 목록을 업로드하세요. 해시 목록을 검색하는 방법을 알아보세요.",
+                    "timeMint": "예상되는 민트 컬렉션 캘린더 날짜 및 시간 (UTC)",
+                    "totalSupply": "총 공급량",
+                    "placeholder": "10",
+                    "supplyDescription": "컬렉션에 존재하거나 예상되는 총 항목 수"
+                },
+                "Submit": {
+                    "title": "검토 및 제출",
+                    "subTitle": "등록 신청을 제출할 준비가 되었습니다. 아래 세부 정보를 검토하고 올바른지 확인하십시오. 제출할 준비가 되면 제출을 클릭하세요.",
+                    "items": {
+                        "item1": "이름",
+                        "item2": "심볼",
+                        "item3": "총 공급량",
+                        "item4": "설명",
+                        "item5": "기본 카테고리",
+                        "item6": "보조 카테고리",
+                        "item7": "컬렉션 프로필 사진",
+                        "item8": "Twitter",
+                        "item9": "Discord",
+                        "item10": "웹 사이트",
+                        "item11": "민트 날짜"
+                    },
+                    "Success": "NFT 작성 성공",
+                    "Error": "NFT 작성 실패"
+                }
+            },
+            "Step": "단계",
+            "of": "의",
+            "LastStep": "마지막 단계",
+            "SaveAndProceed": "저장 및 진행",
+            "Review": "검토",
+            "Submit": "제출"
+        },        
         "Home": {
             "Hero": {
                 "title": "솔라나의 선도적인 NFT 마켓",
@@ -106,5 +220,13 @@
                     }
                 }
             }
+        },
+        "Other": {
+            "Untitled": "제목 없음",
+            "Edited": "편집됨:",
+            "dayAgo": "일 전",
+            "daysAgo": "일 전",
+            "aFewSecondsAgo": "몇 초 전",
+            "Time": "시간"
         }
 }

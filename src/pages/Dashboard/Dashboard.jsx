@@ -10,11 +10,11 @@ import ModalWelcomeBack from "./ModalWelcomeBack/ModalWelcomeBack";
 const cx = classNames.bind(styles);
 
 const Dashboard = () => {
-  const { artistLoading } = useContext(UserContext);
+  const { artistLoading,artist } = useContext(UserContext);
 
   return (
     <div className={`${cx("wrapper")} no-scrollbar scrollbarCustom`}>
-      {artistLoading ? (
+      {artistLoading || Object.keys(artist).length === 0 ? (
         <>
           <ModalWelcomeBack />
           <ModalCheckInboxEmail />

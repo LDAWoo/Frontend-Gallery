@@ -24,14 +24,24 @@
 .wrapperMetaData    
     max-height: 22px
     max-width: 22px
+    min-height: 22px
+    min-width: 22px
     position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: $p1
+    color: $n
+    text-transform: capitalize
+    +text-xs
+    font-weight: 600
+    border-radius: 999px
 
 .metaData
     width: var(--full-w)
     height: var(--full-h)
     object-fit: cover  
     border-radius: 999px
-     
 
 .iconArrowDown    
     color: $n1

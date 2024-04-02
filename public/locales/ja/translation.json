@@ -32,6 +32,120 @@
                 }
             }
         },
+        "NavarCreator": {
+            "Right": {
+                "logout": "ログアウト"
+            }
+        },
+        "DashBoard": {
+            "Collection": {
+                "items": {
+                    "item1": "下書き",
+                    "item2": "審査済み",
+                    "item3": "リスト済み"
+                },
+                "Drafts": {
+                    "title": "これらは未提出の申請です - これらはあなただけが見ることができます。いつでも戻ってこれらを更新することができます。"
+                },
+                "Reviewed": {
+                    "title": "これらの申請は審査され、リストされる前にいつでも更新できます。リストにするには、最終ハッシュリストを送信してください。審査されたコレクションは事前承認されていませんので、リストにする前に最終的な審査が行われます。"
+                },
+                "Listed": {
+                    "title": "これらの申請はアクティブです。いつでも更新できます。更新は引き続き審査と受け入れが必要で、それからライブで反映されます。"
+                }
+            },
+            "CreateNewCollection": "新しいコレクションを作成"
+        },
+        "Creator": {
+            "Listing": {
+                "title": "リストに登録",
+                "items": {
+                    "item1": "コレクション",
+                    "item2": "詳細",
+                    "item3": "ハッシュリスト",
+                    "item4": "提出"
+                }
+            },
+            "Main": {
+                "Collection": {
+                    "title": "コレクション情報",
+                    "subTitle": "作成中のコレクションについて教えてください！",
+                    "name": "コレクション名",
+                    "namePlaceholder": "スーパーNFTコレクション",
+                    "symbol": "シンボルNFT",
+                    "symbolPlaceholder": "GAE",
+                    "collectionSymbol": "コレクションシンボル",
+                    "collectionSymbolPlaceholder": "super_nft_collection"
+                },
+                "Details": {
+                    "title": "リストの詳細",
+                    "subTitle": "マーケットプレイスページで使用されるコレクションの詳細を入力してください",
+                    "description": "コレクションの説明",
+                    "descriptionPlaceholder": "DAOによって管理される2000個のユニークなNFT",
+                    "image": "NFT画像（500x500px）",
+                    "upload": "アップロード",
+                    "imageDescription": "最大ファイルサイズ5MB。これはコレクションページに表示される画像です。",
+                    "Categories": {
+                        "title": "カテゴリー",
+                        "items": {
+                            "item1": "主要カテゴリー",
+                            "item2": "このコレクションをリストに掲載するための主要カテゴリーを選択してください",
+                            "item3": "副次カテゴリー",
+                            "item4": "このコレクションをリストに掲載するための副次カテゴリーを選択してください"
+                        }
+                    },
+                    "SocialWebLinks": {
+                        "title": "ソーシャル＆ウェブリンク",
+                        "subTitle": "コレクションのためのソーシャルとウェブサイトのリンクを入力してください。これらのリンクはコレクションページに表示されます",
+                        "Twitter": {
+                            "title": "Twitterをリンクしてください",
+                            "link": "Twitterのリンク"
+                        },
+                        "Discord": {
+                            "title": "Discord招待コード（オプション）",
+                            "placeholder": "98yXPI"
+                        },
+                        "Website": {
+                            "title": "ウェブサイトURL（オプション）",
+                            "placeholder": "https://suppercollection.io"
+                        }
+                    }
+                },
+                "HashList": {
+                    "title": "NFTハッシュリスト",
+                    "subTitle": "NFTの鋳造ハッシュリストをアップロードしてください。ハッシュリストの取得方法については。",
+                    "timeMint": "お客様の予定されているミントコレクションのカレンダー日時（UTC）",
+                    "totalSupply": "総供給量",
+                    "placeholder": "10",
+                    "supplyDescription": "予想されるコレクションの合計アイテム数"
+                },
+                "Submit": {
+                    "title": "確認して送信",
+                    "subTitle": "リスト申請を送信する準備ができました。以下の詳細を確認し、正しいことを確認してください。準備ができたら送信をクリックしてください。",
+                    "items": {
+                        "item1": "名前",
+                        "item2": "シンボル",
+                        "item3": "総供給",
+                        "item4": "説明",
+                        "item5": "主要カテゴリー",
+                        "item6": "副次カテゴリー",
+                        "item7": "コレクションPFP",
+                        "item8": "Twitter",
+                        "item9": "Discord",
+                        "item10": "ウェブサイト",
+                        "item11": "鋳造日"
+                    },
+                    "Success": "NFTの作成に成功しました",
+                    "Error": "NFTの作成に失敗しました"
+                }
+            },
+            "Step": "ステップ",
+            "of": "の",
+            "LastStep": "最後のステップ",
+            "SaveAndProceed": "保存して続行",
+            "Review": "レビュー",
+            "Submit": "送信"
+        },                
         "Home": {
             "Hero": {
                 "title": "Solana のリーディング NFT マーケットプレイス",
@@ -106,5 +220,13 @@
                     }
                 }
             }
+        },
+        "Other": {
+            "Untitled": "無題",
+            "Edited": "編集済み：",
+            "dayAgo": "日前",
+            "daysAgo": "日前",
+            "aFewSecondsAgo": "数秒前",
+            "Time": "時間"
         }
 }

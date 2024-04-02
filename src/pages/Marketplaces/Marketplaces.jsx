@@ -3,7 +3,7 @@ import styles from "./Marketplaces.module.sass";
 import Content from "./Content";
 import Footer from "./Footer";
 import ActivityAndAnalytics from "./ActivityAndAnalytics";
-import { useGlobalState } from "~/store";
+import { setGlobalState, useGlobalState } from "~/store";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { findMarketplacesArtistBySymbol } from "~/api/Artist";
@@ -31,6 +31,7 @@ const Marketplaces = () => {
     };
 
     fetchData();
+    setGlobalState("carts", [])
   }, [symbol]);
 
 

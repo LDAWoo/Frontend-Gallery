@@ -12,20 +12,40 @@
     align-items: center
 
 .containerLogo
-    width: 60px
-    height: 50px
+    width: 176px
+    height: 20px
+
+.gardenEden
+    color: $n     
+    fill: $n 
+    filter: url(#filter)
+    font-family: 700
+    +text-sm   
 
 .wrapperItemNavbar
     display: flex
     align-items: center
     gap: 16px
 
-.itemNavbar
+.itemNavbar, .iconLanguage
     color: $n
     font-weight: 600 
     transition-duration: 150ms
     transition-property: color
+    background-color: transparent
+    cursor: pointer
     &:hover
         color: $p1
+
+.iconLanguage
+    transform: translateY(2px)
+
+.containerLanguage
+    background-color: $n7
+    border-radius: 4px
+    border: 1px solid $n3
+    width: var(--full-w)
+    height: var(--full-h)
+        
 
 

@@ -5,29 +5,29 @@ import AppUserProvider from "./components/Contexts/AppUserProvider";
 
 function App() {
   return (
-    <AppTokenProvider>
-      <AppUserProvider>
-        <Routes>
-          {publicRouterPathComponent.map((router, index) => {
-            const path = router.path;
-            const Layout = router.layout;
-            const Page = router.component;
-
-            return (
-              <Route
-                key={index}
-                path={path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-        </Routes>
-      </AppUserProvider>
-    </AppTokenProvider>
+      <AppTokenProvider>
+        <AppUserProvider>
+          <Routes>
+            {publicRouterPathComponent.map((router, index) => {
+              const path = router.path;
+              const Layout = router.layout;
+              const Page = router.component;
+  
+              return (
+                <Route
+                  key={index}
+                  path={path}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </AppUserProvider>
+      </AppTokenProvider>
   );
 }
 

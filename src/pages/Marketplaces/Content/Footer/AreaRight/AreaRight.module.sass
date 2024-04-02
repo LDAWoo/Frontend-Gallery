@@ -12,35 +12,22 @@
     display: flex
     gap: 12px 0
     flex-direction: row
-    width: 32px
-    &.hidden
-        display: none
-        
-    +t
-        display: none
-        width: 0
-        &.hidden
-            display: flex 
-            width: auto 
-
-    &:nth-child(4)
+    width: var(--full-w)
+    &:nth-child(1)
         display: flex
-        flex: 1 0 0px
-        width: var(--full-w)
-        gap: 12px
-    +t
-        &:nth-child(4)
-            flex: none
-            width: auto 
-            min-width: 240px
+        +t
+            display: none
+    
+    &:nth-child(3)
+        display: none
+        +t
+            display: flex      
 
 .buttonWrapper
-    display: none
     gap: 12px 0
     width: var(--full-w)
     height: 35px
-    &.active
-        display: flex
+    position: relative
             
 .wrapperTick
     position: absolute 

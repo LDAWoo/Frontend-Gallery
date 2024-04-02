@@ -1,0 +1,43 @@
+@import '~/styles/helpers'
+
+
+.wrapper
+    display: flex
+    cursor: pointer
+
+.container
+    display: flex
+    flex-direction: row
+    gap: 4px
+    justify-content: space-between
+    width: var(--full-w)
+    padding: 10px 16px
+    transition-duration: 200ms
+    transition-property: background-color
+    &:hover
+        background-color: $n6
+
+.content
+    display: flex
+    flex-direction: row
+    width: var(--full-w)
+    color: $-n1   
+    color: $n
+    +text-xs
+    font-weight: 700
+    align-items: center
+
+.wrapperCurrentCheck
+    display: flex
+    justify-content: space-between
+    width: var(--full-w)
+    align-items: center    
+
+.wrapperIcon
+    transform: translateY(2px)
+    color: $-n1    
+    margin-right: 6px
+
+.wrapperIconCheck
+    transform: translateY(2px)
+    color: $p1    

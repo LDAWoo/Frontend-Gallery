@@ -11,7 +11,7 @@ const Header = ({ data }) => {
     <div className={cx("wrapper")}>
       <div className={cx("wrapperMetaData")}>
         <div className={cx("containerMetaData")}>
-          <img src={data?.image_url} className={cx("metaData")} alt="metaData" />
+          {data?.image_url ? <img src={data?.image_url} className={cx("metaData")} alt="metaData" /> : <div className={cx("metaData")}>{data?.name.substring(0,2) || data?.symbol.substring(0,2)}</div>}
           {data?.tick && <Icon icon={FaCheck} size={8} classIcon={cx("wrapperTick")} />}
         </div>
         <div className={cx("wrapperItemsInfo")}>

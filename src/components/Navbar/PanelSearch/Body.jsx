@@ -1,16 +1,15 @@
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { FaCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { dollarIcon } from "~/assets/Icon";
-import { imagesWalletAddress } from "~/assets/Image";
 import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
-import { setGlobalState } from "~/store";
-import { FaCheck } from "react-icons/fa6";
 import routesConfig from "~/configs";
+import { setGlobalState } from "~/store";
 import styles from "./Body.module.sass";
-import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -46,7 +45,11 @@ const Body = ({ data, loading }) => {
                         <Link onClick={handleLinkSearchClick} to={`${routesConfig.marketplace.replace(":symbol", artist.symbol)}`} key={index} className={cx("wrapperCollections")}>
                           <div className={cx("wrapperMetaData")}>
                             <div className={cx("metaData")}>
-                              <Image src={artist?.image_url || imagesWalletAddress(artist?.wallet_address)} />
+                              {artist?.image_url ? 
+                              <Image src={artist?.image_url} /> 
+                              : 
+                                <>{artist?.name && artist?.name.substring(0,2) || artist?.symbol.substring(0,2)}</>
+                              }
                             </div>
                             <Title title={artist?.name || artist?.symbol} white xl />
   

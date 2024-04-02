@@ -32,6 +32,120 @@
                 }
             }
         },
+        "NavarCreator": {
+            "Right": {
+                "logout": "登出"
+            }
+        },
+        "DashBoard": {
+            "Collection": {
+                "items": {
+                    "item1": "草稿",
+                    "item2": "已审核",
+                    "item3": "已列出"
+                },
+                "Drafts": {
+                    "title": "这些是您未提交的申请 - 只有您可以看到这些。您可以随时返回并更新这些内容。"
+                },
+                "Reviewed": {
+                    "title": "这些申请已经过审核，可以随时在列出之前更新。要列出，请提交您的最终哈希列表。请注意，已审核的收藏品不是预先批准的，并且在列出之前将进行最终审核。"
+                },
+                "Listed": {
+                    "title": "这些申请是活动的。您可以随时更新这些内容。请注意：更新仍然需要审核和接受，然后才会实时反映。"
+                }
+            },
+            "CreateNewCollection": "创建新收藏"
+        },
+        "Creator": {
+            "Listing": {
+                "title": "申请上市",
+                "items": {
+                    "item1": "收藏品",
+                    "item2": "详细信息",
+                    "item3": "哈希列表",
+                    "item4": "提交"
+                }
+            },
+            "Main": {
+                "Collection": {
+                    "title": "收藏品信息",
+                    "subTitle": "告诉我们关于您正在铸造的收藏品的信息！",
+                    "name": "收藏品名称",
+                    "namePlaceholder": "超级NFT收藏品",
+                    "symbol": "NFT符号",
+                    "symbolPlaceholder": "GAE",
+                    "collectionSymbol": "收藏品符号",
+                    "collectionSymbolPlaceholder": "super_nft_collection"
+                },
+                "Details": {
+                    "title": "上市详情",
+                    "subTitle": "输入您的收藏品在市场页面上将使用的详细信息",
+                    "description": "收藏品描述",
+                    "descriptionPlaceholder": "由DAO管理的2000个独特NFT",
+                    "image": "NFT图像（500x500像素）",
+                    "upload": "上传",
+                    "imageDescription": "文件大小限制为5MB。这是将显示在您的收藏品页面上的图像。",
+                    "Categories": {
+                        "title": "分类",
+                        "items": {
+                            "item1": "主要分类",
+                            "item2": "选择此收藏品要列入的主要分类",
+                            "item3": "次要分类",
+                            "item4": "选择此收藏品要列入的次要分类"
+                        }
+                    },
+                    "SocialWebLinks": {
+                        "title": "社交与网站链接",
+                        "subTitle": "输入您收藏品的社交和网站链接。这些链接将显示在您的收藏品页面上",
+                        "Twitter": {
+                            "title": "请链接您的Twitter",
+                            "link": "链接Twitter"
+                        },
+                        "Discord": {
+                            "title": "Discord邀请码（可选）",
+                            "placeholder": "98yXPI"
+                        },
+                        "Website": {
+                            "title": "网站网址（可选）",
+                            "placeholder": "https://suppercollection.io"
+                        }
+                    }
+                },
+                "HashList": {
+                    "title": "NFT哈希列表",
+                    "subTitle": "请上传您的NFT铸造哈希列表。了解如何检索您的哈希列表。",
+                    "timeMint": "您预期的铸造收藏日历日期和时间（UTC）",
+                    "totalSupply": "总供应量",
+                    "placeholder": "10",
+                    "supplyDescription": "预计或现有的收藏品中的总项目数"
+                },
+                "Submit": {
+                    "title": "审查并提交",
+                    "subTitle": "您准备提交您的上市申请。请审查以下详细信息，并确认连接正确。准备好后单击提交。",
+                    "items": {
+                        "item1": "名称",
+                        "item2": "符号",
+                        "item3": "总供应量",
+                        "item4": "描述",
+                        "item5": "主要分类",
+                        "item6": "次要分类",
+                        "item7": "收藏品头像",
+                        "item8": "Twitter",
+                        "item9": "Discord",
+                        "item10": "网站",
+                        "item11": "铸造日期"
+                    },
+                    "Success": "成功创建NFT",
+                    "Error": "创建NFT失败"
+                }
+            },
+            "Step": "步骤",
+            "of": "的",
+            "LastStep": "最后一步",
+            "SaveAndProceed": "保存并继续",
+            "Review": "审查",
+            "Submit": "提交"
+        },        
         "Home": {
             "Hero": {
                 "title": "Solana领先的NFT市场",
@@ -106,5 +220,13 @@
                     }
                 }
             }
+        },
+        "Other": {
+            "Untitled": "未命名",
+            "Edited": "已编辑：",
+            "dayAgo": "天前",
+            "daysAgo": "天前",
+            "aFewSecondsAgo": "几秒钟前",
+            "Time": "时间"
         }
 }

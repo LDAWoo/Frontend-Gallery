@@ -12,10 +12,14 @@ import routesConfig from "~/configs";
 import PropTypes from "prop-types";
 import { setGlobalState } from "~/store";
 import { updateHistoryCreateNFT } from "~/api/CreatorNFT";
+import { useTranslation } from "react-i18next";
+import { getLocale } from "~/locale/Locale";
 
 const cx = classNames.bind(styles);
 
 const HashList = ({ data }) => {
+  const {t} = useTranslation();
+  const locale = getLocale();
   const navigate = useNavigate();
   const [supply, setSupply] = useState("");
   const [open, setOpen] = useState(false);
@@ -85,28 +89,38 @@ const HashList = ({ data }) => {
 
   useEffect(() => (supply.length === 0 ? setDisabled(true) : setDisabled(false)), [supply]);
 
+  const handleKeyPress = (e) => {
+    if(e.key === "0" && supply.length === 0){
+      e.preventDefault();
+    }
+
+    if(supply.length >= 4){
+      e.preventDefault();
+    }
+  }
+
   return (
     <div className={cx("wrapper")}>
-      <Title gallery title="Step 3 of 5" large nowrap={false} />
-      <Title title="NFT Hash List" white nowrap={false} fontBold extraLarge6 />
-      <Title gallery title="Please upload your mint hash list for your NFTs. To see how  to retrieve your hash list." fontMedium xl nowrap={false} />
+      <Title gallery title={`${t("Creator.Step")} 3 ${t("Creator.of")} 5`} large nowrap={false} />
+      <Title title={t("Creator.Main.HashList.title")} white nowrap={false} fontBold extraLarge6 />
+      <Title gallery title={t("Creator.Main.HashList.subTitle")} fontMedium xl nowrap={false} />
       <div className={`${cx("mb")}`}></div>
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
-        <Title title="When is  Your Expected Mint Collection Calendar Date And Time (UTC)" white xl fontMedium nowrap={false} />
+        <Title title={t("Creator.Main.HashList.timeMint")} white xl fontMedium nowrap={false} />
         <Tooltip translate interactive={true} isVisible={open} placement="bottom-start" onClickOutside={() => setOpen(false)} items={<Time date={date} setDate={setDate} time={time} setTime={setTime} onChange={handleChangeTime} />}>
           <div>
-            <Button className={cx("button")} classButton={cx("buttonDate")} onClick={handleClick} title={`${format(date, "LLLL dd, yyyy")} ${time}` || "Pick a date and tim"} xl border />
+            <Button className={cx("button")} classButton={cx("buttonDate")} onClick={handleClick} title={`${format(date, "LLLL dd, yyyy", {locale})} ${time}` || "Pick a date and tim"} xl border />
           </div>
         </Tooltip>
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
-        <Title title="Total Supply" white xl fontMedium nowrap={false} />
-        <TextInput type="text" pattern="[0-9]*" placeholder="10" value={supply} onChange={handleChangePrice} />
-        <Title gallery title="Number of total items in the collection existing or expected" fontMedium large nowrap={false} />
+        <Title title={t("Creator.Main.HashList.totalSupply")} white xl fontMedium nowrap={false} />
+        <TextInput type="text" pattern="[0-9]*" placeholder={t("Creator.Main.HashList.placeholder")} value={supply} onChange={handleChangePrice} onKeyPress={handleKeyPress}/>
+        <Title gallery title={t("Creator.Main.HashList.supplyDescription")} fontMedium large nowrap={false} />
       </div>
       <div className={`${cx("mb")}`}>
-        <Button title="Review" disabled={disabled} className={`${cx("buttonReview")} ${disabled ? cx("disable") : ""}`} onClick={handleReview} />
+        <Button title={t("Creator.Review")} disabled={disabled} className={`${cx("buttonReview")} ${disabled ? cx("disable") : ""}`} onClick={handleReview} />
       </div>
     </div>
   );

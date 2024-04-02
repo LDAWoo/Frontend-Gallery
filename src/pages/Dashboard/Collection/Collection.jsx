@@ -1,102 +1,129 @@
-import classNames from "classnames/bind";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { findAllHistoryCreateNFTByEmail, postCreateHistoryNFT, updateHistoryCreateNFT } from "~/api/CreatorNFT";
 import Button from "~/components/Button";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
 import routesConfig from "~/configs";
-import styles from "./Collection.module.sass";
 import Drafts from "./Drafts";
+import Listed from "./Listed";
 import Reviewed from "./Reviewed";
+import { getArtworkReviewedByEmail } from "~/api/Artwork";
+import classNames from "classnames/bind";
+import styles from "./Collection.module.sass";
 
 const cx = classNames.bind(styles);
 
 const Collection = () => {
-  const navigate = useNavigate();
-  const { artist } = useContext(UserContext);
-  const [active, setActive] = useState("drafts");
-  const [data, setDate] = useState([]);
-  const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const { t } = useTranslation();
+    const { artist } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState("drafts");
+    const [drafts, setDrafts] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
-  const handleActiveTab = (tab) => {
-    setActive(tab);
-  };
-
-  const handleCreateNewCollection = async () => {
-    const email = artist.email;
-
-    try {
-      const results = await postCreateHistoryNFT({ email });
-      await updateHistoryCreateNFT({ id: results, email: email });
-      navigate(`${routesConfig.creator.replace(":id", results)}`);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (artist) {
-        try {
-          setLoading(true);
-          const results = await findAllHistoryCreateNFTByEmail(artist.email);
-          setDate(results.listResult);
-          setLoading(false);
-        } catch (e) {
-          console.log(e);
-        }
-      }
+    const handleActiveTab = (tab) => {
+        setActiveTab(tab);
     };
 
-    fetchData();
-  }, [artist]);
+    const handleCreateNewCollection = async () => {
+        try {
+            setLoading(true);
+            const email = artist.email;
+            const results = await postCreateHistoryNFT({ email });
+            await updateHistoryCreateNFT({ id: results, email });
+            setLoading(false);
+            navigate(`${routesConfig.creator.replace(":id", results)}`);
+        } catch (error) {
+            setLoading(false);
+            console.error("Error while creating new collection:", error);
+        }
+    };
 
-  const items = [
-    {
-      tab: "drafts",
-      name: "Drafts",
-      value: data.length,
-    },
+    useEffect(() => {
+        const fetchData = async () => {
+            if (artist) {
+                try {
+                    setLoading(true);
+                    const draft = await findAllHistoryCreateNFTByEmail(artist.email);
+                    const review = await getArtworkReviewedByEmail(artist.email);
+                    setDrafts(draft.listResult);
+                    setReviews(review.listResult);
+                    setLoading(false);
+                } catch (error) {
+                    setLoading(false);
+                    console.error("Error while fetching data:", error);
+                }
+            }
+        };
 
-    {
-      tab: "submissions",
-      name: "Submissions",
-      value: 0,
-    },
-    {
-      tab: "reviewed",
-      name: "Reviewed",
-      value: 0,
-    },
-  ];
+        fetchData();
+    }, [artist]);
 
-  return (
-    <div className={cx("wrapper")}>
-      <div className={cx("container")}>
-        <div className={cx("wrapperContainer")}>
-          <div className={cx("wrapperContentItem")}>
-            {items.map((item, index) => (
-              <div key={index} onClick={() => handleActiveTab(item?.tab)} className={`${cx("containerItem")} ${active === item?.tab ? cx("active") : ""}`}>
-                <div className={cx("contentItem")}>
-                  <div>{item?.name}</div>
-                  {item?.value > 0 && <div className={`${cx("containerValueItem")} ${active === item?.tab ? cx("active") : ""}`}>{item?.value}</div>}
+    const items = useMemo(
+        () => [
+            {
+                tab: "drafts",
+                name: t("DashBoard.Collection.items.item1"),
+                value: drafts.length,
+            },
+            {
+                tab: "reviewed",
+                name: t("DashBoard.Collection.items.item2"),
+                value: reviews.length,
+            },
+            {
+                tab: "listed",
+                name: t("DashBoard.Collection.items.item3"),
+            },
+        ],
+        [drafts.length, reviews.length, t]
+    );
+
+    return (
+        <div className={cx("wrapper")}>
+            <div className={cx("container")}>
+                <div className={cx("wrapperContainer")}>
+                    <div className={cx("wrapperContentItem")}>
+                        {items.map((item, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleActiveTab(item.tab)}
+                                className={`${cx("containerItem")} ${activeTab === item.tab ? cx("active") : ""}`}
+                            >
+                                <div className={cx("contentItem")}>
+                                    <div>{item.name}</div>
+                                    {item.value > 0 && (
+                                        <div className={`${cx("containerValueItem")} ${activeTab === item.tab ? cx("active") : ""}`}>
+                                            {item.value}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={cx("wrapperContentCreator")}>
+                            <Button
+                                title={t("DashBoard.CreateNewCollection")}
+                                disabled={loading}
+                                loading={loading}
+                                background
+                                fontBold
+                                xxl
+                                className={cx("buttonCreatorNewCollection")}
+                                onClick={handleCreateNewCollection}
+                            />
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
 
-          <div className={cx("wrapperContentCreator")}>
-            <div>
-              <Button title="Create New Collection" disabled={loading} background fontBold xxl className={cx("buttonCreatorNewCollection")} onClick={handleCreateNewCollection} />
+                <div>{activeTab === "drafts" && <Drafts data={drafts} loading={loading} />}</div>
+                <div>{activeTab === "reviewed" && <Reviewed data={reviews} loading={loading} />}</div>
+                <div>{activeTab === "listed" && <Listed />}</div>
             </div>
-          </div>
         </div>
-
-        <div>{active === "drafts" && <Drafts data={data} loading={loading} />}</div>
-        <div>{active === "reviewed" && <Reviewed />}</div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Collection;

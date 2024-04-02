@@ -120,7 +120,7 @@ const Card = ({ items, index, onUpdateItems }) => {
         <div className={cx("cardHeading")}>
           <div className={cx("cardGroup")}>
             <div className={cx("wrapperGroup")}>
-              <div className={cx("wrapperImage")}>
+              <div className={`${cx("wrapperImage")} ${active && cx('active')}`}>
                 <Image src={items?.image_url || "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Farweave.net%2FTmrD-CZFywoMXI7-4CqZVwx75X07nW5OWiK-cCCPLc0%3Fext%3Dpng"} className={cx("image")} />
               </div>
               <div className={cx("buttonFavoriteArtwork")}>

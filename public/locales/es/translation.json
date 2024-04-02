@@ -32,6 +32,120 @@
                 }
             }
         },
+        "NavarCreator": {
+            "Right": {
+                "logout": "Cerrar sesión"
+            }
+        },
+        "DashBoard": {
+            "Collection": {
+                "items": {
+                    "item1": "Borradores",
+                    "item2": "Revisados",
+                    "item3": "Listados"
+                },
+                "Drafts": {
+                    "title": "Estas son sus aplicaciones no enviadas: solo usted puede verlas. Puede volver y actualizarlas en cualquier momento."
+                },
+                "Reviewed": {
+                    "title": "Estas aplicaciones han sido revisadas y pueden ser actualizadas en cualquier momento antes de ser listadas. Para ser listadas, envíe su lista de hash final. Tenga en cuenta que las colecciones revisadas NO ESTÁN PREAPROBADAS y estarán sujetas a una revisión final antes de ser listadas."
+                },
+                "Listed": {
+                    "title": "Estas aplicaciones están en vivo. Puede actualizarlas en cualquier momento. Tenga en cuenta: las actualizaciones aún deben ser revisadas y aceptadas antes de que se reflejen en vivo."
+                }
+            },
+            "CreateNewCollection": "Crear nueva colección"
+        },
+        "Creator": {
+            "Listing": {
+                "title": "Solicitar listado",
+                "items": {
+                    "item1": "Colecciones",
+                    "item2": "Detalles",
+                    "item3": "Lista de hash",
+                    "item4": "Enviar"
+                }
+            },
+            "Main": {
+                "Collection": {
+                    "title": "Información de la colección",
+                    "subTitle": "¡Cuéntanos sobre la colección que estás creando!",
+                    "name": "Nombre de la colección",
+                    "namePlaceholder": "Super Colección NFT",
+                    "symbol": "Símbolo NFT",
+                    "symbolPlaceholder": "GAE",
+                    "collectionSymbol": "Símbolo de la colección",
+                    "collectionSymbolPlaceholder": "super_nft_collection"
+                },
+                "Details": {
+                    "title": "Detalles del listado",
+                    "subTitle": "Ingrese los detalles de su colección que se utilizarán para la página de su mercado",
+                    "description": "Descripción de la colección",
+                    "descriptionPlaceholder": "2000 NFT únicos gestionados por DAO",
+                    "image": "Imagen NFT (500x500px)",
+                    "upload": "Subir",
+                    "imageDescription": "Tamaño máximo de archivo 5MB. Esta es la imagen que se mostrará en su página de colección.",
+                    "Categories": {
+                        "title": "Categorías",
+                        "items": {
+                            "item1": "Categoría principal",
+                            "item2": "Seleccione la categoría principal bajo la cual desea que se liste esta colección",
+                            "item3": "Categoría secundaria",
+                            "item4": "Seleccione la categoría secundaria bajo la cual se debe listar esta colección"
+                        }
+                    },
+                    "SocialWebLinks": {
+                        "title": "Enlaces sociales y web",
+                        "subTitle": "Ingrese los enlaces sociales y web para su colección. Estos enlaces se mostrarán en su página de colección",
+                        "Twitter": {
+                            "title": "Por favor vincule su cuenta de Twitter",
+                            "link": "Vincular Twitter"
+                        },
+                        "Discord": {
+                            "title": "Código de invitación de Discord (opcional)",
+                            "placeholder": "98yXPI"
+                        },
+                        "Website": {
+                            "title": "URL del sitio web (opcional)",
+                            "placeholder": "https://suppercollection.io"
+                        }
+                    }
+                },
+                "HashList": {
+                    "title": "Lista de hash NFT",
+                    "subTitle": "Cargue su lista de hash de acuñación para sus NFT. Para saber cómo recuperar su lista de hash.",
+                    "timeMint": "¿Cuál es su fecha y hora de acuñación esperada (UTC)",
+                    "totalSupply": "Oferta total",
+                    "placeholder": "10",
+                    "supplyDescription": "Número total de elementos en la colección existente o esperada"
+                },
+                "Submit": {
+                    "title": "Revisar y enviar",
+                    "subTitle": "Estás listo para enviar tu solicitud de listado. Revise los detalles a continuación y confirme que son correctos. Haga clic en Enviar cuando esté listo para enviar.",
+                    "items": {
+                        "item1": "nombre",
+                        "item2": "símbolo",
+                        "item3": "oferta total",
+                        "item4": "descripción",
+                        "item5": "categorías principales",
+                        "item6": "categorías secundarias",
+                        "item7": "foto de perfil de colección",
+                        "item8": "Twitter",
+                        "item9": "Discord",
+                        "item10": "sitio web",
+                        "item11": "fecha de acuñación"
+                    },
+                    "Success": "NFT creado con éxito",
+                    "Error": "Error al crear NFT"
+                }
+            },
+            "Step": "Paso",
+            "of": "de",
+            "LastStep": "Último paso",
+            "SaveAndProceed": "Guardar y continuar",
+            "Review": "Revisión",
+            "Submit": "Enviar"
+        },        
         "Home": {
             "Hero": {
                 "title": "Principales mercado de NFT de Solana",
@@ -106,5 +220,13 @@
                     }
                 }
             }
+        },
+        "Other": {
+            "Untitled": "Sin título",
+            "Edited": "Editado:",
+            "dayAgo": "día atrás",
+            "daysAgo": "días atrás",
+            "aFewSecondsAgo": "hace unos segundos",
+            "Time": "Tiempo"
         }
 }

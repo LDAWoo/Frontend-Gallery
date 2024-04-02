@@ -4,8 +4,8 @@ import Title from "~/components/Title";
 import Button from "~/components/Button";
 import TextInput from "~/components/TextInput";
 import { useEffect, useState } from "react";
-import { setGlobalState } from "~/store";
-import { getTransactionParsedPhantomSolana, updateNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
+import { setGlobalState, useGlobalState } from "~/store";
+import { getTransactionParsedPhantomSolana, listNftMarketplaceSolanaPhantom, updateNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 import { Bounce, toast } from "react-toastify";
 import { updateArtwork } from "~/api/Artwork";
 import PropTypes from "prop-types";
@@ -14,20 +14,20 @@ const cx = classNames.bind(styles);
 
 const ClaimCondition = ({ data }) => {
   const [artwork, setArtwork] = useState({});
-  const [transaction, setTransaction] = useState({});
-
+  const [marketplace, setMarketplace] = useState({});
   const [price, setPrice] = useState(0);
   const [royalty, setRoyalty] = useState(0);
   const [disabled, setDisabled] = useState(false);
-
+  const [connectedAccount] = useGlobalState("connectedAccount")
   useEffect(() => {
     if (data?.artwork) {
       setArtwork(data?.artwork);
     }
 
-    if (data?.transaction) {
-      setTransaction(data?.transaction);
+    if (data?.marketplace) {
+      setMarketplace(data?.marketplace);
     }
+
   }, [data]);
 
   useEffect(() => {
@@ -54,17 +54,21 @@ const ClaimCondition = ({ data }) => {
     price.length === 0 || royalty.length === 0 ? setDisabled(true) : setDisabled(false);
   }, [price, royalty]);
 
+
   const handleUpdate = async () => {
     try {
       setGlobalState("loading", true);
-      const results = await getTransactionParsedPhantomSolana(transaction?.signature);
 
       const dataUpdateNFT = {
         address: artwork?.wallet_address,
-        tokenAddress: results.actions[0].info.nft_address,
+        tokenAddress: artwork?.tokenAddress,
         price: price,
         royalty: royalty,
       };
+
+      const marketplaceAddress = marketplace?.marketplaceAddress;
+      const tokenAddress = artwork?.tokenAddress;
+      const sellerAddress = connectedAccount.address;
 
       const dataUpdateArtwork = {
         id: artwork?.id,
@@ -72,12 +76,29 @@ const ClaimCondition = ({ data }) => {
         royalty,
       };
 
-      await updateNFTPhantomSolana(dataUpdateNFT);
+      console.log(marketplaceAddress);
+      console.log(tokenAddress);
+      console.log(sellerAddress);
 
-      await updateArtwork(dataUpdateArtwork);
+      // const signature = await updateNFTPhantomSolana(dataUpdateNFT);
 
-      setGlobalState("loading", false);
-      handleSuccessfully();
+      // const signature = await listNftMarketplaceSolanaPhantom(
+      //   marketplaceAddress,
+      //   tokenAddress,
+      //   sellerAddress,
+      //   price
+      // )
+
+      // if(!signature){
+      //   setGlobalState("loading", false);
+      //   handleError();
+      //   return
+      // }
+
+      // await updateArtwork(dataUpdateArtwork);
+
+      // setGlobalState("loading", false);
+      // handleSuccessfully();
     } catch (e) {
       setGlobalState("loading", false);
       handleError();

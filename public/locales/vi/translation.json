@@ -32,6 +32,120 @@
                 }
             }
         },
+        "NavarCreator": {
+            "Right": {
+                "logout": "Đăng xuất"
+            }
+        },
+        "DashBoard": {
+            "Collection": {
+                "items": {
+                    "item1": "Bản nháp",
+                    "item2": "Đã xem xét",
+                    "item3": "Đã liệt kê"
+                },
+                "Drafts": {
+                    "title": "Đây là các ứng dụng chưa được gửi - chỉ có bạn mới có thể nhìn thấy. Bạn có thể quay lại và cập nhật chúng bất kỳ lúc nào."
+                },
+                "Reviewed": {
+                    "title": "Những ứng dụng này đã được xem xét và có thể được cập nhật bất kỳ lúc nào trước khi liệt kê. Để được liệt kê, vui lòng gửi danh sách hash cuối cùng của bạn. Lưu ý, các bộ sưu tập đã được xem xét KHÔNG ĐƯỢC PHÊ DUYỆT TRƯỚC và sẽ được xem xét cuối cùng trước khi liệt kê."
+                },
+                "Listed": {
+                    "title": "Những ứng dụng này đang hoạt động. Bạn có thể cập nhật chúng bất kỳ lúc nào. Vui lòng lưu ý: Các cập nhật vẫn cần được xem xét và chấp nhận trước khi chúng mới được phản ánh trực tiếp."
+                }
+            },
+            "CreateNewCollection": "Tạo Bộ Sưu Tập Mới"
+        },
+        "Creator": {
+            "Listing": {
+                "title": "Đăng ký để niêm yết",
+                "items": {
+                    "item1": "Bộ sưu tập",
+                    "item2": "Chi tiết",
+                    "item3": "Danh sách Hash",
+                    "item4": "Gửi"
+                }
+            },
+            "Main": {
+                "Collection": {
+                    "title": "Thông tin Bộ sưu tập",
+                    "subTitle": "Hãy cho chúng tôi biết về bộ sưu tập mà bạn đang sản xuất!",
+                    "name": "Tên Bộ sưu tập",
+                    "namePlaceholder": "Bộ sưu tập siêu NFT",
+                    "symbol": "Biểu tượng NFT",
+                    "symbolPlaceholder": "GAE",
+                    "collectionSymbol": "Biểu tượng Bộ sưu tập",
+                    "collectionSymbolPlaceholder": "super_nft_collection"
+                },
+                "Details": {
+                    "title": "Chi tiết Niêm yết",
+                    "subTitle": "Nhập các chi tiết về bộ sưu tập của bạn sẽ được sử dụng cho trang của thị trường của bạn",
+                    "description": "Mô tả Bộ sưu tập",
+                    "descriptionPlaceholder": "2000 NFT duy nhất do DAO quản lý",
+                    "image": "Hình ảnh NFT (500x500px)",
+                    "upload": "Tải lên",
+                    "imageDescription": "Dung lượng tệp tối đa 5MB. Đây là hình ảnh sẽ hiển thị trên trang bộ sưu tập của bạn.",
+                    "Categories": {
+                        "title": "Danh mục",
+                        "items": {
+                            "item1": "Danh mục chính",
+                            "item2": "Chọn danh mục chính mà bạn muốn bộ sưu tập này được niêm yết dưới",
+                            "item3": "Danh mục phụ",
+                            "item4": "Chọn danh mục phụ cho bộ sưu tập này được niêm yết dưới"
+                        }
+                    },
+                    "SocialWebLinks": {
+                        "title": "Liên kết Mạng xã hội & Website",
+                        "subTitle": "Nhập các liên kết mạng xã hội và website cho bộ sưu tập của bạn. Những liên kết này sẽ được hiển thị trên trang bộ sưu tập của bạn",
+                        "Twitter": {
+                            "title": "Vui lòng liên kết Twitter của bạn",
+                            "link": "Liên kết Twitter"
+                        },
+                        "Discord": {
+                            "title": "Mã Mời Discord (Tùy chọn)",
+                            "placeholder": "98yXPI"
+                        },
+                        "Website": {
+                            "title": "URL trang web (Tùy chọn)",
+                            "placeholder": "https://suppercollection.io"
+                        }
+                    }
+                },
+                "HashList": {
+                    "title": "Danh sách Hash NFT",
+                    "subTitle": "Vui lòng tải lên danh sách hash sản xuất cho NFT của bạn. Để biết cách lấy danh sách hash của bạn.",
+                    "timeMint": "Khi nào là Ngày và giờ Dự kiến cho Bộ sưu tập của bạn (UTC)",
+                    "totalSupply": "Tổng cung",
+                    "placeholder": "10",
+                    "supplyDescription": "Số lượng tổng cộng trong bộ sưu tập hiện có hoặc dự kiến"
+                },
+                "Submit": {
+                    "title": "Xem lại & Gửi",
+                    "subTitle": "Bạn đã sẵn sàng gửi đơn đăng ký niêm yết của mình. Vui lòng xem lại các chi tiết dưới đây và xác nhận rằng nó đúng. Nhấp vào gửi khi bạn đã sẵn sàng gửi.",
+                    "items": {
+                        "item1": "tên",
+                        "item2": "biểu tượng",
+                        "item3": "tổng cung",
+                        "item4": "mô tả",
+                        "item5": "danh mục chính",
+                        "item6": "danh mục phụ",
+                        "item7": "hình đại diện bộ sưu tập",
+                        "item8": "twitter",
+                        "item9": "discord",
+                        "item10": "website",
+                        "item11": "ngày sản xuất"
+                    },
+                    "Success": "Tạo NFT thành công",
+                    "Error": "Tạo NFT thất bại"
+                }
+            },
+            "Step": "Bước",
+            "of": "của",
+            "LastStep": "Bước cuối cùng",
+            "SaveAndProceed": "Lưu & Tiếp tục",
+            "Review": "Xem lại",
+            "Submit": "Gửi"
+        },        
         "Home": {
             "Hero": {
                 "title": "Thị trường NFT hàng đầu của Solana",
@@ -106,5 +220,13 @@
                     }
                 }
             }
+        },
+        "Other": {
+            "Untitled": "Chưa đặt tên",
+            "Edited": "Đã chỉnh sửa:",
+            "dayAgo": "ngày trước",
+            "daysAgo": "ngày trước",
+            "aFewSecondsAgo": "vài giây trước",
+            "Time": "Thời gian"
         }
 }

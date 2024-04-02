@@ -2,7 +2,6 @@ import classNames from "classnames/bind";
 import PropTypes from 'prop-types';
 import { BiCheck } from "react-icons/bi";
 import { dollarIcon } from "~/assets/Icon";
-import { imagesWalletAddress } from "~/assets/Image";
 import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
@@ -16,7 +15,7 @@ function ItemCollection({data, currentSymbol, onClick}) {
         <div className={cx('wrapper')}>
             <div className={`${cx('container')} ${currentSymbol === data?.symbol && cx('active')}`} onClick={() => onClick(data?.symbol)}>
                 <div className={cx('wrapperMetadata')}>
-                    <Image src={data?.image_url || imagesWalletAddress(data?.walletAddress)}/>
+                    {data?.image_url ? <Image src={data?.image_url}/> : <div>{data?.name.substring(0, 2) || data?.symbol.substring(0, 2)}</div>}
                 </div>
     
                 <div className={cx('wrapperContainer')}>

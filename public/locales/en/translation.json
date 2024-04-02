@@ -32,6 +32,120 @@
                 }
             }
         },
+        "NavarCreator":{
+            "Right": {
+                "logout": "Logout"
+            }
+        },
+        "DashBoard":{
+            "Collection": {
+                "items": {
+                    "item1": "Drafts",
+                    "item2": "Reviewed",
+                    "item3": "Listed"
+                },
+                "Drafts": {
+                    "title": "These are your unsubmitted applications - only you can see these. You can return and update these at any time."
+                },
+                "Reviewed": {
+                    "title": "These applications have been reviewed and can be updated at any time prior to listing. To be listed, submit your final hash list. Please note, collections that have been reviewed are NOT PRE-APPROVED and will be subject to a final review before listing."
+                },
+                "Listed": {
+                    "title": "These applications are live. You can update these at any time. Please note: updates still need to be reviewed and accepted before they will be reflected live."
+                }
+            },
+            "CreateNewCollection": "Create New Collection"
+        },
+        "Creator": {
+            "Listing": {
+                "title": "Apply for listing",
+                "items": {
+                    "item1": "Collections",
+                    "item2": "Details",
+                    "item3": "Hash List",
+                    "item4": "Submit"
+                }
+            },
+            "Main":{
+                "Collection": {
+                    "title": "Collection Info",
+                    "subTitle": "Tell us about the collection your are minting!",
+                    "name": "Collection Name",
+                    "namePlaceholder": "Super NFT Collection",
+                    "symbol": "Symbol NFT",
+                    "symbolPlaceholder": "GAE",
+                    "collectionSymbol": "Collection Symbol",
+                    "collectionSymbolPlaceholder": "super_nft_collection"
+                },
+                "Details": {
+                    "title": "Listing Details",
+                    "subTitle": "Enter in the details on your collection that will be used for your marketplace page on",
+                    "description": "Collection Description",
+                    "descriptionPlaceholder": "2000 unique NFTs governed by DAO",
+                    "image": "NFT Image (500x500px)",
+                    "upload": "Upload",
+                    "imageDescription": "Max file size 5MB. This is the image that will show on your collection page.",
+                    "Categories": {
+                        "title": "Categories",
+                        "items": {
+                            "item1": "Primary Category",
+                            "item2": "Select the primary category that you would like for this collection to be listed under",
+                            "item3": "Secondary Category",
+                            "item4": "Select the secondary category for this collection to be listed under"
+                        }
+                    },
+                    "SocialWebLinks": {
+                        "title": "Social & Web Links",
+                        "subTitle": "Input your social and websites links for your collection. These links will be displayed on your collection page",
+                        "Twitter": {
+                            "title": "Please link your Twitter",
+                            "link": "Link Twitter"
+                        },
+                        "Discord":{
+                            "title": "Discord Invite Code (Optional)",
+                            "placeholder": "98yXPI"
+                        },
+                        "Website": {
+                            "title": "Website Url (Optional)",
+                            "placeholder": "https://suppercollection.io"
+                        }
+                    }
+                },
+                "HashList": {
+                    "title": "NFT Hash List",
+                    "subTitle": "Please upload your mint hash list for your NFTs. To see how to retrieve your hash list.",
+                    "timeMint": "When is Your Expected Mint Collection Calendar Date And Time (UTC)",
+                    "totalSupply": "Total Supply",
+                    "placeholder": "10",
+                    "supplyDescription": "Number of total items in the collection existing or expected"
+                },
+                "Submit": {
+                    "title": "Review & Submit",
+                    "subTitle": "You are ready to submit your listing application. Please review the details below and confirm it is connect. Click submit when you are ready to submit.",
+                    "items": {
+                        "item1": "name",
+                        "item2": "symbol",
+                        "item3": "total supply",
+                        "item4": "description",
+                        "item5": "categories primary",
+                        "item6": "categories secondary",
+                        "item7": "collection pfp",
+                        "item8": "twitter",
+                        "item9": "discord",
+                        "item10": "website",
+                        "item11": "mint date"
+                    },
+                    "Success": "Create NFT Successfully",
+                    "Error": "Create NFT Failed"
+                }
+            },
+            "Step": "Step",
+            "of": "of",
+            "LastStep": "The last step",
+            "SaveAndProceed": "Save & Proceed",
+            "Review": "Review",
+            "Submit": "Submit"
+        },
         "Home":{
             "Hero": {
                 "title": "Solana's Leading NFT Marketplace",
@@ -106,5 +220,13 @@
                     }
                 }
             }
+        },
+        "Other": {
+            "Untitled": "Untitled",
+            "Edited": "Edited:",
+            "dayAgo": "day ago",
+            "daysAgo": "days ago",
+            "aFewSecondsAgo": "a few seconds ago",
+            "Time": "Time"
         }
 }

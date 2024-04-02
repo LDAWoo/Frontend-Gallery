@@ -15,7 +15,7 @@ const Tooltip = ({ toolTip = false, interactive, delay, translate, content, item
   );
 
   const renderItems = () => (
-    <div className={`${cx("wrapperTippyHeadless")} ${translate ? cx("active") : ""}`} style={{ width: width, height: "auto" }}>
+    <div className={`${ !className ? cx("wrapperTippyHeadless") : className} ${translate ? cx("active") : ""}`} style={{ width: width, height: "auto" }}>
       {items}
     </div>
   );

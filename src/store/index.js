@@ -130,4 +130,18 @@ const handleSuccessfully = () => {
   });
 };
 
-export { useGlobalState, setGlobalState, getGlobalState, truncate, copyText };
+const toastInformation = (message) => {
+  toast(`🦄 ${message}`, {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+}
+
+export { useGlobalState, setGlobalState, getGlobalState, truncate, copyText,toastInformation };

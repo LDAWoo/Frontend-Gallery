@@ -1,0 +1,23 @@
+@import '~/styles/helpers'
+
+.wrapper
+    padding: 0
+
+.container
+    display: flex
+    flex-direction: row
+    align-items: center
+    cursor: pointer
+    gap: 2px
+    padding: 10px 16px
+    &:hover
+        background-color: $n5
+
+.wrapperContent
+    display: flex    
+    +text-xs
+    font-weight: 700
+
+.wrapperIcon
+    color: $-n1    
+    transform: translate(-2px, 2px)

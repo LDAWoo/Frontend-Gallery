@@ -42,8 +42,14 @@
 .wrapperImage
     display: flex
     background-color: $n6
-    aspect-ratio: 20/20
     margin: 0
+    width: var(--full-w)
+    height: var(--full-h)
+    transition: transform 0.3s
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+    transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)
+    &.active
+        transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(1.1) scaleY(1.1)
 
 .image
     max-width: var(--full-w)

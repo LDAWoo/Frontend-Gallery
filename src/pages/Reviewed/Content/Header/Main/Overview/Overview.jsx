@@ -1,21 +1,20 @@
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 import { updateArtwork } from "~/api/Artwork";
-import { getTransactionParsedPhantomSolana, updateNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
+import { updateNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
 import { arrowDownUp } from "~/assets/Icon";
 import Button from "~/components/Button";
 import TextInput from "~/components/TextInput";
 import Title from "~/components/Title";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Overview.module.sass";
-import { Bounce, toast } from "react-toastify";
 
 const cx = classNames.bind(styles);
 
 const Overview = ({ data }) => {
   const [artwork, setArtwork] = useState({});
-  const [transaction, setTransaction] = useState({});
   const [attributes, setAttributes] = useState([]);
   const [name, setName] = useState("");
   const [symbol, setSymbol] = useState("");
@@ -28,9 +27,6 @@ const Overview = ({ data }) => {
       setArtwork(data?.artwork);
     }
 
-    if (data?.transaction) {
-      setTransaction(data?.transaction);
-    }
     if (data?.attributes) {
       setAttributes(data?.attributes);
     }
@@ -76,13 +72,12 @@ const Overview = ({ data }) => {
   const handleSave = async () => {
     try {
       setGlobalState("loading", true);
-      const results = await getTransactionParsedPhantomSolana(transaction?.signature);
 
       const newAttributes = currentAttribute.map((att) => ({ trait_type: att.trait_type, value: att.value }));
 
       const dataUpdateNFT = {
         address: artwork?.wallet_address,
-        tokenAddress: results.actions[0].info.nft_address,
+        tokenAddress: artwork?.tokenAddress,
         name: name,
         symbol: symbol,
         description: description,

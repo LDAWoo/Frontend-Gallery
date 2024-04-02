@@ -9,11 +9,11 @@ import { UserContext } from "~/components/Contexts/AppUserProvider";
 const cx = classNames.bind(styles);
 
 const CreateNFTLayout = ({ children }) => {
-  const { artistLoading } = useContext(UserContext);
+  const { artistLoading,artist } = useContext(UserContext);
   return (
     <MainLayout>
       <div className={cx("wrapper")}>
-        {!artistLoading && <NavbarCreator />}
+        {!artistLoading && Object.keys(artist).length > 0  && <NavbarCreator />}
         {children}
       </div>
     </MainLayout>

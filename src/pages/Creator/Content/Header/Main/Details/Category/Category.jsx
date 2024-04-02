@@ -5,9 +5,11 @@ import { getAllCategory } from "~/api/Category";
 import Select from "~/components/Select";
 import Title from "~/components/Title";
 import styles from "./Category.module.sass";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 const Category = ({ primaryCategories, setPrimaryCategories, secondaryCategories, setSecondaryCategories }) => {
   const [categories, setCategories] = useState([]);
+  const {t} = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,17 +38,17 @@ const Category = ({ primaryCategories, setPrimaryCategories, secondaryCategories
 
   return (
     <div className={cx("contentCategory")}>
-      <Title title="Categories" white nowrap={false} fontBold xxxl />
+      <Title title={t("Creator.Main.Details.Categories.title")} white nowrap={false} fontBold xxxl />
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
-        <Title title="Primary Category" gallery xl fontMedium nowrap={false} />
+        <Title title={t("Creator.Main.Details.Categories.items.item1")} gallery xl fontMedium nowrap={false} />
         <Select translate placement="auto" data={categories} disableValue={secondaryCategories} value={primaryCategories} onChange={handleSelectPrimaryCategory} />
-        <Title title="Select the primary category that you would like for this collection to be listed under" nowrap={false} gallery xl fontMedium />
+        <Title title={t("Creator.Main.Details.Categories.items.item2")} nowrap={false} gallery xl fontMedium />
       </div>
 
       <div className={`${cx("containerContent")} ${cx("mb")}`}>
-        <Title title="Secondary Category" gallery xl fontMedium nowrap={false} />
+        <Title title={t("Creator.Main.Details.Categories.items.item3")} gallery xl fontMedium nowrap={false} />
         <Select translate placement="auto" data={categories} value={secondaryCategories} disableValue={primaryCategories} onChange={handleSelectSecondaryCategory} />
-        <Title title="Select the  secondary category for this collection to be listed under" nowrap={false} gallery xl fontMedium />
+        <Title title={t("Creator.Main.Details.Categories.items.item4")} nowrap={false} gallery xl fontMedium />
       </div>
     </div>
   );

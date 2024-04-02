@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { differenceInDays } from "date-fns";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Image from "~/components/Image";
 import Title from "~/components/Title";
@@ -10,11 +11,13 @@ import DraftsSkeleton from "./DraftsSkeleton";
 
 const cx = classNames.bind(styles);
 
-const Drafts = ({ data, loading }) => {
+const Drafts = ({data,loading}) => {
+  const {t} = useTranslation()
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
-        <Title title="These are your unsubmitted applications - only you can see these. You can return and update these at any time." white className={cx("titleWrapper")} fontMedium extraLarge4 nowrap={false} />
+        <Title title={t("DashBoard.Collection.Drafts.title")} white className={cx("titleWrapper")} fontMedium extraLarge4 nowrap={false} />
 
         <div className={cx("containerHistory")}>
           {loading ? (
@@ -37,8 +40,8 @@ const Drafts = ({ data, loading }) => {
                           </div>
                         </Link>
                         <div className={cx("containerContentHistory")}>
-                          <Title title={item?.name || "Untitled"} fontMedium white xxl />
-                          <div className={cx("dateHistoryCreateNFT")}>Edited: {item?.createdDate && date === 1 ? `${date} day ago` : date === 0 ? "a few seconds ago" : date > 1 ? `${date} days ago` : ""}</div>
+                          <Title title={item?.name || t("Other.Untitled")} fontMedium white xxl />
+                          <div className={cx("dateHistoryCreateNFT")}>{t("Other.Edited")} {item?.createdDate && date === 1 ? `${date} ${t("Other.dayAgo")}` : date === 0 ? t("Other.aFewSecondsAgo") : date > 1 ? `${date} ${t("Other.daysAgo")}` : ""}</div>
                         </div>
                       </div>
                     </div>
@@ -54,7 +57,7 @@ const Drafts = ({ data, loading }) => {
 
 Drafts.propTypes = {
   data: PropTypes.array,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default Drafts;

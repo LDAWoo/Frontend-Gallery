@@ -4,22 +4,44 @@ import routesConfig from "~/configs";
 import Image from "../Image";
 import Title from "../Title";
 import styles from "./NavbarCreator.module.sass";
+import Button from "../Button";
+import removeCookie from "~/hooks/useRegisterRemoveCookie";
+import { useContext, useState } from "react";
+import { UserContext } from "../Contexts/AppUserProvider";
+import { GiEarthAmerica } from "react-icons/gi";
+import Language from "../Language";
+import Tooltip from "../Tooltip";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 const NavbarCreator = () => {
+  const {setArtist} = useContext(UserContext)
+  const [showLanguage, setShowLanguage] = useState(false);
+  const {t} = useTranslation();
+
+  const handleLogOut = () => {
+    removeCookie("token");
+    setArtist({})
+  }
+
   return (
     <div className={`${cx("wrapper")}`}>
       <div className={cx("container")}>
         <Link to={routesConfig.dashboard} className={cx("containerLogo")}>
-          <Image lazy={false} src="https://assets.fortmatic.com/MagicLogos/b146580fc7674e2d1df63364da1b2c2e/ee899a3edc7b329249bd1947c0eea95d.png" />
+          {/* <Image lazy={false} src="/images/logogardeneden.png" /> */}
+          <Title title="GARDEN EDEN" className={cx('gardenEden')}/>
         </Link>
         <div className={cx("wrapperItemNavbar")}>
-          <Link to={routesConfig.dashboard} className={cx("")}>
-            <Title title="Dashboard" className={cx("itemNavbar")} xl />
-          </Link>
-          <Link to={routesConfig.dashboard} className={cx("")}>
-            <Title title="Sign out" className={cx("itemNavbar")} xl />
-          </Link>
+            <Tooltip interactive placement="bottom-end" className={cx("containerLanguage")} width={200} onClickOutside={() => setShowLanguage(false)} isVisible={showLanguage} items={
+                <Language 
+                  initialState={1}
+                  onClick={() => setShowLanguage(false)}/>
+                }>
+                  <div>
+                    <Button className={cx("itemNavbar")} classIcon={cx('iconLanguage')} icon={GiEarthAmerica} size={20} onClick={() => setShowLanguage(!showLanguage)}/>
+                  </div>
+            </Tooltip>
+          <Button title={t("NavarCreator.Right.logout")} className={cx("itemNavbar")} xl onClick={handleLogOut}/>
         </div>
       </div>
     </div>
