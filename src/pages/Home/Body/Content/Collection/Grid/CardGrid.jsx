@@ -63,7 +63,10 @@ const CardGrid = ({ items, onUpdateItems }) => {
               <Link className={cx("forwardOwner")} to={routesConfig.marketplace.replace(":symbol", items?.symbol)}></Link>
               <div className={cx("content")}>
                 <div className={cx("wrapperOwner")}>
-                  <Image src={items?.image_url} />
+                  {items?.image_url ? <Image src={items?.image_url} /> : 
+                  <div className={cx('metaData')}>
+                    {items?.symbol.substring(0, 2)}
+                  </div>}
                 </div>
                 <div className={cx("wrapperInfo")}>
                   <div className={cx("contentOwnerInfo")}>

@@ -1,22 +1,22 @@
 import classNames from "classnames/bind";
-import styles from "./ClaimCondition.module.sass";
-import Title from "~/components/Title";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { updateArtwork } from "~/api/Artwork";
+import { listNftMarketplaceSolanaPhantom } from "~/api/PhantomSolana/PhantomSolana.services";
 import Button from "~/components/Button";
 import TextInput from "~/components/TextInput";
-import { useEffect, useState } from "react";
-import { setGlobalState, useGlobalState } from "~/store";
-import { getTransactionParsedPhantomSolana, listNftMarketplaceSolanaPhantom, updateNFTPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
-import { Bounce, toast } from "react-toastify";
-import { updateArtwork } from "~/api/Artwork";
-import PropTypes from "prop-types";
+import Title from "~/components/Title";
+import { setGlobalState, toastInformation, useGlobalState } from "~/store";
+import styles from "./ClaimCondition.module.sass";
 
 const cx = classNames.bind(styles);
 
 const ClaimCondition = ({ data }) => {
+  const {t} = useTranslation()
   const [artwork, setArtwork] = useState({});
   const [marketplace, setMarketplace] = useState({});
   const [price, setPrice] = useState(0);
-  const [royalty, setRoyalty] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [connectedAccount] = useGlobalState("connectedAccount")
   useEffect(() => {
@@ -34,129 +34,93 @@ const ClaimCondition = ({ data }) => {
     if (artwork?.price) {
       setPrice(artwork?.price);
     }
-
-    if (artwork?.royalty) {
-      setRoyalty(artwork?.royalty);
-    }
   }, [artwork]);
 
   const handleChangePrice = (e) => {
     const value = e.target.value;
-    setPrice(value);
-  };
-
-  const handleChangeRoyalty = (e) => {
-    const value = e.target.value;
-    setRoyalty(value);
+    if (isNumeric(value)) {
+      setPrice(value);
+    }
   };
 
   useEffect(() => {
-    price.length === 0 || royalty.length === 0 ? setDisabled(true) : setDisabled(false);
-  }, [price, royalty]);
+    setDisabled(price.length === 0 || !isNumeric(price));
+  }, [price]);
 
+  const isNumeric = (value) => {
+    return /^\d*\.?\d*$/.test(value);
+  };
 
   const handleUpdate = async () => {
     try {
+      if(!connectedAccount.address){
+        setGlobalState("connectedModal", true);
+        return;
+      }
       setGlobalState("loading", true);
-
-      const dataUpdateNFT = {
-        address: artwork?.wallet_address,
-        tokenAddress: artwork?.tokenAddress,
-        price: price,
-        royalty: royalty,
-      };
 
       const marketplaceAddress = marketplace?.marketplaceAddress;
       const tokenAddress = artwork?.tokenAddress;
       const sellerAddress = connectedAccount.address;
 
+      const {signature, listState } = await listNftMarketplaceSolanaPhantom(
+        marketplaceAddress,
+        tokenAddress,
+        sellerAddress,
+        Number.parseFloat(price)
+      )
+
+      if(!signature){
+        setGlobalState("loading", false);
+        toastInformation(
+          t("Reviewed.ClaimCondition.Error")
+        )
+        return;
+      }
+
       const dataUpdateArtwork = {
         id: artwork?.id,
-        price,
-        royalty,
-      };
+        price: price,
+        listState,
+        listedDate: new Date(),
+      }
 
-      console.log(marketplaceAddress);
-      console.log(tokenAddress);
-      console.log(sellerAddress);
+      await updateArtwork(dataUpdateArtwork)
 
-      // const signature = await updateNFTPhantomSolana(dataUpdateNFT);
+      setGlobalState("loading", false);
 
-      // const signature = await listNftMarketplaceSolanaPhantom(
-      //   marketplaceAddress,
-      //   tokenAddress,
-      //   sellerAddress,
-      //   price
-      // )
-
-      // if(!signature){
-      //   setGlobalState("loading", false);
-      //   handleError();
-      //   return
-      // }
-
-      // await updateArtwork(dataUpdateArtwork);
-
-      // setGlobalState("loading", false);
-      // handleSuccessfully();
+      toastInformation(
+        t("Reviewed.ClaimCondition.Success")
+      )
     } catch (e) {
       setGlobalState("loading", false);
-      handleError();
+      toastInformation(
+        t("Reviewed.ClaimCondition.Error")
+      )
     }
   };
 
-  const handleSuccessfully = () => {
-    toast("🦄 Update NFT Successfully!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
-
-  const handleError = () => {
-    toast("🦄 Update NFT Error!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
 
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
         <div className={cx("wrapperContainer")}>
           <div className={cx("wrapperHeader")}>
-            <Title title="Set Claim Conditions" white xxl fontBold nowrap={false} />
+            <Title title={t("Reviewed.ClaimCondition.title")} white xxl fontBold nowrap={false} />
             <div className={cx("wrapperDescription")}>
-              <Title title="Control when the NFTs get dropped, how much they cost, and more." large nowrap={false} />
+              <Title title={t("Reviewed.ClaimCondition.subTitle")} large nowrap={false} />
             </div>
           </div>
 
           <div className={cx("wrapperBody")}>
             <div className={cx("bodyContainer")}>
               <div className={cx("containerItems")}>
-                <Title title="How much do you want to charge to claim each NFT ?" white large fontMedium />
+                <Title title={t("Reviewed.ClaimCondition.price")} white large fontMedium />
                 <TextInput name="price" value={price} placeholder="0.1" onChange={handleChangePrice} />
-              </div>
-              <div className={cx("containerItems")}>
-                <Title title="Royalties" white large fontMedium />
-                <TextInput name="royalties" value={royalty} placeholder="5" currency={<Percent />} classBorder={cx("wrapperRoyalties")} onChange={handleChangeRoyalty} />
               </div>
             </div>
             <div className={cx("wrapperButtonClaimCondition")}>
-              <Button title="Update Claim Condition" background disabled={disabled} onClick={handleUpdate} />
+              <Button title={t("Reviewed.ClaimCondition.updateClaimCondition")} background disabled={disabled} onClick={handleUpdate} />
             </div>
           </div>
         </div>
@@ -167,10 +131,6 @@ const ClaimCondition = ({ data }) => {
 
 ClaimCondition.propTypes = {
   data: PropTypes.object,
-};
-
-const Percent = () => {
-  return <div className={cx("wrapperPercent")}>%</div>;
 };
 
 export default ClaimCondition;

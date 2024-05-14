@@ -2,7 +2,6 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import routesConfig from "~/configs";
 import Image from "../Image";
-import Title from "../Title";
 import styles from "./NavbarCreator.module.sass";
 import Button from "../Button";
 import removeCookie from "~/hooks/useRegisterRemoveCookie";
@@ -12,6 +11,7 @@ import { GiEarthAmerica } from "react-icons/gi";
 import Language from "../Language";
 import Tooltip from "../Tooltip";
 import { useTranslation } from "react-i18next";
+import GardenEden from "../GardenEden";
 
 const cx = classNames.bind(styles);
 const NavbarCreator = () => {
@@ -28,8 +28,7 @@ const NavbarCreator = () => {
     <div className={`${cx("wrapper")}`}>
       <div className={cx("container")}>
         <Link to={routesConfig.dashboard} className={cx("containerLogo")}>
-          {/* <Image lazy={false} src="/images/logogardeneden.png" /> */}
-          <Title title="GARDEN EDEN" className={cx('gardenEden')}/>
+          <GardenEden primary filter/>
         </Link>
         <div className={cx("wrapperItemNavbar")}>
             <Tooltip interactive placement="bottom-end" className={cx("containerLanguage")} width={200} onClickOutside={() => setShowLanguage(false)} isVisible={showLanguage} items={

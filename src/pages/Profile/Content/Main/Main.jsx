@@ -1,12 +1,17 @@
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import { setGlobalState, useGlobalState } from "~/store";
-import Card from "./Card";
 import styles from "./Main.module.sass";
+import Card from "./Card";
+import CardSkeleton from "./Card/CardSkeleton";
+import ComponentCardList from "./ComponentCardList";
 
 const cx = classNames.bind(styles);
 
-const Main = () => {
+const Main = ({data, loading}) => {
+  console.log(data);
+
+  const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
   const [showNavigation] = useGlobalState("showNavigation");
   const [WidthAndHeightWindow] = useGlobalState("WidthAndHeightWindow");
   const scrollRef = useRef();
@@ -26,6 +31,9 @@ const Main = () => {
     setGlobalState("showNavigation", scroll);
   }, [scroll]);
 
+
+  console.log(showMarketplaceGridStyle);
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("content")}>
@@ -34,18 +42,46 @@ const Main = () => {
             <div className={`${cx("wrapperContainer")} no-scrollbar`}>
               <div style={{ display: "flex", flex: "1 1 auto", flexDirection: "column", minWidth: "0px", width: "100%" }}>
                 <div style={{ width: "100%", flex: "1 1 auto" }}>
-                  <div style={{ position: "relative", height: "100%" }}>
-                    <div className={cx("gridContainer")}>
-                      <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
-                        <div className={cx("container")}>
-                          <div className={cx("grid")} tabIndex={0}>
-                            {/* {Array.from({ length: 10 }).map((i, index) => (
-                              <Card items={i} index={index} key={index} />
-                            ))} */}
+                <div style={{ position: "relative", height: "100%" }}>
+                    {
+                      data.length === 0 ? 
+                      <div className={cx('wrapperNoCollection')}>
+                          No active listing for this collection 
+                      </div>
+                      :
+                    <>
+                      {(showMarketplaceGridStyle === "grid" || showMarketplaceGridStyle === "grids") && (
+                        <div className={cx("gridContainer")}>
+                          <div ref={scrollRef} onScroll={handleScroll} className={`${cx("scrollContainer")} ${showNavigation ? cx("active") : ""} scrollbarCustom`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
+                            <div className={cx("container")}>
+                              <div className={`${showMarketplaceGridStyle === "grid" ? cx("grid") : cx("grids")}`} tabIndex={0}>
+                                {loading ? (
+                                  Array.from({ length: 8 }).map((_, index) => (
+                                    <div key={index} className={cx("wrapperSkeleton")}>
+                                      <CardSkeleton />
+                                    </div>
+                                  ))
+                                ) : (
+                                  <>
+                                    {data.map((items, index) => (
+                                      <Card key={index} items={items} index={index} />
+                                    ))}
+                                  </>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
+                      )}
+                      {showMarketplaceGridStyle === "list" && (
+                        <div className={cx("containerList")}>
+                          <>
+                            <ComponentCardList data={data} showNavigation={showNavigation} loading={loading} />
+                          </>
+                        </div>
+                      )}
+                    </>
+                  }
                   </div>
                 </div>
               </div>

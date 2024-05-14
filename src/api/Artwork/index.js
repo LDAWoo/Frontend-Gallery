@@ -1,4 +1,4 @@
-import { get, put } from "~/utils/requestServer";
+import { get, post, put } from "~/utils/requestServer";
 
 export const getArtworkByWalletAddress = async (walletAddress) => {
   const response = await get(`/artwork/getArtworkByWalletAddress/${walletAddress}`);
@@ -34,3 +34,8 @@ export const updateArtwork = async (data) => {
   const response = await put(`/artwork/updateArtwork`, data);
   return response;
 };
+
+export const buyArtworks = async (data) => {
+  const response = await post(`/artwork/buy-artwork`, data);
+  return response;
+}

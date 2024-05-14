@@ -145,6 +145,47 @@
             "SaveAndProceed": "保存并继续",
             "Review": "审查",
             "Submit": "提交"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "创建市场",
+                "marketplace": "市场"
+            },
+            "items": {
+                "overview": "概览",
+                "claimCondition": "索赔条件",
+                "settings": "设置"
+            },
+            "Overview": {
+                "title": "编辑 NFT 收藏品",
+                "subTitle": "更改您当前的 NFT",
+                "name": "名称 NFT",
+                "nameDescription": "此 NFT 名称将显示在交易平台上。",
+                "symbol": "符号 NFT",
+                "symbolDescription": "此 NFT 符号将显示在交易平台上。",
+                "description": "描述 NFT",
+                "descriptionDescription": "此 NFT 描述将显示在交易平台上。",
+                "royalties": "版税",
+                "attributes": "属性 NFT",
+                "attributesDescription": "此 NFT 属性将显示在交易平台上。",
+                "attributeCount": "属性计数",
+                "saveCollection": "保存收藏品",
+                "Success": "成功更新 NFT",
+                "Error": "更新 NFT 失败"
+            },
+            "ClaimCondition": {
+                "title": "设置索赔条件",
+                "subTitle": "控制 NFT 何时下降、每个 NFT 的成本等。",
+                "price": "您想要收取每个 NFT 的费用是多少？",
+                "updateClaimCondition": "更新索赔条件",
+                "Success": "成功更新认领条件",
+                "Error": "更新认领条件失败"
+            },
+            "Settings": {
+                "title": "设置",
+                "display": "NFT 显示",
+                "showNft": "显示可交易的 NFT"
+            }
         },        
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "显示顶部"
             }
         },
+        "AssetFooter": {
+            "copyRight": "版权所有 (2023年 - 2024年) - Garden Eden™。保留所有权利"
+        },
         "Modal": {
             "Settings": {
                 "title": "应用程序设置",
@@ -219,7 +263,34 @@
                         "settings": "设置"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "添加属性 NFT",
+                "subTitle": "当前已选择属性。您可以添加或删除其他属性。",
+                "select": "选择...",
+                "type": "类型",
+                "typePlaceholder": "例如：尺寸",
+                "name": "名称",
+                "namePlaceholder": "例如：大号",
+                "Success": "成功添加属性 NFT！",
+                "Exists": "该属性 NFT 已存在！",
+                "Error": "添加或删除属性 NFT 失败！",
+                "addAndSave": "添加并保存"
+            },
+            "Welcome": {
+                "title": "欢迎回来",
+                "emailPlaceholder": "电子邮件地址",
+                "login": "登录 / 注册"
+            },
+            "ConfirmEmail": {
+                "title": "确认您的电子邮件",
+                "sendToLink": "使用发送到的链接登录",
+                "checkInbox": "检查收件箱"
             }
+        },
+        "Error": {
+            "emailNotBlank": "请输入电子邮件地址",
+            "emailNotEmail": "请输入有效的电子邮件地址"
         },
         "Other": {
             "Untitled": "未命名",

@@ -1,20 +1,21 @@
 import classNames from "classnames/bind";
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
-import { Bounce, toast } from "react-toastify";
 import { addAttributeNFT, deleteAttributeById, findAttributeByIdArtwork } from "~/api/Attribute";
 import Button from "~/components/Button";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
 import Select from "~/components/Select";
 import TextInput from "~/components/TextInput";
 import Title from "~/components/Title";
-import { setGlobalState, useGlobalState } from "~/store";
+import { setGlobalState, toastInformation, useGlobalState } from "~/store";
 import styles from "./BodyModalAddAttribute.module.sass";
 
 const cx = classNames.bind(styles);
 
 const BodyModalAddAttribute = () => {
+  const {t} = useTranslation();
   const [showModalAddAttributeNFT] = useGlobalState("showModalAddAttributeNFT");
   const [attributes] = useGlobalState("currentAttribute");
   const [traitType, setTraitType] = useState("");
@@ -63,10 +64,14 @@ const BodyModalAddAttribute = () => {
         setTraitType("");
         setName("");
         setGlobalState("loading", false);
-        handleSuccessfully();
+        toastInformation(
+          t("Modal.AddAttribute.Success")
+        )
       } catch (e) {
         setGlobalState("loading", false);
-        handleError();
+        toastInformation(
+          t("Modal.AddAttribute.Exists")
+        )
       }
     }
   };
@@ -77,36 +82,10 @@ const BodyModalAddAttribute = () => {
       await deleteAttributeById(id);
       fetchData();
     } catch (e) {
-      console.log(e);
+      toastInformation(
+        t("Modal.AddAttribute.Error")
+      )
     }
-  };
-
-  const handleSuccessfully = () => {
-    toast("🦄 Add Attribute NFT Successfully!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
-
-  const handleError = () => {
-    toast("🦄 This Attribute NFT Already Exists!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
   };
 
   useEffect(() => {
@@ -116,7 +95,7 @@ const BodyModalAddAttribute = () => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("wrapperHeader")}>
-        <Title nowrap={false} xl title={`(${attributes.length}) Attributes currently selected. You can add or remove other properties.`} />
+        <Title nowrap={false} xl title={`(${attributes.length}) ${t("Modal.AddAttribute.title")}`} />
         <div>
           <Button icon={CiCirclePlus} size={20} onClick={handleAddMoreAttribute} />
         </div>
@@ -125,13 +104,13 @@ const BodyModalAddAttribute = () => {
       {activeAttribute && (
         <div className={cx("containerAddAttribute")}>
           <div className={cx("itemsAttribute")}>
-            <Title title="Type" xl white fontMedium />
-            <TextInput value={traitType} placeholder="Ex: Size" name="trait_type" onChange={handleChangeTraitType} />
+            <Title title={t("Modal.AddAttribute.type")} xl white fontMedium />
+            <TextInput value={traitType} placeholder={t("Modal.AddAttribute.typePlaceholder")} name="trait_type" onChange={handleChangeTraitType} />
           </div>
 
           <div className={cx("itemsAttribute")}>
-            <Title title="Name" xl white fontMedium />
-            <TextInput value={name} placeholder="Ex: Large" name="value" onChange={handleChangeValue} />
+            <Title title={t("Modal.AddAttribute.name")} xl white fontMedium />
+            <TextInput value={name} placeholder={t("Modal.AddAttribute.namePlaceholder")} name="value" onChange={handleChangeValue} />
           </div>
         </div>
       )}
@@ -140,7 +119,7 @@ const BodyModalAddAttribute = () => {
         {attributes &&
           attributes.map((item, index) => {
             const values = [
-              { name: "Select...", value: "" },
+              { name: t("Modal.AddAttribute.select"), value: "" },
               { name: item.value, value: item.id },
             ];
 
@@ -153,7 +132,7 @@ const BodyModalAddAttribute = () => {
           })}
 
         <div className={cx("buttonAddAndSave")}>
-          <Button title="Add & Save" background xl disabled={disabled} onClick={handleAddAndSave} />
+          <Button title={t("Modal.AddAttribute.addAndSave")} background xl disabled={disabled} onClick={handleAddAndSave} />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ function CardArtist({owner, onClick}) {
                             Items: {owner?.artworks.length || 0}
                         </div>
                         <div className={cx('wrapperImage')}>
-                            {owner?.image_url ? <Image src={owner?.image_url} /> : <div>{owner?.name.substring(0, 2) || owner?.symbol.substring(0, 2)}</div>}
+                            {owner?.image_url ? <Image src={owner?.image_url} /> : <div>{owner?.name && owner?.name.substring(0, 2) || owner?.symbol.substring(0, 2)}</div>}
                         </div>
                     </div>
                     <div className={cx('wrapperName')}>

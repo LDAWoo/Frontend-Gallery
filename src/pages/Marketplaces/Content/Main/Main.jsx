@@ -42,7 +42,7 @@ const Main = ({ data, loading, onUpdateItems }) => {
                 <div style={{ width: "100%", flex: "1 1 auto" }}>
                   <div style={{ position: "relative", height: "100%" }}>
                     {
-                      data.length === 0 ? 
+                      data.length === 0 && !loading ? 
                       <div className={cx('wrapperNoCollection')}>
                           No active listing for this collection 
                       </div>

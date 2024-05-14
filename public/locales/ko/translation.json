@@ -145,6 +145,47 @@
             "SaveAndProceed": "저장 및 진행",
             "Review": "검토",
             "Submit": "제출"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "마켓플레이스 생성",
+                "marketplace": "마켓플레이스"
+            },
+            "items": {
+                "overview": "개요",
+                "claimCondition": "청구 조건",
+                "settings": "설정"
+            },
+            "Overview": {
+                "title": "NFT 컬렉션 편집",
+                "subTitle": "현재 NFT 변경",
+                "name": "NFT 이름",
+                "nameDescription": "이 NFT 이름은 거래 플랫폼에 표시됩니다.",
+                "symbol": "NFT 심볼",
+                "symbolDescription": "이 NFT 심볼은 거래 플랫폼에 표시됩니다.",
+                "description": "NFT 설명",
+                "descriptionDescription": "이 NFT 설명은 거래 플랫폼에 표시됩니다.",
+                "royalties": "저작권료",
+                "attributes": "NFT 속성",
+                "attributesDescription": "이 NFT 속성은 거래 플랫폼에 표시됩니다.",
+                "attributeCount": "속성 수",
+                "saveCollection": "컬렉션 저장",
+                "Success": "NFT 업데이트 성공",
+                "Error": "NFT 업데이트 실패"
+            },
+            "ClaimCondition": {
+                "title": "청구 조건 설정",
+                "subTitle": "NFT가 언제 드롭되고 얼마나 비용이 드는지 제어합니다.",
+                "price": "각 NFT를 청구하는 데 얼마나 비용이 들까요?",
+                "updateClaimCondition": "청구 조건 업데이트",
+                "Success": "청구 조건 업데이트 성공",
+                "Error": "청구 조건 업데이트 실패"
+            },
+            "Settings": {
+                "title": "설정",
+                "display": "NFT 표시",
+                "showNft": "거래 가능한 NFT 표시"
+            }
         },        
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "상위 표시"
             }
         },
+        "AssetFooter": {
+            "copyRight": "저작권 (2023년 - 2024년) - Garden Eden™. 모든 권리 보유"
+        },
         "Modal": {
             "Settings": {
                 "title": "앱 설정",
@@ -219,7 +263,34 @@
                         "settings": "설정"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "속성 NFT 추가",
+                "subTitle": "현재 선택된 속성입니다. 다른 속성을 추가하거나 제거할 수 있습니다.",
+                "select": "선택...",
+                "type": "유형",
+                "typePlaceholder": "예: 크기",
+                "name": "이름",
+                "namePlaceholder": "예: 큰",
+                "Success": "속성 NFT 추가 성공!",
+                "Exists": "이 속성 NFT가 이미 존재합니다!",
+                "Error": "속성 NFT 추가 또는 삭제 실패!",
+                "addAndSave": "추가 및 저장"
+            },
+            "Welcome": {
+                "title": "다시 오신 것을 환영합니다",
+                "emailPlaceholder": "이메일 주소",
+                "login": "로그인 / 가입"
+            },
+            "ConfirmEmail": {
+                "title": "이메일을 확인하세요",
+                "sendToLink": "전송된 링크를 사용하여 로그인",
+                "checkInbox": "받은 편지함 확인"
             }
+        },
+        "Error": {
+            "emailNotBlank": "이메일 주소를 입력하세요",
+            "emailNotEmail": "유효한 이메일 주소를 입력하세요"
         },
         "Other": {
             "Untitled": "제목 없음",

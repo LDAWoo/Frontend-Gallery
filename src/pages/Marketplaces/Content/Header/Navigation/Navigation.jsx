@@ -20,6 +20,18 @@ const Navigation = () => {
   const [showMarketplaceGridStyle] = useGlobalState("showMarketplaceGridStyle");
   const localMarketPlaceGridStyle = localStorage.getItem("marketplace-gridstyle");
   const [searchActive, setSearchActive] = useState(false);
+  const [marketplaceArtworksFilter] = useGlobalState("marketplaceArtworksFilter");
+  const [refresh] = useGlobalState("refresh");
+
+  const handleSort = (id, v) => {
+    setGlobalState("marketplaceArtworksFilter", {
+      ...marketplaceArtworksFilter,
+      sortValues: {
+        ...marketplaceArtworksFilter.sortValues,
+        [id]: v
+      }
+    });
+  };
 
   useEffect(() => {
     if (!localMarketPlaceGridStyle) {
@@ -95,17 +107,12 @@ const Navigation = () => {
       id: 4,
       groups: [
         {
-          id: "sort",
+          id: "sortPrice",
           name: "sort",
           type: "dropDown",
           data: [
             { name: "Price: Low to High", value: "low_to_high" },
             { name: "Price: High to Low", value: "high_to_low" },
-            { name: "Inscription: Low to High", value: "inscription_low_to_high" },
-            { name: "Inscription: High to Low", value: "inscription_high_to_low" },
-            { name: "Recently", value: "recently" },
-            { name: "Common to Rare", value: "common_to_rare" },
-            { name: "Rare to Common", value: "rare_to_common" },
           ],
           icon: arrowDownUp,
         },
@@ -124,11 +131,6 @@ const Navigation = () => {
       ],
     },
   ];
-  const [sortValue, setSortValue] = useState();
-
-  const handleSort = (v) => {
-    setSortValue(v);
-  };
 
   const handleClickButton = (group) => {
     if (group.categories === "boolean") {
@@ -139,6 +141,11 @@ const Navigation = () => {
     if (group?.localStore) {
       localStorage.setItem(group?.localStore, group?.id);
       setGlobalState(group?.showType, group?.id);
+      return;
+    }
+
+    if(group?.id === "refresh"){
+      setGlobalState("refresh",!refresh);
       return;
     }
   };
@@ -188,7 +195,7 @@ const Navigation = () => {
                     )}
                   </>
                 )}
-                {group?.type === "dropDown" && <DropDownSort data={group.data} value={sortValue} onChange={handleSort} />}
+                {group?.type === "dropDown" && <DropDownSort data={group.data} value={marketplaceArtworksFilter?.sortValues[group?.id]} onChange={value => handleSort(group?.id, value)} />}
                 {group?.type === "input" && 
                 <Search 
                   group={group}

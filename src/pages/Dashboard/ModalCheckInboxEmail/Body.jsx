@@ -6,20 +6,22 @@ import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import { useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 
 const Body = () => {
+  const {t} = useTranslation()
   const [email] = useGlobalState("emailLoginOrSignUp");
 
   return (
     <div className={cx("wrapper")}>
       <Icon icon={IoMailOpenOutline} classIcon={cx("iconEmail")} size={50} />
       <div className={cx("wrapperContainer")}>
-        <Title title="Confirm your email" fontBold white extraLarge7 />
+        <Title title={t("Modal.ConfirmEmail.title")} fontBold white extraLarge7 />
       </div>
 
       <div className={cx("wrapperContainer")}>
-        <Title title="Login in using the garden link sent to" white xxl fontMedium />
+        <Title title={t("Modal.ConfirmEmail.sendToLink")} white xxl fontMedium />
         <div className={cx("wrapperEmail")}>
           <Title title={email} white xxl fontBold />
           <Icon icon={BiEdit} size={18} classIcon={cx("iconEdit")} />
@@ -27,11 +29,11 @@ const Body = () => {
       </div>
 
       <div className={cx("wrapperContainer")}>
-        <Link className={cx("linkCheckInbox")}>Check your inbox</Link>
+        <Link className={cx("linkCheckInbox")}>{t("Modal.ConfirmEmail.checkInbox")}</Link>
       </div>
 
       <div className={cx("wrapperContainer")}>
-        <Title title="Copyright 2024" gallery large />
+        <Title title={t("AssetFooter.copyRight")} gallery large />
       </div>
     </div>
   );

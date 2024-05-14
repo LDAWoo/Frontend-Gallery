@@ -9,6 +9,9 @@
     border: 1px solid $n3
     position: relative
     background-color: $n6
+    height: var(--full-h)
+    display: flex
+    flex-direction: column
 
 .cardHeading
     flex: 1 1 auto
@@ -31,49 +34,87 @@
 .wrapperGroup
     width: var(--full-w)
     height: var(--full-h)
-    cursor: pointer 
 
 .wrapperImage
     display: flex
+    background-color: $n6
+    margin: 0
     width: var(--full-w)
     height: var(--full-h)
-    max-width: var(--full-w)
-    max-height: var(--full-h)  
-    background-color: $n6
-    aspect-ratio: auto
-    margin: none
-
+    transition: transform 0.3s
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+    transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)
+    &.active
+        transform: translate(0 , 0) rotate(0) skewX(0) skewY(0) scaleX(1.1) scaleY(1.1)
+        
 .image
     max-width: var(--full-w)
     max-height: var(--full-h)
     object-fit: cover  
+    transition: transform 0.3s
+    outline: 2px solid transparent
+    outline-offset: 2px
+    object-position: center
+    aspect-ratio: auto
+    background-image: none
+    background-color: transparent
+    width: auto
+    height: auto
+    display: block
+    vertical-align: middle
 
-.buttonLucky
+.wrapperName
     display: flex
-    position: absolute
-    top: 8px
-    left: 8px
-    padding: 3px 4px
-    cursor: pointer
-    border: none
+    flex-direction: column
+    gap: 4px
+    margin-right: 8px    
+    text-transform: capitalize
+    overflow: hidden
+
+.wrapperTick
+    display: flex
+    align-items: center
+    background-color: $p1
+    border-radius: 9999px
+    width: 12px
+    height: 12px
+    justify-content: center
+
+.wrapperIconTick
+    display: flex
+    transform: translateY(-1px)
+    color: $n        
+
+.wrapperArtist
+    display: flex
+    flex-direction: row
+    align-items: center
+    color: $n1
+    +text-xs
+    gap: 4px       
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+    text-decoration: none
+    transition-duration: 300ms
     transition-property: opacity
-    transition-timing-function: cubic-bezier(.4,0,.2,1)        
-    transition-duration: .15s
-    border-radius: 100%
-    background-color: $n1 
+    &:hover
+        opacity: 0.8
 
-.buttonAdd
-    display: flex
+.wrapperButton
     position: absolute
     top: 8px
     right: 8px
+
+.buttonCheck
+    display: flex
     padding: 5px 6px
     cursor: pointer
     border: none
     border-radius: 100%
     transition-duration: 300ms
-    background-color: rgba(18,12,24,.2)
-   
+    background-color: $p1
+    
 
 .cardFooter
     position: relative
@@ -98,10 +139,7 @@
 
 .item
     color: $n
-    text-decoration: none
-    transition-duration: 300ms
-    &:hover
-        color: $n1
+    width: var(--full-w)
 
 .itemNft
     display: flex
@@ -129,6 +167,7 @@
     gap: 4px 0
     background-color: transparent
     color: $n
+    min-height: 24px
 
 .contentFood
     display: flex
@@ -140,10 +179,22 @@
     display: flex
     gap: 4px
     align-items: center
+    color: $n1
 
 .iconMoney
     color: $p3
-    transform: translateY(1px)
+    transform: translateY(0px)
+
+.containerItems
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 4px
+
+.iconInfor
+    color: $n1
+    transform: translateY(1px)        
+
 
 .wrapperPriceNft
     display: flex
@@ -154,7 +205,7 @@
 
 .iconShopping
     color: $n1
-    transform: translateY(1px)    
+    transform: translateY(0px)    
 
 .titlePriceNft
     color: $n1
@@ -177,30 +228,12 @@
     left: 0
     padding: 0 12px
     height: 32px
-    width: var(--full-w)
     align-items: center 
     gap: 0 4px
     color: $n1
     font-size: 12px
     +t  
         display: flex
-
-.contentWallet
-    margin-right: auto
-    display: flex
-    align-items: center
-    justify-content: center
-    width: var(--full-w)
-    height: 32px
-
-.buttonWallet
-    background-color: $n3
-    width: var(--full-w)
-    height: var(--full-h)
-    border: none
-    color: $n
-    border-bottom-left-radius: 8px
-    cursor: pointer    
 
 .modalDetails
     margin-left: auto

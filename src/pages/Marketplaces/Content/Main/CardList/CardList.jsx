@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { formatDistanceToNow } from "date-fns";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
@@ -10,11 +11,14 @@ import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 import Title from "~/components/Title";
 import routesConfig from "~/configs";
+import { getLocale } from "~/locale/Locale";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./CardList.module.sass";
 const cx = classNames.bind(styles);
 
 const CardList = ({ items, onUpdateItems }) => {
+  const locale = getLocale()
+  const [timeDifference, setTimeDifference] = useState("");
   const [connectedAccount] = useGlobalState("connectedAccount");
   const [carts] = useGlobalState("carts");
   const [itemsShowModal, setItemShowModal] = useState(items);
@@ -77,6 +81,14 @@ const CardList = ({ items, onUpdateItems }) => {
     }
   };
 
+  useEffect(() => {
+    if(items?.listedDate){
+      const listedDateTime = new Date(items?.listedDate);
+      const difference = formatDistanceToNow(listedDateTime, { addSuffix: true, locale });
+      setTimeDifference(difference);
+    }
+  },[items,locale])
+
   return (
     <tr className={cx("wrapperTrTb")}>
       <td className={cx("wrapperTd")}>
@@ -117,7 +129,7 @@ const CardList = ({ items, onUpdateItems }) => {
       </td>
 
       <td className={cx("wrapperTd")}>
-        <span className={cx("wrapperListedTime")}>--</span>
+        <span className={cx("wrapperListedTime")}>{items?.listedDate ? timeDifference : "--"}</span>
         <div className={cx("wrapperButtonAddFunds")}>
           <Button title="Add funds" disabled={true} background xl fontSemiBold />
         </div>

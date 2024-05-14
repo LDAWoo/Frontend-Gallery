@@ -145,6 +145,47 @@
             "SaveAndProceed": "Enregistrer & Continuer",
             "Review": "Examiner",
             "Submit": "Soumettre"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "Créer une place de marché",
+                "marketplace": "Place de marché"
+            },
+            "items": {
+                "overview": "Vue d'ensemble",
+                "claimCondition": "Conditions de réclamation",
+                "settings": "Paramètres"
+            },
+            "Overview": {
+                "title": "Modifier la collection NFT",
+                "subTitle": "Modifier vos NFT actuels",
+                "name": "Nom NFT",
+                "nameDescription": "Ce nom de NFT apparaîtra sur la plateforme de trading.",
+                "symbol": "Symbole NFT",
+                "symbolDescription": "Ce symbole de NFT apparaîtra sur la plateforme de trading.",
+                "description": "Description NFT",
+                "descriptionDescription": "Cette description de NFT apparaîtra sur la plateforme de trading.",
+                "royalties": "Redevances",
+                "attributes": "Attribut NFT",
+                "attributesDescription": "Ces attributs de NFT apparaîtront sur la plateforme de trading.",
+                "attributeCount": "Nombre d'attributs",
+                "saveCollection": "Enregistrer la collection",
+                "Success": "Mise à jour NFT réussie",
+                "Error": "Échec de la mise à jour NFT"
+            },
+            "ClaimCondition": {
+                "title": "Définir les conditions de réclamation",
+                "subTitle": "Contrôlez quand les NFT sont abandonnés, combien ils coûtent, et plus encore.",
+                "price": "Combien voulez-vous facturer pour réclamer chaque NFT ?",
+                "updateClaimCondition": "Mettre à jour les conditions de réclamation",
+                "Success": "Mise à jour des conditions de réclamation réussie",
+                "Error": "Échec de la mise à jour des conditions de réclamation"
+            },
+            "Settings": {
+                "title": "Paramètres",
+                "display": "Affichage des NFT",
+                "showNft": "Afficher les NFT pour le commerce"
+            }
         },        
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "Afficher le Top"
             }
         },
+        "AssetFooter": {
+            "copyRight": "Droits d'auteur (2023 - 2024) - Garden Eden™. Tous droits réservés"
+        },
         "Modal": {
             "Settings": {
                 "title": "Paramètres de l'application",
@@ -219,7 +263,34 @@
                         "settings": "Paramètres"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "Ajouter un attribut NFT",
+                "subTitle": "Attributs actuellement sélectionnés. Vous pouvez ajouter ou supprimer d'autres propriétés.",
+                "select": "sélectionner...",
+                "type": "Type",
+                "typePlaceholder": "Ex : Taille",
+                "name": "Nom",
+                "namePlaceholder": "Ex : Grand",
+                "Success": "Ajout de l'attribut NFT réussi !",
+                "Exists": "Cet attribut NFT existe déjà !",
+                "Error": "Échec de l'ajout ou de la suppression de l'attribut NFT !",
+                "addAndSave": "Ajouter et Enregistrer"
+            },
+            "Welcome": {
+                "title": "Bienvenue de retour",
+                "emailPlaceholder": "Adresse e-mail",
+                "login": "Connexion / Inscription"
+            },
+            "ConfirmEmail": {
+                "title": "Confirmez votre e-mail",
+                "sendToLink": "Connectez-vous en utilisant le lien envoyé",
+                "checkInbox": "Vérifiez votre boîte de réception"
             }
+        },
+        "Error": {
+            "emailNotBlank": "Veuillez saisir une adresse e-mail",
+            "emailNotEmail": "Veuillez saisir une adresse e-mail valide"
         },
         "Other": {
             "Untitled": "Sans titre",

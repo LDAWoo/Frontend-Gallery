@@ -11,6 +11,7 @@ import Header from "./Header";
 import ArtistInformationModal from "./Header/ArtistInformationAndModal/ArtistInformationModal";
 import Main from "./Main";
 import ModalDetailsNFT from "./Main/ModalDetailsNFT";
+import { useGlobalState } from "~/store";
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +23,9 @@ const Content = ({ data, loading }) => {
   const [searchParams] = useSearchParams()
   const attributes = searchParams.get("attributes");
   const search = searchParams.get("search");
+  const [marketplaceArtworksFilter] = useGlobalState("marketplaceArtworksFilter")
+  const [originalNFTs, setOriginalNFTs] = useState([]); 
+  const [refresh] = useGlobalState("refresh");
 
   useEffect(() => {
     if (loading || !data) return;
@@ -59,6 +63,7 @@ const Content = ({ data, loading }) => {
         setCurrentNFTs([])
         const results = await getAllArtworkByIdArtist(artistId);
         setCurrentNFTs(results.listResult);
+        setOriginalNFTs(results.listResult);
         setLoadingNFTs(false);
       } catch (error) {
         setLoadingNFTs(true);
@@ -85,6 +90,7 @@ const Content = ({ data, loading }) => {
             if(!Object.keys(dataGetCondition).length > 0) return;
             const results = await getArtworkByIdArtistAndCondition(artistId,dataGetCondition)
             setCurrentNFTs(results.listResult);
+            setOriginalNFTs(results.listResult);
             setLoadingNFTs(false);
           }catch(e){
             setLoadingNFTs(true);
@@ -93,8 +99,28 @@ const Content = ({ data, loading }) => {
         }
 
         fetchData();
-  },[attributes,search, data])
+  },[attributes,search, data,refresh])
 
+
+
+  useEffect(() => {
+    if (!marketplaceArtworksFilter.sortValues.sortPrice) return;
+
+    let sortedNFTs = [...originalNFTs];
+
+    sortedNFTs.sort((a, b) => {
+      if (a.price !== null && b.price !== null) {
+          return marketplaceArtworksFilter.sortValues.sortPrice === "high_to_low" ? b.price - a.price : a.price - b.price;
+      } else if (a.price === null && b.price !== null) {
+          return marketplaceArtworksFilter.sortValues.sortPrice === "high_to_low" ? 1 : -1;
+      } else if (a.price !== null && b.price === null) {
+          return marketplaceArtworksFilter.sortValues.sortPrice === "high_to_low" ? -1 : 1;
+      } else {
+          return 0;
+      }
+    });
+    setCurrentNFTs(sortedNFTs);
+  },[marketplaceArtworksFilter,originalNFTs])
 
   const onUpdateItems = (item) => {
     const updatedItemList = currentNFTs.map((n) => {

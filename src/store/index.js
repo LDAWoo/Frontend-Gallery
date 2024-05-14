@@ -69,6 +69,7 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
   currentShowDisplayArtwork: null,
   currentSourceCreator: "",
   loading: false,
+  refresh: false,
   profiles: {
     data: {},
     avatarName: "",
@@ -79,6 +80,12 @@ const { setGlobalState, getGlobalState, useGlobalState } = createGlobalState({
     loading: false,
   },
   showOwners: false,
+  marketplaceArtworksFilter: {
+    dataSearch: "",
+    sortValues: {
+      sortPrice: "high_to_low",
+    },
+  },
   ownerArtworksFilter: {
     dataSearch: "",
     sortValues: {

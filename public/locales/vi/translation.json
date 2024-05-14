@@ -145,6 +145,47 @@
             "SaveAndProceed": "Lưu & Tiếp tục",
             "Review": "Xem lại",
             "Submit": "Gửi"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "Tạo Marketplace",
+                "marketplace": "Marketplace"
+            },
+            "items": {
+                "overview": "Tổng quan",
+                "claimCondition": "Điều Kiện Đòi Lại",
+                "settings": "Cài Đặt"
+            },
+            "Overview": {
+                "title": "Chỉnh sửa Bộ sưu tập NFT",
+                "subTitle": "Thay đổi NFT hiện tại của bạn",
+                "name": "Tên NFT",
+                "nameDescription": "Tên NFT này sẽ xuất hiện trên nền tảng giao dịch.",
+                "symbol": "Biểu tượng NFT",
+                "symbolDescription": "Biểu tượng NFT này sẽ xuất hiện trên nền tảng giao dịch.",
+                "description": "Mô tả NFT",
+                "descriptionDescription": "Mô tả NFT này sẽ xuất hiện trên nền tảng giao dịch.",
+                "royalties": "Phí bản quyền",
+                "attributes": "Thuộc tính NFT",
+                "attributesDescription": "Các thuộc tính NFT này sẽ xuất hiện trên nền tảng giao dịch.",
+                "attributeCount": "Số lượng thuộc tính",
+                "saveCollection": "Lưu Bộ sưu tập",
+                "Success": "Cập nhật NFT thành công",
+                "Error": "Cập nhật NFT thất bại"
+            },
+            "ClaimCondition": {
+                "title": "Thiết lập Điều Kiện Đòi Lại",
+                "subTitle": "Kiểm soát khi nào các NFT được phát hành, giá bao nhiêu và nhiều hơn nữa.",
+                "price": "Bạn muốn thu phí bao nhiêu cho mỗi NFT?",
+                "updateClaimCondition": "Cập nhật Điều Kiện Đòi Lại",
+                "Success": "Cập nhật Điều kiện Đòi hỏi thành công",
+                "Error": "Cập nhật Điều kiện Đòi hỏi thất bại"
+            },
+            "Settings": {
+                "title": "Cài Đặt",
+                "display": "Hiển thị NFT",
+                "showNft": "Hiển thị NFT có thể giao dịch"
+            }
         },        
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "Hiển thị Top"
             }
         },
+        "AssetFooter": {
+            "copyRight": "Bản quyền (2023 - 2024) - Garden Eden™. Đã đăng ký bản quyền"
+        },
         "Modal": {
             "Settings": {
                 "title": "Cài đặt Ứng dụng",
@@ -219,7 +263,34 @@
                         "settings": "Cài đặt"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "Thêm Thuộc tính NFT",
+                "subTitle": "Các thuộc tính hiện đang được chọn. Bạn có thể thêm hoặc xóa các thuộc tính khác.",
+                "select": "chọn...",
+                "type": "Loại",
+                "typePlaceholder": "Ví dụ: Kích thước",
+                "name": "Tên",
+                "namePlaceholder": "Ví dụ: Lớn",
+                "Success": "Thêm Thuộc tính NFT thành công!",
+                "Exists": "Thuộc tính NFT này đã tồn tại!",
+                "Error": "Thêm hoặc xóa Thuộc tính NFT thất bại!",
+                "addAndSave": "Thêm và Lưu"
+            },
+            "Welcome": {
+                "title": "Chào mừng trở lại",
+                "emailPlaceholder": "Địa chỉ email",
+                "login": "Đăng nhập / Đăng ký"
+            },
+            "ConfirmEmail": {
+                "title": "Xác nhận email của bạn",
+                "sendToLink": "Đăng nhập bằng liên kết được gửi đến",
+                "checkInbox": "Kiểm tra hộp thư đến"
             }
+        },
+        "Error": {
+            "emailNotBlank": "Vui lòng nhập địa chỉ email",
+            "emailNotEmail": "Vui lòng nhập địa chỉ email hợp lệ"
         },
         "Other": {
             "Untitled": "Chưa đặt tên",

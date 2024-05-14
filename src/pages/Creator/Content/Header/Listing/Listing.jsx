@@ -81,7 +81,7 @@ const Listing = ({ data }) => {
         <Title title={t("Creator.Listing.title")} fontBold xxl />
         <div className={cx("content")}>
           {items.map((item, index) => (
-            <div key={index} className={`${cx("item")} ${item?.source === currentSource ? cx("active") : ""}`} onClick={() => handleApplyListing(item?.source, index)}>
+            <div key={index} className={`${cx("item")} ${item?.source === currentSource && cx("active")} ${index - 1 <= lastIndex && cx('complete')}`} onClick={() => handleApplyListing(item?.source, index)}>
               <div>{item?.name}</div>
               {item?.complete && <Icon icon={MdOutlineCheck} classIcon={cx("iconComplete")} size={24} />}
             </div>

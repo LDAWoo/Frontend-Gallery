@@ -7,10 +7,12 @@ import Title from "~/components/Title";
 import Toggle from "~/components/Toggle";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Settings.module.sass";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
 const Settings = ({ data }) => {
+  const {t} = useTranslation();
   const [currentShowDisplayArtwork] = useGlobalState("currentShowDisplayArtwork");
   const [loading, setLoading] = useState(false)
 
@@ -39,16 +41,13 @@ const Settings = ({ data }) => {
       <div className={cx("container")}>
         <div className={cx("wrapperContainer")}>
           <div className={cx("wrapperHeader")}>
-            <Title title="Settings" white xxl fontBold nowrap={false} />
-            <div className={cx("wrapperDescription")}>
-              <Title title="Control when the NFTs get dropped, now much they cost, and more." large nowrap={false} />
-            </div>
+            <Title title={t("Reviewed.Settings.title")} white xxl fontBold nowrap={false} />
           </div>
           <div className={cx("wrapperBody")}>
             <div className={cx("bodyContainer")}>
               <div className={cx("containerItems")}>
-                <Title title="NFTs Display" white large fontMedium />
-                <Toggle title="Show NFTs for trading" isChecked={currentShowDisplayArtwork} onChange={handleToggleShowNFT} />
+                <Title title={t("Reviewed.Settings.display")} white large fontMedium />
+                <Toggle title={t("Reviewed.Settings.showNft")} isChecked={currentShowDisplayArtwork} onChange={handleToggleShowNFT} />
               </div>
             </div>
           </div>

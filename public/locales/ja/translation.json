@@ -145,6 +145,47 @@
             "SaveAndProceed": "保存して続行",
             "Review": "レビュー",
             "Submit": "送信"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "マーケットプレイスを作成",
+                "marketplace": "マーケットプレイス"
+            },
+            "items": {
+                "overview": "概要",
+                "claimCondition": "請求条件",
+                "settings": "設定"
+            },
+            "Overview": {
+                "title": "NFT コレクションを編集",
+                "subTitle": "現在の NFT を変更",
+                "name": "NFT 名前",
+                "nameDescription": "この NFT 名前は取引プラットフォームに表示されます。",
+                "symbol": "NFT シンボル",
+                "symbolDescription": "この NFT シンボルは取引プラットフォームに表示されます。",
+                "description": "NFT 説明",
+                "descriptionDescription": "この NFT 説明は取引プラットフォームに表示されます。",
+                "royalties": "ロイヤルティ",
+                "attributes": "NFT 属性",
+                "attributesDescription": "これらの NFT 属性は取引プラットフォームに表示されます。",
+                "attributeCount": "属性カウント",
+                "saveCollection": "コレクションを保存",
+                "Success": "NFT の更新に成功しました",
+                "Error": "NFT の更新に失敗しました"
+            },
+            "ClaimCondition": {
+                "title": "請求条件を設定",
+                "subTitle": "NFT のドロップ時期、価格などを制御します。",
+                "price": "各 NFT の請求料金はいくらですか？",
+                "updateClaimCondition": "請求条件を更新",
+                "Success": "請求条件の更新に成功しました",
+                "Error": "請求条件の更新に失敗しました"
+            },
+            "Settings": {
+                "title": "設定",
+                "display": "NFT 表示",
+                "showNft": "取引可能な NFT を表示"
+            }
         },                
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "トップを表示"
             }
         },
+        "AssetFooter": {
+            "copyRight": "著作権（2023年 - 2024年）- Garden Eden™。全著作権所有"
+        },
         "Modal": {
             "Settings": {
                 "title": "アプリ設定",
@@ -219,7 +263,34 @@
                         "settings": "設定"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "属性 NFT を追加",
+                "subTitle": "現在選択されている属性。他のプロパティを追加または削除できます。",
+                "select": "選択...",
+                "type": "タイプ",
+                "typePlaceholder": "例：サイズ",
+                "name": "名前",
+                "namePlaceholder": "例：大",
+                "Success": "属性 NFT の追加に成功しました！",
+                "Exists": "この属性 NFT はすでに存在します！",
+                "Error": "属性 NFT の追加または削除に失敗しました！",
+                "addAndSave": "追加して保存"
+            },
+            "Welcome": {
+                "title": "お帰りなさい",
+                "emailPlaceholder": "メールアドレス",
+                "login": "ログイン / サインアップ"
+            },
+            "ConfirmEmail": {
+                "title": "あなたのメールを確認してください",
+                "sendToLink": "送信されたリンクを使用してログイン",
+                "checkInbox": "受信トレイを確認"
             }
+        },
+        "Error": {
+            "emailNotBlank": "メールアドレスを入力してください",
+            "emailNotEmail": "有効なメールアドレスを入力してください"
         },
         "Other": {
             "Untitled": "無題",

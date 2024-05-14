@@ -112,6 +112,7 @@ const Body = () => {
   const handleSignOut = () => {
     setCookie("token", "");
     setArtist({});
+    setGlobalState("connectedAccount", null)
   };
 
   const handleClickUrlMenuItem = (url) => {

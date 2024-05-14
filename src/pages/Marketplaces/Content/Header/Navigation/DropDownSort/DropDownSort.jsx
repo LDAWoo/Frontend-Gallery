@@ -11,7 +11,7 @@ const DropDownSort = ({ data, value, onChange }) => {
     <div className={cx("wrapperDropDown")}>
       <Button className={`${cx("buttonNavigation")} ${cx("buttonDropDownFirst")}`} icon={BsArrowDownUp} backgroundGallery size={20} />
       <div className={cx("buttonDropDownLast")}>
-        <Select placement="top" data={data} value={value} onChange={onChange} />
+        <Select placement="bottom" data={data} value={value} onChange={onChange} />
       </div>
     </div>
   );

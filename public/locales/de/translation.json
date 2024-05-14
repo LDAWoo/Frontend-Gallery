@@ -145,6 +145,47 @@
             "SaveAndProceed": "Speichern & Fortfahren",
             "Review": "Überprüfen",
             "Submit": "Einreichen"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "Marktplatz erstellen",
+                "marketplace": "Marktplatz"
+            },
+            "items": {
+                "overview": "Überblick",
+                "claimCondition": "Anspruchsbedingung",
+                "settings": "Einstellungen"
+            },
+            "Overview": {
+                "title": "NFT-Sammlung bearbeiten",
+                "subTitle": "Ändern Sie Ihre aktuellen NFTs",
+                "name": "Name NFT",
+                "nameDescription": "Dieser NFT-Name wird auf der Handelsplattform angezeigt.",
+                "symbol": "Symbol NFT",
+                "symbolDescription": "Dieses NFT-Symbol wird auf der Handelsplattform angezeigt.",
+                "description": "Beschreibung NFT",
+                "descriptionDescription": "Diese NFT-Beschreibung wird auf der Handelsplattform angezeigt.",
+                "royalties": "Lizenzgebühren",
+                "attributes": "Attribut NFT",
+                "attributesDescription": "Diese NFT-Attribute werden auf der Handelsplattform angezeigt.",
+                "attributeCount": "Attributzahl",
+                "saveCollection": "Sammlung speichern",
+                "Success": "NFT erfolgreich aktualisiert",
+                "Error": "Aktualisierung des NFT fehlgeschlagen"
+            },
+            "ClaimCondition": {
+                "title": "Anspruchsbedingungen festlegen",
+                "subTitle": "Kontrollieren Sie, wann die NFTs fallen gelassen werden, wie viel sie kosten und mehr.",
+                "price": "Wie viel möchten Sie für das Einlösen jedes NFT verlangen?",
+                "updateClaimCondition": "Anspruchsbedingungen aktualisieren",
+                "Success": "Aktualisierung der Anspruchsbedingungen erfolgreich",
+                "Error": "Aktualisierung der Anspruchsbedingungen fehlgeschlagen"
+            },
+            "Settings": {
+                "title": "Einstellungen",
+                "display": "NFT-Anzeige",
+                "showNft": "NFTs für den Handel anzeigen"
+            }
         },        
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "Top anzeigen"
             }
         },
+        "AssetFooter": {
+            "copyRight": "Urheberrecht (2023 - 2024) - Garden Eden™. Alle Rechte vorbehalten"
+        },
         "Modal": {
             "Settings": {
                 "title": "App-Einstellungen",
@@ -219,7 +263,34 @@
                         "settings": "Einstellungen"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "Attribut NFT hinzufügen",
+                "subTitle": "Aktuell ausgewählte Attribute. Sie können weitere Eigenschaften hinzufügen oder entfernen.",
+                "select": "auswählen...",
+                "type": "Typ",
+                "typePlaceholder": "Zum Beispiel: Größe",
+                "name": "Name",
+                "namePlaceholder": "Zum Beispiel: Groß",
+                "Success": "Attribut NFT erfolgreich hinzugefügt!",
+                "Exists": "Dieses Attribut NFT existiert bereits!",
+                "Error": "Fehler beim Hinzufügen oder Entfernen des Attribut NFT!",
+                "addAndSave": "Hinzufügen und Speichern"
+            },
+            "Welcome": {
+                "title": "Willkommen zurück",
+                "emailPlaceholder": "E-Mail-Adresse",
+                "login": "Einloggen / Registrieren"
+            },
+            "ConfirmEmail": {
+                "title": "Bestätigen Sie Ihre E-Mail-Adresse",
+                "sendToLink": "Melden Sie sich mit dem gesendeten Link an",
+                "checkInbox": "Überprüfen Sie Ihren Posteingang"
             }
+        },
+        "Error": {
+            "emailNotBlank": "Bitte geben Sie eine E-Mail-Adresse ein",
+            "emailNotEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
         },
         "Other": {
             "Untitled": "Unbenannt",

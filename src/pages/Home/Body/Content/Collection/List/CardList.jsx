@@ -20,7 +20,7 @@ const CardList = ({ items, index, onUpdateItems }) => {
 
   const handleFavoriteArtist = async () => {
     if (loading) return;
-    if (!connectedAccount) {
+    if (!connectedAccount.address) {
       setGlobalState("connectedModal", true);
       return;
     }

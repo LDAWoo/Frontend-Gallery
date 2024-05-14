@@ -145,6 +145,47 @@
             "SaveAndProceed": "Guardar y continuar",
             "Review": "Revisión",
             "Submit": "Enviar"
+        },
+        "Reviewed": {
+            "Right": {
+                "createMarketplace": "Crear Marketplace",
+                "marketplace": "Marketplace"
+            },
+            "items": {
+                "overview": "Resumen",
+                "claimCondition": "Condiciones de reclamación",
+                "settings": "Configuración"
+            },
+            "Overview": {
+                "title": "Editar Colección NFT",
+                "subTitle": "Cambiar tus NFT actuales",
+                "name": "Nombre NFT",
+                "nameDescription": "Este nombre de NFT aparecerá en la plataforma de trading.",
+                "symbol": "Símbolo NFT",
+                "symbolDescription": "Este símbolo de NFT aparecerá en la plataforma de trading.",
+                "description": "Descripción NFT",
+                "descriptionDescription": "Esta descripción de NFT aparecerá en la plataforma de trading.",
+                "royalties": "Regalías",
+                "attributes": "Atributo NFT",
+                "attributesDescription": "Estos atributos de NFT aparecerán en la plataforma de trading.",
+                "attributeCount": "Recuento de atributos",
+                "saveCollection": "Guardar Colección",
+                "Success": "NFT actualizado exitosamente",
+                "Error": "Error al actualizar el NFT"
+            },
+            "ClaimCondition": {
+                "title": "Establecer Condiciones de Reclamación",
+                "subTitle": "Controla cuándo se lanzan los NFT, cuánto cuestan y más.",
+                "price": "¿Cuánto quieres cobrar por reclamar cada NFT?",
+                "updateClaimCondition": "Actualizar Condiciones de Reclamación",
+                "Success": "Actualización de las condiciones de reclamación exitosa",
+                "Error": "Error al actualizar las condiciones de reclamación"
+            },
+            "Settings": {
+                "title": "Configuración",
+                "display": "Visualización de NFTs",
+                "showNft": "Mostrar NFTs para el comercio"
+            }
         },        
         "Home": {
             "Hero": {
@@ -193,6 +234,9 @@
                 "title": "Mostrar Top"
             }
         },
+        "AssetFooter": {
+            "copyRight": "Derechos de autor (2023 - 2024) - Garden Eden™. Todos los derechos reservados"
+        },
         "Modal": {
             "Settings": {
                 "title": "Configuración de la aplicación",
@@ -219,7 +263,34 @@
                         "settings": "Configuración"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "Agregar Atributo NFT",
+                "subTitle": "Atributos actualmente seleccionados. Puede agregar o eliminar otras propiedades.",
+                "select": "seleccionar...",
+                "type": "Tipo",
+                "typePlaceholder": "Ej: Tamaño",
+                "name": "Nombre",
+                "namePlaceholder": "Ej: Grande",
+                "Success": "¡Atributo NFT agregado exitosamente!",
+                "Exists": "¡Este Atributo NFT ya existe!",
+                "Error": "¡Error al agregar o eliminar el Atributo NFT!",
+                "addAndSave": "Agregar y Guardar"
+            },
+            "Welcome": {
+                "title": "Bienvenido de nuevo",
+                "emailPlaceholder": "Dirección de correo electrónico",
+                "login": "Iniciar sesión / Registrarse"
+            },
+            "ConfirmEmail": {
+                "title": "Confirme su correo electrónico",
+                "sendToLink": "Inicie sesión usando el enlace enviado",
+                "checkInbox": "Revise su bandeja de entrada"
             }
+        },
+        "Error": {
+            "emailNotBlank": "Por favor, ingrese una dirección de correo electrónico",
+            "emailNotEmail": "Por favor, ingrese una dirección de correo electrónico válida"
         },
         "Other": {
             "Untitled": "Sin título",

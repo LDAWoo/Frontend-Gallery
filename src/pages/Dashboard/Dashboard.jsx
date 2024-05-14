@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 const Dashboard = () => {
   const { artistLoading,artist } = useContext(UserContext);
-
+  
   return (
     <div className={`${cx("wrapper")} no-scrollbar scrollbarCustom`}>
       {artistLoading || Object.keys(artist).length === 0 ? (

@@ -17,6 +17,9 @@ import { useNavigate } from "react-router-dom";
 import routesConfig from "~/configs";
 import { useTranslation } from "react-i18next";
 import { getLocale } from "~/locale/Locale";
+import { postCreateMarketplace } from "~/api/Marketplace";
+
+const marketplaceAddress = '62iFzJjZ8W2KM3WCKApQPvdb5a35sJz8k5WTKdXsHtRx'
 
 const cx = classNames.bind(styles);
 const SubmitNFT = ({ data }) => {
@@ -194,6 +197,16 @@ const SubmitNFT = ({ data }) => {
       };
 
       await postCreateNFT(dataSaveCreateNFT);
+      
+      const dataCreateMarketplace = {
+        creatorAddress: connectedAccount.address,
+        currentAddress: 'So11111111111111111111111111111111111111112',
+        signature,
+        marketplaceAddress,
+        marketplaceAuthority: connectedAccount.address,
+      }
+
+      await postCreateMarketplace(dataCreateMarketplace);
       setGlobalState("loading", false);
       toastInformation(
         t("Creator.Main.Submit.Success")

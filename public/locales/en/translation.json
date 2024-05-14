@@ -146,6 +146,47 @@
             "Review": "Review",
             "Submit": "Submit"
         },
+        "Reviewed":{
+            "Right": {
+                "createMarketplace": "Create Marketplace",
+                "marketplace": "Marketplace"
+            },
+            "items": {
+                "overview": "Overview",
+                "claimCondition": "Claim Condition",
+                "settings": "Settings"
+            },
+            "Overview": {
+                "title": "Edit Collection NFT",
+                "subTitle": "Change your current NFT",
+                "name": "Name NFT",
+                "nameDescription": "This nft name will appear on the trading platform.",
+                "symbol": "Symbol NFT",
+                "symbolDescription": "This nft symbol will appear on the trading platform.",
+                "description": "Description NFT",
+                "descriptionDescription": "This nft description will appear on the trading platform.",
+                "royalties": "Royalties",
+                "attributes": "Attribute NFT",
+                "attributesDescription": "This nft attributes will appear on the trading platform.",
+                "attributeCount": "Attribute count",
+                "saveCollection": "Save Collection",
+                "Success": "Update NFT Successfully",
+                "Error": "Update NFT Failed"
+            },
+            "ClaimCondition": {
+                "title": "Set Claim Conditions",
+                "subTitle": "Control when the NFTs get dropped, how much they cost, and more.",
+                "price": "How much do you want to charge to claim each NFT ?",
+                "updateClaimCondition": "Update Claim Condition",
+                "Success": "Update Claim Condition Successfully",
+                "Error": "Update Claim Condition Failed"
+            },
+            "Settings": {
+                "title": "Settings",
+                "display": "NFTs Display",
+                "showNft": "Show NFTs for trading"
+            }
+        },
         "Home":{
             "Hero": {
                 "title": "Solana's Leading NFT Marketplace",
@@ -193,6 +234,9 @@
                 "title": "Show Top"
             }
         },
+        "AssetFooter": {
+            "copyRight": "Copyright (2023 - 2024) - Garden Eden™. All rights reserved"
+        },
         "Modal":{
             "Settings": {
                 "title": "App Settings",
@@ -219,7 +263,34 @@
                         "settings": "Settings"
                     }
                 }
+            },
+            "AddAttribute": {
+                "title": "Add Attribute NFT",
+                "subTitle" :"Attributes currently selected. You can add or remove other properties.",
+                "select": "select...",
+                "type": "Type",
+                "typePlaceholder": "Ex: Size",
+                "name": "Name",
+                "namePlaceholder": "Ex: Large",
+                "Success": "Add Attribute NFT Successfully!",
+                "Exists": "This Attribute NFT Already Exists!",
+                "Error": "The Add Or Delete Attribute NFT Failed!",
+                "addAndSave": "Add & Save"
+            },
+            "Welcome" :{
+                "title": "Welcome Back",
+                "emailPlaceholder": "Email address",
+                "login": "Login in / Sign up"
+            },
+            "ConfirmEmail" :{
+                "title": "Confirm your email",
+                "sendToLink": "Login in using the garden link sent to",
+                "checkInbox": "Check your inbox"
             }
+        },
+        "Error": {
+            "emailNotBlank": "Please enter a email address",
+            "emailNotEmail": "Please enter a valid email address"
         },
         "Other": {
             "Untitled": "Untitled",

@@ -7,7 +7,7 @@ import ClaimCondition from "./ClaimCondition";
 
 const cx = classNames.bind(styles);
 
-const Main = ({ data, currentTab }) => {
+const Main = ({ data, currentTab, onUpdateData }) => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("content")}>
@@ -21,7 +21,7 @@ const Main = ({ data, currentTab }) => {
                       <div className={`${cx("scrollContainer")} no-scrollbar`} data-virtuoso-scroller="true" data-test-id="virtuoso-scroller">
                         <div className={cx("container")}>
                           <div className={cx("contentContainer")}>
-                            {currentTab === "overview" && <Overview data={data} />}
+                            {currentTab === "overview" && <Overview data={data} onUpdateData={onUpdateData}/>}
                             {currentTab === "claimCondition" && <ClaimCondition data={data} />}
                             {currentTab === "settings" && <Settings data={data?.artwork} />}
                           </div>
@@ -42,6 +42,7 @@ const Main = ({ data, currentTab }) => {
 Main.propTypes = {
   data: PropTypes.object.isRequired,
   currentTab: PropTypes.string,
+  onUpdateData: PropTypes.func.isRequired,
 };
 
 export default Main;

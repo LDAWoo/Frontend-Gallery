@@ -1,15 +1,21 @@
 import classNames from "classnames/bind";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { authenticated } from "~/api/Artist";
 import Button from "~/components/Button";
-import Image from "~/components/Image";
+import GardenEden from "~/components/GardenEden";
+import TextError from "~/components/TextError/TextError";
 import TextInput from "~/components/TextInput";
 import Title from "~/components/Title";
+import { validateEmail } from "~/regex";
 import { setGlobalState, useGlobalState } from "~/store";
 import styles from "./Body.module.sass";
 
 const cx = classNames.bind(styles);
 const Body = () => {
+  const {t} = useTranslation()
   const [email] = useGlobalState("emailLoginOrSignUp");
+  const [emailError, setEmailError] = useState("")
   const [loading] = useGlobalState("loading");
   const handleChangeEmail = (e) => {
     const value = e.target.value;
@@ -17,6 +23,8 @@ const Body = () => {
   };
 
   const handleLoginOrSignUp = async () => {
+    if(!validate()) return;
+
     const data = {
       email: email.trim(),
     };
@@ -39,23 +47,44 @@ const Body = () => {
     }
   };
 
+  const validate = () => {
+    let isValid = true;
+
+    if(email.length === 0 || !email){
+      setEmailError(t("Error.emailNotBlack"));
+      isValid = false;
+    }else{
+      if(!validateEmail(email)){
+        setEmailError(t("Error.emailNotEmail"));
+        isValid = false;
+      }else{
+        setEmailError("");
+      }
+    }
+
+    return isValid;
+  }
+
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("wrapperImage")}>
-        <Image lazy={false} src="https://assets.fortmatic.com/MagicLogos/b146580fc7674e2d1df63364da1b2c2e/ee899a3edc7b329249bd1947c0eea95d.png" />
+      <div className={cx("wrapperGardenEden")}>
+          <GardenEden primary/>
       </div>
       <div className={cx("wrapperContainer")}>
-        <Title title="Welcome Back" fontBold white extraLarge7 />
+        <Title title={t("Modal.Welcome.title")} fontBold white extraLarge7 />
       </div>
       <div className={cx("wrapperContainer")}>
-        <TextInput type="text" name="email" value={email} onKeyDown={handleKeyDown} onChange={handleChangeEmail} placeholder="Email address" className={cx("input")} classInput={cx("classInput")} classBorder={cx("classBorderInput")} />
+        <div className={cx('wrapperEmail')}>
+          <TextInput type="text" name="email" value={email} onKeyDown={handleKeyDown} onChange={handleChangeEmail} placeholder={t("Modal.Welcome.emailPlaceholder")} className={cx("input")} classInput={cx("classInput")} classBorder={cx("classBorderInput")} />
+          {emailError && <TextError error={emailError}/>}
+        </div>
       </div>
       <div className={cx("wrapperContainer")}>
-        <Button title="Log in / Sign up" onClick={handleLoginOrSignUp} background className={cx("buttonLogin")} xxxl disabled={!email.length > 0 || loading} fontMedium />
+        <Button title={t("Modal.Welcome.login")} onClick={handleLoginOrSignUp} background className={cx("buttonLogin")} xxxl disabled={!email.length > 0 || loading} fontMedium />
       </div>
 
       <div className={cx("wrapperContainer")}>
-        <Title title="Copyright 2024" gallery large />
+        <Title title={t("AssetFooter.copyRight")} gallery large />
       </div>
     </div>
   );

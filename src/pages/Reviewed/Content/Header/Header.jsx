@@ -35,11 +35,26 @@ const Header = () => {
     fetchData();
   }, [artist, artistLoading, id]);
 
+  const handleUpdateData = (item) => {
+    setData((prev) => ({
+      ...prev,
+      marketplace: item
+    }));
+  }
+
+  const handleUpdate = (item) => {
+    setData((prev) => ({
+      ...prev,
+      artwork: item?.artwork,
+      attributes: item?.attributes
+    }));
+  }
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
-        <Listing data={data?.artwork} loading={loading || artistLoading} />
-        {!loading && <Main data={data} currentTab={currentTab} />}
+        <Listing data={data} loading={loading || artistLoading} onUpdateData={handleUpdateData}/>
+        {!loading && <Main data={data} currentTab={currentTab} onUpdateData={handleUpdate}/>}
       </div>
     </div>
   );

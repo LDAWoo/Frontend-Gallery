@@ -5,10 +5,11 @@ import { LiaBroomSolid } from "react-icons/lia";
 import { PiShoppingCartLight } from "react-icons/pi";
 import Button from "~/components/Button";
 import { UserContext } from "~/components/Contexts/AppUserProvider";
-import { setGlobalState, useGlobalState } from "~/store";
+import { setGlobalState, toastInformation, useGlobalState } from "~/store";
 import styles from "./AreaRight.module.sass";
 import CartModal from "./CartModal";
 import { buyNftMarketplaceSolanaPhantom, getOwners, getTransactionParsedPhantomSolana, transferManyPhantomSolana, transferSolPhantomSolana } from "~/api/PhantomSolana/PhantomSolana.services";
+import { buyArtworks, updateArtwork } from "~/api/Artwork";
 
 const cx = classNames.bind(styles);
 
@@ -43,10 +44,11 @@ const AreaRight = ({ data, loading }) => {
       const price = itemPriceBuyFloor.price;
       const totalPriceFee = (price * (itemPriceBuyFloor.fee || 0)) / 100;
       const totalPriceRoyalty = (price * (itemPriceBuyFloor.royalty || 0)) / 100;
-
-      setTotalPriceSummary(price + totalPriceFee + totalPriceRoyalty);
+      const total = price + totalPriceFee + totalPriceRoyalty
+      setTotalPriceSummary(total); 
     }
   }, [itemPriceBuyFloor]);
+
 
   const handleShowModalCart = () => {
     setGlobalState("showModalCart",!showModalCart)
@@ -57,52 +59,124 @@ const AreaRight = ({ data, loading }) => {
   }
 
   const handleBuyNFT = async() => {
-    // if(itemPriceBuyFloor && !carts.length > 0) {
-    //   const transaction = itemPriceBuyFloor?.transaction;
-    //   setGlobalState("loading", true);
-    //   const results = await getTransactionParsedPhantomSolana(transaction?.signature);
-    //   console.log(results);
-    //   setGlobalState("loading", false);
-    // }else{
+    if (!connectedAccount.address) {
+      setGlobalState("connectedModal", true);
+      return;
+    }
+
+    if(Object.keys(artist).length === 0) {
+      setGlobalState("showModalUserSignIn", true);
+      return ;
+    }
+
+
+    if(!itemPriceBuyFloor && !carts.length > 0) {
+      return;
+    }else{
       if(carts.length > 0){
         setGlobalState("loading", true);
-        const data = carts.map((item) => ({
-            walletAddress: item?.wallet_address,
-            tokenAddress: item?.tokenAddress,
-            marketplaceAddress: item?.marketplace?.marketplaceAddress,
-        }));
 
-        const marketplaceAddress = data[0].marketplaceAddress;
-        const tokenAddress = data[0].tokenAddress;
-        const sellerAddress = data[0].walletAddress;
-        const buyerAddress = connectedAccount.address;
-        const price = 0.01;
+        const dataUpdateArtwork = {
+          id: carts[0].id,
+          supply: carts[0]?.supply - 1,
+        }
 
-        console.log(data);
+        const dataBuyArtwork = {
+          id_artist: artist.id,
+          seller_address: carts[0]?.wallet_address,
+          buyer_address: connectedAccount.address,
+          tokenAddress: carts[0]?.tokenAddress,
+          name: carts[0]?.name,
+          symbol: carts[0]?.symbol,
+          description: carts[0]?.description,
+          image_url: itemPriceBuyFloor?.image_url,
+          chain: carts[0]?.chain,
+          signature: "signature",
+          price: carts[0].price,
+          amount: 1,
+          attributes: carts[0]?.attributes
+        }
 
-        await buyNftMarketplaceSolanaPhantom(
-          marketplaceAddress,
-          tokenAddress,
-          sellerAddress,
-          buyerAddress,
-          price
-        )
-        // await getOwners(tokenAddress)
+        console.log(dataBuyArtwork);
 
-        // const signature = await transferManyPhantomSolana(
+          // await buyNftMarketplaceSolanaPhantom(
+        //   marketplaceAddress,
         //   tokenAddress,
-        //   fromAddress,
-        //   toAddress
-        // );
+        //   sellerAddress,
+        //   buyerAddress,
+        //   price
+        // )
+        try{
 
-        // const signature = await transferSolPhantomSolana(
-        //   toAddress,
-        //   fromAddress,
-        //   0.05
-        // );
-
-
+        await updateArtwork(dataUpdateArtwork)
+        await buyArtworks(dataBuyArtwork)
+        
+        const updatedCarts = [...carts];
+        updatedCarts.splice(0, 1); 
+        setGlobalState("carts", updatedCarts)
         setGlobalState("loading", false);
+        toastInformation("Buy NFT Successfully!")
+          
+        }catch(e){
+          setGlobalState("loading", false)
+          toastInformation("Buy NFT Failed!")
+        }
+      }else{
+        if(itemPriceBuyFloor?.supply === 0){
+          return;
+        }
+
+        const dataUpdateArtwork = {
+          id: itemPriceBuyFloor.id,
+          supply: itemPriceBuyFloor?.supply - 1,
+        }
+
+        const dataBuyArtwork = {
+          id_artist: artist.id,
+          seller_address: itemPriceBuyFloor?.wallet_address,
+          buyer_address: connectedAccount.address,
+          tokenAddress: connectedAccount?.tokenAddress,
+          name: itemPriceBuyFloor?.name,
+          symbol: itemPriceBuyFloor?.symbol,
+          description: itemPriceBuyFloor?.description,
+          image_url: itemPriceBuyFloor?.image_url,
+          chain: itemPriceBuyFloor?.chain,
+          signature: "signature",
+          price: totalPriceSummary,
+          amount: 1,
+          attributes: itemPriceBuyFloor?.attributes
+        }
+
+        const marketplaceAddress = itemPriceBuyFloor.marketplace.marketplaceAddress;
+        const tokenAddress = itemPriceBuyFloor.tokenAddress;
+        const sellerAddress = itemPriceBuyFloor.walletAddress;
+        const buyerAddress = connectedAccount.address;
+        const price = totalPriceSummary;
+
+        try{
+          setGlobalState("loading", true)
+
+          // const signature = await buyNftMarketplaceSolanaPhantom(
+          //   marketplaceAddress,
+          //   tokenAddress,
+          //   sellerAddress,
+          //   buyerAddress,
+          //   price
+          // )
+
+          // if(signature){
+            await updateArtwork(dataUpdateArtwork)
+            await buyArtworks(dataBuyArtwork)
+            setGlobalState("loading", false)
+            toastInformation("Buy NFT Successfully!")
+          // }
+          // setGlobalState("loading", false)
+          // toastInformation("Buy NFT Failed!")
+        }catch(e){
+          setGlobalState("loading", false)
+          toastInformation("Buy NFT Failed!")
+        }
+      }
       }
     }
 
@@ -124,7 +198,7 @@ const AreaRight = ({ data, loading }) => {
         <div className={`${cx("buttonWrapper")}`}>
             <Button 
             background 
-            title= {`Buy ${Object.keys(itemPriceBuyFloor).length > 0 && carts.length === 0 ? "floor" : carts.length > 0 ? `${carts.length} item` : ""}`}
+            title= {`Buy ${Object.keys(itemPriceBuyFloor).length > 0 && carts.length === 0 ? `${totalPriceSummary} floor` : carts.length > 0 ? `${carts.length} item` : ""}`}
             loadingPrimary 
             fontBold
             xl
@@ -135,7 +209,6 @@ const AreaRight = ({ data, loading }) => {
                <>
                  {!loading ? <div className={cx("wrapperPriceFloor")}>
                                 <span></span>
-                                <div>{totalPriceSummary}</div>
                                 {itemPriceBuyFloor?.chain === "solana" && <div>SOL</div>}
                               </div>
                  : <div></div>}

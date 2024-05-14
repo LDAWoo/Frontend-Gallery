@@ -15,7 +15,7 @@ function ItemCollection({data, currentSymbol, onClick}) {
         <div className={cx('wrapper')}>
             <div className={`${cx('container')} ${currentSymbol === data?.symbol && cx('active')}`} onClick={() => onClick(data?.symbol)}>
                 <div className={cx('wrapperMetadata')}>
-                    {data?.image_url ? <Image src={data?.image_url}/> : <div>{data?.name.substring(0, 2) || data?.symbol.substring(0, 2)}</div>}
+                    {data?.image_url ? <Image src={data?.image_url}/> : <div>{data?.name && data?.name.substring(0, 2) || data?.symbol.substring(0, 2)}</div>}
                 </div>
     
                 <div className={cx('wrapperContainer')}>
